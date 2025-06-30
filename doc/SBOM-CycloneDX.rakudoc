@@ -1,0 +1,31 @@
+=begin pod
+
+=head1 NAME
+
+SBOM::CycloneDX - Software Bill Of Materials, CyclonDX style
+
+=head1 SYNOPSIS
+
+=begin code :lang<raku>
+
+use SBOM::CycloneDX;
+
+=end code
+
+=head1 DESCRIPTION
+
+SBOM::CycloneDX is ...
+
+=head1 AUTHOR
+
+Elizabeth Mattijsen <liz@raku.rocks>
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright 2025 Elizabeth Mattijsen
+
+This library is free software; you can redistribute it and/or modify it under the Artistic License 2.0.
+
+=end pod
+
+# vim: expandtab shiftwidth=4

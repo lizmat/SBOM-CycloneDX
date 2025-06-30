@@ -1,0 +1,6 @@
+use Test;
+use SBOM::CycloneDX;
+
+pass "replace me";
+
+done-testing;

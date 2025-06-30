@@ -1,0 +1,32 @@
+{
+  "auth": "zef:lizmat",
+  "authors": [
+    "Elizabeth Mattijsen"
+  ],
+  "build-depends": [
+  ],
+  "depends": [
+  ],
+  "description": "Software Bill Of Materials, CyclonDX style",
+  "license": "Artistic-2.0",
+  "name": "SBOM::CycloneDX",
+  "perl": "6.d",
+  "provides": {
+    "SBOM::CycloneDX": "lib/SBOM/CycloneDX.rakumod",
+    "SBOM::CycloneDX::Phase": "lib/SBOM/CycloneDX/Phase.rakumod",
+    "SBOM::CycloneDX::ReferenceType": "lib/SBOM/CycloneDX/ReferenceType.rakumod",
+    "SBOM::NameDescription": "lib/SBOM/NameDescription.rakumod"
+  },
+  "resources": [
+  ],
+  "source-url": "",
+  "tags": [
+    "SBOM",
+    "CYCLONEDX",
+    "ATTESTATION",
+    "CRA"
+  ],
+  "test-depends": [
+  ],
+  "version": "0.0.1"
+}
