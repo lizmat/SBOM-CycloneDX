@@ -6,20 +6,48 @@
   "build-depends": [
   ],
   "depends": [
+    "JSON::Fast:ver<0.19+>:auth<cpan:TIMOTIMO>"
   ],
   "description": "Software Bill Of Materials, CyclonDX style",
   "license": "Artistic-2.0",
   "name": "SBOM::CycloneDX",
   "perl": "6.d",
   "provides": {
+    "SBOM::AcknowledgementType": "lib/SBOM/AcknowledgementType.rakumod",
+    "SBOM::Address": "lib/SBOM/Address.rakumod",
+    "SBOM::Commit": "lib/SBOM/Commit.rakumod",
+    "SBOM::Component": "lib/SBOM/Component.rakumod",
+    "SBOM::ComponentType": "lib/SBOM/ComponentType.rakumod",
+    "SBOM::Contact": "lib/SBOM/Contact.rakumod",
     "SBOM::CycloneDX": "lib/SBOM/CycloneDX.rakumod",
-    "SBOM::CycloneDX::Phase": "lib/SBOM/CycloneDX/Phase.rakumod",
-    "SBOM::CycloneDX::ReferenceType": "lib/SBOM/CycloneDX/ReferenceType.rakumod",
-    "SBOM::NameDescription": "lib/SBOM/NameDescription.rakumod"
+    "SBOM::Development": "lib/SBOM/Development.rakumod",
+    "SBOM::Diff": "lib/SBOM/Diff.rakumod",
+    "SBOM::Encoding": "lib/SBOM/Encoding.rakumod",
+    "SBOM::Hash": "lib/SBOM/Hash.rakumod",
+    "SBOM::License": "lib/SBOM/License.rakumod",
+    "SBOM::LicenseType": "lib/SBOM/LicenseType.rakumod",
+    "SBOM::Licensing": "lib/SBOM/Licensing.rakumod",
+    "SBOM::Metadata": "lib/SBOM/Metadata.rakumod",
+    "SBOM::NameDescription": "lib/SBOM/NameDescription.rakumod",
+    "SBOM::NameValue": "lib/SBOM/NameValue.rakumod",
+    "SBOM::Organization": "lib/SBOM/Organization.rakumod",
+    "SBOM::Patch": "lib/SBOM/Patch.rakumod",
+    "SBOM::PatchType": "lib/SBOM/PatchType.rakumod",
+    "SBOM::Phase": "lib/SBOM/Phase.rakumod",
+    "SBOM::Reference": "lib/SBOM/Reference.rakumod",
+    "SBOM::ReferenceType": "lib/SBOM/ReferenceType.rakumod",
+    "SBOM::Resolve": "lib/SBOM/Resolve.rakumod",
+    "SBOM::ResolveType": "lib/SBOM/ResolveType.rakumod",
+    "SBOM::ScopeType": "lib/SBOM/ScopeType.rakumod",
+    "SBOM::Source": "lib/SBOM/Source.rakumod",
+    "SBOM::Subsets": "lib/SBOM/Subsets.rakumod",
+    "SBOM::SWID": "lib/SBOM/SWID.rakumod",
+    "SBOM::Text": "lib/SBOM/Text.rakumod",
+    "SBOM::Tool": "lib/SBOM/Tool.rakumod"
   },
-  "resources": [
+  "resources": [ "licenses.json"
   ],
-  "source-url": "",
+  "source-url": "https://github.com/lizmat/SBOM-CycloneDX.git",
   "tags": [
     "SBOM",
     "CYCLONEDX",

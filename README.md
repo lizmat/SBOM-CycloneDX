@@ -1,3 +1,5 @@
+[![Actions Status](https://github.com/lizmat/SBOM-CycloneDX/actions/workflows/linux.yml/badge.svg)](https://github.com/lizmat/SBOM-CycloneDX/actions) [![Actions Status](https://github.com/lizmat/SBOM-CycloneDX/actions/workflows/macos.yml/badge.svg)](https://github.com/lizmat/SBOM-CycloneDX/actions) [![Actions Status](https://github.com/lizmat/SBOM-CycloneDX/actions/workflows/windows.yml/badge.svg)](https://github.com/lizmat/SBOM-CycloneDX/actions)
+
 NAME
 ====
 
