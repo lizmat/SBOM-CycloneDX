@@ -16,6 +16,7 @@ use SBOM::Patch:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Reference:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::ReleaseNotes:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::ScopeType:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::Signature:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::SWID:ver<0.0.1>:auth<zef:lizmat>;
 
 class SBOM::Pedigree { ... }
@@ -51,6 +52,7 @@ class SBOM::Component:ver<0.0.1>:auth<zef:lizmat> {
     has SBOM::CryptoProperties $.cryptoProperties;
     has SBOM::NameValue        @.properties;
     has Str                    @.tags;
+    has SBOM::ValidSignature   $.signature;
 
     method TWEAK(:$author) {
         die q/'data' can only be specified if the 'type' is "data"/

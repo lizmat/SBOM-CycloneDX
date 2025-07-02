@@ -8,8 +8,8 @@ class SBOM::Metadata:ver<0.0.1>:auth<zef:lizmat> {
 
     method TWEAK(:$tools) {
         die "improper tool"
-          unless $tools ~~ SBOM::LegacyTool
-            || ($tools ~~ Positional && $tools.are(SBOM::Tool))
+          unless $tools ~~ SBOM::Tool
+            || ($tools ~~ Positional && $tools.are(SBOM::LegacyTool))
     }
 }
 
