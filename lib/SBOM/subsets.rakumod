@@ -44,7 +44,7 @@ subset bomLinkElement of Str where *.contains:
      '/'        <[ 1..9 ]> <[ 0..9 ]>* '#' .+
   /;
 
-subset externalReferenceURL of Str
+subset referenceURL of Str
   where URL | bomLinkDocument | bomLinkElement;
 
 subset locale of Str where *.contains: /^ <[a..z]> ** 2 ['-' <[A..Z]> ** 2]? $/;
@@ -57,8 +57,8 @@ subset PositiveInt of Int where * > 0;
 my sub EXPORT(*@names) {
     @names ||= <
       bomLinkDocunment bomLinkElement bom-ref confidenceValue contentHash
-      CPE email externalReferenceURL locale mime-type omniborId PositiveInt
-      PURL serialNumber SWHID URL
+      CPE email referenceURL locale mime-type omniborId PositiveInt PURL
+      serialNumber SWHID URL
     >;
     Map.new: @names.map: {
         if UNIT::{$_}:exists {

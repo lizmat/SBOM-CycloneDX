@@ -1,22 +1,15 @@
-use SBOM::NameDescription:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::Enum:ver<0.0.1>:auth<zef:lizmat>;
 
-class SBOM::ResolveType:ver<0.0.1>:auth<zef:lizmat>
-  does SBOM::NameDescription {
-}
+class SBOM::ResolveType:ver<0.0.1>:auth<zef:lizmat> does SBOM::Enum { }
+BEGIN SBOM::ResolveType.setup(
+  "defect",
+  "A fault, flaw, or bug in software.",
 
-enum resolveType (
-  resolveDefect => SBOM::ResolveType.new(
-    "defect",
-    "A fault, flaw, or bug in software."
-  ),
-  resolveEnhancement => SBOM::ResolveType.new(
-    "enhancement",
-    "A new feature or behavior in software."
-  ),
-  resolveSecurity => SBOM::ResolveType.new(
-    "security",
-    "A special type of defect which impacts security."
-  )
+  "enhancement",
+  "A new feature or behavior in software.",
+
+  "security",
+  "A special type of defect which impacts security.",
 );
 
 # vim: expandtab shiftwidth=4

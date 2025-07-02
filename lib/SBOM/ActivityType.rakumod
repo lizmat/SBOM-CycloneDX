@@ -1,0 +1,33 @@
+use SBOM::Enum:ver<0.0.1>:auth<zef:lizmat>;
+
+class SBOM::ActivityType:ver<0.0.1>:auth<zef:lizmat> does SBOM::Enum { }
+BEGIN SBOM::ActivityType.setup(
+  "design",
+  "A model design including problem framing, goal definition and algorithm selection.",
+
+  "data-collection",
+  "Model data acquisition including search, selection and transfer.",
+
+  "data-preparation",
+  "Model data preparation including data cleaning, labeling and conversion.",
+
+  "Training",
+  "Model building, training and generalized tuning.",
+
+  "fine-tuning",
+  "Refining a trained model to produce desired outputs for a given problem space.",
+
+  "validation",
+  "Model validation including model output evaluation and testing.",
+
+  "deployment",
+  "Explicit model deployment to a target hosting infrastructure.",
+
+  "inference",
+  "Generating an output response from a hosted model from a set of inputs.",
+
+  "other",
+  "A lifecycle activity type whose description does not match currently defined values.",
+);
+
+# vim: expandtab shiftwidth=4

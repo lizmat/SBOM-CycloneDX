@@ -19,7 +19,7 @@ class SBOM::Pedigree { ... }
 
 class SBOM::Component:ver<0.0.1>:auth<zef:lizmat> {
     has Str                 $.name is required;
-    has SBOM::ScopeType     $.scope = scopeRequired;
+    has SBOM::ScopeType     $.scope = SBOM::ScopeType("required");
     has Str                 $.version;
     has Str                 $.description;
     has SBOM::ComponentType $.type;
