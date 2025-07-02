@@ -12,6 +12,10 @@ role SBOM::Enum:ver<0.0.1>:auth<zef:lizmat> {
         %enums := %hash.Map;
     }
 
+    proto method name() {*}
+    multi method name(SBOM::Enum:U:) { ""     }
+    multi method name(SBOM::Enum:D:) { $!name }
+
     method WHICH(SBOM::Enum:D:) {
         ValueObjAt.new(self.^name ~ '|' ~ $!name)
     }

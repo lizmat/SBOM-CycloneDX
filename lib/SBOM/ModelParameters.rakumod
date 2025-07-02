@@ -1,7 +1,5 @@
-use SBOM::enums:ver<0.0.1>:auth<zef:lizmat>
-  <formatType>;
-
 use SBOM::Dataset:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::FormatType:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::LearningType:ver<0.0.1>:auth<zef:lizmat>;
 
 class SBOM::Approach:ver<0.0.1>:auth<zef:lizmat> {
@@ -9,7 +7,7 @@ class SBOM::Approach:ver<0.0.1>:auth<zef:lizmat> {
 }
 
 class SBOM::ModelFormat:ver<0.0.1>:auth<zef:lizmat> {
-    has formatType $.format;
+    has SBOM::FormatType $.format;
 }
 
 class SBOM::ModelParameters:ver<0.0.1>:auth<zef:lizmat> {

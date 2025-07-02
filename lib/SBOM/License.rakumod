@@ -1,16 +1,15 @@
-use SBOM::enums:ver<0.0.1>:auth<zef:lizmat>
-  <licenseId>;
 use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat>
   <bom-ref URL>;
 
 use SBOM::AcknowledgementType:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::LicenseType:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Licensing:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::NameValue:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Text:ver<0.0.1>:auth<zef:lizmat>;
 
 class SBOM::License:ver<0.0.1>:auth<zef:lizmat> {
     has bom-ref                   $.bom-ref;
-    has licenseId                 $.id;
+    has SBOM::LicenseType         $.id;
     has Str                       $.name;
     has SBOM::AcknowledgementType $.acknowledgement;
     has SBOM::Text                $.text;

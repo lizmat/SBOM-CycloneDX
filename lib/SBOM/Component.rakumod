@@ -4,6 +4,7 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat>
 use SBOM::Commit:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::ComponentType:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Contact:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::Dataset:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Evidence:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Hash:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::License:ver<0.0.1>:auth<zef:lizmat>;
@@ -44,8 +45,14 @@ class SBOM::Component:ver<0.0.1>:auth<zef:lizmat> {
     has SBOM::Evidence      $.evidence;
     has SBOM::ReleaseNotes  $.releaseNotes;
     has SBOM::ModelCard     $.modelCard;
+    has SBOM::Dataset       @.data;
 
-# XXX handle "author" -> "authors" on ingestion
+    method TWEAK(:$author) {
+        die q/'data' can only be specified if the 'type' is "data"/
+          if @!data && $!type.name ne 'data';
+
+        @!authors.push($author) if $author;
+    }
 }
 
 class SBOM::Pedigree:ver<0.0.1>:auth<zef:lizmat> {
