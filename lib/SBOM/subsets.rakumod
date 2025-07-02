@@ -53,12 +53,14 @@ subset confidenceValue of Rat where 0 < * < 1;
 
 subset PositiveInt of Int where * > 0;
 
+subset nistQuantumSecurityLevel of Int where 0 <= * <= 6;
+
 #- EXPORT ----------------------------------------------------------------------
 my sub EXPORT(*@names) {
     @names ||= <
       bomLinkDocunment bomLinkElement bom-ref confidenceValue contentHash
-      CPE email referenceURL locale mime-type omniborId PositiveInt PURL
-      serialNumber SWHID URL
+      CPE email referenceURL locale mime-type nistQuantumSecurityLevel
+      omniborId PositiveInt PURL serialNumber SWHID URL
     >;
     Map.new: @names.map: {
         if UNIT::{$_}:exists {
