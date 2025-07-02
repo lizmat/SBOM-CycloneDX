@@ -34,7 +34,7 @@ class SBOM::Component:ver<0.0.1>:auth<zef:lizmat> {
     has SBOM::Contact          @.authors;
     has Str                    $.publisher;
     has SBOM::Hash             @.hashes;
-    has SBOM::License          @.licenses;
+    has SBOM::AnyLicense       @.licenses;
     has Str                    $.copyright;
     has CPE                    $.cpe;
     has PURL                   $.purl;
@@ -54,11 +54,14 @@ class SBOM::Component:ver<0.0.1>:auth<zef:lizmat> {
     has Str                    @.tags;
     has SBOM::ValidSignature   $.signature;
 
-    method TWEAK(:$author) {
+    submethod TWEAK(:$author) {
         die q/'data' can only be specified if the 'type' is "data"/
           if @!data && $!type.name ne 'data';
 
         @!authors.push($author) if $author;
+
+        die "Can only have one SPDX license"
+          if @!licenses > 1 && @!licenses.first(SBOM::SPDXLicense);
     }
 }
 

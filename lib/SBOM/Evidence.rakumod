@@ -8,13 +8,16 @@ class SBOM::Evidence:ver<0.0.1>:auth<zef:lizmat> {
     has                  $.identity;
     has SBOM::Occurrence @.occurrences;
     has SBOM::Callstack  $.callstack;
-    has SBOM::License    @.licenses;
+    has SBOM::AnyLicense @.licenses;
     has SBOM::Copyright  @.copyright;
 
-    method TWEAK(:$identity) {
+    submethod TWEAK(:$identity) {
         die "improper identity specification"
           unless $identity ~~ SBOM::Identity
-            || ($identity ~~ Positional && $identity.are(SBOM::Identity))
+            || ($identity ~~ Positional && $identity.are(SBOM::Identity));
+
+        die "Can only have one SPDX license"
+          if @!licenses > 1 && @!licenses.first(SBOM::SPDXLicense);
     }
 }
 
