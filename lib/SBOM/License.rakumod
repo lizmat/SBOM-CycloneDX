@@ -1,7 +1,11 @@
+use SBOM::enums:ver<0.0.1>:auth<zef:lizmat>
+  <licenseId>;
+use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat>
+  <bom-ref URL>;
+
 use SBOM::AcknowledgementType:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Licensing:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::NameValue:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::Subsets:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Text:ver<0.0.1>:auth<zef:lizmat>;
 
 class SBOM::License:ver<0.0.1>:auth<zef:lizmat> {

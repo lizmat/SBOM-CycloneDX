@@ -1,6 +1,8 @@
+use SBOM::enums:ver<0.0.1>:auth<zef:lizmat>
+  <licenseId>;
+
 use SBOM::Contact:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Organization:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::Subsets:ver<0.0.1>:auth<zef:lizmat>;
 
 my subset OrgOrContact where SBOM::Organization | SBOM::Contact;
 

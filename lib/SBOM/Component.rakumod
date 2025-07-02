@@ -1,13 +1,18 @@
+use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat>
+  <bom-ref CPE mime-type omniborId PURL SWHID>;
+
 use SBOM::Commit:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::ComponentType:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Contact:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::Evidence:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Hash:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::License:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::ModelCard:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Organization:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Patch:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Reference:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::ReleaseNotes:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::ScopeType:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::Subsets:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::SWID:ver<0.0.1>:auth<zef:lizmat>;
 
 class SBOM::Pedigree { ... }
@@ -29,13 +34,16 @@ class SBOM::Component:ver<0.0.1>:auth<zef:lizmat> {
     has Str                 $.copyright;
     has CPE                 $.cpe;
     has PURL                $.purl;
-    has OmniborID           @.omniborId;
+    has omniborId           @.omniborId;
     has SWHID               @.swhid;
     has SBOM::SWID          $.swid;
     has Bool                $.modified;
     has SBOM::Pedigree      $.pedigree;
     has SBOM::Reference     @.externalReferences;
     has SBOM::Component     @.components;
+    has SBOM::Evidence      $.evidence;
+    has SBOM::ReleaseNotes  $.releaseNotes;
+    has SBOM::ModelCard     $.modelCard;
 
 # XXX handle "author" -> "authors" on ingestion
 }

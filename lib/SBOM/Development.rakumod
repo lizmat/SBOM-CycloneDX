@@ -1,4 +1,5 @@
-use SBOM::Subsets:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat>
+  <email>;
 
 class SBOM::Development:ver<0.0.1>:auth<zef:lizmat> {
     has DateTime $.timestamp;
