@@ -8,6 +8,7 @@ class SBOM::Input:ver<0.0.1>:auth<zef:lizmat> {
     has resourceRef     $.target;
     has resourceRef     $.resource;
 #    has SBOM::Parameter @.parameters;
+    has                 @.parameters;
     has StrOrNameValue  @.environmentVars;
     has SBOM::Text      $.data;
     has SBOM::NameValue @.properties;
