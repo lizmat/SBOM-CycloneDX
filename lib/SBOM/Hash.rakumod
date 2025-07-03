@@ -1,11 +1,14 @@
-use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat>
-  <contentHash>;
+use SBOM::enums:ver<0.0.1>:auth<zef:lizmat> <
+  HashAlgorithm
+>;
 
-use SBOM::HashType:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
+  contentHash
+>;
 
 class SBOM::Hash:ver<0.0.1>:auth<zef:lizmat> {
-    has SBOM::HashType $.alg     is required;
-    has contentHash    $.content is required;
+    has HashAlgorithm $.alg     is required;
+    has contentHash   $.content is required;
 }
 
 # vim: expandtab shiftwidth=4

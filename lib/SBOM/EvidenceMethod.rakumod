@@ -1,12 +1,15 @@
-use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat>
-  <confidenceValue>;
+use SBOM::enums:ver<0.0.1>:auth<zef:lizmat> <
+  Evidence
+>;
 
-use SBOM::EvidenceType:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
+  confidenceValue
+>;
 
 class SBOM::EvidenceMethod:ver<0.0.1>:auth<zef:lizmat> {
-    has SBOM::EvidenceType $.technique  is required;
-    has confidenceValue    $.confidence is required;
-    has Str                $.value;
+    has Evidence        $.technique  is required;
+    has confidenceValue $.confidence is required;
+    has Str             $.value;
 }
 
 # vim: expandtab shiftwidth=4

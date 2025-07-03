@@ -1,0 +1,11 @@
+unoffical
+A patch which is not developed by the creators or maintainers of the software being patched. Refer to https://en.wikipedia.org/wiki/Unofficial_patch.
+
+monkey
+A patch which dynamically modifies runtime behavior. Refer to https://en.wikipedia.org/wiki/Monkey_patch.
+
+backport
+A patch which takes code from a newer version of the software and applies it to older versions of the same software. Refer to https://en.wikipedia.org/wiki/Backporting.
+
+cherry-pick
+A patch created by selectively applying commits from other versions or branches of the same software.

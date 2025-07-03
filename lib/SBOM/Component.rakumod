@@ -1,8 +1,12 @@
-use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat>
-  <bom-ref CPE mime-type omniborId PURL SWHID>;
+use SBOM::enums:ver<0.0.1>:auth<zef:lizmat> <
+  Component Scope
+>;
+
+use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
+  bom-ref CPE mime-type omniborId PURL SWHID
+>;
 
 use SBOM::Commit:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::ComponentType:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Contact:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::CryptoProperties:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Dataset:ver<0.0.1>:auth<zef:lizmat>;
@@ -15,7 +19,6 @@ use SBOM::Organization:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Patch:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Reference:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::ReleaseNotes:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::ScopeType:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Signature:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::SWID:ver<0.0.1>:auth<zef:lizmat>;
 
@@ -23,10 +26,10 @@ class SBOM::Pedigree { ... }
 
 class SBOM::Component:ver<0.0.1>:auth<zef:lizmat> {
     has Str                    $.name is required;
-    has SBOM::ScopeType        $.scope = SBOM::ScopeType("required");
+    has Scope                  $.scope = SBOM::ScopeType("required");
     has Str                    $.version;
     has Str                    $.description;
-    has SBOM::ComponentType    $.type;
+    has Component              $.type;
     has mime-type              $.mime-type;
     has bom-ref                $.bom-ref;
     has SBOM::Organization     $.supplier;

@@ -1,5 +1,6 @@
-use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat>
-  <URL>;
+use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
+  URL
+>;
 
 use SBOM::NameValue:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Text:ver<0.0.1>:auth<zef:lizmat>;

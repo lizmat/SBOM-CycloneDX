@@ -1,0 +1,20 @@
+critical
+Critical severity
+
+high
+High severity
+
+medium
+Medium severity
+
+low
+Low severity
+
+info
+Informational warning.
+
+none
+None
+
+unknown
+The severity is not known

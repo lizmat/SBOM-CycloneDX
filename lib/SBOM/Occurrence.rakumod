@@ -1,5 +1,6 @@
-use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat>
-  <bom-ref PositiveInt>;
+use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
+  bom-ref PositiveInt
+>;
 
 class SBOM::Occurrence:ver<0.0.1>:auth<zef:lizmat> {
     has Str         $.location is required;

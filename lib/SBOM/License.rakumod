@@ -1,22 +1,24 @@
-use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat>
-  <bom-ref URL>;
+use SBOM::enums:ver<0.0.1>:auth<zef:lizmat> <
+  Acknowledgement LicenseId LicenseName
+>;
 
-use SBOM::AcknowledgementType:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::LicenseIdType:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::LicenseNameType:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
+  bom-ref URL
+>;
+
 use SBOM::Licensing:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::NameValue:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Text:ver<0.0.1>:auth<zef:lizmat>;
 
 class SBOM::License:ver<0.0.1>:auth<zef:lizmat> {
-    has bom-ref                   $.bom-ref;
-    has SBOM::LicenseIdType       $.id;
-    has Str                       $.name;
-    has SBOM::AcknowledgementType $.acknowledgement;
-    has SBOM::Text                $.text;
-    has URL                       $.url;
-    has SBOM::Licensing           $.licensing;
-    has SBOM::NameValue           @.properties;
+    has bom-ref         $.bom-ref;
+    has LicenseId       $.id;
+    has Str             $.name;
+    has Acknowledgement $.acknowledgement;
+    has SBOM::Text      $.text;
+    has URL             $.url;
+    has SBOM::Licensing $.licensing;
+    has SBOM::NameValue @.properties;
 
     submethod TWEAK() {
         die "Must have 'id' or 'name' specified"
@@ -25,9 +27,9 @@ class SBOM::License:ver<0.0.1>:auth<zef:lizmat> {
 }
 
 class SBOM::SPDXLicense:ver<0.0.1>:auth<zef:lizmat> {
-    has bom-ref                   $.bom-ref;
-    has SBOM::LicenseNameType     $.expression is required;
-    has SBOM::AcknowledgementType $.acknowledgement;
+    has bom-ref         $.bom-ref;
+    has LicenseName     $.expression is required;
+    has Acknowledgement $.acknowledgement;
 }
 
 subset SBOM::AnyLicense where SBOM::License | SBOM::SPDXLicense;

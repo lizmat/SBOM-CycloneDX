@@ -1,5 +1,6 @@
-use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat>
-  <locale>;
+use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
+  locale
+>;
 
 use SBOM::Text:ver<0.0.1>:auth<zef:lizmat>;
 

@@ -1,0 +1,23 @@
+tls
+Transport Layer Security
+
+ssh
+Secure Shell
+
+ipsec
+Internet Protocol Security
+
+ike
+Internet Key Exchange
+
+sstp
+Secure Socket Tunneling Protocol
+
+wpa
+Wi-Fi Protected Access
+
+other
+Another protocol type
+
+unknown
+The protocol type is not known

@@ -1,5 +1,6 @@
-use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat>
-  <bom-ref URL>;
+use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
+  bom-ref URL
+>;
 
 use SBOM::Address:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Contact:ver<0.0.1>:auth<zef:lizmat>;

@@ -1,13 +1,14 @@
-use SBOM::ECCurveType:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::KeyType:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::enums:ver<0.0.1>:auth<zef:lizmat> <
+  CryptoKey ECCurve
+>;
 
 class SBOM::PublicKey:ver<0.0.1>:auth<zef:lizmat> {
-    has SBOM::KeyType     $.kty is required;
-    has SBOM::ECCurveType $.crv;
-    has Str               $.x;
-    has Str               $.y;
-    has Str               $.n;
-    has Str               $.e;
+    has CryptoKey $.kty is required;
+    has ECCurve   $.crv;
+    has Str       $.x;
+    has Str       $.y;
+    has Str       $.n;
+    has Str       $.e;
 
     submethod TWEAK() {
         my $keytype := $!kty.Str;

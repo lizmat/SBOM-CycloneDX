@@ -1,5 +1,6 @@
-use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat>
-  <bom-ref email>;
+use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
+  bom-ref email
+>;
 
 class SBOM::Contact:ver<0.0.1>:auth<zef:lizmat> {
     has bom-ref $.bom-ref;

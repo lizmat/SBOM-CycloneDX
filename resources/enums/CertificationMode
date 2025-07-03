@@ -1,0 +1,26 @@
+cbc
+Cipher block chaining
+
+ecb
+Electronic codebook
+
+ccm
+Counter with cipher block chaining message authentication code
+
+gcm
+Galois/counter
+
+cfb
+Cipher feedback
+
+ofb
+Output feedback
+
+ctr
+Counter
+
+other
+Another mode of operation
+
+unknown
+The mode of operation is not known

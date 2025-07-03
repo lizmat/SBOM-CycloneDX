@@ -1,0 +1,17 @@
+software-plain-ram
+A software implementation running in plain unencrypted RAM.
+
+software-encrypted-ram
+A software implementation running in encrypted RAM.
+
+software-tee
+A software implementation running in a trusted execution environment.
+
+hardware
+A hardware implementation.
+
+other
+Another implementation environment.
+
+unknown
+The execution environment is not known.
