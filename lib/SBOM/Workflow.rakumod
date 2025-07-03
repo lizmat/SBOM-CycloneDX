@@ -16,6 +16,7 @@ class SBOM::Workflow:ver<0.0.1>:auth<zef:lizmat> {
             die "Mixed references"
               unless @!resourceReferences.are(SBOM::Reference)
                   || @!resourceReferences.all ~~ resourceRef;
+        }
     }
 
     method WHY() {
