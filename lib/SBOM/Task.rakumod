@@ -6,9 +6,9 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
   bom-ref
 >;
 
-use SBOM::ExecutionStep:ver<0.0.1>:auth<zef:lizmat>
-use SBOM::Input:ver<0.0.1>:auth<zef:lizmat>
-use SBOM::Output:ver<0.0.1>:auth<zef:lizmat>
+use SBOM::ExecutionStep:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::Input:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::Output:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Reference:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Trigger:ver<0.0.1>:auth<zef:lizmat>;
 
@@ -31,6 +31,7 @@ class SBOM::Task:ver<0.0.1>:auth<zef:lizmat> {
             die "Mixed references"
               unless @!resourceReferences.are(SBOM::Reference)
                   || @!resourceReferences.all ~~ resourceRef;
+        }
     }
 
     method WHY() {
