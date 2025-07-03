@@ -15,7 +15,7 @@ class SBOM::Input:ver<0.0.1>:auth<zef:lizmat> {
 
     submethod TWEAK() {
         die "Must have at least 'resource', 'parameters', 'environmentVars' or 'data'"
-          unless $!resoource || @!parameters || @!environmentVars || $!data;
+          unless $!resource || @!parameters || @!environmentVars || $!data;
     }
 
     method WHY() {
