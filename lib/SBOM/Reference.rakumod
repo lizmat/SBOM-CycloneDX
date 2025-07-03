@@ -10,9 +10,11 @@ use SBOM::Hash:ver<0.0.1>:auth<zef:lizmat>;
 
 class SBOM::Reference:ver<0.0.1>:auth<zef:lizmat> {
     has referenceURL    $.url  is required;
-    has Str             $.comment;
     has ReferenceSource $.type is required;
+    has Str             $.comment;
     has SBOM::Hash      @.hashes;
 }
+
+subset resourceRef where referenceURL | SBOM::Reference;
 
 # vim: expandtab shiftwidth=4

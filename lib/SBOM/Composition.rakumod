@@ -15,6 +15,10 @@ class SBOM::Composition:ver<0.0.1>:auth<zef:lizmat> {
     has bom-ref              @.dependencies;;
     has bom-ref              @.vulnerabilities;;
     has SBOM::ValidSignature $.signature;
+
+    method description() {
+        "Compositions describe constituent parts (including components, services, and dependency relationships) and their completeness. The completeness of vulnerabilities expressed in a BOM may also be described."
+    }
 }
 
 # vim: expandtab shiftwidth=4

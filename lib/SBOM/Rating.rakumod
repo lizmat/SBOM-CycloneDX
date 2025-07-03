@@ -6,7 +6,7 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
   URL
 >;
 
-use SBOM::Source:ver<0.0.1>:auth<zef:lizmat>
+use SBOM::Source:ver<0.0.1>:auth<zef:lizmat>;
 
 class SBOM::Rating:ver<0.0.1>:auth<zef:lizmat> {
     has SBOM::Source    $.source;

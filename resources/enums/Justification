@@ -1,0 +1,26 @@
+code_not_present
+The code has been removed or tree-shaked.
+
+code_not_reachable
+The vulnerable code is not invoked at runtime.
+
+requires_configuration
+Exploitability requires a configurable option to be set/unset.
+
+requires_dependency
+Exploitability requires a dependency that is not present.
+
+requires_environment
+Exploitability requires a certain environment which is not present.
+
+protected_by_compiler
+Exploitability requires a compiler flag to be set/unset.
+
+protected_at_runtime
+Exploits are prevented at runtime.
+
+protected_at_perimeter
+Attacks are blocked at physical, logical, or network perimeter.
+
+protected_by_mitigating_control
+Preventative measures have been implemented that reduce the likelihood and/or impact of the vulnerability.

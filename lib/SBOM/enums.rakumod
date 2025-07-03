@@ -2,7 +2,7 @@ use JSON::Fast:ver<0.19+>:auth<cpan:TIMOTIMO>;
 
 my role Enumify {
     has $.name;
-    has $.description;
+    has $.WHY;
 
     my %enums is Map;
 
@@ -13,14 +13,14 @@ my role Enumify {
     multi method setup(Enumify:U: @setup) {
         my %hash;
         while @setup {
-            my $name        = @setup.shift;
-            my $description = @setup.shift // "";
-            if $description {
+            my $name  = @setup.shift;
+            my $WHY   = @setup.shift // "";
+            if $WHY {
                 while @setup && @setup.shift -> $next {
-                    $description ~= "\n$next";
+                    $WHY ~= "\n$next";
                 }
             }
-            %hash{$name} := self.new(:$name, :$description);
+            %hash{$name} := self.new(:$name, :$WHY);
         }
         %enums := %hash.Map;
     }
@@ -28,6 +28,14 @@ my role Enumify {
     proto method name() {*}
     multi method name(Enumify:U:) { ""     }
     multi method name(Enumify:D:) { $!name }
+
+    proto method WHY() {*}
+    multi method WHY(Enumify:U:) {
+        "No description available for '" ~ self.^name ~ "' enum"
+    }
+    multi method WHY(Enumify:D:) {
+        $!WHY
+    }
 
     method WHICH(Enumify:D:) {
         ValueObjAt.new(self.^name ~ '|' ~ $!name)
@@ -43,6 +51,7 @@ my role Enumify {
     }
 }
 
+#-------------------------------------------------------------------------------
 my class Acknowledgement:ver<0.0.1>:auth<zef:lizmat>      does Enumify { }
 my class Activity:ver<0.0.1>:auth<zef:lizmat>             does Enumify { }
 my class Aggregate:ver<0.0.1>:auth<zef:lizmat>            does Enumify { }
@@ -80,21 +89,15 @@ my class RiskMethodology:ver<0.0.1>:auth<zef:lizmat>      does Enumify { }
 my class Scope:ver<0.0.1>:auth<zef:lizmat>                does Enumify { }
 my class Severity:ver<0.0.1>:auth<zef:lizmat>             does Enumify { }
 my class SignatureAlgorithm:ver<0.0.1>:auth<zef:lizmat>   does Enumify { }
-my class VulnerabilityState:ver<0.0.1>:auth<zef:lizmat>   does Enumify { }
 
-# Sadly, UNIT::.keys is not set yet at this point at compile time, so
-# we need to repeat ourselves
-BEGIN ::($_).setup($_) for <
-  Acknowledgement Activity Aggregate AlgorithmPrimitive CO2Cost
-  Certification CertificationMode CertificationPadding Component
-  Crypto CryptoAsset CryptoFunction CryptoKey CryptoProtocol
-  CryptoState DataSource ECCurve Encoding Energy EnergyUnit Evidence
-  ExecutionEnvironment Field Format HashAlgorithm Learning
-  LicenseGranted Patch Phase Platform ReferenceSource ReleaseLevel
-  ResolveType RiskMethodology Scope Severity SignatureAlgorithm
-  VulnerabilityState
->;
+#- J ---------------------------------------------------------------------------
+my class Justification:ver<0.0.1>:auth<zef:lizmat> does Enumify {
+    multi method WHY(Justification:U:) {
+        "The rationale of why the impact analysis state was asserted."
+    }
+}
 
+#- L ---------------------------------------------------------------------------
 # fetched from https://raw.githubusercontent.com/spdx/license-list-data/refs/heads/main/json/licenses.json
 my class LicenseId:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
 BEGIN LicenseId.setup(
@@ -110,7 +113,44 @@ BEGIN LicenseName.setup(
   )<licenses>.map({ (.<name>, .<licenseId>, "").Slip }).Array
 );
 
-# vim: expandtab shiftwidth=4
+#- R ---------------------------------------------------------------------------
+my class Response:ver<0.0.1>:auth<zef:lizmat> does Enumify {
+    multi method WHY(Response:U:) {
+        "A response to the vulnerability by the manufacturer, supplier, or project responsible for the affected component or service. More than one response is allowed. Responses are strongly encouraged for vulnerabilities where the analysis state is exploitable."
+    }
+}
+
+my class VulnerabilityState:ver<0.0.1>:auth<zef:lizmat> does Enumify {
+    multi method WHY(VulnerabilityState:U:) {
+        "Declares the current state of an occurrence of a vulnerability, after automated or manual analysis."
+    }
+}
+
+#-O ----------------------------------------------------------------------------
+my class OutputType:ver<0.0.1>:auth<zef:lizmat> does Enumify {
+    multi method WHY(OutputType:U:) {
+        "Describes the type of data output."
+    }
+}
+
+#- T ---------------------------------------------------------------------------
+my class TaskActivity:ver<0.0.1>:auth<zef:lizmat> does Enumify {
+    multi method WHY(TaskActivity:U:) {
+        "Indicates the types of activities performed by the set of workflow tasks"
+    }
+}
+my class TriggerEvent:ver<0.0.1>:auth<zef:lizmat> does Enumify {
+    multi method WHY(TriggerEvent:U:) {
+        "The source type of event which caused the trigger to fire."
+    }
+}
+
+#- process resources -----------------------------------------------------------
+# Read the resources section of the META6.json to figure out which
+# text files need to be processed into their associated classes
+BEGIN ::($_).setup($_) for $?DISTRIBUTION.meta<resources>.map: {
+    .substr(6) if .starts-with("enums/")
+}
 
 #- EXPORT ----------------------------------------------------------------------
 my sub EXPORT(*@names) {
@@ -127,6 +167,5 @@ my sub EXPORT(*@names) {
         }
     }
 }
-
 
 # vim: expandtab shiftwidth=4
