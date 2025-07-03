@@ -1,9 +1,6 @@
-use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
-  resourceRef
->;
-
 use SBOM::NameValue:ver<0.0.1>:auth<zef:lizmat>;
 #use SBOM::Parameter:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::Reference:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Text:ver<0.0.1>:auth<zef:lizmat>;
 
 class SBOM::Input:ver<0.0.1>:auth<zef:lizmat> {
