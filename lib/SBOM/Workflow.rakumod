@@ -7,12 +7,13 @@ use SBOM::Reference:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::RuntimeTopology:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Workspace:ver<0.0.1>:auth<zef:lizmat>;
 
+#| A specialized orchestration task.
 class SBOM::Workflow:ver<0.0.1>:auth<zef:lizmat> {
     has bom-ref               $.bom-ref is required;
     has Str                   $.uid     is required;
     has Str                   $.name;
     has Str                   $.description;
-    has resourceRef           @.resourceReferences;
+    has SBOM::resourceRef     @.resourceReferences;
     has SBOM::Workspace       @.worksSpaces;
     has SBOM::RuntimeTopology @.runtimeTopology;
     has SBOM::NameValue       @.properties;
@@ -21,12 +22,8 @@ class SBOM::Workflow:ver<0.0.1>:auth<zef:lizmat> {
         if @!resourceReferences {
             die "Mixed references"
               unless @!resourceReferences.are(SBOM::Reference)
-                  || @!resourceReferences.all ~~ resourceRef;
+                  || @!resourceReferences.all ~~ SBOM::resourceRef;
         }
-    }
-
-    method WHY() {
-        "A specialized orchestration task."
     }
 }
 

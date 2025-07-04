@@ -15,6 +15,6 @@ class SBOM::Reference:ver<0.0.1>:auth<zef:lizmat> {
     has SBOM::Hash      @.hashes;
 }
 
-subset resourceRef where referenceURL | SBOM::Reference;
+subset SBOM::resourceRef where referenceURL | SBOM::Reference;
 
 # vim: expandtab shiftwidth=4

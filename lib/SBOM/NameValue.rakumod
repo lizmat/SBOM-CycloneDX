@@ -9,6 +9,6 @@ class SBOM::NameValue:ver<0.0.1>:auth<zef:lizmat> {
     multi method Str(SBOM::NameValue:D:) { $.name }
 }
 
-subset StrOrNameValue where Str | SBOM::NameValue;
+subset SBOM::StrOrNameValue where Str | SBOM::NameValue;
 
 # vim: expandtab shiftwidth=4

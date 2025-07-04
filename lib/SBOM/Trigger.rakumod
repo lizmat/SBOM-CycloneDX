@@ -13,31 +13,28 @@ use SBOM::NameValue:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Output:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Reference:ver<0.0.1>:auth<zef:lizmat>;
 
+#| The trigger that initiated the task.
 class SBOM::Trigger:ver<0.0.1>:auth<zef:lizmat> {
-    has bom-ref         $.bom-ref is required;
-    has Str             $.uid     is required;
-    has Str             $.name;
-    has Str             $.description;
-    has resourceRef     @.resourceReferences;
-    has TaskActivity    @.taskTypes is required;
-    has TriggerEvent    $.type;
-    has SBOM::Event     $.event;
-    has SBOM::Condition @.conditions;
-    has DateTime        $.timeActivated;
-    has SBOM::Input     @.inputs;
-    has SBOM::Output    @.outputs;
-    has SBOM::NameValue @.properties;
+    has bom-ref           $.bom-ref is required;
+    has Str               $.uid     is required;
+    has Str               $.name;
+    has Str               $.description;
+    has SBOM::resourceRef @.resourceReferences;
+    has TaskActivity      @.taskTypes is required;
+    has TriggerEvent      $.type;
+    has SBOM::Event       $.event;
+    has SBOM::Condition   @.conditions;
+    has DateTime          $.timeActivated;
+    has SBOM::Input       @.inputs;
+    has SBOM::Output      @.outputs;
+    has SBOM::NameValue   @.properties;
 
     submethod TWEAK() {
         if @!resourceReferences {
             die "Mixed references"
               unless @!resourceReferences.are(SBOM::Reference)
-                  || @!resourceReferences.all ~~ resourceRef;
+                  || @!resourceReferences.all ~~ SBOM::resourceRef;
         }
-    }
-
-    method WHY() {
-        "The trigger that initiated the task."
     }
 }
 
