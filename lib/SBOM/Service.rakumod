@@ -10,6 +10,7 @@ use SBOM::Reference:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::ReleaseNotes:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Signature:ver<0.0.1>:auth<zef:lizmat>;
 
+#| A service, which may include microservices, function-as-a-service, and other types of network or intra-process services.
 class SBOM::Service:ver<0.0.1>:auth<zef:lizmat> {
     has Str                  $.name is required;
     has bom-ref              $.bom-ref;

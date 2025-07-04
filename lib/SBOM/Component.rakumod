@@ -24,6 +24,7 @@ use SBOM::SWID:ver<0.0.1>:auth<zef:lizmat>;
 
 class SBOM::Pedigree { ... }
 
+#| A software or hardware component
 class SBOM::Component:ver<0.0.1>:auth<zef:lizmat> {
     has Str                    $.name is required;
     has Scope                  $.scope = SBOM::ScopeType("required");
@@ -68,6 +69,7 @@ class SBOM::Component:ver<0.0.1>:auth<zef:lizmat> {
     }
 }
 
+#| Component pedigree is a way to document complex supply chain scenarios where components are created, distributed, modified, redistributed, combined with other components, etc. Pedigree supports viewing this complex chain from the beginning, the end, or anywhere in the middle. It also provides a way to document variants where the exact relation may not be known.
 class SBOM::Pedigree:ver<0.0.1>:auth<zef:lizmat> {
     has SBOM::Component   @.ancestors;
     has SBOM::Component   @.descendants;
