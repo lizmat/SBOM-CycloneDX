@@ -78,6 +78,7 @@
     "SBOM::Reference": "lib/SBOM/Reference.rakumod",
     "SBOM::ReleaseNotes": "lib/SBOM/ReleaseNotes.rakumod",
     "SBOM::Resolve": "lib/SBOM/Resolve.rakumod",
+    "SBOM::RuntimeTopology": "lib/SBOM/RuntimeTopology.rakumod",
     "SBOM::SWID": "lib/SBOM/SWID.rakumod",
     "SBOM::Service": "lib/SBOM/Service.rakumod",
     "SBOM::Signature": "lib/SBOM/Signature.rakumod",
@@ -87,12 +88,15 @@
     "SBOM::Text": "lib/SBOM/Text.rakumod",
     "SBOM::Tool": "lib/SBOM/Tool.rakumod",
     "SBOM::Trigger": "lib/SBOM/Trigger.rakumod",
+    "SBOM::Volume": "lib/SBOM/Volume.rakumod",
     "SBOM::Vulnerability": "lib/SBOM/Vulnerability.rakumod",
     "SBOM::Workflow": "lib/SBOM/Workflow.rakumod",
+    "SBOM::Workspace": "lib/SBOM/Workspace.rakumod",
     "SBOM::enums": "lib/SBOM/enums.rakumod",
     "SBOM::subsets": "lib/SBOM/subsets.rakumod"
   },
   "resources": [
+    "enums/AccessMode",
     "enums/Acknowledgement",
     "enums/Activity",
     "enums/Aggregate",
@@ -135,6 +139,7 @@
     "enums/SignatureAlgorithm",
     "enums/TaskActivity",
     "enums/TriggerEvent",
+    "enums/VolumeMode",
     "enums/VulnerabilityState",
     "licenses.json"
   ],

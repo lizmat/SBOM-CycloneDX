@@ -6,6 +6,7 @@ use SBOM::Annotation:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Component:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Composition:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Dependency:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::Formulation:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Metadata:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Reference:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Service:ver<0.0.1>:auth<zef:lizmat>;
@@ -23,11 +24,16 @@ class SBOM::CycloneDX:ver<0.0.1>:auth<zef:lizmat> {
     has SBOM::Composition   @.compositions;;
     has SBOM::Vulnerability @.vulnerabilities;;
     has SBOM::Annotation    @.annotations;;
+    has SBOM::Formulation   @.formulations;;
 
     method bomFormat()   { "CycloneDX" }
     method specVersion() { v1.6        }
 
     method updated() { ++$!version }
+
+    method WHY() {
+        self.bomFormat ~ " " ~ self.specVersion;
+    }
 }
 
 # vim: expandtab shiftwidth=4

@@ -90,6 +90,13 @@ my class Scope:ver<0.0.1>:auth<zef:lizmat>                does Enumify { }
 my class Severity:ver<0.0.1>:auth<zef:lizmat>             does Enumify { }
 my class SignatureAlgorithm:ver<0.0.1>:auth<zef:lizmat>   does Enumify { }
 
+#- A ---------------------------------------------------------------------------
+my class AccessMode:ver<0.0.1>:auth<zef:lizmat> does Enumify {
+    multi method WHY(AccessMode:U:) {
+        "Describes the read-write access control for the workspace relative to the owning resource instance."
+    }
+}
+
 #- J ---------------------------------------------------------------------------
 my class Justification:ver<0.0.1>:auth<zef:lizmat> does Enumify {
     multi method WHY(Justification:U:) {
@@ -142,6 +149,13 @@ my class TaskActivity:ver<0.0.1>:auth<zef:lizmat> does Enumify {
 my class TriggerEvent:ver<0.0.1>:auth<zef:lizmat> does Enumify {
     multi method WHY(TriggerEvent:U:) {
         "The source type of event which caused the trigger to fire."
+    }
+}
+
+#- V ---------------------------------------------------------------------------
+my class VolumeMode:ver<0.0.1>:auth<zef:lizmat> does Enumify {
+    multi method WHY(VolumeMode:U:) {
+        "The mode for the volume instance."
     }
 }
 

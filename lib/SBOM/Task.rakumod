@@ -1,5 +1,5 @@
 use SBOM::enums:ver<0.0.1>:auth<zef:lizmat> <
-  TaskActivity TriggerEvent
+  TaskActivity
 >;
 
 use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
@@ -8,23 +8,29 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
 
 use SBOM::ExecutionStep:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Input:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::NameValue:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Output:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Reference:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::RuntimTopology:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Trigger:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::Workspace:ver<0.0.1>:auth<zef:lizmat>;
 
 class SBOM::Task:ver<0.0.1>:auth<zef:lizmat> {
-    has bom-ref              $.bom-ref is required;
-    has Str                  $.uid     is required;
-    has Str                  $.name;
-    has Str                  $.description;
-    has resourceRef          @.resourceReferences;
-    has TaskActivity         @.taskTypes is required;
-    has SBOM::Trigger        $.trigger;
-    has SBOM::ExecutionStep  @.steps;
-    has SBOM::Input          @.inputs;
-    has SBOM::Output         @.outputs;
-    has DateTime             $.timeStart;
-    has DateTime             $.timeEnd;
+    has bom-ref               $.bom-ref is required;
+    has Str                   $.uid     is required;
+    has Str                   $.name;
+    has Str                   $.description;
+    has resourceRef           @.resourceReferences;
+    has TaskActivity          @.taskTypes is required;
+    has SBOM::Trigger         $.trigger;
+    has SBOM::ExecutionStep   @.steps;
+    has SBOM::Input           @.inputs;
+    has SBOM::Output          @.outputs;
+    has DateTime              $.timeStart;
+    has DateTime              $.timeEnd;
+    has SBOM::Workspace       @.workspaces;
+    has SBOM::RuntimeTopology @.runtimeTopology;
+    has SBOM::NameValue       @.properties;
 
     submethod TWEAK() {
         if @!resourceReferences {

@@ -1,0 +1,9 @@
+read-only
+
+read-write
+
+read-write-once
+
+write-once
+
+write-only
