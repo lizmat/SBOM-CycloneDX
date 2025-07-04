@@ -11,7 +11,7 @@ use SBOM::Input:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::NameValue:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Output:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Reference:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::RuntimTopology:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::RuntimeTopology:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Trigger:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Workspace:ver<0.0.1>:auth<zef:lizmat>;
 
