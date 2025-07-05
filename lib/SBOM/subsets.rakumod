@@ -9,18 +9,33 @@ subset serialNumber of Str where *.contains:
      '-'         <hexnum> ** 12
   $/;
 
-# Identifier which can be used to reference a component in the BOM.
-# Every bom-ref must be unique within the BOM.
+#| Identifier which can be used to reference a component in the BOM.
+#| Every bom-ref must be unique within the BOM. Must be at least 1
+#| characters long.
 subset bom-ref of Str where { .chars && !.starts-with('urn:cdx') }
 
 subset email     of Str;  # XXX to be done
 subset URL       of Str;  # XXX fetch URL rules
+
+#| A CPE must conform to the CPE 2.2 or 2.3 specification. See
+#| https://nvd.nist.gov/products/cpe.
 subset CPE       of Str;  # XXX fetch from https://nvd.nist.gov/products/cpe
+
+#| A package-url (purl). The purl, if specified, must be valid and conform
+#| to the specification defined at: https://github.com/package-url/purl-spec.
 subset PURL      of Str;  # XXX fetch from https://github.com/package-url/purl-spec
+
+#| An OmniBOR Artifact ID. The OmniBOR, if specified, must be valid and
+#| conform to the specification defined at:
+#| https://www.iana.org/assignments/uri-schemes/prov/gitoid.
 subset omniborId of Str;  # XXX fetch from https://www.iana.org/assignments/uri-schemes/prov/gitoid
+
+#| A Software Heritage persistent identifier (SWHID). The SWHID, if
+#| specified, must be valid and conform to the specification defined at:
+#| https://docs.softwareheritage.org/devel/swh-model/persistent-identifiers.html.
 subset SWHID     of Str;  # XXX fetch from https://docs.softwareheritage.org/devel/swh-model/persistent-identifiers.html
 
-# A MIME-type
+#| A MIME-type.  Must match regular expression: ^[-+a-z0-9.]+/[-+a-z0-9.]+$
 my token mime-part { <[-+ a..z 0..9 ]>+ }
 subset mime-type of Str where *.contains: /^ <mime-part> '/' <mime-part> $/;
 
@@ -56,12 +71,16 @@ subset PositiveInt of Int where * > 0;
 
 subset nistQuantumSecurityLevel of Int where 0 <= * <= 6;
 
+#| A version should ideally comply with semantic versioning but is noti
+#| enforced. Must be at most 1024 characters long.
+subset versionString of Str where 0 < *.chars <= 1024;
+
 #- EXPORT ----------------------------------------------------------------------
 my sub EXPORT(*@names) {
     @names ||= <
       bomLinkDocunment bomLinkElement bom-ref confidenceValue contentHash
       CPE email referenceURL locale mime-type nistQuantumSecurityLevel
-      omniborId PositiveInt PURL serialNumber SWHID URL
+      omniborId PositiveInt PURL serialNumber SWHID URL versionString
     >;
     Map.new: @names.map: {
         if UNIT::{$_}:exists {
