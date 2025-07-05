@@ -17,31 +17,98 @@ use SBOM::Signature:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Vulnerability:ver<0.0.1>:auth<zef:lizmat>;
 
 #-------------------------------------------------------------------------------
-class SBOM::CycloneDX:ver<0.0.1>:auth<zef:lizmat> {
-    has serialNumber         $.serialNumber;
-    has Int                  $.version = 1;
-    has SBOM::Metadata       $.metadata;
-    has SBOM::Component      @.components;
-    has SBOM::Service        @.services;
-    has SBOM::Reference      @.externalReferences;
-    has SBOM::Dependency     @.dependencies;
-    has SBOM::Composition    @.compositions;
-    has SBOM::Vulnerability  @.vulnerabilities;
-    has SBOM::Annotation     @.annotations;
-    has SBOM::Formulation    @.formulations;
-    has SBOM::Declaration    @.declarations;
-    has SBOM::Definition     @.definitions;
-    has SBOM::NameValue      @.properties;
+unit class SBOM::CycloneDX:ver<0.0.1>:auth<zef:lizmat>;
+
+#| Every BOM generated SHOULD have a unique serial number, even if the
+#| contents of the BOM have not changed over time. If specified, the serial
+#| number must conform to RFC 4122. Use of serial numbers is recommended.
+    has serialNumber $.serialNumber;
+
+#| Whenever an existing BOM is modified, either manually or through
+#| automated processes, the version of the BOM SHOULD be incremented by 1.
+#| When a system is presented with multiple BOMs with identical serial
+#| numbers, the system SHOULD use the most recent version of the BOM.
+#| The default version is '1'.
+    has Int $.version = 1;
+
+#| Provides additional information about a BOM.
+    has SBOM::Metadata $.metadata;
+
+#| A list of software and hardware components. All items must be unique.
+    has SBOM::Component @.components;
+
+#| A list of services. This may include microservices,
+#| function-as-a-service, and other types of network or intra-process
+#| services. All items must be unique.
+    has SBOM::Service @.services;
+
+#| External references provide a way to document systems, sites, and
+#| information that may be relevant but are not included with the BOM.
+#| They may also establish specific relationships within or external
+#| to the BOM.
+    has SBOM::Reference @.externalReferences;
+
+#| Provides the ability to document dependency relationships including
+#| provided & implemented components. All items must be unique.
+    has SBOM::Dependency @.dependencies;
+
+#| Compositions describe constituent parts (including components,
+#| services, and dependency relationships) and their completeness.
+#| The completeness of vulnerabilities expressed in a BOM may also be
+#| described.
+    has SBOM::Composition @.compositions;
+
+#| Vulnerabilities identified in components or services. All items
+#| must be unique.
+    has SBOM::Vulnerability @.vulnerabilities;
+
+#| Comments made by people, organizations, or tools about any object
+#| with a bom-ref, such as components, services, vulnerabilities, or
+#| the BOM itself. Unlike inventory information, annotations may
+#| contain opinions or commentary from various stakeholders.
+#| Annotations may be inline (with inventory) or externalized viai
+#| BOM-Link and may optionally be signed. All items must be unique.
+    has SBOM::Annotation @.annotations;
+
+#| Describes how a component or service was manufactured or deployed.
+#| This is achieved through the use of formulas, workflows, tasks,
+# and steps, which declare the precise steps to reproduce along with
+#| the observed formulas describing the steps which transpired in the
+#| manufacturing process. All items must be unique.
+    has SBOM::Formulation @.formulations;
+
+#| The list of declarations which describe the conformance to
+#| standards. Each declaration may include attestations, claims,
+#| and evidence.
+    has SBOM::Declaration @.declarations;
+
+#| A collection of reusable objects that are defined and may be used
+#| elsewhere in the BOM.
+    has SBOM::Definition @.definitions;
+
+#| Provides the ability to document properties in a name-value store.
+#| This provides flexibility to include data not officially supported
+#| in the standard without having to use additional namespaces or
+#| create extensions. Unlike key-value stores, properties support
+#| duplicate names, each potentially having different values. Property
+#| names of interest to the general public are encouraged to be
+#| registered in the CycloneDX Property Taxonomy. Formal registration
+#| is optional.
+    has SBOM::NameValue @.properties;
+
+#| Enveloped signature in JSON Signature Format (JSF).
     has SBOM::ValidSignature $.signature;
 
-    method bomFormat()   { "CycloneDX" }
-    method specVersion() { v1.6        }
+#| Specifies the format of the BOM. This helps to identify the file as CycloneDX since BOMs do not have a filename convention, nor does JSON schema support namespaces. This value must be "CycloneDX".
+    method bomFormat() { "CycloneDX" }
+
+#| The version of the CycloneDX specification the BOM conforms to.
+    method specVersion() { v1.6 }
 
     method updated() { ++$!version }
 
     method WHY() {
-        self.bomFormat ~ " " ~ self.specVersion;
-    }
+     self.bomFormat ~ " " ~ self.specVersion;
 }
 
 # vim: expandtab shiftwidth=4
