@@ -2,11 +2,21 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
   bom-ref email
 >;
 
+#| A person.
 class SBOM::Contact:ver<0.0.1>:auth<zef:lizmat> {
+
+#| An optional identifier which can be used to reference the person
+#| elsewhere in the BOM.
     has bom-ref $.bom-ref;
-    has Str     $.name;
-    has email   $.email;
-    has Str     $.phone;
+
+#| The name of a contact.
+    has Str $.name;
+
+#| The email address of the contact.
+    has email $.email;
+
+#| The phone number of the contact.
+    has Str $.phone;
 }
 
 # vim: expandtab shiftwidth=4

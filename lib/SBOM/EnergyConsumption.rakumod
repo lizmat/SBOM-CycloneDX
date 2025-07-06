@@ -7,12 +7,26 @@ use SBOM::EnergyCost:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::EnergyProvider:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Property:ver<0.0.1>:auth<zef:lizmat>;
 
+#| Describes energy consumption information incurred during a component's
+#| lifecycle activities.
 class SBOM::EnergyConsumption:ver<0.0.1>:auth<zef:lizmat> {
-    has Activity             $.activity           is required;
+
+#| The type of activity that is part of a machine learning model
+#| development or operational lifecycle.
+    has Activity $.activity is required;
+
+#| The provider(s) of the energy consumed by the associated model
+#| development lifecycle activity.
     has SBOM::EnergyProvider @.energyProviders    is required;
-    has SBOM::EnergyCost     $.activityEnergyCost is required;
-    has SBOM::CO2Cost        $.co2CostEquivalent;
-    has SBOM::CO2Cost        $.co2CostOffset;
+
+#| The total energy cost associated with the model lifecycle activity.
+    has SBOM::EnergyCost $.activityEnergyCost is required;
+
+#| The CO2 cost (debit) equivalent to the total energy cost.
+    has SBOM::CO2Cost $.co2CostEquivalent;
+
+#| The CO2 offset (credit) for the CO2 equivalent cost.
+    has SBOM::CO2Cost $.co2CostOffset;
 
 #| Provides the ability to document properties in a name-value store.
 #| This provides flexibility to include data not officially supported

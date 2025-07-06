@@ -5,11 +5,23 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
 use SBOM::Address:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Contact:ver<0.0.1>:auth<zef:lizmat>;
 
+#| An organization, as opposed to a person.
 class SBOM::Organization:ver<0.0.1>:auth<zef:lizmat> {
-    has bom-ref       $.bom-ref;
-    has Str           $.name;
+
+#| An optional identifier which can be used to reference the object
+#| elsewhere in the BOM.
+    has bom-ref $.bom-ref;
+
+#| The name of the organization.
+    has Str $.name;
+
+#| The physical address (location) of the organization.
     has SBOM::Address $.address;
-    has URL           @.url;
+
+#| The URL of the organization. Multiple URLs are allowed.
+    has URL @.url;
+
+#| A contact at the organization. Multiple contacts are allowed.
     has SBOM::Contact @.contact;
 }
 

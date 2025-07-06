@@ -10,13 +10,33 @@ use SBOM::Licensing:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Property:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Attachment:ver<0.0.1>:auth<zef:lizmat>;
 
+#- License ---------------------------------------------------------------------
 class SBOM::License:ver<0.0.1>:auth<zef:lizmat> {
-    has bom-ref         $.bom-ref;
-    has LicenseId       $.id;
-    has Str             $.name;
+
+#| An optional identifier which can be used to reference the license
+#| elsewhere in the BOM.
+    has bom-ref $.bom-ref;
+
+#| A valid SPDX license identifier.
+    has LicenseId $.id;
+
+#| The name of the license. This may include the name of a commercial
+#| or proprietary license or an open source license that may not be
+#| defined by SPDX.
+    has Str $.name;
+
+#| Stage in licensing process.
     has Acknowledgement $.acknowledgement;
-    has SBOM::Attachment      $.text;
-    has URL             $.url;
+
+#| An optional way to include the textual content of a license.
+    has SBOM::Attachment $.text;
+
+#| The URL to the license file. If specified, a 'license'
+#| externalReference should also be specified for completeness
+    has URL $.url;
+
+#| Licensing details describing the licensor/licensee, license type,
+#| renewal and expiration dates, and other important metadata
     has SBOM::Licensing $.licensing;
 
 #| Provides the ability to document properties in a name-value store.
@@ -35,9 +55,16 @@ class SBOM::License:ver<0.0.1>:auth<zef:lizmat> {
     }
 }
 
+#- SPDXLicense -----------------------------------------------------------------
 class SBOM::SPDXLicense:ver<0.0.1>:auth<zef:lizmat> {
-    has bom-ref         $.bom-ref;
-    has LicenseName     $.expression is required;
+#| An optional identifier which can be used to reference the license
+#| elsewhere in the BOM.
+    has bom-ref $.bom-ref;
+
+#| The SPDX license name (as opposed to ID).
+    has LicenseName $.expression is required;
+
+#| Stage in licensing process.
     has Acknowledgement $.acknowledgement;
 }
 

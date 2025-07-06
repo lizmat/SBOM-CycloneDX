@@ -8,13 +8,26 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
 
 use SBOM::Source:ver<0.0.1>:auth<zef:lizmat>;
 
+#| An issue that has been resolved.
 class SBOM::Resolve:ver<0.0.1>:auth<zef:lizmat> {
-    has ResolveType  $.type is required;
-    has Str          $.id;
-    has Str          $.name;
-    has Str          $.description;
+
+#| Specifies the type of issue.
+    has ResolveType $.type is required;
+
+#| The identifier of the issue assigned by the source of the issue.
+    has Str $.id;
+
+#| The name of the issue.
+    has Str $.name;
+
+#| A description of the issue.
+    has Str $.description;
+
+#| The source of the issue where it is documented.
     has SBOM::Source $.source;
-    has URL          @.references;
+
+#| A collection of URL's for reference. Multiple URLs are allowed.
+    has URL @.references;
 }
 
 # vim: expandtab shiftwidth=4

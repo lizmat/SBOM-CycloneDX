@@ -21,6 +21,14 @@ subset URL   of Str;  # XXX fetch URL rules
 #| https://nvd.nist.gov/products/cpe.
 subset CPE of Str;  # XXX fetch from https://nvd.nist.gov/products/cpe
 
+#| A Common Requirements Enumeration (CRE) identifier. CRE is a
+#| structured and standardized framework for uniting security standards
+#| and guidelines. CRE links each section of a resource to a shared
+#| topic identifier (a Common Requirement). Through this shared topic
+#| link, all resources map to each other. Use of CRE promotes clear and
+#| unambiguous communication among stakeholders.
+subset CRE of Str where *.contains /^ 'CRE:' <[0..9]>+ '-' <[0..9]>+ $/;
+
 #| A package-url (purl). The purl, if specified, must be valid and conform
 #| to the specification defined at: https://github.com/package-url/purl-spec.
 subset PURL of URL;  # XXX fetch from https://github.com/package-url/purl-spec
@@ -67,13 +75,21 @@ subset bomLinkElement of Str where *.contains:
      '/'        <[ 1..9 ]> <[ 0..9 ]>* '#' .+
   /;
 
+#| Identifier for referable and therefore interlinkable elements.  Value
+#| SHOULD not start with the BOM-Link intro 'urn:cdx:' to avoid conflicts
+#| |with BOM-Links.
+subset IDnotbomLink of Str where !*.starts-with('urn:cdx:');
+
 subset referenceURL of Str where
   URL | bomLinkDocument | bomLinkElement;
 
+#| The ISO-639 (or higher) language code and optional ISO-3166 (or
+#| higher) country code. Examples include: "en", "en-US", "fr" and
+#| "fr-CA".  Must match regular expression: ^([a-z]{2})(-[A-Z]{2})?$.
 subset locale of Str where *.contains: /^ <[a..z]> ** 2 ['-' <[A..Z]> ** 2]? $/;
 
 #| The confidence value between and inclusive of 0 and 1, where 1 is
-#| 100% conformant.
+#| 100% confidence.
 subset confidenceValue of Rat where 0 < * < 1;
 
 #| The conformance value between and inclusive of 0 and 1, where 1 is
@@ -82,6 +98,9 @@ subset conformanceValue of Rat where 0 <= * <= 1;
 
 subset PositiveInt of Int where * > 0;
 
+#| The NIST security strength category as defined in
+#| https://csrc.nist.gov/projects/post-quantum-cryptography/post-quantum-cryptography-standardization/evaluation-criteria/security-(evaluation-criteria).
+#| A value of 0 indicates that none of the categories are met.
 subset nistQuantumSecurityLevel of Int where 0 <= * <= 6;
 
 #| A version should ideally comply with semantic versioning but is noti
@@ -91,9 +110,11 @@ subset versionString of Str where 0 < *.chars <= 1024;
 #- EXPORT ----------------------------------------------------------------------
 my sub EXPORT(*@names) {
     @names ||= <
-      bomLinkDocunment bomLinkElement bom-ref confidenceValue contentHash
-      CPE email referenceURL locale mime-type nistQuantumSecurityLevel
-      omniborId PositiveInt PURL serialNumber SWHID URL versionString
+      bomLinkDocunment bomLinkElement bom-ref confidenceValue
+      conformanceValue contentHash CPE CRE email IDnotbomLink
+      locale mime-type nistQuantumSecurityLevel omniborId
+      PositiveInt PURL referenceURL serialNumber SWHID URL
+      versionString
     >;
     Map.new: @names.map: {
         if UNIT::{$_}:exists {

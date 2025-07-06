@@ -10,12 +10,25 @@ use SBOM::EnergyCost:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Organization:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Reference:ver<0.0.1>:auth<zef:lizmat>;
 
+#| The provider of the energy consumed by a model during its
+#| development lifecycle activity.
 class SBOM::EnergyProvider:ver<0.0.1>:auth<zef:lizmat> {
-    has bom-ref            $.bom-ref;
-    has Str                $.description;
-    has SBOM::Organization $.organization   is required;
-    has Energy             $.energySource   is required;
-    has SBOM::EnergyCost   $.energyProvided is required;
+
+#| An optional identifier which can be used to reference the energy
+#| provider elsewhere in the BOM.
+    has bom-ref $.bom-ref;
+
+#| A description of the energy provider.
+    has Str $.description;
+
+#| The organization that provides energy.
+    has SBOM::Organization $.organization is required;
+
+#| The energy source for the energy provider.
+    has Energy $.energySource   is required;
+
+#| The energy provided by the energy source for an associated activity.
+    has SBOM::EnergyCost  $.energyProvided is required;
 
 #| External references provide a way to document systems, sites, and
 #| information that may be relevant but are not included with the BOM.

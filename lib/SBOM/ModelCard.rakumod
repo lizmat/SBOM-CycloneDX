@@ -3,15 +3,69 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
 >;
 
 use SBOM::Considerations:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::Graphics:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::ModelParameters:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Property:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::QuantitativeAnalysis:ver<0.0.1>:auth<zef:lizmat>;
 
+#- ConfidenceInterval ----------------------------------------------------------
+#| The confidence interval of a metric.
+class SBOM::ConfidenceInterval:ver<0.0.1>:auth<zef:lizmat> {
+
+#| The lower bound of the confidence interval.
+    has Str $.lowerBound;
+
+#| The upper bound of the confidence interval.
+    has Str $.UpperBound;
+}
+
+#- PerformanceMetric -----------------------------------------------------------
+#| The model performance metrics being reported. Examples may include
+#| accuracy, F1 score, precision, top-3 error rates, MSC, etc.
+class SBOM::PerformanceMetric:ver<0.0.1>:auth<zef:lizmat> {
+
+#| The type of performance metric.
+    has Str $.type;
+
+#| The value of the performance metric.
+    has Str $.value;
+
+#| The name of the slice this metric was computed on. By default,
+#| assume this metric is not sliced.
+    has Str $.slice;
+
+#| The confidence interval of the metric.
+    has SBOM::ConfidenceInterval $.confidenceInterval;
+}
+
+#- QuantitativeAnalysis --------------------------------------------------------
+#| A quantitative analysis of a model
+class SBOM::QuantitativeAnalysis:ver<0.0.1>:auth<zef:lizmat> {
+
+#| The model performance metrics being reported.
+    has SBOM::PerformanceMetric @.performanceMetrics;
+
+#| A collection of graphics that represent various measurements.
+    has SBOM::Graphics $.graphics;
+}
+
+#- ModelCard -------------------------------------------------------------------
+#| A model card describes the intended uses of a machine learning model
+#| and potential limitations, including biases and ethical considerations.
+#| Model cards typically contain the training parameters, which datasets
+#| were used to train the model, performance metrics, and other relevant
+#| data useful for ML transparency.
 class SBOM::ModelCard:ver<0.0.1>:auth<zef:lizmat> {
-    has bom-ref                    $.bom-ref;
-    has SBOM::ModelParameters      $.modelParameters;
+
+#| An optional identifier which can be used to reference the model card
+#| elsewhere in the BOM.
+    has bom-ref $.bom-ref;
+
+#| Hyper-parameters for construction of the model.
+    has SBOM::ModelParameters $.modelParameters;
+
+#| A quantitative analysis of the model
     has SBOM::QuantitativeAnalysis $.quantitativeAnalysis;
-    has SBOM::Considerations       $.considerations;
+    has SBOM::Considerations $.considerations;
 
 #| Provides the ability to document properties in a name-value store.
 #| This provides flexibility to include data not officially supported

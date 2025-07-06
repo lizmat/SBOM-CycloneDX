@@ -3,18 +3,69 @@ use SBOM::enums:ver<0.0.1>:auth<zef:lizmat> <
 >;
 
 use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
-  versionString
+  IDnotbomLink versionString
 >;
 
-use SBOM::CipherSuite:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::IKEv2TransformTypes:ver<0.0.1>:auth<zef:lizmat>;
+#- CipherSuite -----------------------------------------------------------------
+#| A cipher suite related to a protocol.
+class SBOM::CipherSuite:ver<0.0.1>:auth<zef:lizmat> {
 
+#| A common name for the cipher suite.
+    has Str $.name;
+
+#| A list of algorithms related to the cipher suite.
+    has Str @.algorithms;
+
+#| A list of common identifiers for the cipher suite.
+    has Str @.identifiers;
+}
+
+#- IKEv2TransformTypes ---------------------------------------------------------
+#| The IKEv2 transform types supported (types 1-4), defined in RFC 7296
+#| section 3.3.2, and additional properties.
+class SBOM::IKEv2TransformTypes:ver<0.0.1>:auth<zef:lizmat> {
+
+#| Transform Type 1: encryption algorithms.
+    has Str  @.encr;
+
+#| Transform Type 2: pseudorandom functions.
+    has Str  @.prf;
+
+#| Transform Type 3: integrity algorithms.
+    has Str  @.integ;
+
+#| Transform Type 4: Key Exchange Method (KE) per RFC 9370, formerly
+#| called Diffie-Hellman Group (D-H).
+    has Str  @.ke;
+
+#| Specifies if an Extended Sequence Number (ESN) is used.
+    has Bool $.esn;
+
+#| IKEv2 Authentication methods: identifier for referable and therefore
+#| interlinkable elements.
+    has IDnotbomLink @.auth;
+}
+
+#- CryptoProtocolProperties ----------------------------------------------------
+#| Properties specific to cryptographic assets of type: protocol.
 class SBOM::CryptoProtocolProperties:ver<0.0.1>:auth<zef:lizmat> {
-    has CryptoProtocol            $.type;
-    has versionString             $.version;
-    has SBOM::CipherSuite         @.cipherSuites;
+
+#| The concrete protocol type.
+    has CryptoProtocol $.type;
+
+#| The version of the protocol.
+    has versionString $.version;
+
+#| A list of cipher suites related to the protocol.
+    has SBOM::CipherSuite @.cipherSuites;
+
+#| The IKEv2 transform types supported (types 1-4), defined in RFC 7296
+#| section 3.3.2, and additional properties.
     has SBOM::IKEv2TransformTypes $.ikev2TransformTypes;
-    has Str                       @.cryptoRefArray;
+
+#| A list of protocol-related cryptographic assets, Identifier for
+#| referable and therefore interlinkable elements.
+    has IDnotbomLink @.cryptoRefArray;
 }
 
 # vim: expandtab shiftwidth=4

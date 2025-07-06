@@ -1,9 +1,63 @@
 use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
-  URL
+  bom-ref
 >;
 
+use SBOM::Reference:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::Requirement:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::RequirementLevel:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::Signature:ver<0.0.1>:auth<zef:lizmat>;
+
+#- Standard --------------------------------------------------------------------
+#| A standard which may consist of regulations, industry or
+#| organizational-specific standards, maturity models, best
+#| practices, or any other requirements which can be evaluated
+#| against or attested to.
+class SBOM::Standard:ver<0.0.1>:auth<zef:lizmat> {
+
+#| An optional identifier which can be used to reference the object
+#| elsewhere in the BOM.
+    has bom-ref $.bom-ref;
+
+#| The name of the standard. This will often be a shortened, single
+#| name of the standard.
+    has Str $.name;
+
+#| The version of the standard.
+    has Str $.version;
+
+#| The description of the standard.
+    has Str $.description;
+
+#| The owner of the standard, often the entity responsible for its
+#| release.
+    has Str $.owner;
+
+#| The list of requirements comprising the standard.
+    has SBOM::Requirement @.requirements;
+
+#| The list of levels associated with the standard. Some standards
+#| have different levels of compliance.
+    has SBOM::RequirementLevel @.levels;
+
+#| External references provide a way to document systems, sites, and
+#| information that may be relevant but are not included with the BOM.
+#| They may also establish specific relationships within or external
+#| to the BOM.
+    has SBOM::Reference @.externalReferences;
+
+#| Enveloped signature in JSON Signature Format (JSF).
+    has SBOM::ValidSignature $.signature;
+}
+
+#- Definition ------------------------------------------------------------------
 #| Reusable object that may be used elsewhere in the BOM.
 class SBOM::Definition:ver<0.0.1>:auth<zef:lizmat> {
+
+#| The list of standards which may consist of regulations, industry
+#| or organizational-specific standards, maturity models, best
+#| practices, or any other requirements which can be evaluated against
+#| or attested to.
+    has SBOM::Standard @.standards;
 }
 
 # vim: expandtab shiftwidth=4

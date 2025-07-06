@@ -2,14 +2,30 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
   bom-ref
 >;
 
+#| The physical address (location) of the organization.
 class SBOM::Address:ver<0.0.1>:auth<zef:lizmat> {
-    has bom-ref       $.bom-ref;
-    has Str           $.country;
-    has Str           $.region;
-    has Str           $.locality;
-    has Str           $.postOfficeBoxNumber;
-    has Str           $.postalCode;
-    has Str           $.streetAddress;
+
+#| An optional identifier which can be used to reference the
+#| address elsewhere in the BOM.
+    has bom-ref $.bom-ref;
+
+#| The country name or the two-letter ISO 3166-1 country code.
+    has Str $.country;
+
+#| The region or state in the country.
+    has Str $.region;
+
+#| The locality or city within the country.
+    has Str $.locality;
+
+#| The post office box number.
+    has Str $.postOfficeBoxNumber;
+
+#| The postal code.
+    has Str $.postalCode;
+
+#| The street address.
+    has Str $.streetAddress;
 }
 
 # vim: expandtab shiftwidth=4
