@@ -118,6 +118,7 @@
     "enums/CryptoState",
     "enums/DataSource",
     "enums/ECCurve",
+    "enums/EdDSA",
     "enums/Encoding",
     "enums/Energy",
     "enums/EnergyUnit",

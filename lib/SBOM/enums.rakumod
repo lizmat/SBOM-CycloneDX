@@ -48,11 +48,8 @@ my role Enumify {
 #-------------------------------------------------------------------------------
 my class Aggregate:ver<0.0.1>:auth<zef:lizmat>            does Enumify { }
 my class Component:ver<0.0.1>:auth<zef:lizmat>            does Enumify { }
-my class CryptoKey:ver<0.0.1>:auth<zef:lizmat>            does Enumify { }
-my class ECCurve:ver<0.0.1>:auth<zef:lizmat>              does Enumify { }
 my class HashAlgorithm:ver<0.0.1>:auth<zef:lizmat>        does Enumify { }
 my class Phase:ver<0.0.1>:auth<zef:lizmat>                does Enumify { }
-my class ReferenceSource:ver<0.0.1>:auth<zef:lizmat>      does Enumify { }
 my class Scope:ver<0.0.1>:auth<zef:lizmat>                does Enumify { }
 my class SignatureAlgorithm:ver<0.0.1>:auth<zef:lizmat>   does Enumify { }
 
@@ -123,6 +120,9 @@ my class CryptoAsset:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
 #| A cryptographic function implemented by a cryptographic algorithm.
 my class CryptoFunction:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
 
+#| Public key type indicator.
+my class CryptoKey:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
+
 #| A concrete cryptographic protocol type.
 my class CryptoProtocol:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
 
@@ -137,6 +137,12 @@ my class DataFlow:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
 my class DataSource:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
 
 #- E ---------------------------------------------------------------------------
+#| EC curve name.
+my class ECCurve:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
+
+#| EdDSA curve name.
+my class EdDSA:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
+
 #| Specifies the optional encoding a text is represented in.
 my class Encoding:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
 
@@ -196,6 +202,9 @@ my class Patch:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
 my class Platform:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
 
 #- R ---------------------------------------------------------------------------
+#| Specifies the type of external reference.
+my class ReferenceSource:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
+
 #| The software versioning type of a release note.
 my class ReleaseLevel:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
 

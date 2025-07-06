@@ -2,7 +2,7 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
   bom-ref
 >;
 
-#| A claim.
+#| The requirement level of a claim.
 class SBOM::RequirementLevel:ver<0.0.1>:auth<zef:lizmat> {
 
 #| An optional identifier which can be used to reference the object

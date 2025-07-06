@@ -4,6 +4,7 @@ use SBOM::enums:ver<0.0.1>:auth<zef:lizmat> <
 
 use SBOM::PublicKey:ver<0.0.1>:auth<zef:lizmat>;
 
+#| Unique top level property for simple signatures. (signaturecore)
 class SBOM::Signature:ver<0.0.1>:auth<zef:lizmat> {
     has SignatureAlgorithm $.algorithm is required;
     has Str                $.value     is required;
