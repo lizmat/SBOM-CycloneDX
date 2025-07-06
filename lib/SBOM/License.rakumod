@@ -7,15 +7,15 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
 >;
 
 use SBOM::Licensing:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::NameValue:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::Text:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::Property:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::Attachment:ver<0.0.1>:auth<zef:lizmat>;
 
 class SBOM::License:ver<0.0.1>:auth<zef:lizmat> {
     has bom-ref         $.bom-ref;
     has LicenseId       $.id;
     has Str             $.name;
     has Acknowledgement $.acknowledgement;
-    has SBOM::Text      $.text;
+    has SBOM::Attachment      $.text;
     has URL             $.url;
     has SBOM::Licensing $.licensing;
 
@@ -27,7 +27,7 @@ class SBOM::License:ver<0.0.1>:auth<zef:lizmat> {
 #| names of interest to the general public are encouraged to be
 #| registered in the CycloneDX Property Taxonomy. Formal registration
 #| is optional.
-    has SBOM::NameValue @.properties;
+    has SBOM::Property @.properties;
 
     submethod TWEAK() {
         die "Must have 'id' or 'name' specified"
@@ -41,6 +41,7 @@ class SBOM::SPDXLicense:ver<0.0.1>:auth<zef:lizmat> {
     has Acknowledgement $.acknowledgement;
 }
 
+#| An SPDX licenses and/or named license
 subset SBOM::AnyLicense where SBOM::License | SBOM::SPDXLicense;
 
 # vim: expandtab shiftwidth=4

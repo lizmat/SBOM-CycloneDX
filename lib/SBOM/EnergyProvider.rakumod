@@ -16,6 +16,11 @@ class SBOM::EnergyProvider:ver<0.0.1>:auth<zef:lizmat> {
     has SBOM::Organization $.organization   is required;
     has Energy             $.energySource   is required;
     has SBOM::EnergyCost   $.energyProvided is required;
+
+#| External references provide a way to document systems, sites, and
+#| information that may be relevant but are not included with the BOM.
+#| They may also establish specific relationships within or external
+#| to the BOM.
     has SBOM::Reference    @.externalReferences;
 }
 

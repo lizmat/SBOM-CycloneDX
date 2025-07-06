@@ -5,7 +5,7 @@ use SBOM::enums:ver<0.0.1>:auth<zef:lizmat> <
 use SBOM::Component:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Contact:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::License:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::NameValue:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::Property:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Organization:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Tool:ver<0.0.1>:auth<zef:lizmat>;
 
@@ -57,7 +57,7 @@ class SBOM::Metadata:ver<0.0.1>:auth<zef:lizmat> {
 #| names of interest to the general public are encouraged to be
 #| registered in the CycloneDX Property Taxonomy. Formal registration
 #| is optional.
-    has SBOM::NameValue @.properties;
+    has SBOM::Property @.properties;
 
     submethod TWEAK(:$tools, :$manufacture) {
         die "Can only have one SPDX license"

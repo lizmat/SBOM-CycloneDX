@@ -39,10 +39,13 @@ subset SWHID     of Str;  # XXX fetch from https://docs.softwareheritage.org/dev
 my token mime-part { <[-+ a..z 0..9 ]>+ }
 subset mime-type of Str where *.contains: /^ <mime-part> '/' <mime-part> $/;
 
+#| The value of a hash.  Must match regular expression:
+#| ^([a-fA-F0-9]{32}|[a-fA-F0-9]{40}|[a-fA-F0-9]{64}|[a-fA-F0-9]{96}|[a-fA-F0-9]{128})$.
 subset contentHash of Str where {
   .contains(/^ <[0..9 a..f A..F]>+ $/)
     && .chars == 32 | 40 | 64 | 128
 }
+
 subset bomLinkDocument of Str where *.contains:
   /^ 'urn:cdx:' <hexnum> ** 8
      '-'        <hexnum> ** 4

@@ -1,7 +1,7 @@
-use SBOM::NameValue:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::Property:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Parameter:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Reference:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::Text:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::Attachment:ver<0.0.1>:auth<zef:lizmat>;
 
 #| Type that represents various input data types and formats.
 class SBOM::Input:ver<0.0.1>:auth<zef:lizmat> {
@@ -19,10 +19,10 @@ class SBOM::Input:ver<0.0.1>:auth<zef:lizmat> {
     has SBOM::Parameter @.parameters;
 
     #| Inputs that have the form of parameters with names and values.
-    has SBOM::StrOrNameValue @.environmentVars;
+    has SBOM::StrOrProperty @.environmentVars;
 
     #| Inputs that have the form of data.
-    has SBOM::Text $.data;
+    has SBOM::Attachment $.data;
 
 #| Provides the ability to document properties in a name-value store.
 #| This provides flexibility to include data not officially supported
@@ -32,7 +32,7 @@ class SBOM::Input:ver<0.0.1>:auth<zef:lizmat> {
 #| names of interest to the general public are encouraged to be
 #| registered in the CycloneDX Property Taxonomy. Formal registration
 #| is optional.
-    has SBOM::NameValue @.properties;
+    has SBOM::Property @.properties;
 
     submethod TWEAK() {
         die "Must have at least 'resource', 'parameters', 'environmentVars' or 'data'"

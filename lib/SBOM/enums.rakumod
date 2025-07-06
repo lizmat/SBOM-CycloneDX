@@ -29,13 +29,7 @@ my role Enumify {
     multi method name(Enumify:U:) { ""     }
     multi method name(Enumify:D:) { $!name }
 
-    proto method WHY() {*}
-    multi method WHY(Enumify:U:) {
-        "No description available for '" ~ self.^name ~ "' enum"
-    }
-    multi method WHY(Enumify:D:) {
-        $!WHY
-    }
+    multi method WHY(Enumify:D:) { $!WHY }
 
     method WHICH(Enumify:D:) {
         ValueObjAt.new(self.^name ~ '|' ~ $!name)
@@ -55,7 +49,6 @@ my role Enumify {
 my class Acknowledgement:ver<0.0.1>:auth<zef:lizmat>      does Enumify { }
 my class Activity:ver<0.0.1>:auth<zef:lizmat>             does Enumify { }
 my class Aggregate:ver<0.0.1>:auth<zef:lizmat>            does Enumify { }
-my class AlgorithmPrimitive:ver<0.0.1>:auth<zef:lizmat>   does Enumify { }
 my class CO2Cost:ver<0.0.1>:auth<zef:lizmat>              does Enumify { }
 my class Certification:ver<0.0.1>:auth<zef:lizmat>        does Enumify { }
 my class CertificationMode:ver<0.0.1>:auth<zef:lizmat>    does Enumify { }
@@ -69,7 +62,6 @@ my class CryptoProtocol:ver<0.0.1>:auth<zef:lizmat>       does Enumify { }
 my class CryptoState:ver<0.0.1>:auth<zef:lizmat>          does Enumify { }
 my class DataSource:ver<0.0.1>:auth<zef:lizmat>           does Enumify { }
 my class ECCurve:ver<0.0.1>:auth<zef:lizmat>              does Enumify { }
-my class Encoding:ver<0.0.1>:auth<zef:lizmat>             does Enumify { }
 my class Energy:ver<0.0.1>:auth<zef:lizmat>               does Enumify { }
 my class EnergyUnit:ver<0.0.1>:auth<zef:lizmat>           does Enumify { }
 my class Evidence:ver<0.0.1>:auth<zef:lizmat>             does Enumify { }
@@ -85,24 +77,24 @@ my class Platform:ver<0.0.1>:auth<zef:lizmat>             does Enumify { }
 my class ReferenceSource:ver<0.0.1>:auth<zef:lizmat>      does Enumify { }
 my class ReleaseLevel:ver<0.0.1>:auth<zef:lizmat>         does Enumify { }
 my class ResolveType:ver<0.0.1>:auth<zef:lizmat>          does Enumify { }
-my class RiskMethodology:ver<0.0.1>:auth<zef:lizmat>      does Enumify { }
 my class Scope:ver<0.0.1>:auth<zef:lizmat>                does Enumify { }
-my class Severity:ver<0.0.1>:auth<zef:lizmat>             does Enumify { }
 my class SignatureAlgorithm:ver<0.0.1>:auth<zef:lizmat>   does Enumify { }
 
 #- A ---------------------------------------------------------------------------
-my class AccessMode:ver<0.0.1>:auth<zef:lizmat> does Enumify {
-    multi method WHY(AccessMode:U:) {
-        "Describes the read-write access control for the workspace relative to the owning resource instance."
-    }
-}
+#| Describes the read-write access control for a workspace relative
+#| to the owning resource instance.
+my class AccessMode:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
+
+#| The algorithm that generated a hash value.
+my class AlgorithmPrimitive:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
+
+#- E ---------------------------------------------------------------------------
+#| Specifies the optional encoding a text is represented in.
+my class Encoding:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
 
 #- J ---------------------------------------------------------------------------
-my class Justification:ver<0.0.1>:auth<zef:lizmat> does Enumify {
-    multi method WHY(Justification:U:) {
-        "The rationale of why the impact analysis state was asserted."
-    }
-}
+#| The rationale of why the impact analysis state was asserted.
+my class Justification:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
 
 #- L ---------------------------------------------------------------------------
 # fetched from https://raw.githubusercontent.com/spdx/license-list-data/refs/heads/main/json/licenses.json
@@ -121,43 +113,37 @@ BEGIN LicenseName.setup(
 );
 
 #- R ---------------------------------------------------------------------------
-my class Response:ver<0.0.1>:auth<zef:lizmat> does Enumify {
-    multi method WHY(Response:U:) {
-        "A response to the vulnerability by the manufacturer, supplier, or project responsible for the affected component or service. More than one response is allowed. Responses are strongly encouraged for vulnerabilities where the analysis state is exploitable."
-    }
-}
+#| A response to the vulnerability by the manufacturer, supplier, or
+#| project responsible for the affected component or service.
+#| Responses are strongly encouraged for vulnerabilities where the
+#| analysis state is exploitable.
+my class Response:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
 
-my class VulnerabilityState:ver<0.0.1>:auth<zef:lizmat> does Enumify {
-    multi method WHY(VulnerabilityState:U:) {
-        "Declares the current state of an occurrence of a vulnerability, after automated or manual analysis."
-    }
-}
+#| Specifies the severity or risk scoring methodology or standard used.
+my class RiskMethodology:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
 
-#-O ----------------------------------------------------------------------------
-my class OutputType:ver<0.0.1>:auth<zef:lizmat> does Enumify {
-    multi method WHY(OutputType:U:) {
-        "Describes the type of data output."
-    }
-}
+#- O ---------------------------------------------------------------------------
+#| Describes the type of data output.
+my class OutputType:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
+
+#- S ---------------------------------------------------------------------------
+#| Textual representation of a severity.
+my class Severity:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
 
 #- T ---------------------------------------------------------------------------
-my class TaskActivity:ver<0.0.1>:auth<zef:lizmat> does Enumify {
-    multi method WHY(TaskActivity:U:) {
-        "Indicates the types of activities performed by the set of workflow tasks"
-    }
-}
-my class TriggerEvent:ver<0.0.1>:auth<zef:lizmat> does Enumify {
-    multi method WHY(TriggerEvent:U:) {
-        "The source type of event which caused the trigger to fire."
-    }
-}
+#| Indicates the types of activities performed by the set of workflow tasks.
+my class TaskActivity:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
+
+#| The source type of event which caused a trigger to fire.
+my class TriggerEvent:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
 
 #- V ---------------------------------------------------------------------------
-my class VolumeMode:ver<0.0.1>:auth<zef:lizmat> does Enumify {
-    multi method WHY(VolumeMode:U:) {
-        "The mode for the volume instance."
-    }
-}
+#| The mode for a volume instance.
+my class VolumeMode:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
+
+#| Declares the current state of an occurrence of a vulnerability,
+#| after automated or manual analysis.
+my class VulnerabilityState:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
 
 #- process resources -----------------------------------------------------------
 # Read the resources section of the META6.json to figure out which

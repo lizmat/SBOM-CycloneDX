@@ -1,20 +1,75 @@
+use SBOM::enums:ver<0.0.1>:auth<zef:lizmat> <
+  TaskActivity
+>;
+
 use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
   bom-ref
 >;
 
-use SBOM::NameValue:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::Dependency:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::ExecutionStep:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::Property:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Reference:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::RuntimeTopology:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::Task:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::Trigger:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Workspace:ver<0.0.1>:auth<zef:lizmat>;
 
 #| A specialized orchestration task.
 class SBOM::Workflow:ver<0.0.1>:auth<zef:lizmat> {
-    has bom-ref               $.bom-ref is required;
-    has Str                   $.uid     is required;
-    has Str                   $.name;
-    has Str                   $.description;
-    has SBOM::resourceRef     @.resourceReferences;
-    has SBOM::Workspace       @.worksSpaces;
+
+#| An optional identifier which can be used to reference the workflow
+#| elsewhere in the BOM.
+    has bom-ref $.bom-ref is required;
+
+#| The unique identifier for the resource instance within its
+#| deployment context.
+    has Str $.uid is required;
+
+#| The name of the resource instance.
+    has Str $.name;
+
+#| A description of the resource instance.
+    has Str $.description;
+
+#| References to component or service resources that are used toi
+#| realize the resource instance.
+    has SBOM::resourceRef @.resourceReferences;
+
+#| The tasks that comprise the workflow.
+    has SBOM::Task @.tasks;
+
+#| The graph of dependencies between tasks within the workflow.
+    has SBOM::Dependency @.taskDependencies;
+
+#| Indicates the types of activities performed by the set of workflow tasks.
+    has TaskActivity @.taskTypes;
+
+#| The trigger that initiated the task.
+    has SBOM::Trigger $.trigger;
+
+#| The sequence of steps for the task.
+    has SBOM::ExecutionStep @.steps;
+
+#| Represents resources and data brought into a task at runtime by
+#| executor or task commands.
+    has SBOM::Input @.inputs;
+
+#| Represents resources and data output from a task at runtime by
+#| executor or task commands.
+    has SBOM::Input @.outputs;
+
+#| The date and time (timestamp) when the task started.
+    has DateTime $.timeStart;
+
+#| The date and time (timestamp) when the task ended.
+    has DateTime $.timeEnd;
+
+#| A set of named filesystem or data resource shareable by workflow
+#| tasks.
+    has SBOM::Workspace @.worksSpaces;
+
+#| A graph of the component runtime topology for task's instance.
     has SBOM::RuntimeTopology @.runtimeTopology;
 
 #| Provides the ability to document properties in a name-value store.
@@ -25,7 +80,7 @@ class SBOM::Workflow:ver<0.0.1>:auth<zef:lizmat> {
 #| names of interest to the general public are encouraged to be
 #| registered in the CycloneDX Property Taxonomy. Formal registration
 #| is optional.
-    has SBOM::NameValue       @.properties;
+    has SBOM::Property @.properties;
 
     submethod TWEAK() {
         if @!resourceReferences {

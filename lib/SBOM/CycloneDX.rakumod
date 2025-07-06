@@ -10,7 +10,7 @@ use SBOM::Definition:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Dependency:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Formulation:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Metadata:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::NameValue:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::Property:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Reference:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Service:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Signature:ver<0.0.1>:auth<zef:lizmat>;
@@ -94,7 +94,7 @@ unit class SBOM::CycloneDX:ver<0.0.1>:auth<zef:lizmat>;
 #| names of interest to the general public are encouraged to be
 #| registered in the CycloneDX Property Taxonomy. Formal registration
 #| is optional.
-    has SBOM::NameValue @.properties;
+    has SBOM::Property @.properties;
 
 #| Enveloped signature in JSON Signature Format (JSF).
     has SBOM::ValidSignature $.signature;

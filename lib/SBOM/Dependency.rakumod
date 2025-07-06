@@ -2,10 +2,29 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
   bom-ref
 >;
 
-#| Provides the ability to document dependency relationships including provided & implemented components.  All items must be unique
+#| Defines the direct dependencies of a component, service, or the
+#| components provided/implemented by a given component. Components
+#| or services that do not have their own dependencies must be declared
+#| as empty elements within the graph. Components or services that are
+#| not represented in the dependency graph may have unknown
+#| dependencies. It is recommended that implementations assume this to
+#| be opaque and not an indicator of an object being dependency-free.
+#| It is recommended to leverage compositions to indicate unknown
+#| dependency graphs.
 class SBOM::Dependency:ver<0.0.1>:auth<zef:lizmat> {
+
+#| References a component or service by its bom-ref attribute.
     has bom-ref $.ref;
+
+#| The bom-ref identifiers of the components or services that are
+#| dependencies of this dependency object.
     has bom-ref @.dependsOn;
+
+#| The bom-ref identifiers of the components or services that define
+#| a given specification or standard, which are provided or implemented
+#| by this dependency object. For example, a cryptographic library which
+#| implements a cryptographic algorithm. A component which implements
+#| another component does not imply that the implementation is in use.
     has bom-ref @.provides;
 }
 

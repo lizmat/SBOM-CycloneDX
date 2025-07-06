@@ -14,7 +14,7 @@ use SBOM::Evidence:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Hash:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::License:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::ModelCard:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::NameValue:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::Property:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Organization:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Patch:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Reference:ver<0.0.1>:auth<zef:lizmat>;
@@ -198,7 +198,7 @@ class SBOM::Component:ver<0.0.1>:auth<zef:lizmat> {
 #| names of interest to the general public are encouraged to be
 #| registered in the CycloneDX Property Taxonomy. Formal registration
 #| is optional.
-    has SBOM::NameValue @.properties;
+    has SBOM::Property @.properties;
 
 #| Textual strings that aid in discovery, search, and retrieval of the
 #| associated object. Tags often serve as a way to group or categorize

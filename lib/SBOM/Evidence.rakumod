@@ -8,7 +8,11 @@ class SBOM::Evidence:ver<0.0.1>:auth<zef:lizmat> {
     has                  $.identity;
     has SBOM::Occurrence @.occurrences;
     has SBOM::Callstack  $.callstack;
+
+#| EITHER (list of SPDX licenses and/or named licenses) OR (tuple
+#| of one SPDX License Expression).
     has SBOM::AnyLicense @.licenses;
+
     has SBOM::Copyright  @.copyright;
 
     submethod TWEAK(:$identity) {

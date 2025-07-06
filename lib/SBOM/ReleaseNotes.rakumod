@@ -6,7 +6,7 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
   URL
 >;
 
-use SBOM::NameValue:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::Property:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Note:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Resolve:ver<0.0.1>:auth<zef:lizmat>;
 
@@ -30,7 +30,7 @@ class SBOM::ReleaseNotes:ver<0.0.1>:auth<zef:lizmat> {
 #| names of interest to the general public are encouraged to be
 #| registered in the CycloneDX Property Taxonomy. Formal registration
 #| is optional.
-    has SBOM::NameValue @.properties;
+    has SBOM::Property @.properties;
 }
 
 # vim: expandtab shiftwidth=4
