@@ -3,7 +3,7 @@ use SBOM::enums:ver<0.0.1>:auth<zef:lizmat> <
 >;
 
 #| EC curve name or EdDSA curve name
-subtype CryptoCurve where ECCurve | EdDSA;
+subset CryptoCurve where ECCurve | EdDSA;
 
 class SBOM::PublicKey:ver<0.0.1>:auth<zef:lizmat> {
 
