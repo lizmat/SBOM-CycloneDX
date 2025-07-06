@@ -2,12 +2,12 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
   bom-ref URL versionString
 >;
 
-use SBOM::Dataset:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::License:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Property:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Organization:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Reference:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::ReleaseNotes:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::ServiceDataset:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Signature:ver<0.0.1>:auth<zef:lizmat>;
 
 #| A service, which may include microservices, function-as-a-service,
@@ -57,7 +57,7 @@ class SBOM::Service:ver<0.0.1>:auth<zef:lizmat> {
 
 #| Specifies information about the data including the directional
 #| flow of data and the data classification.
-    has SBOM::Dataset @.data;
+    has SBOM::ServiceDataset @.data;
 
 #| EITHER (list of SPDX licenses and/or named licenses) OR (tuple
 #| of one SPDX License Expression).

@@ -60,16 +60,13 @@ my class CryptoFunction:ver<0.0.1>:auth<zef:lizmat>       does Enumify { }
 my class CryptoKey:ver<0.0.1>:auth<zef:lizmat>            does Enumify { }
 my class CryptoProtocol:ver<0.0.1>:auth<zef:lizmat>       does Enumify { }
 my class CryptoState:ver<0.0.1>:auth<zef:lizmat>          does Enumify { }
-my class DataSource:ver<0.0.1>:auth<zef:lizmat>           does Enumify { }
 my class ECCurve:ver<0.0.1>:auth<zef:lizmat>              does Enumify { }
 my class Energy:ver<0.0.1>:auth<zef:lizmat>               does Enumify { }
 my class EnergyUnit:ver<0.0.1>:auth<zef:lizmat>           does Enumify { }
 my class Evidence:ver<0.0.1>:auth<zef:lizmat>             does Enumify { }
 my class ExecutionEnvironment:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
 my class Field:ver<0.0.1>:auth<zef:lizmat>                does Enumify { }
-my class Format:ver<0.0.1>:auth<zef:lizmat>               does Enumify { }
 my class HashAlgorithm:ver<0.0.1>:auth<zef:lizmat>        does Enumify { }
-my class Learning:ver<0.0.1>:auth<zef:lizmat>             does Enumify { }
 my class LicenseGranted:ver<0.0.1>:auth<zef:lizmat>       does Enumify { }
 my class Patch:ver<0.0.1>:auth<zef:lizmat>                does Enumify { }
 my class Phase:ver<0.0.1>:auth<zef:lizmat>                does Enumify { }
@@ -88,6 +85,13 @@ my class AccessMode:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
 #| The algorithm that generated a hash value.
 my class AlgorithmPrimitive:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
 
+#- D ---------------------------------------------------------------------------
+#| Specifies information about the directional flow of data.
+my class DataFlow:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
+
+#| The general theme or subject matter of model data being specified.
+my class DataSource:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
+
 #- E ---------------------------------------------------------------------------
 #| Specifies the optional encoding a text is represented in.
 my class Encoding:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
@@ -97,6 +101,10 @@ my class Encoding:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
 my class Justification:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
 
 #- L ---------------------------------------------------------------------------
+#| Learning types describing the learning problem or hybrid
+#| learning problem.
+my class Learning:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
+
 # fetched from https://raw.githubusercontent.com/spdx/license-list-data/refs/heads/main/json/licenses.json
 my class LicenseId:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
 BEGIN LicenseId.setup(

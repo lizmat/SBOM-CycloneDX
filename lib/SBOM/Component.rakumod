@@ -9,8 +9,8 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
 use SBOM::Commit:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Contact:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::CryptoProperties:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::Dataset:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::Evidence:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::ComponentDataset:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::ComponentEvidence:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Hash:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::License:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::ModelCard:ver<0.0.1>:auth<zef:lizmat>;
@@ -162,7 +162,7 @@ class SBOM::Component:ver<0.0.1>:auth<zef:lizmat> {
 
 #| Provides the ability to document evidence collected through various
 #| forms of extraction or analysis.
-    has SBOM::Evidence $.evidence;
+    has SBOM::ComponentEvidence $.evidence;
 
 #| Specifies optional release notes.
     has SBOM::ReleaseNotes $.releaseNotes;
@@ -176,9 +176,8 @@ class SBOM::Component:ver<0.0.1>:auth<zef:lizmat> {
 #| for other component types.
     has SBOM::ModelCard $.modelCard;
 
-#| This object SHOULD be specified for any component of type data and
-#| must not be specified for other component types.
-    has SBOM::Dataset @.data;
+#| Data associated with a data component.
+    has SBOM::ComponentDataset @.data;
 
 #| Cryptographic assets have properties that uniquely define them and
 #| that make them actionable for further reasoning. As an example, it

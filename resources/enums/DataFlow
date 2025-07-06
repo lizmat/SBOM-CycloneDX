@@ -1,0 +1,11 @@
+inbound
+Data that enters a service.
+
+outbound
+Data that exits a service.
+
+bi-directional
+Data flows in and out of the service.
+
+unknown
+The directional flow of data is not known.

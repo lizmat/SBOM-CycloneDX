@@ -14,16 +14,16 @@ subset serialNumber of Str where *.contains:
 #| characters long.
 subset bom-ref of Str where { .chars && !.starts-with('urn:cdx') }
 
-subset email     of Str;  # XXX to be done
-subset URL       of Str;  # XXX fetch URL rules
+subset email of Str;  # XXX to be done
+subset URL   of Str;  # XXX fetch URL rules
 
 #| A CPE must conform to the CPE 2.2 or 2.3 specification. See
 #| https://nvd.nist.gov/products/cpe.
-subset CPE       of Str;  # XXX fetch from https://nvd.nist.gov/products/cpe
+subset CPE of Str;  # XXX fetch from https://nvd.nist.gov/products/cpe
 
 #| A package-url (purl). The purl, if specified, must be valid and conform
 #| to the specification defined at: https://github.com/package-url/purl-spec.
-subset PURL      of Str;  # XXX fetch from https://github.com/package-url/purl-spec
+subset PURL of URL;  # XXX fetch from https://github.com/package-url/purl-spec
 
 #| An OmniBOR Artifact ID. The OmniBOR, if specified, must be valid and
 #| conform to the specification defined at:
@@ -33,7 +33,11 @@ subset omniborId of Str;  # XXX fetch from https://www.iana.org/assignments/uri-
 #| A Software Heritage persistent identifier (SWHID). The SWHID, if
 #| specified, must be valid and conform to the specification defined at:
 #| https://docs.softwareheritage.org/devel/swh-model/persistent-identifiers.html.
-subset SWHID     of Str;  # XXX fetch from https://docs.softwareheritage.org/devel/swh-model/persistent-identifiers.html
+subset SWHID of Str;  # XXX fetch from https://docs.softwareheritage.org/devel/swh-model/persistent-identifiers.html
+
+#| A reference to the property name as defined in the CycloneDX
+#| Property Taxonomy.
+subset propertyName of Str;  # XXX fetch from https://github.com/CycloneDX/cyclonedx-property-taxonomy/
 
 #| A MIME-type.  Must match regular expression: ^[-+a-z0-9.]+/[-+a-z0-9.]+$
 my token mime-part { <[-+ a..z 0..9 ]>+ }
@@ -63,12 +67,18 @@ subset bomLinkElement of Str where *.contains:
      '/'        <[ 1..9 ]> <[ 0..9 ]>* '#' .+
   /;
 
-subset referenceURL of Str
-  where URL | bomLinkDocument | bomLinkElement;
+subset referenceURL of Str where
+  URL | bomLinkDocument | bomLinkElement;
 
 subset locale of Str where *.contains: /^ <[a..z]> ** 2 ['-' <[A..Z]> ** 2]? $/;
 
+#| The confidence value between and inclusive of 0 and 1, where 1 is
+#| 100% conformant.
 subset confidenceValue of Rat where 0 < * < 1;
+
+#| The conformance value between and inclusive of 0 and 1, where 1 is
+#| 100% conformant.
+subset conformanceValue of Rat where 0 <= * <= 1;
 
 subset PositiveInt of Int where * > 0;
 

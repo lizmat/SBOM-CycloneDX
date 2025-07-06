@@ -5,9 +5,14 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
 use SBOM::Property:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Attachment:ver<0.0.1>:auth<zef:lizmat>;
 
+#| The contents or references to the contents of data being described.
 class SBOM::DataContents:ver<0.0.1>:auth<zef:lizmat> {
-    has SBOM::Attachment      $.attachment;
-    has URL             $.url;
+
+#| An optional way to include textual or encoded data.
+    has SBOM::Attachment $.attachment;
+
+#| The URL to where the data can be retrieved.
+    has URL$.url;
 
 #| Provides the ability to document properties in a name-value store.
 #| This provides flexibility to include data not officially supported

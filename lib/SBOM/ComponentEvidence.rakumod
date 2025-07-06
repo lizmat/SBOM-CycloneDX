@@ -4,7 +4,7 @@ use SBOM::Identity:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::License:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Occurrence:ver<0.0.1>:auth<zef:lizmat>;
 
-class SBOM::Evidence:ver<0.0.1>:auth<zef:lizmat> {
+class SBOM::ComponentEvidence:ver<0.0.1>:auth<zef:lizmat> {
     has                  $.identity;
     has SBOM::Occurrence @.occurrences;
     has SBOM::Callstack  $.callstack;

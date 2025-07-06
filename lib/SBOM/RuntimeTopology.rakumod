@@ -9,7 +9,7 @@
 class SBOM::RuntimeTopology:ver<0.0.1>:auth<zef:lizmat> {
 
 #| References a component or service by its bom-ref attribute
-    has Str $.ref is required;;
+    has Str $.ref is required;
 
 #| The bom-ref identifiers of the components or services that are
 #| dependencies of this dependency object.
