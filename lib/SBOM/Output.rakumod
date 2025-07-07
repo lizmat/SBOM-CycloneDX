@@ -6,7 +6,9 @@ use SBOM::Property:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Reference:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Attachment:ver<0.0.1>:auth<zef:lizmat>;
 
-#| Represents resources and data output from a task at runtime by executor or task commands
+#- Output ----------------------------------------------------------------------
+#| Represents resources and data output from a task at runtime by
+#| executor or task commands.
 class SBOM::Output:ver<0.0.1>:auth<zef:lizmat> {
     has OutputType           $.type;
     has SBOM::resourceRef    $.source;

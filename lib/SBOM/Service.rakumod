@@ -1,15 +1,55 @@
-use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
-  bom-ref URL versionString
+use SBOM::enums:ver<0.0.1>:auth<zef:lizmat> <
+  DataFlow
 >;
 
+use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
+  bom-ref bomLinkElement URL versionString
+>;
+
+use SBOM::Governance:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::License:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Property:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Organization:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Reference:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::ReleaseNotes:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::ServiceDataset:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Signature:ver<0.0.1>:auth<zef:lizmat>;
 
+#| An endpoint for a source or destination of data
+subset Endpoint of Str where URL | bomLinkElement;
+
+#- ServiceDataset --------------------------------------------------------------
+#| A dataset associated with a service.
+class SBOM::ServiceDataset:ver<0.0.1>:auth<zef:lizmat> {
+
+#| Specifies the flow direction of the data, relative to the service.
+    has DataFlow $.flow is required;
+
+#| Data classification tags data according to its type, sensitivity,
+#| and value if altered, stolen, or destroyed.
+    has Str $.classification is required;
+
+#| Name for the defined data.
+    has Str $.name;
+
+#| Short description of the data content and usage.
+    has Str $.description;
+
+#| Data governance captures information regarding data ownership,
+#| stewardship, and custodianship, providing insights into the
+#| individuals or entities responsible for managing, overseeing,
+#| and safeguarding the data throughout its lifecycle.
+    has SBOM::Governance $.governance;
+
+#| The URI, URL, or BOM-Link of the components or services the data
+#| came in from.
+    has Endpoint $.source;
+
+#| The URI, URL, or BOM-Link of the components or services the data
+#| is sent to.
+    has Endpoint $.destination;
+}
+
+#- Service ---------------------------------------------------------------------
 #| A service, which may include microservices, function-as-a-service,
 #| and other types of network or intra-process services.
 class SBOM::Service:ver<0.0.1>:auth<zef:lizmat> {

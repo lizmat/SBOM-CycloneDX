@@ -1,12 +1,66 @@
 use SBOM::enums:ver<0.0.1>:auth<zef:lizmat> <
-  Activity
+  Activity CO2Cost Energy EnergyUnit
 >;
 
-use SBOM::CO2Cost:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::EnergyCost:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::EnergyProvider:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::Property:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
+  bom-ref
+>;
 
+use SBOM::Organization:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::Property:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::Reference:ver<0.0.1>:auth<zef:lizmat>;
+
+#- CO2Cost ---------------------------------------------------------------------
+#| An expression of CO2 cost.
+class SBOM::CO2Cost:ver<0.0.1>:auth<zef:lizmat> {
+
+#| Quantity of carbon dioxide (CO2).
+    has Rat $.value is required;
+
+#| Unit of carbon dioxide (CO2).
+    has CO2Cost $.unit is required;
+}
+
+#- EnergyCost ------------------------------------------------------------------
+#| The energy provided by the energy source for an associated activity.
+class SBOM::EnergyCost:ver<0.0.1>:auth<zef:lizmat> {
+
+#| Quantity of energy.
+    has Rat $.value is required;
+
+#| Unit of energy.
+    has EnergyUnit $.unit  is required;
+}
+
+#- EnergyProvider --------------------------------------------------------------
+#| The provider of the energy consumed by a model during its
+#| development lifecycle activity.
+class SBOM::EnergyProvider:ver<0.0.1>:auth<zef:lizmat> {
+
+#| An optional identifier which can be used to reference the energy
+#| provider elsewhere in the BOM.
+    has bom-ref $.bom-ref;
+
+#| A description of the energy provider.
+    has Str $.description;
+
+#| The organization that provides energy.
+    has SBOM::Organization $.organization is required;
+
+#| The energy source for the energy provider.
+    has Energy $.energySource   is required;
+
+#| The energy provided by the energy source for an associated activity.
+    has SBOM::EnergyCost  $.energyProvided is required;
+
+#| External references provide a way to document systems, sites, and
+#| information that may be relevant but are not included with the BOM.
+#| They may also establish specific relationships within or external
+#| to the BOM.
+    has SBOM::Reference    @.externalReferences;
+}
+
+#- EnergyConsumption -----------------------------------------------------------
 #| Describes energy consumption information incurred during a component's
 #| lifecycle activities.
 class SBOM::EnergyConsumption:ver<0.0.1>:auth<zef:lizmat> {

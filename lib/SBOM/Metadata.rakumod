@@ -9,6 +9,7 @@ use SBOM::Property:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Organization:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Tool:ver<0.0.1>:auth<zef:lizmat>;
 
+#- Metadata --------------------------------------------------------------------
 #| Provides additional information about a BOM.
 class SBOM::Metadata:ver<0.0.1>:auth<zef:lizmat> {
 

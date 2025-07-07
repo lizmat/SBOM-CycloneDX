@@ -10,6 +10,7 @@ use SBOM::DataContents:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Governance:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Graphics:ver<0.0.1>:auth<zef:lizmat>;
 
+#- ComponentDataset ------------------------------------------------------------
 #| A dataset associated with a component.
 class SBOM::ComponentDataset:ver<0.0.1>:auth<zef:lizmat> {
 

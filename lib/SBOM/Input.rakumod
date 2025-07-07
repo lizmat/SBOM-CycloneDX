@@ -1,8 +1,21 @@
 use SBOM::Property:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::Parameter:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Reference:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Attachment:ver<0.0.1>:auth<zef:lizmat>;
 
+#- Parameter -------------------------------------------------------------------
+#| A representation of a functional parameter.
+class SBOM::Parameter:ver<0.0.1>:auth<zef:lizmat> {
+    #| The name of the parameter.
+    has Str $.name;
+
+    #| The value of the parameter.
+    has Str $.value;
+
+    #| The data type of the parameter.
+    has Str $.dataType;
+}
+
+#- Input -----------------------------------------------------------------------
 #| Type that represents various input data types and formats.
 class SBOM::Input:ver<0.0.1>:auth<zef:lizmat> {
 

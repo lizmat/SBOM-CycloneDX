@@ -1,7 +1,10 @@
+use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
+  bom-ref PositiveInt
+>;
+
 use SBOM::Callstack:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Identity:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::License:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::Occurrence:ver<0.0.1>:auth<zef:lizmat>;
 
 #| Evidence that substantiates the identity of a component. The
 #| identity may be an object or an array of identity objects.
@@ -20,6 +23,30 @@ class SBOM::Copyright:ver<0.0.1>:auth<zef:lizmat> {
 
 #| The textual content of the copyright.
     has Str $.text is required;
+}
+
+#- Occurrence ------------------------------------------------------------------
+#| Evidence of instance of a component spread across multiple locations.
+class SBOM::Occurrence:ver<0.0.1>:auth<zef:lizmat> {
+
+#| An optional identifier which can be used to reference the occurrence
+#| elsewhere in the BOM
+    has bom-ref $.bom-ref;
+
+#| The location or path to where the component was found.
+    has Str $.location is required;
+
+#| The line number where the component was found.
+    has PositiveInt $.line;
+
+#| The offset where the component was found.
+    has PositiveInt $.offset;
+
+#| The symbol name that was found associated with the component.
+    has Str $.symbol;
+
+#| Any additional context of the detected component (e.g. a code snippet).
+    has Str $.additionalContext;
 }
 
 #- ComponentEvidence -----------------------------------------------------------

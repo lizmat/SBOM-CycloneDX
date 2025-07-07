@@ -7,6 +7,7 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
   nistQuantumSecurityLevel
 >;
 
+#- AlgorithmProperties ---------------------------------------------------------
 #| Properties specific to a cryptographic algorithm.
 class SBOM::AlgorithmProperties:ver<0.0.1>:auth<zef:lizmat> {
 

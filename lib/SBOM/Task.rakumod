@@ -15,6 +15,7 @@ use SBOM::RuntimeTopology:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Trigger:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Workspace:ver<0.0.1>:auth<zef:lizmat>;
 
+#- Task ------------------------------------------------------------------------
 #| Describes the inputs, sequence of steps and resources used to
 #| accomplish a task and its output.
 class SBOM::Task:ver<0.0.1>:auth<zef:lizmat> {

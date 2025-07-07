@@ -5,6 +5,7 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
 use SBOM::Reference:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Signature:ver<0.0.1>:auth<zef:lizmat>;
 
+#- Claim -----------------------------------------------------------------------
 #| A claim.
 class SBOM::Claim:ver<0.0.1>:auth<zef:lizmat> {
 

@@ -2,6 +2,7 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
   PositiveInt
 >;
 
+#- Frame -----------------------------------------------------------------------
 #| Within a call stack, a frame is a discrete unit that encapsulates
 #| an execution context, including local variables, parameters, and
 #| the return address. As function calls are made, frames are pushed
@@ -33,6 +34,7 @@ class SBOM::Frame:ver<0.0.1>:auth<zef:lizmat> {
     has Str $.fullFilename;
 }
 
+#- Callstack -------------------------------------------------------------------
 #| Evidence of component use through the callstack.
 class SBOM::Callstack:ver<0.0.1>:auth<zef:lizmat> {
 

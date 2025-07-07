@@ -2,6 +2,7 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
   bom-ref
 >;
 
+#- Dependency ------------------------------------------------------------------
 #| Defines the direct dependencies of a component, service, or the
 #| components provided/implemented by a given component. Components
 #| or services that do not have their own dependencies must be declared

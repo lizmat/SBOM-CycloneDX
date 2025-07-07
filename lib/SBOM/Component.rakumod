@@ -1,11 +1,12 @@
 use SBOM::enums:ver<0.0.1>:auth<zef:lizmat> <
-  Component Scope
+  Component Patch Scope
 >;
 
 use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
-  bom-ref CPE mime-type omniborId PURL SWHID
+  bom-ref CPE mime-type omniborId PURL SWHID URL
 >;
 
+use SBOM::Attachment:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Commit:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Contact:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::CryptoProperties:ver<0.0.1>:auth<zef:lizmat>;
@@ -16,21 +17,50 @@ use SBOM::License:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::ModelCard:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Property:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Organization:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::Patch:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Reference:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::ReleaseNotes:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::Resolve:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Signature:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::SWID:ver<0.0.1>:auth<zef:lizmat>;
 
-class SBOM::Pedigree { ... }
+#- SWID ------------------------------------------------------------------------
+#| Asserts the identity of the component using ISO-IEC 19770-2 Software
+#| Identification (SWID) Tags. Refer to @.evidence.identity to
+#| optionally provide evidence that substantiates the assertion of
+#| the component's identity.
+class SBOM::SWID:ver<0.0.1>:auth<zef:lizmat> {
+
+#| Maps to the tagId of a SoftwareIdentity.
+    has Str:D $.tagID is required;
+
+#| Maps to the name of a SoftwareIdentity.
+    has Str:D $.name  is required;
+
+#| Maps to the version of a SoftwareIdentity.
+    has Str:D $.version = "0.0";
+
+#| Maps to the tagVersion of a SoftwareIdentity.
+    has Int:D @.tagVersion = 1;
+
+#| Maps to the patch of a SoftwareIdentity.
+    has Bool:D $.patch = False;
+
+#| Specifies the metadata and content of the SWID tag.
+    has SBOM::Attachment $.text;
+
+#| The URL to the SWID file.
+    has URL $.url;
+}
 
 #- Component -------------------------------------------------------------------
+class SBOM::Pedigree { ... }
+
 #| A software or hardware component
 class SBOM::Component:ver<0.0.1>:auth<zef:lizmat> {
 
-#| Specifies the type of component. For software components, classify
-#| as application if no more specific appropriate classification is
-#| available or cannot be determined for the component.
+#| Specifies the type of the component. For software components,
+#| classify as application if no more specific appropriate
+#| classification is available or cannot be determined for the
+#| component.
     has Component $.type is required;
 
 #| The optional mime-type of the component. When used on file
@@ -219,6 +249,34 @@ class SBOM::Component:ver<0.0.1>:auth<zef:lizmat> {
         die "Can only have one SPDX license"
           if @!licenses > 1 && @!licenses.first(SBOM::SPDXLicense);
     }
+}
+
+#- Diff ------------------------------------------------------------------------
+#| The patch file (or diff) that shows changes. Refer to
+#| https://en.wikipedia.org/wiki/Diff
+class SBOM::Diff:ver<0.0.1>:auth<zef:lizmat> {
+
+#| Specifies the optional text of the diff.
+    has SBOM::Attachment $.text;
+
+#| Specifies the URL to the diff.
+    has URL $.url;
+}
+
+#- Patch -----------------------------------------------------------------------
+#| Specifies an individual patch
+class SBOM::Patch:ver<0.0.1>:auth<zef:lizmat> {
+
+#| Specifies the purpose for the patch including the resolution of
+#| defects, security issues, or new behavior or functionality.
+    has Patch $.type is required;
+
+#| The patch file (or diff) that shows changes. Refer to
+#| https://en.wikipedia.org/wiki/Diff
+    has SBOM::Diff $.diff;
+
+#| A collection of issues the patch resolves.
+    has SBOM::Resolve @.resolves;
 }
 
 #- Pedigree --------------------------------------------------------------------

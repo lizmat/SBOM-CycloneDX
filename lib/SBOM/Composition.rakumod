@@ -8,6 +8,7 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
 
 use SBOM::Signature:ver<0.0.1>:auth<zef:lizmat>;
 
+#- Conmposition ----------------------------------------------------------------
 #| Compositions describe constituent parts (including components,
 #| services, and dependency relationships) and their completeness.
 #| The completeness of vulnerabilities expressed in a BOM may also

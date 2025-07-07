@@ -2,6 +2,7 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
   bom-ref
 >;
 
+#- Address ---------------------------------------------------------------------
 #| The physical address (location) of the organization.
 class SBOM::Address:ver<0.0.1>:auth<zef:lizmat> {
 

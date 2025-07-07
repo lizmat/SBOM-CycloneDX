@@ -45,14 +45,6 @@ my role Enumify {
     }
 }
 
-#-------------------------------------------------------------------------------
-my class Aggregate:ver<0.0.1>:auth<zef:lizmat>            does Enumify { }
-my class Component:ver<0.0.1>:auth<zef:lizmat>            does Enumify { }
-my class HashAlgorithm:ver<0.0.1>:auth<zef:lizmat>        does Enumify { }
-my class Phase:ver<0.0.1>:auth<zef:lizmat>                does Enumify { }
-my class Scope:ver<0.0.1>:auth<zef:lizmat>                does Enumify { }
-my class SignatureAlgorithm:ver<0.0.1>:auth<zef:lizmat>   does Enumify { }
-
 #- A ---------------------------------------------------------------------------
 #| Describes the read-write access control for a workspace relative
 #| to the owning resource instance.
@@ -77,6 +69,10 @@ my class Acknowledgement:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
 #| The type of activity that is part of a machine learning model
 #| development or operational lifecycle.
 my class Activity:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
+
+#| Specifies an aggregate type that describes how complete a
+#| relationship is.
+my class Aggregate:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
 
 #| Cryptographic building blocks used in higher-level cryptographic
 #| systems and protocols. Primitives represent different cryptographic
@@ -106,6 +102,9 @@ my class CertificationPadding:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
 
 #| Unit of CO2 cost.
 my class CO2Cost:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
+
+#| Specifies the type of a component.
+my class Component:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
 
 #| The type for the related cryptographic material
 my class Crypto:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
@@ -163,6 +162,10 @@ my class ExecutionEnvironment:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
 #| The identity field of the component which an evidence describes.
 my class Field:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
 
+#- H ---------------------------------------------------------------------------
+#| An algorithm to generate a hash value with.
+my class HashAlgorithm:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
+
 #- J ---------------------------------------------------------------------------
 #| The rationale of why the impact analysis state was asserted.
 my class Justification:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
@@ -198,6 +201,14 @@ BEGIN LicenseName.setup(
 #| defects, security issues, or new behavior or functionality.
 my class Patch:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
 
+#| Lifecycles communicate the stage(s) in which data in the BOM was
+#| captured. Different types of data may be available at various phases
+#| of a lifecycle, such as the Software Development Lifecycle (SDLC),
+#| IT Asset Management (ITAM), and Software Asset Management (SAM).
+#| Thus, a BOM may include data specific to or only obtainable in a
+#| given lifecycle.
+my class Phase:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
+
 #| A platform for which an algorithm is implemented.
 my class Platform:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
 
@@ -225,8 +236,17 @@ my class RiskMethodology:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
 my class OutputType:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
 
 #- S ---------------------------------------------------------------------------
+#| The scope of a component.
+my class Scope:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
+
 #| Textual representation of a severity.
 my class Severity:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
+
+#| Signature algorithm. The currently recognized JWA [RFC7518] and
+#| RFC8037 [RFC8037] asymmetric key algorithms. Unlike RFC8037
+#| [RFC8037] JSF requires explicit Ed* algorithm names instead ofi
+#| "EdDSA".
+my class SignatureAlgorithm:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
 
 #- T ---------------------------------------------------------------------------
 #| Indicates the types of activities performed by the set of workflow tasks.

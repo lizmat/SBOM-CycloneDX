@@ -6,6 +6,7 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
   bomLinkElement bom-ref confidenceValue
 >;
 
+#| A bom-ref or a bomlink element
 subset BomRefOrbomLinkElement of Str where bom-ref | bomLinkElement;
 
 #- EvidenceMethod --------------------------------------------------------------

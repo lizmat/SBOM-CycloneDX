@@ -16,8 +16,8 @@ use SBOM::Service:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Signature:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Vulnerability:ver<0.0.1>:auth<zef:lizmat>;
 
-#-------------------------------------------------------------------------------
-unit class SBOM::CycloneDX:ver<0.0.1>:auth<zef:lizmat>;
+#- CycloneDX -------------------------------------------------------------------
+class SBOM::CycloneDX:ver<0.0.1>:auth<zef:lizmat> {
 
 #| Every BOM generated SHOULD have a unique serial number, even if the
 #| contents of the BOM have not changed over time. If specified, the serial
@@ -108,7 +108,8 @@ unit class SBOM::CycloneDX:ver<0.0.1>:auth<zef:lizmat>;
     method updated() { ++$!version }
 
     method WHY() {
-     self.bomFormat ~ " " ~ self.specVersion;
+        self.bomFormat ~ " " ~ self.specVersion;
+    }
 }
 
 # vim: expandtab shiftwidth=4

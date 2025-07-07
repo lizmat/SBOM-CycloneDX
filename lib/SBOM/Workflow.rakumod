@@ -15,6 +15,7 @@ use SBOM::Task:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Trigger:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Workspace:ver<0.0.1>:auth<zef:lizmat>;
 
+#- Workflow --------------------------------------------------------------------
 #| A specialized orchestration task.
 class SBOM::Workflow:ver<0.0.1>:auth<zef:lizmat> {
 

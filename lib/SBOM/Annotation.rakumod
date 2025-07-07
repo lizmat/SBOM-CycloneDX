@@ -8,6 +8,7 @@ use SBOM::Organization:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Service:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Signature:ver<0.0.1>:auth<zef:lizmat>;
 
+#| Person or organization making an annotation
 subset Annotator where
   SBOM::Contact | SBOM::Component | SBOM::Organization | SBOM::Service;
 

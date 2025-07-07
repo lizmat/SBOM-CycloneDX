@@ -21,6 +21,7 @@ class SBOM::Property:ver<0.0.1>:auth<zef:lizmat> {
     multi method Str(SBOM::Property:D:) { $.name }
 }
 
+#| Allow for a Property or a string
 subset SBOM::StrOrProperty where Str | SBOM::Property;
 
 # vim: expandtab shiftwidth=4

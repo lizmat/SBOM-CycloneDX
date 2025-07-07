@@ -7,6 +7,7 @@ use SBOM::Property:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Service:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Workflow:ver<0.0.1>:auth<zef:lizmat>;
 
+#- Formulation -----------------------------------------------------------------
 #| Describes how a component or service was manufactured or deployed.
 #| This is achieved through the use of formulas, workflows, tasks, and
 #| steps, which declare the precise steps to reproduce along with the

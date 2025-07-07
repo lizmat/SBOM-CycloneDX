@@ -6,6 +6,7 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
   contentHash
 >;
 
+#- Hash ------------------------------------------------------------------------
 #| A hashed representation of data
 class SBOM::Hash:ver<0.0.1>:auth<zef:lizmat> {
 

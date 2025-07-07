@@ -8,7 +8,11 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
 
 use SBOM::Hash:ver<0.0.1>:auth<zef:lizmat>;
 
-#| External references provide a way to document systems, sites, and information that may be relevant but are not included with the BOM. They may also establish specific relationships within or external to the BOM.
+#- Reference -------------------------------------------------------------------
+#| External references provide a way to document systems, sites, and
+#| information that may be relevant but are not included with the BOM.
+#| They may also establish specific relationships within or external
+#| to the BOM.
 class SBOM::Reference:ver<0.0.1>:auth<zef:lizmat> {
 
 #| The URI (URL or URN) to the external reference. External references
@@ -30,6 +34,7 @@ class SBOM::Reference:ver<0.0.1>:auth<zef:lizmat> {
     has SBOM::Hash @.hashes;
 }
 
+#| Either a referenceURL or a Reference are allowed.
 subset SBOM::resourceRef where referenceURL | SBOM::Reference;
 
 # vim: expandtab shiftwidth=4
