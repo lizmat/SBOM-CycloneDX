@@ -6,9 +6,11 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
   mime-type
 >;
 
+use SBOM:ver<0.0.1>:auth<zef:lizmat>;
+
 #| Supporting material that helps in reproducing or understanding. This
 #| may include screenshots, payloads, and PoC exploit code.
-class SBOM::Attachment:ver<0.0.1>:auth<zef:lizmat> {
+class SBOM::Attachment:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| Specifies the format and nature of the data being attached, helping
 #| systems correctly interpret and process the content. Common content

@@ -2,6 +2,7 @@ use SBOM::enums:ver<0.0.1>:auth<zef:lizmat> <
    Phase
 >;
 
+use SBOM:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Component:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Contact:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::License:ver<0.0.1>:auth<zef:lizmat>;
@@ -11,7 +12,7 @@ use SBOM::Tool:ver<0.0.1>:auth<zef:lizmat>;
 
 #- Metadata --------------------------------------------------------------------
 #| Provides additional information about a BOM.
-class SBOM::Metadata:ver<0.0.1>:auth<zef:lizmat> {
+class SBOM::Metadata:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| The date and time (timestamp) when the BOM was created.
     has DateTime $.timestamp;
@@ -28,12 +29,12 @@ class SBOM::Metadata:ver<0.0.1>:auth<zef:lizmat> {
 #| the BOM.
     has SBOM::AnyTool $.tools;
 
-#| The organization that created the BOM.  Manufacturer is common in
+#| The organization that created the BOM. Manufacturer is common in
 #| BOMs created through automated processes. BOMs created through
 #| manual means may have @.authors instead.
     has SBOM::Organization $.manufacturer;
 
-#| The person(s) who created the BOM.  Authors are common in BOMs
+#| The person(s) who created the BOM. Authors are common in BOMs
 #| created through manual processes. BOMs created through automated
 #| means may have @.manufacturer instead.
     has SBOM::Contact @.authors;

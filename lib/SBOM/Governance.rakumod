@@ -1,3 +1,4 @@
+use SBOM:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Contact:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Organization:ver<0.0.1>:auth<zef:lizmat>;
 
@@ -9,11 +10,11 @@ my subset Governor where SBOM::Organization | SBOM::Contact;
 #| stewardship, and custodianship, providing insights into the
 #| individuals or entities responsible for managing, overseeing, and
 #| safeguarding the data throughout its lifecycle.
-class SBOM::Governance:ver<0.0.1>:auth<zef:lizmat> {
+class SBOM::Governance:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| Data custodians are responsible for the safe custody, transport,
 #| and storage of data.
-    has Governor @.custdians;
+    has Governor @.custodians;
 
 #| Data stewards are responsible for data content, context, and
 #| associated business rules.

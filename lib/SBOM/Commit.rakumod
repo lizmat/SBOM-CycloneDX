@@ -2,9 +2,11 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
   email URL
 >;
 
+use SBOM:ver<0.0.1>:auth<zef:lizmat>;
+
 #- Development -----------------------------------------------------------------
 #| An action during development, such as a commit.
-class SBOM::Development:ver<0.0.1>:auth<zef:lizmat> {
+class SBOM::Development:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| The timestamp in which the action occurred.
     has DateTime $.timestamp;
@@ -18,7 +20,7 @@ class SBOM::Development:ver<0.0.1>:auth<zef:lizmat> {
 
 #- Commit ----------------------------------------------------------------------
 #| Specifies an individual commit.
-class SBOM::Commit:ver<0.0.1>:auth<zef:lizmat> {
+class SBOM::Commit:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| A unique identifier of the commit. This may be version control
 #| specific. For example, Subversion uses revision numbers whereas

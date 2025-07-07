@@ -6,6 +6,7 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
   bom-ref
 >;
 
+use SBOM:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::DataContents:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Governance:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Graphics:ver<0.0.1>:auth<zef:lizmat>;
@@ -13,7 +14,7 @@ use SBOM::Graphics:ver<0.0.1>:auth<zef:lizmat>;
 #- Approach --------------------------------------------------------------------
 #| The overall approach to learning used by the model for problem
 #| solving.
-class SBOM::Approach:ver<0.0.1>:auth<zef:lizmat> {
+class SBOM::Approach:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| Learning types describing the learning problem or hybrid learning
 #| problem.
@@ -22,7 +23,7 @@ class SBOM::Approach:ver<0.0.1>:auth<zef:lizmat> {
 
 #- ModelDataset ----------------------------------------------------------------
 #| A dataset used to train and evaluate the model.
-class SBOM::ModelDataset:ver<0.0.1>:auth<zef:lizmat> {
+class SBOM::ModelDataset:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| An optional identifier which can be used to reference the dataset
 #| elsewhere in the BOM.
@@ -60,7 +61,7 @@ class SBOM::ModelDataset:ver<0.0.1>:auth<zef:lizmat> {
 
 #- ModelFormat -----------------------------------------------------------------
 #| The input / output format of a model
-class SBOM::ModelFormat:ver<0.0.1>:auth<zef:lizmat> {
+class SBOM::ModelFormat:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| The data format for input/output to the model, e.g. "string",
 #| "image", "time-series".
@@ -69,7 +70,7 @@ class SBOM::ModelFormat:ver<0.0.1>:auth<zef:lizmat> {
 
 #- ModelParameters -------------------------------------------------------------
 #| Hyper-parameters for construction of the model.
-class SBOM::ModelParameters:ver<0.0.1>:auth<zef:lizmat> {
+class SBOM::ModelParameters:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| The overall approach to learning used by the model for problem
 #| solving.

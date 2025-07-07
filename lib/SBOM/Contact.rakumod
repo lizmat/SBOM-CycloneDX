@@ -2,8 +2,10 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
   bom-ref email
 >;
 
+use SBOM:ver<0.0.1>:auth<zef:lizmat>;
+
 #| A person.
-class SBOM::Contact:ver<0.0.1>:auth<zef:lizmat> {
+class SBOM::Contact:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| An optional identifier which can be used to reference the person
 #| elsewhere in the BOM.

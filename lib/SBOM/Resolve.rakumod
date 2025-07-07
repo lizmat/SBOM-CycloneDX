@@ -6,11 +6,12 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
   URL
 >;
 
+use SBOM:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Source:ver<0.0.1>:auth<zef:lizmat>;
 
 #- Resolve ---------------------------------------------------------------------
 #| An issue that has been resolved.
-class SBOM::Resolve:ver<0.0.1>:auth<zef:lizmat> {
+class SBOM::Resolve:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| Specifies the type of issue.
     has ResolveType $.type is required;

@@ -2,6 +2,7 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
   serialNumber
 >;
 
+use SBOM:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Annotation:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Component:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Composition:ver<0.0.1>:auth<zef:lizmat>;
@@ -17,7 +18,7 @@ use SBOM::Signature:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Vulnerability:ver<0.0.1>:auth<zef:lizmat>;
 
 #- CycloneDX -------------------------------------------------------------------
-class SBOM::CycloneDX:ver<0.0.1>:auth<zef:lizmat> {
+class SBOM::CycloneDX:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| Every BOM generated SHOULD have a unique serial number, even if the
 #| contents of the BOM have not changed over time. If specified, the serial

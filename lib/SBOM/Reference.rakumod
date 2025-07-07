@@ -6,6 +6,7 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
   referenceURL
 >;
 
+use SBOM:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::HashedString:ver<0.0.1>:auth<zef:lizmat>;
 
 #- Reference -------------------------------------------------------------------
@@ -13,7 +14,7 @@ use SBOM::HashedString:ver<0.0.1>:auth<zef:lizmat>;
 #| information that may be relevant but are not included with the BOM.
 #| They may also establish specific relationships within or external
 #| to the BOM.
-class SBOM::Reference:ver<0.0.1>:auth<zef:lizmat> {
+class SBOM::Reference:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| The URI (URL or URN) to the external reference. External references
 #| are URIs and therefore can accept any URL scheme including https

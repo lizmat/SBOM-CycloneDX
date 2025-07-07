@@ -1,3 +1,5 @@
+use SBOM:ver<0.0.1>:auth<zef:lizmat>;
+
 #- RuntimeTopology -------------------------------------------------------------
 #| Defines the direct dependencies of a component, service, or the
 #| components provided/implemented by a given component. Components
@@ -7,7 +9,7 @@
 #| It is recommended that implementations assume this to be opaque and
 #| not an indicator of an object being dependency-free. It is recommended
 #| to leverage compositions to indicate unknown dependency graphs.
-class SBOM::RuntimeTopology:ver<0.0.1>:auth<zef:lizmat> {
+class SBOM::RuntimeTopology:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| References a component or service by its bom-ref attribute
     has Str $.ref is required;

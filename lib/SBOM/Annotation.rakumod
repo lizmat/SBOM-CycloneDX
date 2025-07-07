@@ -2,6 +2,7 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
   bom-ref referenceURL
 >;
 
+use SBOM:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Contact:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Component:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Organization:ver<0.0.1>:auth<zef:lizmat>;
@@ -19,7 +20,7 @@ subset Annotator where
 #| opinions or commentary from various stakeholders. Annotations may be
 #| inline (with inventory) or externalized via BOM-Link and may
 #| optionally be signed.
-class SBOM::Annotation:ver<0.0.1>:auth<zef:lizmat> {
+class SBOM::Annotation:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| An optional identifier which can be used to reference the annotation
 #| elsewhere in the BOM.

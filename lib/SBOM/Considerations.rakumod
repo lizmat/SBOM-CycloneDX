@@ -1,9 +1,10 @@
+use SBOM:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::EnergyConsumption:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Property:ver<0.0.1>:auth<zef:lizmat>;
 
 #- EthicalConsideration --------------------------------------------------------
 #| What are the ethical risks involved in the application of a model?
-class SBOM::EthicalConsideration:ver<0.0.1>:auth<zef:lizmat> {
+class SBOM::EthicalConsideration:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| The name of the risk.
     has Str $.name;
@@ -15,7 +16,7 @@ class SBOM::EthicalConsideration:ver<0.0.1>:auth<zef:lizmat> {
 #- EnvironmentalConsiderations -------------------------------------------------
 #| What are the various environmental impacts a machine learning model
 #| has exhibited across its lifecycle?
-class SBOM::EnvironmentalConsiderations:ver<0.0.1>:auth<zef:lizmat> {
+class SBOM::EnvironmentalConsiderations:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| Describes energy consumption information incurred for one or more
 #| component lifecycle activities.
@@ -29,7 +30,7 @@ class SBOM::EnvironmentalConsiderations:ver<0.0.1>:auth<zef:lizmat> {
 #| How does the model affect groups at risk of being systematically
 #| disadvantaged? What are the harms and benefits to the various
 #| affected groups?
-class SBOM::FairnessAssessment:ver<0.0.1>:auth<zef:lizmat> {
+class SBOM::FairnessAssessment:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| The groups or individuals at risk of being systematically
 #| disadvantaged by the model.
@@ -49,7 +50,7 @@ class SBOM::FairnessAssessment:ver<0.0.1>:auth<zef:lizmat> {
 #- Considerations --------------------------------------------------------------
 #| What considerations should be taken into account regarding a model's
 #| construction, training, and application?
-class SBOM::Considerations:ver<0.0.1>:auth<zef:lizmat> {
+class SBOM::Considerations:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| Who are the intended users of the model?
     has Str @.users;

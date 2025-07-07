@@ -1,10 +1,11 @@
+use SBOM:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Property:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Reference:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Attachment:ver<0.0.1>:auth<zef:lizmat>;
 
 #- Parameter -------------------------------------------------------------------
 #| A representation of a functional parameter.
-class SBOM::Parameter:ver<0.0.1>:auth<zef:lizmat> {
+class SBOM::Parameter:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 #| The name of the parameter.
     has Str $.name;
 
@@ -17,7 +18,7 @@ class SBOM::Parameter:ver<0.0.1>:auth<zef:lizmat> {
 
 #- Input -----------------------------------------------------------------------
 #| Type that represents various input data types and formats.
-class SBOM::Input:ver<0.0.1>:auth<zef:lizmat> {
+class SBOM::Input:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| A reference to the component or service that provided the input to the task (e.g., reference to a service with data flow value of inbound)
     has SBOM::resourceRef $.source;

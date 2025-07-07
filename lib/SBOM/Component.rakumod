@@ -27,7 +27,7 @@ use SBOM::Signature:ver<0.0.1>:auth<zef:lizmat>;
 #| Identification (SWID) Tags. Refer to @.evidence.identity to
 #| optionally provide evidence that substantiates the assertion of
 #| the component's identity.
-class SBOM::SWID:ver<0.0.1>:auth<zef:lizmat> {
+class SBOM::SWID:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| Maps to the tagId of a SoftwareIdentity.
     has Str:D $.tagID is required;
@@ -55,7 +55,7 @@ class SBOM::SWID:ver<0.0.1>:auth<zef:lizmat> {
 class SBOM::Pedigree { ... }
 
 #| A software or hardware component.
-class SBOM::Component:ver<0.0.1>:auth<zef:lizmat> {
+class SBOM::Component:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| Specifies the type of the component. For software components,
 #| classify as application if no more specific appropriate
@@ -247,7 +247,7 @@ class SBOM::Component:ver<0.0.1>:auth<zef:lizmat> {
 #- Diff ------------------------------------------------------------------------
 #| The patch file (or diff) that shows changes. Refer to
 #| https://en.wikipedia.org/wiki/Diff
-class SBOM::Diff:ver<0.0.1>:auth<zef:lizmat> {
+class SBOM::Diff:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| Specifies the optional text of the diff.
     has SBOM::Attachment $.text;
@@ -258,7 +258,7 @@ class SBOM::Diff:ver<0.0.1>:auth<zef:lizmat> {
 
 #- Patch -----------------------------------------------------------------------
 #| Specifies an individual patch
-class SBOM::Patch:ver<0.0.1>:auth<zef:lizmat> {
+class SBOM::Patch:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| Specifies the purpose for the patch including the resolution of
 #| defects, security issues, or new behavior or functionality.
@@ -279,7 +279,7 @@ class SBOM::Patch:ver<0.0.1>:auth<zef:lizmat> {
 #| complex chain from the beginning, the end, or anywhere in the middle.
 #| It also provides a way to document variants where the exact relation
 #| may not be known.
-class SBOM::Pedigree:ver<0.0.1>:auth<zef:lizmat> {
+class SBOM::Pedigree:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| Describes zero or more components in which a component is derived
 #| from. This is commonly used to describe forks from existing projects

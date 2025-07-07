@@ -6,6 +6,7 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
   bom-ref bomLinkElement
 >;
 
+use SBOM:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Signature:ver<0.0.1>:auth<zef:lizmat>;
 
 #- Conmposition ----------------------------------------------------------------
@@ -13,7 +14,7 @@ use SBOM::Signature:ver<0.0.1>:auth<zef:lizmat>;
 #| services, and dependency relationships) and their completeness.
 #| The completeness of vulnerabilities expressed in a BOM may also
 #| be described.
-class SBOM::Composition:ver<0.0.1>:auth<zef:lizmat> {
+class SBOM::Composition:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| An optional identifier which can be used to reference the
 #| composition elsewhere in the BOM.

@@ -2,9 +2,11 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
   bom-ref
 >;
 
+use SBOM:ver<0.0.1>:auth<zef:lizmat>;
+
 #- Address ---------------------------------------------------------------------
 #| The physical address (location) of the organization.
-class SBOM::Address:ver<0.0.1>:auth<zef:lizmat> {
+class SBOM::Address:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| An optional identifier which can be used to reference the
 #| address elsewhere in the BOM.

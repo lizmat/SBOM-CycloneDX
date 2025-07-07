@@ -2,11 +2,12 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
   bom-ref URL
 >;
 
+use SBOM:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Address:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Contact:ver<0.0.1>:auth<zef:lizmat>;
 
 #| An organization, as opposed to a person.
-class SBOM::Organization:ver<0.0.1>:auth<zef:lizmat> {
+class SBOM::Organization:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| An optional identifier which can be used to reference the object
 #| elsewhere in the BOM.

@@ -6,9 +6,11 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
   contentHash
 >;
 
-#- Hash ------------------------------------------------------------------------
+use SBOM:ver<0.0.1>:auth<zef:lizmat>;
+
+#- HashedString ----------------------------------------------------------------
 #| A hashed representation of data
-class SBOM::HashedString:ver<0.0.1>:auth<zef:lizmat> {
+class SBOM::HashedString:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| The algorithm that generated the hash value.
     has HashAlgorithm $.alg is required;

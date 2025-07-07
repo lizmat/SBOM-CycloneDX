@@ -2,6 +2,8 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
   PositiveInt
 >;
 
+use SBOM:ver<0.0.1>:auth<zef:lizmat>;
+
 #- Frame -----------------------------------------------------------------------
 #| Within a call stack, a frame is a discrete unit that encapsulates
 #| an execution context, including local variables, parameters, and
@@ -9,7 +11,7 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
 #| onto the stack, forming an array-like structure that orchestrates
 #| the flow of program execution and manages the sequence of function
 #| invocations.
-class SBOM::Frame:ver<0.0.1>:auth<zef:lizmat> {
+class SBOM::Frame:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| A package organizes modules into namespaces, providing a unique
 #| namespace for each type it contains.
@@ -36,7 +38,7 @@ class SBOM::Frame:ver<0.0.1>:auth<zef:lizmat> {
 
 #- Callstack -------------------------------------------------------------------
 #| Evidence of component use through the callstack.
-class SBOM::Callstack:ver<0.0.1>:auth<zef:lizmat> {
+class SBOM::Callstack:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| The frames seen in the callstack.
     has SBOM::Frame @.frames;

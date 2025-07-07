@@ -6,6 +6,7 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
   bom-ref
 >;
 
+use SBOM:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Dependency:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::ExecutionStep:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Property:ver<0.0.1>:auth<zef:lizmat>;
@@ -17,7 +18,7 @@ use SBOM::Workspace:ver<0.0.1>:auth<zef:lizmat>;
 
 #- Workflow --------------------------------------------------------------------
 #| A specialized orchestration task.
-class SBOM::Workflow:ver<0.0.1>:auth<zef:lizmat> {
+class SBOM::Workflow:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| An optional identifier which can be used to reference the workflow
 #| elsewhere in the BOM.

@@ -6,6 +6,7 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
   bom-ref
 >;
 
+use SBOM:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::ExecutionStep:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Input:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Property:ver<0.0.1>:auth<zef:lizmat>;
@@ -18,7 +19,7 @@ use SBOM::Workspace:ver<0.0.1>:auth<zef:lizmat>;
 #- Task ------------------------------------------------------------------------
 #| Describes the inputs, sequence of steps and resources used to
 #| accomplish a task and its output.
-class SBOM::Task:ver<0.0.1>:auth<zef:lizmat> {
+class SBOM::Task:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| An optional identifier which can be used to reference the task
 #| elsewhere in the BOM.
