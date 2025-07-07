@@ -3,7 +3,7 @@
 NAME
 ====
 
-SBOM::CycloneDX - Software Bill Of Materials, CyclonDX style
+SBOM::CycloneDX - Software Bill Of Materials, CycloneDX style
 
 SYNOPSIS
 ========
@@ -50,7 +50,7 @@ PRELIMINARY STRUCTURE DEFINITION
         Software Development Lifecycle (SDLC), IT Asset
         Management (ITAM), and Software Asset Management (SAM).
         Thus, a BOM may include data specific to or only
-        obtainable in a
+        obtainable in a given lifecycle.
 
         AnyTool $tools
         The tool(s) used in the creation, enrichment, and
@@ -59,7 +59,7 @@ PRELIMINARY STRUCTURE DEFINITION
         Organization $manufacturer
         The organization that created the BOM. Manufacturer is
         common in BOMs created through automated processes. BOMs
-        created through
+        created through manual means may have @.authors instead.
 
           bom-ref $bom-ref
           An optional identifier which can be used to reference
@@ -996,7 +996,8 @@ PRELIMINARY STRUCTURE DEFINITION
 
                       Str $classification
                       Data classification tags data according
-                      to its type, sensitivity,
+                      to its type, sensitivity, and value if
+                      altered, stolen, or destroyed.
 
                       Str @sensitiveData
                       A description of any sensitive data in a
@@ -2213,7 +2214,8 @@ PRELIMINARY STRUCTURE DEFINITION
         Organization $supplier
         The organization that supplied the component that the
         BOM describes. The supplier may often be the
-        manufacturer, but may also be a
+        manufacturer, but may also be a distributor or
+        repackager.
 
         AnyLicense @licenses
         The license information for the BOM document. This may
@@ -2492,7 +2494,8 @@ PRELIMINARY STRUCTURE DEFINITION
         Str $detail
         If available, an in-depth description of the
         vulnerability as provided by the source organization.
-        Details often include
+        Details often include information useful in
+        understanding root cause.
 
         Str $recommendation
         Recommendations of how the vulnerability can be
@@ -2684,9 +2687,10 @@ PRELIMINARY STRUCTURE DEFINITION
     - Formulation @formulations -----------------------------------
       Describes how a component or service was manufactured or
       deployed. This is achieved through the use of formulas,
-      workflows, tasks, the observed formulas describing the
-      steps which transpired in the manufacturing process. All
-      items must be unique.
+      workflows, tasks, and steps, which declare the precise
+      steps to reproduce along with the observed formulas
+      describing the steps which transpired in the manufacturing
+      process. All items must be unique.
 
         bom-ref $bom-ref
         An optional identifier which can be used to reference

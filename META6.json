@@ -8,7 +8,7 @@
   "depends": [
     "JSON::Fast:ver<0.19+>:auth<cpan:TIMOTIMO>"
   ],
-  "description": "Software Bill Of Materials, CyclonDX style",
+  "description": "Software Bill Of Materials, CycloneDX style",
   "license": "Artistic-2.0",
   "name": "SBOM::CycloneDX",
   "perl": "6.d",

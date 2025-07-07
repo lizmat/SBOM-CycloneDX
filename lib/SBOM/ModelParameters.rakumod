@@ -38,7 +38,7 @@ class SBOM::ModelDataset:ver<0.0.1>:auth<zef:lizmat> {
     has SBOM::DataContents $.contents;
 
 #| Data classification tags data according to its type, sensitivity,
-# and value if altered, stolen, or destroyed.
+#| and value if altered, stolen, or destroyed.
     has Str $.classification;
 
 #| A description of any sensitive data in a dataset.

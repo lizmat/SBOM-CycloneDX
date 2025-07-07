@@ -1,6 +1,9 @@
-# Serial number conforming to RFC 4122
 my token hexnum { <[0..9 a..f]> }
-#| Every BOM generated SHOULD have a unique serial number, even if the contents of the BOM have not changed over time. If specified, the serial number must conform to RFC 4122. Use of serial numbers is recommended.  Must match regular expression: ^urn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+#| Every BOM generated SHOULD have a unique serial number, even if the
+#| contents of the BOM have not changed over time. If specified, the
+#| serial number must conform to RFC 4122. Use of serial numbers is
+#| recommended.  Must match regular expression:
+#| ^urn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
 subset serialNumber of Str where *.contains:
   /^ 'urn:uuid:' <hexnum> ** 8
      '-'         <hexnum> ** 4

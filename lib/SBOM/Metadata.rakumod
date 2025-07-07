@@ -21,7 +21,7 @@ class SBOM::Metadata:ver<0.0.1>:auth<zef:lizmat> {
 #| of a lifecycle, such as the Software Development Lifecycle (SDLC),
 #| IT Asset Management (ITAM), and Software Asset Management (SAM).
 #| Thus, a BOM may include data specific to or only obtainable in a
-# given lifecycle.
+#| given lifecycle.
     has Phase @.lifecycles;
 
 #| The tool(s) used in the creation, enrichment, and validation of
@@ -30,7 +30,7 @@ class SBOM::Metadata:ver<0.0.1>:auth<zef:lizmat> {
 
 #| The organization that created the BOM.  Manufacturer is common in
 #| BOMs created through automated processes. BOMs created through
-# manual means may have @.authors instead.
+#| manual means may have @.authors instead.
     has SBOM::Organization $.manufacturer;
 
 #| The person(s) who created the BOM.  Authors are common in BOMs
@@ -43,7 +43,7 @@ class SBOM::Metadata:ver<0.0.1>:auth<zef:lizmat> {
 
 #| The organization that supplied the component that the BOM describes.
 #| The supplier may often be the manufacturer, but may also be a
-# distributor or repackager.
+#| distributor or repackager.
     has SBOM::Organization $.supplier;
 
 #| The license information for the BOM document. This may be different
