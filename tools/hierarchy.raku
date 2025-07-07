@@ -11,9 +11,7 @@ sub types(Mu $class, str $indent = "  ") {
 
     for $class.^attributes -> $attribute {
         my $type := $attribute.type;
-        if $type ~~ Positional {
-            $type := $type.of;
-        }
+        $type := $type.of if $type ~~ Positional;
         my str $name = "$type.^name.subst("SBOM::") $attribute.name.subst("!")";
         $name ~= " (required)" if $attribute.required;
 

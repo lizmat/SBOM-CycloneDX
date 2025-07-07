@@ -4,3 +4,5 @@ use SBOM::CycloneDX;
 pass "replace me";
 
 done-testing;
+
+# vim: expandtab shiftwidth=4

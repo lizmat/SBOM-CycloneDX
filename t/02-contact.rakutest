@@ -1,0 +1,33 @@
+use Test;
+use SBOM::Contact;
+
+plan 5;
+
+my %args is Map =
+  bom-ref => "jdoe",
+  name    => "Jane Doe",
+  email   => "jdoe@foo.org",
+  phone   => "+31 123 456 789"
+;
+
+my $contact = SBOM::Contact.new(|%args);
+isa-ok $contact, SBOM::Contact;
+
+my %map := $contact.Map;
+is-deeply %map, %args, 'does .Map work';
+
+is-deeply SBOM::Contact.new(|%map), $contact,
+  'can we roundtrip on the Map';
+
+is $contact.JSON, Q:to/JSON/.chomp, 'is the JSON correct';
+{
+  "bom-ref": "jdoe",
+  "name": "Jane Doe",
+  "email": "jdoe@foo.org",
+  "phone": "+31 123 456 789"
+}
+JSON
+
+is-deeply SBOM::Contact.new, Nil, 'No args return Nil';
+
+# vim: expandtab shiftwidth=4

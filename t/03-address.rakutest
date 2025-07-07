@@ -1,0 +1,39 @@
+use Test;
+use SBOM::Address;
+
+plan 5;
+
+my %args is Map =
+  bom-ref             => "home",
+  country             => "NL",
+  region              => "Knoware",
+  locality            => "Schutter",
+  postOfficeBoxNumber => "27434",
+  postalCode          => "1000CS",
+  streetAddress       => "Voetboogstraat",
+;
+
+my $address = SBOM::Address.new(|%args);
+isa-ok $address, SBOM::Address;
+
+my %map := $address.Map;
+is-deeply %map, %args, 'does .Map work';
+
+is-deeply SBOM::Address.new(|%map), $address,
+  'can we roundtrip on the Map';
+
+is $address.JSON, Q:to/JSON/.chomp, 'is the JSON correct';
+{
+  "bom-ref": "home",
+  "country": "NL",
+  "region": "Knoware",
+  "locality": "Schutter",
+  "postOfficeBoxNumber": "27434",
+  "postalCode": "1000CS",
+  "streetAddress": "Voetboogstraat"
+}
+JSON
+
+is-deeply SBOM::Address.new, Nil, 'No args return Nil';
+
+# vim: expandtab shiftwidth=4
