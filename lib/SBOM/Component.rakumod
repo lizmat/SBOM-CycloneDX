@@ -1,5 +1,5 @@
 use SBOM::enums:ver<0.0.1>:auth<zef:lizmat> <
-  Component Patch Scope
+  ComponentType Patch Scope
 >;
 
 use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
@@ -12,7 +12,7 @@ use SBOM::Contact:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::CryptoProperties:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::ComponentDataset:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::ComponentEvidence:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::Hash:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::HashedString:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::License:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::ModelCard:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Property:ver<0.0.1>:auth<zef:lizmat>;
@@ -54,14 +54,14 @@ class SBOM::SWID:ver<0.0.1>:auth<zef:lizmat> {
 #- Component -------------------------------------------------------------------
 class SBOM::Pedigree { ... }
 
-#| A software or hardware component
+#| A software or hardware component.
 class SBOM::Component:ver<0.0.1>:auth<zef:lizmat> {
 
 #| Specifies the type of the component. For software components,
 #| classify as application if no more specific appropriate
 #| classification is available or cannot be determined for the
 #| component.
-    has Component $.type is required;
+    has ComponentType $.type is required;
 
 #| The optional mime-type of the component. When used on file
 #| components, the mime-type can provide additional context about the
@@ -116,7 +116,7 @@ class SBOM::Component:ver<0.0.1>:auth<zef:lizmat> {
     has Scope $.scope = SBOM::ScopeType("required");
 
 #| The hashes of the component.
-    has SBOM::Hash @.hashes;
+    has SBOM::HashedString @.hashes;
 
 #| EITHER (list of SPDX licenses and/or named licenses) OR (tuple
 #| of one SPDX License Expression)
@@ -219,14 +219,7 @@ class SBOM::Component:ver<0.0.1>:auth<zef:lizmat> {
 #| vs. HMAC-SHA1 also makes a difference.
     has SBOM::CryptoProperties $.cryptoProperties;
 
-#| Provides the ability to document properties in a name-value store.
-#| This provides flexibility to include data not officially supported
-#| in the standard without having to use additional namespaces or
-#| create extensions. Unlike key-value stores, properties support
-#| duplicate names, each potentially having different values. Property
-#| names of interest to the general public are encouraged to be
-#| registered in the CycloneDX Property Taxonomy. Formal registration
-#| is optional.
+#| Any additional properties as name-value pairs.
     has SBOM::Property @.properties;
 
 #| Textual strings that aid in discovery, search, and retrieval of the

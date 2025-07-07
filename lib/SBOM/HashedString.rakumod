@@ -8,7 +8,7 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
 
 #- Hash ------------------------------------------------------------------------
 #| A hashed representation of data
-class SBOM::Hash:ver<0.0.1>:auth<zef:lizmat> {
+class SBOM::HashedString:ver<0.0.1>:auth<zef:lizmat> {
 
 #| The algorithm that generated the hash value.
     has HashAlgorithm $.alg is required;

@@ -3,7 +3,7 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
 >;
 
 use SBOM::Component:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::Hash:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::HashedString:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Reference:ver<0.0.1>:auth<zef:lizmat>;
 use SBOM::Service:ver<0.0.1>:auth<zef:lizmat>;
 
@@ -36,7 +36,7 @@ class SBOM::LegacyTool:ver<0.0.1>:auth<zef:lizmat> {
     has versionString $.version;
 
 #| The hashes of the tool (if applicable).
-    has SBOM::Hash @.hashes;
+    has SBOM::HashedString @.hashes;
 
 #| External references provide a way to document systems, sites, and
 #| information that may be relevant but are not included with the BOM.

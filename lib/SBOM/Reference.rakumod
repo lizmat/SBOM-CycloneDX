@@ -6,7 +6,7 @@ use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
   referenceURL
 >;
 
-use SBOM::Hash:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM::HashedString:ver<0.0.1>:auth<zef:lizmat>;
 
 #- Reference -------------------------------------------------------------------
 #| External references provide a way to document systems, sites, and
@@ -31,7 +31,7 @@ class SBOM::Reference:ver<0.0.1>:auth<zef:lizmat> {
     has ReferenceSource $.type is required;
 
 #| The hashes of the external reference (if applicable).
-    has SBOM::Hash @.hashes;
+    has SBOM::HashedString @.hashes;
 }
 
 #| Either a referenceURL or a Reference are allowed.

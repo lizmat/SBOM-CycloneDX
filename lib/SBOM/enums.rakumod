@@ -1,6 +1,8 @@
 use JSON::Fast:ver<0.19+>:auth<cpan:TIMOTIMO>;
 
-my role Enumify {
+#| Role for creating SBOM "enums", which are in fact just classes
+#| that consume this role
+role Enumify {
     has $.name;
     has $.WHY;
 
@@ -104,7 +106,7 @@ my class CertificationPadding:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
 my class CO2Cost:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
 
 #| Specifies the type of a component.
-my class Component:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
+my class ComponentType:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
 
 #| The type for the related cryptographic material
 my class Crypto:ver<0.0.1>:auth<zef:lizmat> does Enumify { }
