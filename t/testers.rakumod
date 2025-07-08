@@ -4,16 +4,17 @@ use SBOM::subsets;
 use SBOM::CycloneDX;
 
 my sub test-map-json(
-  $description, $class, %args, $json
+  $class, \args, $json, $description = 'complete'
 ) is test-assertion is export {
+
     subtest "$class.^name(): $description" => {
         plan 5;
 
-        my $instance := $class.new(|%args);
+        my $instance := $class.new(|args);
         isa-ok $instance, $class;
 
         my %map := $instance.Map;
-        is-deeply %map, %args, 'does .Map work';
+        is-deeply %map, args, 'does .Map work';
 
         is-deeply $instance.raku.EVAL, $instance,
           'can we roundtrip on .raku';

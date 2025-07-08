@@ -19,7 +19,7 @@ class SBOM::ExecutionStep:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| A name for the step.
     has Str $.name;
-    
+
 #| A description for the step.
     has Str $.description;;
 

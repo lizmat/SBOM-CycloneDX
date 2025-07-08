@@ -25,6 +25,12 @@ role SBOM:ver<0.0.1>:auth<zef:lizmat> {
         $name => True if %attribute{$name}.type ~~ Positional
     }
 
+    # Attribute name to required flag, if attribute was specified
+    # with "is required".
+    my %required is Map = @names.map: -> $name {
+        $name => True if %attribute{$name}.required;
+    }
+
     # Attribute name to type mapper, hiding any Positional wrapping
     my %type is Map = @names.map: -> $name {
         my $type := %attribute{$name}.type;
@@ -82,14 +88,17 @@ role SBOM:ver<0.0.1>:auth<zef:lizmat> {
                     if value ~~ Associative {
                         %out{$name} := $type.new(|$_) with value;
                     }
-                    elsif value ~~ SBOM | Cool {
-                        %out{$name} := $_ with value;
-                    }
-                    elsif value ~~ DateTime {
-                        %out{$name} := .DateTime with value;
+                    elsif value ~~ Enumify {
+                        %out{$name} := value;
                     }
                     elsif $type ~~ Enumify {
                         %out{$name} := $_ with $type(value);
+                    }
+                    elsif $type ~~ DateTime {
+                        %out{$name} := .DateTime with value;
+                    }
+                    elsif value ~~ SBOM | Cool {
+                        %out{$name} := $_ with value;
                     }
                     elsif $type ~~ SBOM {
                         %out{$name} := $_ with $type.new(|value);
@@ -101,7 +110,7 @@ role SBOM:ver<0.0.1>:auth<zef:lizmat> {
             }
         }
 
-        if %out {
+        if %out || %required {
             self.bless: |%out;
         }
         else {
@@ -155,7 +164,7 @@ role SBOM:ver<0.0.1>:auth<zef:lizmat> {
                 $type ~~ Cool
                   ?? $value
                   !! ($type ~~ Enumify)
-                    ?? self.name
+                    ?? $value.name
                     !! ($type ~~ DateTime)
                       ?? $value.Str
                       !! $value.Map(:$ordered)

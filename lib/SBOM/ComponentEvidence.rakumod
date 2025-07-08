@@ -63,7 +63,7 @@ class SBOM::ComponentEvidence:ver<0.0.1>:auth<zef:lizmat> does SBOM {
     has SBOM::Occurrence @.occurrences;
 
 #| Evidence of the components use through the callstack.
-    has SBOM::Callstack  $.callstack;
+    has SBOM::Callstack $.callstack;
 
 #| EITHER (list of SPDX licenses and/or named licenses) OR (tuple
 #| of one SPDX License Expression).

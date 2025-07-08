@@ -1,0 +1,24 @@
+use Test;
+use SBOM::EnergyConsumption;  # EnergyCost lives in there
+
+use lib $*PROGRAM.parent;
+use testers;
+
+plan 2;
+
+# Testing an object with only required arguments
+
+my %complete is Map =
+  value => 42,
+  unit  => "kWh",
+;
+test-map-json SBOM::EnergyCost, %complete, Q:to/JSON/;
+{
+  "value": 42,
+  "unit": "kWh"
+}
+JSON
+
+dies-ok { SBOM::EnergyCost.new }, 'No args throws';
+
+# vim: expandtab shiftwidth=4

@@ -2,7 +2,7 @@ use SBOM::enums:ver<0.0.1>:auth<zef:lizmat> <
   AlgorithmPrimitive Certification CertificationMode CertificationPadding
   CryptoFunction ExecutionEnvironment Platform
 >;
-   
+
 use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
   nistQuantumSecurityLevel
 >;

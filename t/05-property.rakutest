@@ -1,0 +1,32 @@
+use Test;
+use SBOM::Property;
+
+use lib $*PROGRAM.parent;
+use testers;
+
+plan 3;
+
+# Testing an object with one required argument
+
+my %complete is Map =
+  name  => "foo",
+  value => "42",
+;
+
+test-map-json SBOM::Property, %complete, Q:to/JSON/;
+{
+  "name": "foo",
+  "value": "42"
+}
+JSON
+
+my %minimal is Map = name => "foo";
+test-map-json SBOM::Contact, %minimal, Q:to/JSON/, "minimal";
+{
+  "name": "foo"
+}
+JSON
+
+dies-ok { SBOM::Property.new }, 'No args throws';
+
+# vim: expandtab shiftwidth=4

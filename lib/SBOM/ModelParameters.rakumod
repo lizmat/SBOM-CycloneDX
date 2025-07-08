@@ -74,7 +74,7 @@ class SBOM::ModelParameters:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| The overall approach to learning used by the model for problem
 #| solving.
-    has SBOM::Approach    $.approach;
+    has SBOM::Approach $.approach;
 
 #| Directly influences the input and/or output. Examples include
 #| classification, regression, clustering, etc.

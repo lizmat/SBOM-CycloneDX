@@ -56,7 +56,7 @@ class SBOM::CryptoProperties:ver<0.0.1>:auth<zef:lizmat> does SBOM {
     has SBOM::AlgorithmProperties $.algorithmProperties;
 
 #| Properties for cryptographic assets of asset type 'certificate'.
-    has SBOM::CertificateProperties    $.certificateProperties;
+    has SBOM::CertificateProperties $.certificateProperties;
 
 #| Properties for cryptographic assets of asset type 'related-crypto-material'.
     has SBOM::CryptoMaterialProperties $.relatedCryptoMaterialProperties;

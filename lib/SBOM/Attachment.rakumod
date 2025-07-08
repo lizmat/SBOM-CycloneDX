@@ -19,7 +19,7 @@ class SBOM::Attachment:ver<0.0.1>:auth<zef:lizmat> does SBOM {
     has mime-type $.contentType = "text/plain";
 
 #| Specifies the optional encoding the text is represented in.
-    has Encoding  $.encoding;
+    has Encoding $.encoding;
 
 #| The attachment data. Proactive controls such as input validation and
 #| sanitization should be employed to prevent misuse of attachment text.

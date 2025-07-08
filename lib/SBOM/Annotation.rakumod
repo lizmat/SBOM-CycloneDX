@@ -28,7 +28,7 @@ class SBOM::Annotation:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| The object in the BOM identified by its bom-ref. This is often a
 #| component or service, but may be any object type supporting bom-refs.
-    has referenceURL @.subjects  is required;
+    has referenceURL @.subjects is required;
 
 #| The organization, person, component, or service which created the
 #| textual content of the annotation.

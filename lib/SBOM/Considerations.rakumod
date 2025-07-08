@@ -68,7 +68,14 @@ class SBOM::Considerations:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| What are the ethical risks involved in the application of this model?
     has SBOM::EthicalConsideration @.ethicalConsiderations;
+
+#| What are the various environmental impacts the corresponding machine
+#| learning model has exhibited across its lifecycle?
     has SBOM::EnvironmentalConsiderations $.environmentalConsiderations;
+
+#| How does the model affect groups at risk of being systematically
+#| disadvantaged? What are the harms and benefits to the various
+#| affected groups?
     has SBOM::FairnessAssessment          @.fairnessAssessments;
 }
 

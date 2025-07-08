@@ -33,7 +33,7 @@ class SBOM::SWID:ver<0.0.1>:auth<zef:lizmat> does SBOM {
     has Str:D $.tagID is required;
 
 #| Maps to the name of a SoftwareIdentity.
-    has Str:D $.name  is required;
+    has Str:D $.name is required;
 
 #| Maps to the version of a SoftwareIdentity.
     has Str:D $.version = "0.0";

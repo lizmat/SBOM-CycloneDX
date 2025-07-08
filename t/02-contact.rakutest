@@ -6,6 +6,8 @@ use testers;
 
 plan 3;
 
+# Testing a simple object with just optional string-like attributes
+
 my %complete is Map =
   bom-ref => "jdoe",
   name    => "Jane Doe",
@@ -13,7 +15,7 @@ my %complete is Map =
   phone   => "+31 123 456 789"
 ;
 
-test-map-json "fully fleshed", SBOM::Contact, %complete, Q:to/JSON/;
+test-map-json SBOM::Contact, %complete, Q:to/JSON/;
 {
   "bom-ref": "jdoe",
   "name": "Jane Doe",
@@ -23,7 +25,7 @@ test-map-json "fully fleshed", SBOM::Contact, %complete, Q:to/JSON/;
 JSON
 
 my %minimal is Map = bom-ref => "jdoe";
-test-map-json "minimal", SBOM::Contact, %minimal, Q:to/JSON/;
+test-map-json SBOM::Contact, %minimal, Q:to/JSON/, "minimal";
 {
   "bom-ref": "jdoe"
 }

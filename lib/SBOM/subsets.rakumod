@@ -17,6 +17,9 @@ subset serialNumber of Str where *.contains:
 #| characters long.
 subset bom-ref of Str where { .chars && !.starts-with('urn:cdx') }
 
+#| A numeric value
+subset number of Cool where Int | Rat;
+
 subset email of Str;  # XXX to be done
 subset URL   of Str;  # XXX fetch URL rules
 
@@ -97,7 +100,7 @@ subset confidenceValue of Rat where 0 < * < 1;
 
 #| The conformance value between and inclusive of 0 and 1, where 1 is
 #| 100% conformant.
-subset conformanceValue of Rat where 0 <= * <= 1;
+subset conformanceValue of Numeric where 0 <= * <= 1;
 
 subset PositiveInt of Int where * > 0;
 
@@ -115,7 +118,7 @@ my sub EXPORT(*@names) {
     @names ||= <
       bomLinkDocunment bomLinkElement bom-ref confidenceValue
       conformanceValue contentHash CPE CRE email IDnotbomLink
-      locale mime-type nistQuantumSecurityLevel omniborId
+      locale mime-type nistQuantumSecurityLevel number omniborId
       PositiveInt PURL referenceURL serialNumber SWHID URL
       versionString
     >;

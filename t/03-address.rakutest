@@ -6,6 +6,8 @@ use testers;
 
 plan 3;
 
+# Testing another simple object with just optional string-like attributes
+
 my %complete is Map =
   bom-ref             => "home",
   country             => "NL",
@@ -16,7 +18,7 @@ my %complete is Map =
   streetAddress       => "Voetboogstraat",
 ;
 
-test-map-json "complete", SBOM::Address, %complete, Q:to/JSON/;
+test-map-json SBOM::Address, %complete, Q:to/JSON/;
 {
   "bom-ref": "home",
   "country": "NL",
@@ -29,7 +31,7 @@ test-map-json "complete", SBOM::Address, %complete, Q:to/JSON/;
 JSON
 
 my %minimal is Map = bom-ref => "home";
-test-map-json "minimal", SBOM::Address, %minimal, Q:to/JSON/;
+test-map-json SBOM::Address, %minimal, Q:to/JSON/, "minimal";
 {
   "bom-ref": "home"
 }

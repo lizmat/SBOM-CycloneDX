@@ -6,6 +6,8 @@ use testers;
 
 plan 3;
 
+# Testing a an object that contains other SBOM objects
+
 my %complete is Map =
   bom-ref => "AcmeInc",
   name    => "ACME Inc.",
@@ -27,7 +29,7 @@ my %complete is Map =
   }.Map, )
 ;
 
-test-map-json "complete", SBOM::Organization, %complete, Q:to/JSON/;
+test-map-json SBOM::Organization, %complete, Q:to/JSON/;
 {
   "bom-ref": "AcmeInc",
   "name": "ACME Inc.",
@@ -54,10 +56,10 @@ test-map-json "complete", SBOM::Organization, %complete, Q:to/JSON/;
 }
 JSON
 
-my %minimal is Map = bom-ref => "AcmeInc";
-test-map-json "minimal", SBOM::Organization, %minimal, Q:to/JSON/;
+my %minimal is Map = "name" => "ACME Inc.";
+test-map-json SBOM::Organization, %minimal, Q:to/JSON/, "minimal";
 {
-  "bom-ref": "AcmeInc"
+  "name": "ACME Inc."
 }
 JSON
 

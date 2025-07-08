@@ -3,7 +3,7 @@ use SBOM::enums:ver<0.0.1>:auth<zef:lizmat> <
 >;
 
 use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
-  bom-ref
+  bom-ref number
 >;
 
 use SBOM:ver<0.0.1>:auth<zef:lizmat>;
@@ -16,7 +16,7 @@ use SBOM::Reference:ver<0.0.1>:auth<zef:lizmat>;
 class SBOM::CO2Cost:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| Quantity of carbon dioxide (CO2).
-    has Rat $.value is required;
+    has number $.value is required;
 
 #| Unit of carbon dioxide (CO2).
     has CO2Cost $.unit is required;
@@ -27,10 +27,10 @@ class SBOM::CO2Cost:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 class SBOM::EnergyCost:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| Quantity of energy.
-    has Rat $.value is required;
+    has number $.value is required;
 
 #| Unit of energy.
-    has EnergyUnit $.unit  is required;
+    has EnergyUnit $.unit is required;
 }
 
 #- EnergyProvider --------------------------------------------------------------
@@ -49,10 +49,10 @@ class SBOM::EnergyProvider:ver<0.0.1>:auth<zef:lizmat> does SBOM {
     has SBOM::Organization $.organization is required;
 
 #| The energy source for the energy provider.
-    has Energy $.energySource   is required;
+    has Energy $.energySource is required;
 
 #| The energy provided by the energy source for an associated activity.
-    has SBOM::EnergyCost  $.energyProvided is required;
+    has SBOM::EnergyCost $.energyProvided is required;
 
 #| External references provide a way to document systems, sites, and
 #| information that may be relevant but are not included with the BOM.
@@ -72,7 +72,7 @@ class SBOM::EnergyConsumption:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| The provider(s) of the energy consumed by the associated model
 #| development lifecycle activity.
-    has SBOM::EnergyProvider @.energyProviders    is required;
+    has SBOM::EnergyProvider @.energyProviders is required;
 
 #| The total energy cost associated with the model lifecycle activity.
     has SBOM::EnergyCost $.activityEnergyCost is required;

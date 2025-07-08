@@ -42,7 +42,7 @@ class SBOM::Identity:ver<0.0.1>:auth<zef:lizmat> does SBOM {
     has Str $.concludedValue;
 
 #| The methods used to extract and/or analyze the evidence.
-    has SBOM::EvidenceMethod  @.methods;
+    has SBOM::EvidenceMethod @.methods;
 
 #| The object in the BOM identified by its bom-ref. This is often a
 #| component or service but may be any object type supporting bom-refs.

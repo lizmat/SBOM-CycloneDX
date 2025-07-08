@@ -17,10 +17,6 @@ class SBOM::Property:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 #| The value of the property.
     has Str $.value;
 
-    multi method new(SBOM::Property:U: Str:D $name, Str $value? --> SBOM::Property:D) {
-        self.bless(:$name, :$value)
-    }
-
     multi method Str(SBOM::Property:D:) { $.name }
 }
 

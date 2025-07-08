@@ -28,17 +28,17 @@ class SBOM::CipherSuite:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 class SBOM::IKEv2TransformTypes:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #| Transform Type 1: encryption algorithms.
-    has Str  @.encr;
+    has Str @.encr;
 
 #| Transform Type 2: pseudorandom functions.
-    has Str  @.prf;
+    has Str @.prf;
 
 #| Transform Type 3: integrity algorithms.
-    has Str  @.integ;
+    has Str @.integ;
 
 #| Transform Type 4: Key Exchange Method (KE) per RFC 9370, formerly
 #| called Diffie-Hellman Group (D-H).
-    has Str  @.ke;
+    has Str @.ke;
 
 #| Specifies if an Extended Sequence Number (ESN) is used.
     has Bool $.esn;
