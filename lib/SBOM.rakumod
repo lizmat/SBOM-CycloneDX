@@ -1,8 +1,8 @@
 use JSON::Fast:ver<0.19+>:auth<cpan:TIMOTIMO>;
-use SBOM::enums:ver<0.0.1>:auth<zef:lizmat> <Enumify>;
+use SBOM::enums:ver<0.0.2>:auth<zef:lizmat> <Enumify>;
 
 #- SBOM ------------------------------------------------------------------------
-role SBOM:ver<0.0.1>:auth<zef:lizmat> {
+role SBOM:ver<0.0.2>:auth<zef:lizmat> {
 
     # This code is run at compile time when the role is being consumed.
     # So this effectively creaes constants, hence the .Map and .List

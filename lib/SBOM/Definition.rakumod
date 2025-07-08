@@ -1,15 +1,15 @@
-use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
+use SBOM::subsets:ver<0.0.2>:auth<zef:lizmat> <
   bom-ref
 >;
 
-use SBOM:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::Reference:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::Requirement:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::Signature:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM:ver<0.0.2>:auth<zef:lizmat>;
+use SBOM::Reference:ver<0.0.2>:auth<zef:lizmat>;
+use SBOM::Requirement:ver<0.0.2>:auth<zef:lizmat>;
+use SBOM::Signature:ver<0.0.2>:auth<zef:lizmat>;
 
 #- RequirementLevel ------------------------------------------------------------
 #| The requirement level of a claim.
-class SBOM::RequirementLevel:ver<0.0.1>:auth<zef:lizmat> does SBOM {
+class SBOM::RequirementLevel:ver<0.0.2>:auth<zef:lizmat> does SBOM {
 
 #| An optional identifier which can be used to reference the object
 #| elsewhere in the BOM.
@@ -33,7 +33,7 @@ class SBOM::RequirementLevel:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 #| organizational-specific standards, maturity models, best
 #| practices, or any other requirements which can be evaluated
 #| against or attested to.
-class SBOM::Standard:ver<0.0.1>:auth<zef:lizmat> does SBOM {
+class SBOM::Standard:ver<0.0.2>:auth<zef:lizmat> does SBOM {
 
 #| An optional identifier which can be used to reference the object
 #| elsewhere in the BOM.
@@ -72,7 +72,7 @@ class SBOM::Standard:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #- Definition ------------------------------------------------------------------
 #| Reusable object that may be used elsewhere in the BOM.
-class SBOM::Definition:ver<0.0.1>:auth<zef:lizmat> does SBOM {
+class SBOM::Definition:ver<0.0.2>:auth<zef:lizmat> does SBOM {
 
 #| The list of standards which may consist of regulations, industry
 #| or organizational-specific standards, maturity models, best

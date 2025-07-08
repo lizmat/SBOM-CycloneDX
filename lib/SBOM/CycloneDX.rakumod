@@ -1,24 +1,24 @@
-use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
+use SBOM::subsets:ver<0.0.2>:auth<zef:lizmat> <
   serialNumber
 >;
 
-use SBOM:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::Annotation:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::Component:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::Composition:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::Declaration:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::Definition:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::Dependency:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::Formulation:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::Metadata:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::Property:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::Reference:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::Service:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::Signature:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::Vulnerability:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM:ver<0.0.2>:auth<zef:lizmat>;
+use SBOM::Annotation:ver<0.0.2>:auth<zef:lizmat>;
+use SBOM::Component:ver<0.0.2>:auth<zef:lizmat>;
+use SBOM::Composition:ver<0.0.2>:auth<zef:lizmat>;
+use SBOM::Declaration:ver<0.0.2>:auth<zef:lizmat>;
+use SBOM::Definition:ver<0.0.2>:auth<zef:lizmat>;
+use SBOM::Dependency:ver<0.0.2>:auth<zef:lizmat>;
+use SBOM::Formulation:ver<0.0.2>:auth<zef:lizmat>;
+use SBOM::Metadata:ver<0.0.2>:auth<zef:lizmat>;
+use SBOM::Property:ver<0.0.2>:auth<zef:lizmat>;
+use SBOM::Reference:ver<0.0.2>:auth<zef:lizmat>;
+use SBOM::Service:ver<0.0.2>:auth<zef:lizmat>;
+use SBOM::Signature:ver<0.0.2>:auth<zef:lizmat>;
+use SBOM::Vulnerability:ver<0.0.2>:auth<zef:lizmat>;
 
 #- CycloneDX -------------------------------------------------------------------
-class SBOM::CycloneDX:ver<0.0.1>:auth<zef:lizmat> does SBOM {
+class SBOM::CycloneDX:ver<0.0.2>:auth<zef:lizmat> does SBOM {
 
 #| Every BOM generated SHOULD have a unique serial number, even if the
 #| contents of the BOM have not changed over time. If specified, the serial

@@ -1,12 +1,12 @@
-use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
+use SBOM::subsets:ver<0.0.2>:auth<zef:lizmat> <
   URL
 >;
 
-use SBOM:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM:ver<0.0.2>:auth<zef:lizmat>;
 
 #- Source ----------------------------------------------------------------------
 #| Defines a source of documentation, e.g. about vulnerabilities.
-class SBOM::Source:ver<0.0.1>:auth<zef:lizmat> does SBOM {
+class SBOM::Source:ver<0.0.2>:auth<zef:lizmat> does SBOM {
 
 #| The url of documentation as provided by the source.
     has URL $.url;

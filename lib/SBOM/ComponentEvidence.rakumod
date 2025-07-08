@@ -1,11 +1,11 @@
-use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
+use SBOM::subsets:ver<0.0.2>:auth<zef:lizmat> <
   bom-ref PositiveInt
 >;
 
-use SBOM:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::Callstack:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::Identity:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::License:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM:ver<0.0.2>:auth<zef:lizmat>;
+use SBOM::Callstack:ver<0.0.2>:auth<zef:lizmat>;
+use SBOM::Identity:ver<0.0.2>:auth<zef:lizmat>;
+use SBOM::License:ver<0.0.2>:auth<zef:lizmat>;
 
 #| Evidence that substantiates the identity of a component. The
 #| identity may be an object or an array of identity objects.
@@ -20,7 +20,7 @@ subset Identity where {
 #- Copyright -------------------------------------------------------------------
 #| Copyright evidence captures intellectual property assertions,
 #| providing evidence of possible ownership and legal protection.
-class SBOM::Copyright:ver<0.0.1>:auth<zef:lizmat> does SBOM {
+class SBOM::Copyright:ver<0.0.2>:auth<zef:lizmat> does SBOM {
 
 #| The textual content of the copyright.
     has Str $.text is required;
@@ -28,7 +28,7 @@ class SBOM::Copyright:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #- Occurrence ------------------------------------------------------------------
 #| Evidence of instance of a component spread across multiple locations.
-class SBOM::Occurrence:ver<0.0.1>:auth<zef:lizmat> does SBOM {
+class SBOM::Occurrence:ver<0.0.2>:auth<zef:lizmat> does SBOM {
 
 #| An optional identifier which can be used to reference the occurrence
 #| elsewhere in the BOM
@@ -53,7 +53,7 @@ class SBOM::Occurrence:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 #- ComponentEvidence -----------------------------------------------------------
 #| The ability to document evidence about a component, collected
 #| through various forms of extraction or analysis.
-class SBOM::ComponentEvidence:ver<0.0.1>:auth<zef:lizmat> does SBOM {
+class SBOM::ComponentEvidence:ver<0.0.2>:auth<zef:lizmat> does SBOM {
 
 #| Evidence that substantiates the identity of a component.
     has Identity $.identity;

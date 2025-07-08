@@ -15,7 +15,7 @@ use SBOM::CycloneDX;
 DESCRIPTION
 ===========
 
-`SBOM::CycloneDX` provides a distribution for the implementation of the Software Bill Of Materials standard provided by CycloneDX using the [JSON Reference](https://cyclonedx.org/docs/1.6/json/).
+`SBOM::CycloneDX` provides a distribution for the implementation of the Software Bill Of Materials standard provided by CycloneDX using the [JSON Reference version 1.6](https://cyclonedx.org/docs/1.6/json/).
 
 This is still alpha state, but all necessary classes are currently implemented. But no way to ingest any JSON generated data yet.
 

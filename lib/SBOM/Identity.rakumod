@@ -1,19 +1,19 @@
-use SBOM::enums:ver<0.0.1>:auth<zef:lizmat> <
+use SBOM::enums:ver<0.0.2>:auth<zef:lizmat> <
   Evidence Field
 >;
 
-use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
+use SBOM::subsets:ver<0.0.2>:auth<zef:lizmat> <
   bomLinkElement bom-ref confidenceValue
 >;
 
-use SBOM:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM:ver<0.0.2>:auth<zef:lizmat>;
 
 #| A bom-ref or a bomlink element
 subset BomRefOrbomLinkElement of Str where bom-ref | bomLinkElement;
 
 #- EvidenceMethod --------------------------------------------------------------
 #| A method used to extract and/or analyze the evidence.
-class SBOM::EvidenceMethod:ver<0.0.1>:auth<zef:lizmat> does SBOM {
+class SBOM::EvidenceMethod:ver<0.0.2>:auth<zef:lizmat> does SBOM {
 
 #| The technique used in this method of analysis.
     has Evidence $.technique  is required;
@@ -29,7 +29,7 @@ class SBOM::EvidenceMethod:ver<0.0.1>:auth<zef:lizmat> does SBOM {
 
 #- Identity --------------------------------------------------------------------
 #| Evidence that substantiates the identity of a component.
-class SBOM::Identity:ver<0.0.1>:auth<zef:lizmat> does SBOM {
+class SBOM::Identity:ver<0.0.2>:auth<zef:lizmat> does SBOM {
 #| The identity field of the component which the evidence describes.
     has Field $.type is required;
 

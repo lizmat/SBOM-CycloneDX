@@ -1,14 +1,14 @@
-use SBOM::subsets:ver<0.0.1>:auth<zef:lizmat> <
+use SBOM::subsets:ver<0.0.2>:auth<zef:lizmat> <
   URL
 >;
 
-use SBOM:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::Property:ver<0.0.1>:auth<zef:lizmat>;
-use SBOM::Attachment:ver<0.0.1>:auth<zef:lizmat>;
+use SBOM:ver<0.0.2>:auth<zef:lizmat>;
+use SBOM::Property:ver<0.0.2>:auth<zef:lizmat>;
+use SBOM::Attachment:ver<0.0.2>:auth<zef:lizmat>;
 
 #- DataContents ----------------------------------------------------------------
 #| The contents or references to the contents of data being described.
-class SBOM::DataContents:ver<0.0.1>:auth<zef:lizmat> does SBOM {
+class SBOM::DataContents:ver<0.0.2>:auth<zef:lizmat> does SBOM {
 
 #| An optional way to include textual or encoded data.
     has SBOM::Attachment $.attachment;
