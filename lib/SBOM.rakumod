@@ -1,64 +1,102 @@
 use JSON::Fast:ver<0.19+>:auth<cpan:TIMOTIMO>;
 use SBOM::enums:ver<0.0.1>:auth<zef:lizmat> <Enumify>;
 
+#- SBOM ------------------------------------------------------------------------
 role SBOM:ver<0.0.1>:auth<zef:lizmat> {
 
-    my @attributes  is List = $?CLASS.^attributes;
-    my %attributes  is Map  = @attributes.map: { .name.substr(2) => $_ }
-    my @sorted-keys is List = @attributes.map(*.name.substr(2));
+    # This code is run at compile time when the role is being consumed.
+    # So this effectively creaes constants, hence the .Map and .List
+    # to ensure immutability.
 
-    my sub type-of(Attribute:D $attribute) {
-        my $type := $attribute.type;
-        $type ~~ Positional ?? $type.of !! $type
+    # The attributes of the class, so we don't need to introspect
+    # at runtime
+    my @attributes is List = $?CLASS.^attributes;
+
+    # Attribute name to attribute object mapping: can also be used to
+    # see if a name corresponds to a valid attribute
+    my %attribute is Map  = @attributes.map: { .name.substr(2) => $_ }
+
+    # The attribute names in order of definition
+    my @names is List = @attributes.map(*.name.substr(2));
+
+    # Attribute name to positional mapper: returns True for an
+    # attribute name if it was defined with a @ sigil
+    my %positional is Map = @names.map: -> $name {
+        $name => True if %attribute{$name}.type ~~ Positional
     }
 
+    # Attribute name to type mapper, hiding any Positional wrapping
+    my %type is Map = @names.map: -> $name {
+        my $type := %attribute{$name}.type;
+        $name => $type ~~ Positional ?? $type.of !! $type
+    }
+
+    # The instantiator method, using standard .new semantics, except
+    # that it will return Nil if no named arguments were given
     multi method new(::?CLASS: *%in) {
         my %out;
 
-        if %in {
-            for @sorted-keys -> $name {
+        for %in.grep({ %attribute{.key} }) {
+            my $name := .key;
 
-                my sub multi-value($type) {
-                    my $values := %in{$name}:delete<>;
+            # Fetch any defined value without container
+            with (%in{$name}:delete)<> -> \value {
+                my $type := %type{$name};
 
-                    my @out;
-                    if $type ~~ Enumify {
-                        @out.push($type($_)) for $values;
+                # We potentially got multiple values
+                if %positional{$name} {
+                    # Handle if there any elements in there
+                    if +value {
+                        my @out := Array[$type].new;
+
+                        if $type ~~ Enumify {
+                            @out.push($type($_)) for value;
+                        }
+                        elsif $type ~~ Cool {
+                            # Makes sure any types are checked
+                            @out = value;
+                        }
+                        elsif $type ~~ DateTime {
+                            @out.push(.DateTime) for value;
+                        }
+                        elsif $type ~~ SBOM {
+                            for value {
+                                if $_ ~~ SBOM {
+                                    @out.push($_) if .defined;
+                                }
+                                else {
+                                    @out.push($type.new(|$_));
+                                }
+                            }
+                        }
+                        else {
+                            die "Don't know how to handle type $type.^name()";
+                        }
+
+                        %out{$name} := @out if @out;
                     }
-                    elsif $type ~~ Cool {
-                        @out := $values;
+                }
+
+                # Only a single value allowed
+                else {
+                    if value ~~ Associative {
+                        %out{$name} := $type.new(|$_) with value;
                     }
-                    elsif $type ~~ DateTime {
-                        @out.push(.DateTime) for $values;
+                    elsif value ~~ SBOM | Cool {
+                        %out{$name} := $_ with value;
+                    }
+                    elsif value ~~ DateTime {
+                        %out{$name} := .DateTime with value;
+                    }
+                    elsif $type ~~ Enumify {
+                        %out{$name} := $_ with $type(value);
                     }
                     elsif $type ~~ SBOM {
-                        $type.new(|$_) for $values;
+                        %out{$name} := $_ with $type.new(|value);
                     }
                     else {
                         die "Don't know how to handle type $type.^name()";
                     }
-
-                    %out{$name} := @out if @out;
-                }
-
-                my sub single-value($type) {
-                    %out{$name} := $type ~~ Enumify
-                      ?? $type(%in{$name}:delete)
-                      !! $type ~~ Cool
-                        ?? (%in{$name}:delete)
-                        !! $type ~~ DateTime
-                          ?? (%in{$name}:delete).DateTime
-                          !! $type ~~ SBOM
-                            ?? $type.new(|(%in{$name}:delete)<>)
-                            !! die "Don't know how to handle type $type.^name()";
-                }
-
-                if %in{$name}:exists {
-                    my $attribute := %attributes{$name};
-                    my $type := type-of($attribute);
-                    $attribute.type ~~ Positional
-                      ?? multi-value($type)
-                      !! single-value($type);
                 }
             }
         }
@@ -71,37 +109,74 @@ role SBOM:ver<0.0.1>:auth<zef:lizmat> {
         }
     }
 
-    method Map(::?CLASS:D:) {
-        @attributes.map(-> $attribute {
-            my $type   := type-of($attribute);
-            my $name   := $attribute.name.substr(2);
-            my $method := self.^find_method($name);
-            
-            Pair.new: $name, $type ~~ Cool
-              ?? $method(self)
-              !! ($type ~~ Enumify)
-                ?? self.name
-                !! ($type ~~ DateTime)
-                  ?? $method(self).Str
-                  !! $method(self).Map;
-        }).Map
+    # Standard .raku semantics, but skips any type objects or empty
+    # Positionals
+    multi method raku(::?CLASS:D:) {
+        my str @parts;
+
+        for @names -> $name {
+            with self."$name"() -> $value is raw {
+                if $value ~~ Positional {
+                    @parts.push: "$name => $value.raku()"
+                      if $value.elems;
+                }
+                else {
+                    @parts.push: "$name => $value.raku()";
+                }
+            }
+        }
+        self.^name ~ ".new(@parts.join(", "))"
     }
 
-    method JSON(::?CLASS:D:) {
+    # Produce a Map for the object, recursively if necessary.  Takes
+    # an optional :ordered named argument to create a special type of
+    # map that will produce keys in the attribute definition order.
+    method Map(::?CLASS:D: :$ordered) {
 
-        my sub jsonify($target) {
-            to-json($target.Map, :@sorted-keys).indent($*SBOM-INDENT)
+        # This role allows to-json to generate all hashes in the order
+        # of the attributes by mixing in a "list" method, which is what
+        # JSON::Fast uses internally on any associative translation to
+        # JSON.  Because roles do *NOT* close over the scope they're in,
+        # we need to parameterize the role to be mixed in with the names
+        # of the attributes.
+        my role ordered-list[@NAMES] {
+            method list() {
+                @NAMES.map({
+                    Pair.new($_, self.AT-KEY($_)) if self.EXISTS-KEY($_)
+                }).List
+            }
         }
 
-        with $*SBOM-INDENT {
-            $*SBOM-INDENT += 2;
-            jsonify(self);
-            $*SBOM-INDENT -= 2;
-        }
-        else {
-            my $*SBOM-INDENT = 0;
-            jsonify(self)
-        }
+        my $map := @names.map(-> $name {
+            my $value := self."$name"();
+            my $type  := %type{$name};
+
+            sub mapify($value) {
+                $type ~~ Cool
+                  ?? $value
+                  !! ($type ~~ Enumify)
+                    ?? self.name
+                    !! ($type ~~ DateTime)
+                      ?? $value.Str
+                      !! $value.Map(:$ordered)
+            }
+
+            if %positional{$name} {
+                if $value.elems {
+                    $name => $value.map(&mapify).List
+                }
+            }
+            else {
+                $name => mapify($_) with $value;
+            }
+        }).Map;
+
+        $ordered ?? $map but ordered-list[@names] !! $map
+    }
+
+    # Produce the JSON for the invocant
+    method JSON(::?CLASS:D: --> Str:D) {
+        to-json(self.Map(:ordered))
     }
 }
 

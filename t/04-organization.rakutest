@@ -1,0 +1,66 @@
+use Test;
+use SBOM::Organization;
+
+use lib $*PROGRAM.parent;
+use testers;
+
+plan 3;
+
+my %complete is Map =
+  bom-ref => "AcmeInc",
+  name    => "ACME Inc.",
+  address => {
+    bom-ref             => "home",
+    country             => "NL",
+    region              => "Knoware",
+    locality            => "Schutter",
+    postOfficeBoxNumber => "27434",
+    postalCode          => "1000CS",
+    streetAddress       => "Voetboogstraat",
+  }.Map,
+  url     => ( "https://acme.org", ),
+  contact => ( {
+    bom-ref => "jdoe",
+    name    => "Jane Doe",
+    email   => "jdoe@foo.org",
+    phone   => "+31 123 456 789"
+  }.Map, )
+;
+
+test-map-json "complete", SBOM::Organization, %complete, Q:to/JSON/;
+{
+  "bom-ref": "AcmeInc",
+  "name": "ACME Inc.",
+  "address": {
+    "bom-ref": "home",
+    "country": "NL",
+    "region": "Knoware",
+    "locality": "Schutter",
+    "postOfficeBoxNumber": "27434",
+    "postalCode": "1000CS",
+    "streetAddress": "Voetboogstraat"
+  },
+  "url": [
+    "https://acme.org"
+  ],
+  "contact": [
+    {
+      "bom-ref": "jdoe",
+      "name": "Jane Doe",
+      "email": "jdoe@foo.org",
+      "phone": "+31 123 456 789"
+    }
+  ]
+}
+JSON
+
+my %minimal is Map = bom-ref => "AcmeInc";
+test-map-json "minimal", SBOM::Organization, %minimal, Q:to/JSON/;
+{
+  "bom-ref": "AcmeInc"
+}
+JSON
+
+is-deeply SBOM::Organization.new, Nil, 'No args return Nil';
+
+# vim: expandtab shiftwidth=4

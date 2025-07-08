@@ -1,9 +1,12 @@
 use Test;
 use SBOM::Address;
 
-plan 5;
+use lib $*PROGRAM.parent;
+use testers;
 
-my %args is Map =
+plan 3;
+
+my %complete is Map =
   bom-ref             => "home",
   country             => "NL",
   region              => "Knoware",
@@ -13,16 +16,7 @@ my %args is Map =
   streetAddress       => "Voetboogstraat",
 ;
 
-my $address = SBOM::Address.new(|%args);
-isa-ok $address, SBOM::Address;
-
-my %map := $address.Map;
-is-deeply %map, %args, 'does .Map work';
-
-is-deeply SBOM::Address.new(|%map), $address,
-  'can we roundtrip on the Map';
-
-is $address.JSON, Q:to/JSON/.chomp, 'is the JSON correct';
+test-map-json "complete", SBOM::Address, %complete, Q:to/JSON/;
 {
   "bom-ref": "home",
   "country": "NL",
@@ -31,6 +25,13 @@ is $address.JSON, Q:to/JSON/.chomp, 'is the JSON correct';
   "postOfficeBoxNumber": "27434",
   "postalCode": "1000CS",
   "streetAddress": "Voetboogstraat"
+}
+JSON
+
+my %minimal is Map = bom-ref => "home";
+test-map-json "minimal", SBOM::Address, %minimal, Q:to/JSON/;
+{
+  "bom-ref": "home"
 }
 JSON
 
