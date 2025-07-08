@@ -1,6 +1,10 @@
 Revision history for SBOM::CycloneDX
 
 {{$NEXT}}
+    - Make sure input parameters are handled in order of attribute
+      definition, to ensure consistent error reporting on large
+      SBOMs with potential errors (or errors in the handling of
+      such files)
 
 0.0.2  2025-07-08T22:52:50+02:00
     - Made .new / .raku / .Map fully functional

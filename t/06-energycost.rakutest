@@ -1,7 +1,6 @@
+use lib $*PROGRAM.parent;
 use Test;
 use SBOM::EnergyConsumption;  # EnergyCost lives in there
-
-use lib $*PROGRAM.parent;
 use testers;
 
 plan 2;

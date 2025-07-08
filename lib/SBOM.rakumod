@@ -42,70 +42,67 @@ role SBOM:ver<0.0.2>:auth<zef:lizmat> {
     multi method new(::?CLASS: *%in) {
         my %out;
 
-        for %in.grep({ %attribute{.key} }) {
-            my $name := .key;
+        # Process any defined value without container in attribute order
+        for @names.grep({ %in{$_}.defined }) -> $name {
+            my \value := (%in{$name}:delete)<>;
+            my $type  := %type{$name};
 
-            # Fetch any defined value without container
-            with (%in{$name}:delete)<> -> \value {
-                my $type := %type{$name};
+            # We potentially got multiple values
+            if %positional{$name} {
+                # Handle if there any elements in there
+                if +value {
+                    my @out := Array[$type].new;
 
-                # We potentially got multiple values
-                if %positional{$name} {
-                    # Handle if there any elements in there
-                    if +value {
-                        my @out := Array[$type].new;
-
-                        if $type ~~ Enumify {
-                            @out.push($type($_)) for value;
-                        }
-                        elsif $type ~~ Cool {
-                            # Makes sure any types are checked
-                            @out = value;
-                        }
-                        elsif $type ~~ DateTime {
-                            @out.push(.DateTime) for value;
-                        }
-                        elsif $type ~~ SBOM {
-                            for value {
-                                if $_ ~~ SBOM {
-                                    @out.push($_) if .defined;
-                                }
-                                else {
-                                    @out.push($type.new(|$_));
-                                }
-                            }
-                        }
-                        else {
-                            die "Don't know how to handle type $type.^name()";
-                        }
-
-                        %out{$name} := @out if @out;
+                    if $type ~~ Enumify {
+                        @out.push($type($_)) for value;
                     }
-                }
-
-                # Only a single value allowed
-                else {
-                    if value ~~ Associative {
-                        %out{$name} := $type.new(|$_) with value;
-                    }
-                    elsif value ~~ Enumify {
-                        %out{$name} := value;
-                    }
-                    elsif $type ~~ Enumify {
-                        %out{$name} := $_ with $type(value);
+                    elsif $type ~~ Cool {
+                        # Makes sure any types are checked
+                        @out = value;
                     }
                     elsif $type ~~ DateTime {
-                        %out{$name} := .DateTime with value;
-                    }
-                    elsif value ~~ SBOM | Cool {
-                        %out{$name} := $_ with value;
+                        @out.push(.DateTime) for value;
                     }
                     elsif $type ~~ SBOM {
-                        %out{$name} := $_ with $type.new(|value);
+                        for value {
+                            if $_ ~~ SBOM {
+                                @out.push($_) if .defined;
+                            }
+                            else {
+                                @out.push($type.new(|$_));
+                            }
+                        }
                     }
                     else {
                         die "Don't know how to handle type $type.^name()";
                     }
+
+                    %out{$name} := @out if @out;
+                }
+            }
+
+            # Only a single value allowed
+            else {
+                if value ~~ Associative {
+                    %out{$name} := $type.new(|$_) with value;
+                }
+                elsif value ~~ Enumify {
+                    %out{$name} := value;
+                }
+                elsif $type ~~ Enumify {
+                    %out{$name} := $_ with $type(value);
+                }
+                elsif $type ~~ DateTime {
+                    %out{$name} := .DateTime with value;
+                }
+                elsif value ~~ SBOM | Cool {
+                    %out{$name} := $_ with value;
+                }
+                elsif $type ~~ SBOM {
+                    %out{$name} := $_ with $type.new(|value);
+                }
+                else {
+                    die "Don't know how to handle type $type.^name()";
                 }
             }
         }
