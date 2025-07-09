@@ -1,18 +1,18 @@
-use SBOM::enums:ver<0.0.2>:auth<zef:lizmat> <
+use SBOM::enums:ver<0.0.3>:auth<zef:lizmat> <
    Phase
 >;
 
-use SBOM:ver<0.0.2>:auth<zef:lizmat>;
-use SBOM::Component:ver<0.0.2>:auth<zef:lizmat>;
-use SBOM::Contact:ver<0.0.2>:auth<zef:lizmat>;
-use SBOM::License:ver<0.0.2>:auth<zef:lizmat>;
-use SBOM::Property:ver<0.0.2>:auth<zef:lizmat>;
-use SBOM::Organization:ver<0.0.2>:auth<zef:lizmat>;
-use SBOM::Tool:ver<0.0.2>:auth<zef:lizmat>;
+use SBOM:ver<0.0.3>:auth<zef:lizmat>;
+use SBOM::Component:ver<0.0.3>:auth<zef:lizmat>;
+use SBOM::Contact:ver<0.0.3>:auth<zef:lizmat>;
+use SBOM::License:ver<0.0.3>:auth<zef:lizmat>;
+use SBOM::Property:ver<0.0.3>:auth<zef:lizmat>;
+use SBOM::Organization:ver<0.0.3>:auth<zef:lizmat>;
+use SBOM::Tool:ver<0.0.3>:auth<zef:lizmat>;
 
 #- Metadata --------------------------------------------------------------------
 #| Provides additional information about a BOM.
-class SBOM::Metadata:ver<0.0.2>:auth<zef:lizmat> does SBOM {
+class SBOM::Metadata:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 
 #| The date and time (timestamp) when the BOM was created.
     has DateTime $.timestamp;

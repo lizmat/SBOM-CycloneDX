@@ -1,16 +1,16 @@
-use SBOM::enums:ver<0.0.2>:auth<zef:lizmat> <
+use SBOM::enums:ver<0.0.3>:auth<zef:lizmat> <
   Acknowledgement LicenseGranted LicenseId LicenseName
 >;
 
-use SBOM::subsets:ver<0.0.2>:auth<zef:lizmat> <
+use SBOM::subsets:ver<0.0.3>:auth<zef:lizmat> <
   bom-ref URL
 >;
 
-use SBOM:ver<0.0.2>:auth<zef:lizmat>;
-use SBOM::Contact:ver<0.0.2>:auth<zef:lizmat>;
-use SBOM::Organization:ver<0.0.2>:auth<zef:lizmat>;
-use SBOM::Property:ver<0.0.2>:auth<zef:lizmat>;
-use SBOM::Attachment:ver<0.0.2>:auth<zef:lizmat>;
+use SBOM:ver<0.0.3>:auth<zef:lizmat>;
+use SBOM::Contact:ver<0.0.3>:auth<zef:lizmat>;
+use SBOM::Organization:ver<0.0.3>:auth<zef:lizmat>;
+use SBOM::Property:ver<0.0.3>:auth<zef:lizmat>;
+use SBOM::Attachment:ver<0.0.3>:auth<zef:lizmat>;
 
 #| A person or an organization
 my subset OrgOrContact where SBOM::Organization | SBOM::Contact;
@@ -18,7 +18,7 @@ my subset OrgOrContact where SBOM::Organization | SBOM::Contact;
 #- Licensing -------------------------------------------------------------------
 #| Licensing details describing the licensor/licensee, license type,
 #| renewal and expiration dates, and other important metadata.
-class SBOM::Licensing:ver<0.0.2>:auth<zef:lizmat> does SBOM {
+class SBOM::Licensing:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 
 #| License identifiers that may be used to manage licenses and their lifecycle.
     has Str @.altIds;
@@ -52,7 +52,7 @@ class SBOM::Licensing:ver<0.0.2>:auth<zef:lizmat> does SBOM {
 }
 
 #- License ---------------------------------------------------------------------
-class SBOM::License:ver<0.0.2>:auth<zef:lizmat> does SBOM {
+class SBOM::License:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 
 #| An optional identifier which can be used to reference the license
 #| elsewhere in the BOM.
@@ -90,7 +90,7 @@ class SBOM::License:ver<0.0.2>:auth<zef:lizmat> does SBOM {
 }
 
 #- SPDXLicense -----------------------------------------------------------------
-class SBOM::SPDXLicense:ver<0.0.2>:auth<zef:lizmat> does SBOM {
+class SBOM::SPDXLicense:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 #| An optional identifier which can be used to reference the license
 #| elsewhere in the BOM.
     has bom-ref $.bom-ref;

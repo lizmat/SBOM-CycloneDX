@@ -1,19 +1,19 @@
-use SBOM::enums:ver<0.0.2>:auth<zef:lizmat> <
+use SBOM::enums:ver<0.0.3>:auth<zef:lizmat> <
   Activity CO2Cost Energy EnergyUnit
 >;
 
-use SBOM::subsets:ver<0.0.2>:auth<zef:lizmat> <
+use SBOM::subsets:ver<0.0.3>:auth<zef:lizmat> <
   bom-ref number
 >;
 
-use SBOM:ver<0.0.2>:auth<zef:lizmat>;
-use SBOM::Organization:ver<0.0.2>:auth<zef:lizmat>;
-use SBOM::Property:ver<0.0.2>:auth<zef:lizmat>;
-use SBOM::Reference:ver<0.0.2>:auth<zef:lizmat>;
+use SBOM:ver<0.0.3>:auth<zef:lizmat>;
+use SBOM::Organization:ver<0.0.3>:auth<zef:lizmat>;
+use SBOM::Property:ver<0.0.3>:auth<zef:lizmat>;
+use SBOM::Reference:ver<0.0.3>:auth<zef:lizmat>;
 
 #- CO2Cost ---------------------------------------------------------------------
 #| An expression of CO2 cost.
-class SBOM::CO2Cost:ver<0.0.2>:auth<zef:lizmat> does SBOM {
+class SBOM::CO2Cost:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 
 #| Quantity of carbon dioxide (CO2).
     has number $.value is required;
@@ -24,7 +24,7 @@ class SBOM::CO2Cost:ver<0.0.2>:auth<zef:lizmat> does SBOM {
 
 #- EnergyCost ------------------------------------------------------------------
 #| The energy provided by the energy source for an associated activity.
-class SBOM::EnergyCost:ver<0.0.2>:auth<zef:lizmat> does SBOM {
+class SBOM::EnergyCost:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 
 #| Quantity of energy.
     has number $.value is required;
@@ -36,7 +36,7 @@ class SBOM::EnergyCost:ver<0.0.2>:auth<zef:lizmat> does SBOM {
 #- EnergyProvider --------------------------------------------------------------
 #| The provider of the energy consumed by a model during its
 #| development lifecycle activity.
-class SBOM::EnergyProvider:ver<0.0.2>:auth<zef:lizmat> does SBOM {
+class SBOM::EnergyProvider:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 
 #| An optional identifier which can be used to reference the energy
 #| provider elsewhere in the BOM.
@@ -64,7 +64,7 @@ class SBOM::EnergyProvider:ver<0.0.2>:auth<zef:lizmat> does SBOM {
 #- EnergyConsumption -----------------------------------------------------------
 #| Describes energy consumption information incurred during a component's
 #| lifecycle activities.
-class SBOM::EnergyConsumption:ver<0.0.2>:auth<zef:lizmat> does SBOM {
+class SBOM::EnergyConsumption:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 
 #| The type of activity that is part of a machine learning model
 #| development or operational lifecycle.

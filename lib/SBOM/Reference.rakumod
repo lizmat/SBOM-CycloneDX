@@ -1,20 +1,20 @@
-use SBOM::enums:ver<0.0.2>:auth<zef:lizmat> <
+use SBOM::enums:ver<0.0.3>:auth<zef:lizmat> <
   ReferenceSource
 >;
 
-use SBOM::subsets:ver<0.0.2>:auth<zef:lizmat> <
+use SBOM::subsets:ver<0.0.3>:auth<zef:lizmat> <
   referenceURL
 >;
 
-use SBOM:ver<0.0.2>:auth<zef:lizmat>;
-use SBOM::HashedString:ver<0.0.2>:auth<zef:lizmat>;
+use SBOM:ver<0.0.3>:auth<zef:lizmat>;
+use SBOM::HashedString:ver<0.0.3>:auth<zef:lizmat>;
 
 #- Reference -------------------------------------------------------------------
 #| External references provide a way to document systems, sites, and
 #| information that may be relevant but are not included with the BOM.
 #| They may also establish specific relationships within or external
 #| to the BOM.
-class SBOM::Reference:ver<0.0.2>:auth<zef:lizmat> does SBOM {
+class SBOM::Reference:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 
 #| The URI (URL or URN) to the external reference. External references
 #| are URIs and therefore can accept any URL scheme including https

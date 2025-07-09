@@ -1,12 +1,12 @@
-use SBOM::enums:ver<0.0.2>:auth<zef:lizmat> <
+use SBOM::enums:ver<0.0.3>:auth<zef:lizmat> <
   CryptoKey ECCurve EdDSA SignatureAlgorithm
 >;
 
-use SBOM::subsets:ver<0.0.2>:auth<zef:lizmat> <
+use SBOM::subsets:ver<0.0.3>:auth<zef:lizmat> <
   URL
 >;
 
-use SBOM:ver<0.0.2>:auth<zef:lizmat>;
+use SBOM:ver<0.0.3>:auth<zef:lizmat>;
 
 #| Signature algorithm. If proprietary signature algorithms are added,
 #| they must be expressed as URIs.
@@ -16,7 +16,7 @@ subset URLorAlgorithm where URL | SignatureAlgorithm;
 subset CryptoCurve where ECCurve | EdDSA;
 
 #- PublicKey -------------------------------------------------------------------
-class SBOM::PublicKey:ver<0.0.2>:auth<zef:lizmat> does SBOM {
+class SBOM::PublicKey:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 
 #| Key type indicator.
     has CryptoKey $.kty is required;
@@ -60,7 +60,7 @@ class SBOM::PublicKey:ver<0.0.2>:auth<zef:lizmat> does SBOM {
 
 #- Signature -------------------------------------------------------------------
 #| Unique top level property for simple signatures. (signaturecore)
-class SBOM::Signature:ver<0.0.2>:auth<zef:lizmat> does SBOM {
+class SBOM::Signature:ver<0.0.3>:auth<zef:lizmat> does SBOM {
     has URLorAlgorithm $.algorithm is required;
 
 #| Optional. Application specific string identifying the signature key.
@@ -89,13 +89,13 @@ class SBOM::Signature:ver<0.0.2>:auth<zef:lizmat> does SBOM {
 
 #- SignatureChain --------------------------------------------------------------
 #| Unique top level property for Signature Chains. (signaturechain)
-class SBOM::SignatureChain:ver<0.0.2>:auth<zef:lizmat> does SBOM {
+class SBOM::SignatureChain:ver<0.0.3>:auth<zef:lizmat> does SBOM {
     has SBOM::Signature @.chain;
 }
 
 #- SignatureSigners ------------------------------------------------------------
 #| Unique top level property for Multiple Signatures. (multisignature)
-class SBOM::SignatureSigners:ver<0.0.2>:auth<zef:lizmat> does SBOM {
+class SBOM::SignatureSigners:ver<0.0.3>:auth<zef:lizmat> does SBOM {
     has SBOM::Signature @.signers;
 }
 

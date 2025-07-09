@@ -1,11 +1,11 @@
-use SBOM::subsets:ver<0.0.2>:auth<zef:lizmat> <
+use SBOM::subsets:ver<0.0.3>:auth<zef:lizmat> <
   versionString
 >;
 
-use SBOM::Component:ver<0.0.2>:auth<zef:lizmat>;
-use SBOM::HashedString:ver<0.0.2>:auth<zef:lizmat>;
-use SBOM::Reference:ver<0.0.2>:auth<zef:lizmat>;
-use SBOM::Service:ver<0.0.2>:auth<zef:lizmat>;
+use SBOM::Component:ver<0.0.3>:auth<zef:lizmat>;
+use SBOM::HashedString:ver<0.0.3>:auth<zef:lizmat>;
+use SBOM::Reference:ver<0.0.3>:auth<zef:lizmat>;
+use SBOM::Service:ver<0.0.3>:auth<zef:lizmat>;
 
 class SBOM::Tool { ... }
 class SBOM::LegacyTool { ... }
@@ -13,7 +13,7 @@ class SBOM::LegacyTool { ... }
 #- AnyTool----------------------------------------------------------------------
 #| Frontend class that will either instantiate a single Tool or a list
 #| of LegacyTool objects.
-class SBOM::AnyTool:ver<0.0.2>:auth<zef:lizmat> {
+class SBOM::AnyTool:ver<0.0.3>:auth<zef:lizmat> {
     multi method new(SBOM::AnyTool:U: *@in, *%in) {
         if @in {
             @in.map({ SBOM::LegacyTool.new(|($_<>)) }).List
@@ -27,7 +27,7 @@ class SBOM::AnyTool:ver<0.0.2>:auth<zef:lizmat> {
 #- Tool ------------------------------------------------------------------------
 #| Description of a tool used to identify, confirm, or score a
 #| vulnerability.
-class SBOM::Tool:ver<0.0.2>:auth<zef:lizmat> is SBOM::AnyTool does SBOM {
+class SBOM::Tool:ver<0.0.3>:auth<zef:lizmat> is SBOM::AnyTool does SBOM {
 
 #| A list of software and hardware components used as tools.
     has SBOM::Component @.components;
@@ -41,7 +41,7 @@ class SBOM::Tool:ver<0.0.2>:auth<zef:lizmat> is SBOM::AnyTool does SBOM {
 #- LegacyTool ------------------------------------------------------------------
 #| Legacy format of the description of a tool used to identify,
 #| confirm, or score a vulnerability.
-class SBOM::LegacyTool:ver<0.0.2>:auth<zef:lizmat> is SBOM::AnyTool does SBOM {
+class SBOM::LegacyTool:ver<0.0.3>:auth<zef:lizmat> is SBOM::AnyTool does SBOM {
 
 #| The name of the vendor who created the tool.
     has Str $.vendor;
