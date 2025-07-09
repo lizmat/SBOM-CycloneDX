@@ -1,12 +1,16 @@
+use SBOM::enums:ver<0.0.2>:auth<zef:lizmat> <
+  BOMFormat
+>;
+
 use SBOM::subsets:ver<0.0.2>:auth<zef:lizmat> <
-  serialNumber
+  PositiveInt serialNumber
 >;
 
 use SBOM:ver<0.0.2>:auth<zef:lizmat>;
 use SBOM::Annotation:ver<0.0.2>:auth<zef:lizmat>;
 use SBOM::Component:ver<0.0.2>:auth<zef:lizmat>;
 use SBOM::Composition:ver<0.0.2>:auth<zef:lizmat>;
-use SBOM::Declaration:ver<0.0.2>:auth<zef:lizmat>;
+use SBOM::Declarations:ver<0.0.2>:auth<zef:lizmat>;
 use SBOM::Definition:ver<0.0.2>:auth<zef:lizmat>;
 use SBOM::Dependency:ver<0.0.2>:auth<zef:lizmat>;
 use SBOM::Formulation:ver<0.0.2>:auth<zef:lizmat>;
@@ -20,6 +24,14 @@ use SBOM::Vulnerability:ver<0.0.2>:auth<zef:lizmat>;
 #- CycloneDX -------------------------------------------------------------------
 class SBOM::CycloneDX:ver<0.0.2>:auth<zef:lizmat> does SBOM {
 
+#| Specifies the format of the BOM. This helps to identify the file as
+#| CycloneDX since BOMs do not have a filename convention, nor does
+#| JSON schema support namespaces.
+    has BOMFormat $.bomFormat is required;
+
+#| The version of the CycloneDX specification the BOM conforms to.
+    has Str $.specVersion is required;
+
 #| Every BOM generated SHOULD have a unique serial number, even if the
 #| contents of the BOM have not changed over time. If specified, the serial
 #| number must conform to RFC 4122. Use of serial numbers is recommended.
@@ -30,7 +42,7 @@ class SBOM::CycloneDX:ver<0.0.2>:auth<zef:lizmat> does SBOM {
 #| When a system is presented with multiple BOMs with identical serial
 #| numbers, the system SHOULD use the most recent version of the BOM.
 #| The default version is '1'.
-    has Int $.version = 1;
+    has PositiveInt $.version = 1;
 
 #| Provides additional information about a BOM.
     has SBOM::Metadata $.metadata;
@@ -81,7 +93,7 @@ class SBOM::CycloneDX:ver<0.0.2>:auth<zef:lizmat> does SBOM {
 #| The list of declarations which describe the conformance to
 #| standards. Each declaration may include attestations, claims,
 #| and evidence.
-    has SBOM::Declaration @.declarations;
+    has SBOM::Declarations $.declarations;
 
 #| A collection of reusable objects that are defined and may be used
 #| elsewhere in the BOM.
@@ -92,12 +104,6 @@ class SBOM::CycloneDX:ver<0.0.2>:auth<zef:lizmat> does SBOM {
 
 #| Enveloped signature in JSON Signature Format (JSF).
     has SBOM::ValidSignature $.signature;
-
-#| Specifies the format of the BOM. This helps to identify the file as CycloneDX since BOMs do not have a filename convention, nor does JSON schema support namespaces. This value must be "CycloneDX".
-    method bomFormat() { "CycloneDX" }
-
-#| The version of the CycloneDX specification the BOM conforms to.
-    method specVersion() { v1.6 }
 
     method updated() { ++$!version }
 

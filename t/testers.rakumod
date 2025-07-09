@@ -1,6 +1,6 @@
 use Test;
-use SBOM::enums;
-use SBOM::subsets;
+use SBOM::enums;    # for .EVAL
+use SBOM::subsets;  # for .EVAL
 use SBOM::CycloneDX;
 
 my sub test-map-json(
@@ -16,7 +16,9 @@ my sub test-map-json(
         my %map := $instance.Map;
         is-deeply %map, args, 'does .Map work';
 
-        is-deeply $instance.raku.EVAL, $instance,
+        is-deeply
+          $instance.raku.subst("new(","new(:raw-error, ").EVAL,
+          $instance,
           'can we roundtrip on .raku';
 
         is-deeply $class.new(|%map), $instance,

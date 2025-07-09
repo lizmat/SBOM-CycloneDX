@@ -39,8 +39,36 @@ role SBOM:ver<0.0.2>:auth<zef:lizmat> {
 
     # The instantiator method, using standard .new semantics, except
     # that it will return Nil if no named arguments were given
-    multi method new(::?CLASS: *%in) {
+    multi method new(::?CLASS: :$raw-error, *%in) {
+        with @*CRUMBS {
+            self!ingest(%in)
+        }
+        else {
+            my @*CRUMBS;
+            my $*RAW-ERROR := $raw-error;
+            self!ingest(%in)
+        }
+    }
+
+    # Basic error handling
+    my sub handle-error($_) {
+        note "Found error in: @*CRUMBS.join("/")";
+        .rethrow if $*RAW-ERROR;
+        note .message;
+    }
+
+    # The actual instantiation logic, setting @*CRUMBS as appropriate
+    method !ingest(%in) {
         my %out;
+
+        # Mark we're in this class
+        @*CRUMBS.push($?CLASS.^name.subst("SBOM::"));
+
+        CATCH {
+            handle-error($_);
+            @*CRUMBS.pop;
+            return Nil;
+        }
 
         # Process any defined value without container in attribute order
         for @names.grep({ %in{$_}.defined }) -> $name {
@@ -54,23 +82,22 @@ role SBOM:ver<0.0.2>:auth<zef:lizmat> {
                     my @out := Array[$type].new;
 
                     if $type ~~ Enumify {
-                        @out.push($type($_)) for value;
+                        for value.grep(*.defined) {
+                            @out.push($_ ~~ Enumify ?? $_ !! $type($_));
+                        }
                     }
                     elsif $type ~~ Cool {
                         # Makes sure any types are checked
-                        @out = value;
+                        @out = value.grep(*.defined)
                     }
                     elsif $type ~~ DateTime {
-                        @out.push(.DateTime) for value;
+                        for value.grep(*.defined) {
+                            @out.push($_ ~~ DateTime ?? $_ !! .DateTime);
+                        }
                     }
                     elsif $type ~~ SBOM {
-                        for value {
-                            if $_ ~~ SBOM {
-                                @out.push($_) if .defined;
-                            }
-                            else {
-                                @out.push($type.new(|$_));
-                            }
+                        for value.grep(*.defined) {
+                            @out.push($_ ~~ SBOM ?? $_ !! $type.new(|$_));
                         }
                     }
                     else {
@@ -84,22 +111,27 @@ role SBOM:ver<0.0.2>:auth<zef:lizmat> {
             # Only a single value allowed
             else {
                 if value ~~ Associative {
-                    %out{$name} := $type.new(|$_) with value;
-                }
-                elsif value ~~ Enumify {
-                    %out{$name} := value;
+                    with value {
+                        my sub ingest($args) {
+                            CATCH {
+                                handle-error($_);
+                                return;
+                            }
+                            %out{$name} := $type.new(|$args)
+                        }($_)
+                    }
                 }
                 elsif $type ~~ Enumify {
-                    %out{$name} := $_ with $type(value);
+                    %out{$name} := $_ ~~ Enumify ?? $_ !! $type($_) with value;
                 }
                 elsif $type ~~ DateTime {
-                    %out{$name} := .DateTime with value;
+                    %out{$name} := $_ ~~ DateTime ?? $_ !! .DateTime with value;
                 }
-                elsif value ~~ SBOM | Cool {
+                elsif value ~~ Cool {
                     %out{$name} := $_ with value;
                 }
                 elsif $type ~~ SBOM {
-                    %out{$name} := $_ with $type.new(|value);
+                    %out{$name} := $_ ~~ SBOM ?? $_ !! $type.new(|$_) with value;
                 }
                 else {
                     die "Don't know how to handle type $type.^name()";
@@ -107,12 +139,16 @@ role SBOM:ver<0.0.2>:auth<zef:lizmat> {
             }
         }
 
-        if %out || %required {
-            self.bless: |%out;
+
+        my $result := do if %out || %required {
+            self.bless: |%out
         }
         else {
             Nil
         }
+
+        @*CRUMBS.pop;
+        $result
     }
 
     # Standard .raku semantics, but skips any type objects or empty
@@ -134,10 +170,12 @@ role SBOM:ver<0.0.2>:auth<zef:lizmat> {
         self.^name ~ ".new(@parts.join(", "))"
     }
 
+    multi method Map(::?CLASS:U:) { Map.new }
+
     # Produce a Map for the object, recursively if necessary.  Takes
     # an optional :ordered named argument to create a special type of
     # map that will produce keys in the attribute definition order.
-    method Map(::?CLASS:D: :$ordered) {
+    multi method Map(::?CLASS:D: :$ordered) {
 
         # This role allows to-json to generate all hashes in the order
         # of the attributes by mixing in a "list" method, which is what
@@ -161,9 +199,13 @@ role SBOM:ver<0.0.2>:auth<zef:lizmat> {
                 $type ~~ Cool
                   ?? $value
                   !! ($type ~~ Enumify)
-                    ?? $value.name
+                    ?? $value ~~ Enumify
+                      ?? $value.name
+                      !! $value
                     !! ($type ~~ DateTime)
-                      ?? $value.Str
+                      ?? $value ~~ DateTime
+                        ?? $value
+                        !! $value.DateTime
                       !! $value.Map(:$ordered)
             }
 

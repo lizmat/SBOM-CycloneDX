@@ -37,6 +37,7 @@ role Enumify {
         ValueObjAt.new(self.^name ~ '|' ~ $!name)
     }
 
+    multi method raku(Enumify:D:) { $?CLASS.^name ~ "($!name.raku())" }
     multi method Str(Enumify:D:) { $.name }
 
     method AT-KEY(Enumify:U: Str:D $name) {
@@ -88,6 +89,12 @@ my class Aggregate:ver<0.0.2>:auth<zef:lizmat> does Enumify { }
 #| authenticated encryption (ae, e.g. AES-GCM) and the combination of
 #| multiple algorithms (combiner, e.g. SP800-56Cr2).
 my class AlgorithmPrimitive:ver<0.0.2>:auth<zef:lizmat> does Enumify { }
+
+#- B ---------------------------------------------------------------------------
+#| Specifies the format of the BOM. This helps to identify the file as
+#| CycloneDX since BOMs do not have a filename convention, nor does
+#| JSON schema support namespaces.
+my class BOMFormat:ver<0.0.2>:auth<zef:lizmat> does Enumify { }
 
 #- C ---------------------------------------------------------------------------
 #| The certification that an implementation of a cryptographic algorithm
@@ -258,6 +265,9 @@ my class TaskActivity:ver<0.0.2>:auth<zef:lizmat> does Enumify { }
 my class TriggerEvent:ver<0.0.2>:auth<zef:lizmat> does Enumify { }
 
 #- V ---------------------------------------------------------------------------
+#| The vulnerability status for the version or range of versions.
+my class VersionAffection:ver<0.0.2>:auth<zef:lizmat> does Enumify { }
+
 #| The mode for a volume instance.
 my class VolumeMode:ver<0.0.2>:auth<zef:lizmat> does Enumify { }
 

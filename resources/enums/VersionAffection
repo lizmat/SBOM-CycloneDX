@@ -1,0 +1,8 @@
+affected
+The version is affected by the vulnerability.
+
+unaffected
+The version is not affected by the vulnerability.
+
+unknown
+It is unknown (or unspecified) whether the given version is affected.

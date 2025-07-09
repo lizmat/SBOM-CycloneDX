@@ -3608,6 +3608,11 @@ CycloneDX
 
 =end output
 
+=head1 CREDITS
+
+Many SBOM test files were taken from
+L<Giuseppe Di Terlizzi's SBOM::CycloneDX repoository|https://github.com/giterlizzi/perl-SBOM-CycloneDX/>.
+
 =head1 AUTHOR
 
 Elizabeth Mattijsen <liz@raku.rocks>

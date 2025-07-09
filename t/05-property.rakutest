@@ -26,6 +26,6 @@ test-map-json SBOM::Contact, %minimal, Q:to/JSON/, "minimal";
 }
 JSON
 
-dies-ok { SBOM::Property.new }, 'No args throws';
+dies-ok { SBOM::Property.new(:raw-error) }, 'No args throws';
 
 # vim: expandtab shiftwidth=4

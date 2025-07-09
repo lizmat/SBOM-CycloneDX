@@ -3604,6 +3604,11 @@ PRELIMINARY STRUCTURE DEFINITION
     - ValidSignature $signature -----------------------------------
       Enveloped signature in JSON Signature Format (JSF).
 
+CREDITS
+=======
+
+Many SBOM test files were taken from [Giuseppe Di Terlizzi's SBOM::CycloneDX repoository](https://github.com/giterlizzi/perl-SBOM-CycloneDX/).
+
 AUTHOR
 ======
 

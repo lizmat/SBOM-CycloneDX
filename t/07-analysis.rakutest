@@ -1,0 +1,42 @@
+use lib $*PROGRAM.parent;
+use Test;
+use SBOM::Vulnerability;  # provides Analysis
+use testers;
+
+plan 3;
+
+# Testing an object with an array of enums and DateTimes
+
+my %complete is Map =
+  state         => "exploitable",
+  justification => "requires_configuration",
+  detail        => "Detailed description",
+  response      => ("will_not_fix", "update"),
+  firstIssued   => "2025-07-09T10:39:57.833699+02:00".DateTime,
+  lastUpdated   => "2025-07-09T10:39:57.835142+02:00".DateTime,
+;
+
+test-map-json SBOM::Analysis, %complete, Q:to/JSON/;
+{
+  "state": "exploitable",
+  "justification": "requires_configuration",
+  "response": [
+    "will_not_fix",
+    "update"
+  ],
+  "detail": "Detailed description",
+  "firstIssued": "2025-07-09T10:39:57.833699+02:00",
+  "lastUpdated": "2025-07-09T10:39:57.835142+02:00"
+}
+JSON
+
+my %minimal is Map = state => "exploitable";
+test-map-json SBOM::Analysis, %minimal, Q:to/JSON/, "minimal";
+{
+  "state": "exploitable"
+}
+JSON
+
+is-deeply SBOM::Analysis.new, Nil, 'No args return Nil';
+
+# vim: expandtab shiftwidth=4

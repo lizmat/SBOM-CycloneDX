@@ -86,6 +86,9 @@ subset bomLinkElement of Str where *.contains:
 #| |with BOM-Links.
 subset IDnotbomLink of Str where !*.starts-with('urn:cdx:');
 
+#| Reference that is either a bom-ref or a bomLinkElement
+subset bom-refOrLink of Str where bom-ref | bomLinkElement;
+
 subset referenceURL of Str where
   URL | bomLinkDocument | bomLinkElement;
 
@@ -109,18 +112,23 @@ subset PositiveInt of Int where * > 0;
 #| A value of 0 indicates that none of the categories are met.
 subset nistQuantumSecurityLevel of Int where 0 <= * <= 6;
 
-#| A version should ideally comply with semantic versioning but is noti
+#| A version range specified in Package URL Version Range syntax (vers)
+#| which is defined at
+#| https://github.com/package-url/purl-spec/blob/master/VERSION-RANGE-SPEC.rst
+subset versionRange of Str where 0 < *.chars <= 4096;  # XXX needs refinement
+
+#| A version should ideally comply with semantic versioning but is not
 #| enforced. Must be at most 1024 characters long.
 subset versionString of Str where 0 < *.chars <= 1024;
 
 #- EXPORT ----------------------------------------------------------------------
 my sub EXPORT(*@names) {
     @names ||= <
-      bomLinkDocunment bomLinkElement bom-ref confidenceValue
-      conformanceValue contentHash CPE CRE email IDnotbomLink
-      locale mime-type nistQuantumSecurityLevel number omniborId
-      PositiveInt PURL referenceURL serialNumber SWHID URL
-      versionString
+      bomLinkDocunment bomLinkElement bom-ref bom-refOrLink
+      confidenceValue conformanceValue contentHash CPE CRE email
+      IDnotbomLink locale mime-type nistQuantumSecurityLevel number
+      omniborId PositiveInt PURL referenceURL serialNumber SWHID URL
+      versionRange versionString
     >;
     Map.new: @names.map: {
         if UNIT::{$_}:exists {

@@ -177,7 +177,7 @@ class SBOM::Target:ver<0.0.2>:auth<zef:lizmat> does SBOM {
 #- Declaration -----------------------------------------------------------------
 #| Describes the conformance to standards, may include attestations,
 #| claims, and evidence.
-class SBOM::Declaration:ver<0.0.2>:auth<zef:lizmat> does SBOM {
+class SBOM::Declarations:ver<0.0.2>:auth<zef:lizmat> does SBOM {
 
 #| The list of assessors evaluating claims and determining conformance
 #| to requirements and confidence in that assessment.

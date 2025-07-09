@@ -1,0 +1,38 @@
+use Test;
+use SBOM::enums;    # for .EVAL
+use SBOM::subsets;  # for .EVAL
+
+use SBOM::CycloneDX;
+use JSON::Fast:ver<0.19+>:auth<cpan:TIMOTIMO>;  # for parsing valid sboms
+
+my @files = $*PROGRAM.sibling("valid").dir;
+
+plan +@files;
+
+# Testing valid SBOMs
+
+for @files -> $io {
+    subtest "Testing $io" => {
+        plan 7;
+
+        my $json := $io.slurp;
+        my $sbom := SBOM::CycloneDX.new(:raw-error, |from-json $json);
+        isa-ok $sbom, SBOM::CycloneDX;
+
+        my $json2 := $sbom.JSON;
+        isa-ok $json2, Str;
+
+        my $sbom2 := SBOM::CycloneDX.new(:raw-error, |from-json $json2);
+        isa-ok $sbom2, SBOM::CycloneDX;
+        is-deeply $sbom2, $sbom, 'did we roundtrip from .JSON correctly';
+
+        my $raku := $sbom.raku;
+        isa-ok $raku, Str;
+
+        my $sbom3 := $raku.EVAL;
+        isa-ok $sbom3, SBOM::CycloneDX;
+        is-deeply $sbom2, $sbom, 'did we roundtrip from .raku correctly';
+    }
+}
+
+# vim: expandtab shiftwidth=4

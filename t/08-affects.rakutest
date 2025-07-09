@@ -1,0 +1,49 @@
+use lib $*PROGRAM.parent;
+use Test;
+use SBOM::Vulnerability;  # provides Affects;
+use testers;
+
+plan 3;
+
+# Testing an object with an array versions with different requireds
+
+my %complete is Map =
+  ref      => "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.9.4",
+  versions => (
+    {
+      range  => "vers:semver/<2.6.7.5",
+      status => "affected",
+    }.Map,
+    {
+      version => "1.0",
+      status => "unaffected",
+    }.Map,
+  ),
+;
+
+test-map-json SBOM::Affects, %complete, Q:to/JSON/;
+{
+  "ref": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.9.4",
+  "versions": [
+    {
+      "range": "vers:semver/<2.6.7.5",
+      "status": "affected"
+    },
+    {
+      "version": "1.0",
+      "status": "unaffected"
+    }
+  ]
+}
+JSON
+
+my %minimal is Map = ref => "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.9.4";
+test-map-json SBOM::Affects, %minimal, Q:to/JSON/, "minimal";
+{
+  "ref": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.9.4"
+}
+JSON
+
+dies-ok { SBOM::Affects.new(:raw-error) }, 'No args throws';
+
+# vim: expandtab shiftwidth=4
