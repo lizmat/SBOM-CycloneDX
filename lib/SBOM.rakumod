@@ -4,13 +4,23 @@ use SBOM::enums:ver<0.0.3>:auth<zef:lizmat> <Enumify>;
 #- SBOM ------------------------------------------------------------------------
 role SBOM:ver<0.0.3>:auth<zef:lizmat> {
 
+    # Hidden attribute that collects pairs with errors, in which the
+    # key is is the crumbs of where the error happened, and the value
+    # is the actual exception.
+    has @.build-errors is built(False);
+
     # This code is run at compile time when the role is being consumed.
     # So this effectively creaes constants, hence the .Map and .List
     # to ensure immutability.
 
     # The attributes of the class, so we don't need to introspect
     # at runtime
-    my @attributes is List = $?CLASS.^attributes;
+    my @attributes is List = $?CLASS.^attributes.grep: {
+        # No other reliable way to find out whether an Attribute
+        # will be built by .new at the moment of writing
+        use nqp;
+        nqp::getattr($_,Attribute,'$!is_built')
+    }
 
     # Attribute name to attribute object mapping: can also be used to
     # see if a name corresponds to a valid attribute
@@ -39,22 +49,42 @@ role SBOM:ver<0.0.3>:auth<zef:lizmat> {
 
     # The instantiator method, using standard .new semantics, except
     # that it will return Nil if no named arguments were given
-    multi method new(::?CLASS: :$raw-error, *%in) {
-        with @*CRUMBS {
+    multi method new(::?CLASS: :$raw-error = False, *%in) {
+
+        # Inner SBOM creation logic
+        with $*RAW-ERROR {
             self!ingest(%in)
         }
+
+        # Outer SBOM creation logic
         else {
+            my $*RAW-ERROR = $raw-error;
             my @*CRUMBS;
-            my $*RAW-ERROR := $raw-error;
-            self!ingest(%in)
+            my @*ERRORS;
+
+            my $sbom := self!ingest(%in);
+            $sbom.defined
+              ?? $sbom!set-build-errors
+              !! $sbom
         }
+    }
+
+    # Instantiate from a path, either as a string or as an IO object
+    multi method new(::?CLASS: IO(Str) $io, :$raw-error = False) {
+        self.new(:$raw-error, |from-json $io.slurp)
+    }
+
+    # Helper method to set @*ERRORS on the outer SBOM object
+    method !set-build-errors() {
+        @!build-errors := @*ERRORS;
+        self
     }
 
     # Basic error handling
     my sub handle-error($_) {
-        note "Found error in: @*CRUMBS.join("/")";
-        .rethrow if $*RAW-ERROR;
-        note .message;
+        $*RAW-ERROR
+          ?? .rethrow
+          !!  @*ERRORS.push(@*CRUMBS.join("/") => $_);
     }
 
     # The actual instantiation logic, setting @*CRUMBS as appropriate
@@ -151,25 +181,16 @@ role SBOM:ver<0.0.3>:auth<zef:lizmat> {
         $result
     }
 
-    # Standard .raku semantics, but skips any type objects or empty
-    # Positionals
+    # Cannot use the standard .raku semantics, as that would process
+    # the arguments before processing their parent, which has all sorts
+    # of weird effects, specifically in error reporting.  So instead
+    # producing .raku output for each sub-class, just generate the
+    # .Map of the arguments and flatten that as the arguments.
     multi method raku(::?CLASS:D:) {
-        my str @parts;
-
-        for @names -> $name {
-            with self."$name"() -> $value is raw {
-                if $value ~~ Positional {
-                    @parts.push: "$name => $value.raku()"
-                      if $value.elems;
-                }
-                else {
-                    @parts.push: "$name => $value.raku()";
-                }
-            }
-        }
-        self.^name ~ ".new(@parts.join(", "))"
+        self.^name ~ ".new(|" ~ self.Map.raku ~ ")"
     }
 
+    # Type objects get a empty Map
     multi method Map(::?CLASS:U:) { Map.new }
 
     # Produce a Map for the object, recursively if necessary.  Takes
@@ -204,8 +225,8 @@ role SBOM:ver<0.0.3>:auth<zef:lizmat> {
                       !! $value
                     !! ($type ~~ DateTime)
                       ?? $value ~~ DateTime
-                        ?? $value
-                        !! $value.DateTime
+                        ?? $value.Str
+                        !! $value
                       !! $value.Map(:$ordered)
             }
 
@@ -225,6 +246,18 @@ role SBOM:ver<0.0.3>:auth<zef:lizmat> {
     # Produce the JSON for the invocant
     method JSON(::?CLASS:D: --> Str:D) {
         to-json(self.Map(:ordered))
+    }
+
+    # Helper method for required array attributes: the "is required"
+    # argument just checks whether it was specified, but not whether
+    # any elements were specified: so calling this method with the
+    # attribute in question as argument, will check for elements and
+    # add an error if no elements are specified
+    method must-have-elements(\attribute) is hidden-from-backtrace {
+        handle-error(X::Attribute::Required.new(
+          name => attribute.VAR.name,
+          why => "Must have at least one element specified"
+        )) unless attribute.elems;
     }
 }
 

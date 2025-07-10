@@ -9,9 +9,27 @@ use SBOM::Organization:ver<0.0.3>:auth<zef:lizmat>;
 use SBOM::Service:ver<0.0.3>:auth<zef:lizmat>;
 use SBOM::Signature:ver<0.0.3>:auth<zef:lizmat>;
 
-#| Person or organization making an annotation
-subset Annotator where
-  SBOM::Contact | SBOM::Component | SBOM::Organization | SBOM::Service;
+#- Annotator -------------------------------------------------------------------
+#| Person, organization, component, service making an annotation
+class SBOM::Annotator:ver<0.0.3>:auth<zef:lizmat> does SBOM {
+
+#| The person that created the annotation.
+    has SBOM::Contact $.individual;
+
+#| The organization that created the annotation.
+    has SBOM::Organization $.organization;
+
+#| The tool or component that created the annotation.
+    has SBOM::Component $.component;
+
+#| The service that created the annotation.
+    has SBOM::Service $.service;
+
+    submethod TWEAK() is hidden-from-backtrace {
+        die "Must have one of <individual organization component service> specified"
+          unless one($!individual,$!organization,$!component,$!service);
+    }
+}
 
 #- Annotation ------------------------------------------------------------------
 #| Comments made by people, organizations, or tools about any object
@@ -32,7 +50,7 @@ class SBOM::Annotation:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 
 #| The organization, person, component, or service which created the
 #| textual content of the annotation.
-    has Annotator $.annotator is required;
+    has SBOM::Annotator $.annotator is required;
 
 #| The date and time (timestamp) when the annotation was created.
     has DateTime $.timestamp is required;
@@ -42,6 +60,10 @@ class SBOM::Annotation:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 
 #| Enveloped signature in JSON Signature Format (JSF).
     has SBOM::ValidSignature $.signature;
+
+    submethod TWEAK() is hidden-from-backtrace {
+        self.must-have-elements(@!subjects);
+    }
 }
 
 # vim: expandtab shiftwidth=4

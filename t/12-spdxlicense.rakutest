@@ -1,0 +1,35 @@
+use lib $*PROGRAM.parent;
+use Test;
+use SBOM::License;  # provides SPDXLicens
+use testers;
+
+plan 3;
+
+# Testing an object with a required arrays and a merge-type
+
+my %complete is Map =
+  expression      => "BSD Zero Clause License",
+  acknowledgement => "declared",
+  bom-ref         => "bsd"
+;
+
+test-map-json SBOM::SPDXLicense, %complete, Q:to/JSON/;
+{
+  "expression": "BSD Zero Clause License",
+  "acknowledgement": "declared",
+  "bom-ref": "bsd"
+}
+JSON
+
+my %minimal is Map =
+  expression => "BSD Zero Clause License",
+;
+test-map-json SBOM::SPDXLicense, %minimal, Q:to/JSON/, "minimal";
+{
+  "expression": "BSD Zero Clause License"
+}
+JSON
+
+dies-ok { SBOM::SPDXLicense.new(:raw-error) }, 'No args throws';
+
+# vim: expandtab shiftwidth=4

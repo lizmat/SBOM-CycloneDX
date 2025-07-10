@@ -1,0 +1,72 @@
+use lib $*PROGRAM.parent;
+use Test;
+use SBOM::License;  # provides Licensing
+use testers;
+
+plan 3;
+
+# Testing an object with a required arrays and a merge-type
+
+my %complete is Map =
+  altIds         => ("foo","bar"),
+  licensor       => {
+    organization => { name => "Disney" }.Map,
+  }.Map,
+  licensee       => {
+    individual => { name => "Micky Mouse" }.Map,
+  }.Map,
+  purchaser      => {
+    individual => { name => "A small kid" }.Map,
+  }.Map,
+  purchaseOrder  => "Mommy, please!",
+  licenseTypes   => ("user", "perpetual"),
+  lastRenewal    => "2025-07-10T19:09:43.121897+02:00",
+  expiration     => "2125-07-10T19:09:43.121897+02:00"
+;
+
+test-map-json SBOM::Licensing, %complete, Q:to/JSON/;
+{
+  "altIds": [
+    "foo",
+    "bar"
+  ],
+  "licensor": {
+    "organization": {
+      "name": "Disney"
+    }
+  },
+  "licensee": {
+    "individual": {
+      "name": "Micky Mouse"
+    }
+  },
+  "purchaser": {
+    "individual": {
+      "name": "A small kid"
+    }
+  },
+  "purchaseOrder": "Mommy, please!",
+  "licenseTypes": [
+    "user",
+    "perpetual"
+  ],
+  "lastRenewal": "2025-07-10T19:09:43.121897+02:00",
+  "expiration": "2125-07-10T19:09:43.121897+02:00"
+}
+JSON
+
+my %minimal is Map =
+  "altIds" => ("foo","bar")
+;
+test-map-json SBOM::Licensing, %minimal, Q:to/JSON/, "minimal";
+{
+  "altIds": [
+    "foo",
+    "bar"
+  ]
+}
+JSON
+
+is-deeply SBOM::Licensing.new, Nil, 'No args return Nil';
+
+# vim: expandtab shiftwidth=4

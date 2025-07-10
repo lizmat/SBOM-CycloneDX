@@ -27,4 +27,21 @@ class SBOM::Organization:ver<0.0.3>:auth<zef:lizmat> does SBOM {
     has SBOM::Contact @.contact;
 }
 
+#-------------------------------------------------------------------------------
+#| An individual or an organizaton
+class SBOM::IndividualOrOrganization:ver<0.0.3>:auth<zef:lizmat> does SBOM {
+
+#| An individual
+    has SBOM::Contact $.individual;
+
+#| An organization
+    has SBOM::Organization $.organization;
+
+    submethod TWEAK() {
+        die "Must either have 'individual' or 'organization' specified"
+          unless one($!individual, $!organization);
+    }
+}
+
+
 # vim: expandtab shiftwidth=4

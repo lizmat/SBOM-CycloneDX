@@ -8,13 +8,19 @@ my sub test-map-json(
 ) is test-assertion is export {
 
     subtest "$class.^name(): $description" => {
-        plan 5;
+        plan 6;
 
-        my $instance := $class.new(|args);
+        my $instance := $class.new(:raw-error, |args);
         isa-ok $instance, $class;
 
+        nok $instance.build-errors, 'should be without errors';
+
         my %map := $instance.Map;
-        is-deeply %map, args, 'does .Map work';
+        # Cannot use is-deeply, as some objects may have a role
+        # mixed in.  Even though the mixin has been made invisible
+        # by using ^set_name, it is *still* a different type from
+        # expected, so use the .raku representation to compare
+        is %map.raku, args.raku, 'does .Map work';
 
         is-deeply
           $instance.raku.subst("new(","new(:raw-error, ").EVAL,

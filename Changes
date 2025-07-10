@@ -1,6 +1,9 @@
 Revision history for SBOM::CycloneDX
 
 {{$NEXT}}
+    - Get error handling going, add method "build-errors"
+    - Add support to instantiate directly from file
+    - Added SBOM::Annotator and SBOM::IndividualOrOrganization classes
 
 0.0.3  2025-07-09T20:50:33+02:00
     - Several example SBOM files are now ingested without errors

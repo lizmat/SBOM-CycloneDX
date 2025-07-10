@@ -113,7 +113,7 @@ class SBOM::Component:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 
 #| Specifies the scope of the component. If scope is not specified,
 #| 'required' scope SHOULD be assumed by the consumer of the BOM.
-    has Scope $.scope = Scope("required");
+    has Scope $.scope;
 
 #| The hashes of the component.
     has SBOM::HashedString @.hashes;

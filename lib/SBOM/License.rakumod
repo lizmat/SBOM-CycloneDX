@@ -12,9 +12,6 @@ use SBOM::Organization:ver<0.0.3>:auth<zef:lizmat>;
 use SBOM::Property:ver<0.0.3>:auth<zef:lizmat>;
 use SBOM::Attachment:ver<0.0.3>:auth<zef:lizmat>;
 
-#| A person or an organization
-my subset OrgOrContact where SBOM::Organization | SBOM::Contact;
-
 #- Licensing -------------------------------------------------------------------
 #| Licensing details describing the licensor/licensee, license type,
 #| renewal and expiration dates, and other important metadata.
@@ -25,13 +22,13 @@ class SBOM::Licensing:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 
 #| The individual or organization that grants a license to another
 #| individual or organization
-    has OrgOrContact $.licensor;
+    has SBOM::IndividualOrOrganization $.licensor;
 
 #| The individual or organization for which a license was granted to.
-    has OrgOrContact $.licensee;
+    has SBOM::IndividualOrOrganization $.licensee;
 
 #| The individual or organization that purchased the license.
-    has OrgOrContact $.purchaser;
+    has SBOM::IndividualOrOrganization $.purchaser;
 
 #| The purchase order identifier the purchaser sent to a supplier or
 #| vendor to authorize a purchase.
@@ -91,15 +88,15 @@ class SBOM::License:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 
 #- SPDXLicense -----------------------------------------------------------------
 class SBOM::SPDXLicense:ver<0.0.3>:auth<zef:lizmat> does SBOM {
-#| An optional identifier which can be used to reference the license
-#| elsewhere in the BOM.
-    has bom-ref $.bom-ref;
-
 #| The SPDX license name (as opposed to ID).
     has LicenseName $.expression is required;
 
 #| Stage in licensing process.
     has Acknowledgement $.acknowledgement;
+
+#| An optional identifier which can be used to reference the license
+#| elsewhere in the BOM.
+    has bom-ref $.bom-ref;
 }
 
 #| An SPDX licenses and/or named license

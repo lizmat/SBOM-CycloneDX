@@ -1,0 +1,76 @@
+use lib $*PROGRAM.parent;
+use Test;
+use SBOM::License;
+use testers;
+
+plan 3;
+
+# Testing an object with a required arrays and a merge-type
+
+my %complete is Map =
+  bom-ref         => "license-1",
+  id              => "0BSD",
+  name            => "The BSD license",
+  acknowledgement => "declared",
+  text            => {
+      contentType => "text/plain",
+      content     => "An attachment",
+  }.Map,
+  url             => "https://raku.org",
+  licensing       => {
+    altIds => ("foo","bar"),
+  }.Map,
+  properties      => (
+    {
+      name  => "good",
+      value => "42"
+    }.Map,
+    {
+      name  => "bad",
+      value => "666"
+    }.Map
+  )
+;
+
+test-map-json SBOM::License, %complete, Q:to/JSON/;
+{
+  "bom-ref": "license-1",
+  "id": "0BSD",
+  "name": "The BSD license",
+  "acknowledgement": "declared",
+  "text": {
+    "contentType": "text/plain",
+    "content": "An attachment"
+  },
+  "url": "https://raku.org",
+  "licensing": {
+    "altIds": [
+      "foo",
+      "bar"
+    ]
+  },
+  "properties": [
+    {
+      "name": "good",
+      "value": "42"
+    },
+    {
+      "name": "bad",
+      "value": "666"
+    }
+  ]
+}
+JSON
+
+my %minimal is Map =
+  id => "0BSD"
+;
+test-map-json SBOM::License, %minimal, Q:to/JSON/, "minimal";
+{
+  "id": "0BSD"
+}
+JSON
+
+is-deeply SBOM::License.new, Nil, 'No args return Nil';
+
+# vim: expandtab shiftwidth=4

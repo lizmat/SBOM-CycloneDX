@@ -1,0 +1,81 @@
+use lib $*PROGRAM.parent;
+use Test;
+use SBOM::Annotation;
+use testers;
+
+plan 3;
+
+# Testing an object with a required arrays and a merge-type
+
+my %complete is Map =
+  bom-ref => "annotation-1",
+  subjects => ("component-a",),
+  annotator => {
+    organization => {
+      name => "Acme, Inc.",
+      url => ("https://example.com",),
+      contact => (
+        {
+          name => "Acme Professional Services",
+          email => "professional.services@example.com"
+        }.Map
+      ,)
+    }.Map
+  }.Map,
+  timestamp => "2022-01-01T00:00:00Z",
+  text => "This is a sample annotation made by an organization"
+;
+
+test-map-json SBOM::Annotation, %complete, Q:to/JSON/;
+{
+  "bom-ref": "annotation-1",
+  "subjects": [
+    "component-a"
+  ],
+  "annotator": {
+    "organization": {
+      "name": "Acme, Inc.",
+      "url": [
+        "https://example.com"
+      ],
+      "contact": [
+        {
+          "name": "Acme Professional Services",
+          "email": "professional.services@example.com"
+        }
+      ]
+    }
+  },
+  "timestamp": "2022-01-01T00:00:00Z",
+  "text": "This is a sample annotation made by an organization"
+}
+JSON
+
+my %minimal is Map =
+  subjects => ("component-a",),
+  annotator => {
+    organization => {
+      name => "Acme, Inc.",
+    }.Map
+  }.Map,
+  timestamp => "2022-01-01T00:00:00Z",
+  text => "This is a sample annotation made by an organization"
+;
+test-map-json SBOM::Annotation, %minimal, Q:to/JSON/, "minimal";
+{
+  "subjects": [
+    "component-a"
+  ],
+  "annotator": {
+    "organization": {
+      "name": "Acme, Inc."
+    }
+  },
+  "timestamp": "2022-01-01T00:00:00Z",
+  "text": "This is a sample annotation made by an organization"
+}
+JSON
+
+dies-ok { SBOM::Annotation.new(:raw-error) }, 'No args throws';
+
+# vim: expandtab shiftwidth=4

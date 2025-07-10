@@ -246,7 +246,9 @@ my class OutputType:ver<0.0.3>:auth<zef:lizmat> does Enumify { }
 
 #- S ---------------------------------------------------------------------------
 #| The scope of a component.
-my class Scope:ver<0.0.3>:auth<zef:lizmat> does Enumify { }
+my class Scope:ver<0.0.3>:auth<zef:lizmat> does Enumify {
+    multi method Str(Scope:U:) { "required" }
+}
 
 #| Textual representation of a severity.
 my class Severity:ver<0.0.3>:auth<zef:lizmat> does Enumify { }
