@@ -6,7 +6,7 @@ use SBOM::CycloneDX;
 use JSON::Fast:ver<0.19+>:auth<cpan:TIMOTIMO>;  # for parsing valid sboms
 
 my @files = $*PROGRAM.sibling("valid").dir.sort(*.basename);
-my $raw-error := False;
+my $raw-error := True;
 
 plan +@files;
 

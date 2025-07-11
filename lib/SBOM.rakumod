@@ -116,7 +116,7 @@ role SBOM:ver<0.0.3>:auth<zef:lizmat> {
                             @out.push($_ ~~ Enumify ?? $_ !! $type($_));
                         }
                     }
-                    elsif $type ~~ Cool {
+                    elsif $type ~~ Cool | Pair {
                         # Makes sure any types are checked
                         @out = value.grep(*.defined)
                     }
@@ -220,15 +220,20 @@ role SBOM:ver<0.0.3>:auth<zef:lizmat> {
         my role ordered-list[@NAMES] {
             method list() {
                 @NAMES.map({
-                    Pair.new($_, self.AT-KEY($_)) if self.EXISTS-KEY($_)
+                    Pair.new($_, self.AT-KEY($_)) if self.EXISTS-KEY($_);
                 }).List
             }
         }
 
+        # Set up list of keys to render, may have additional keys
+        my @keys = @names;
+
+        # Create initial version of the Map
         my $map := @names.map(-> $name {
             my $value := self."$name"();
             my $type  := %type{$name};
 
+            # Generic mapification logic
             sub mapify($value) {
                 $type ~~ Cool
                   ?? $value
@@ -243,17 +248,25 @@ role SBOM:ver<0.0.3>:auth<zef:lizmat> {
                       !! $value.Map(:$ordered)
             }
 
-            if %positional{$name} {
+            # Have additional properties, so add them
+            if $name eq 'additional-properties' {
+                $value.map({ @keys.push(.key); $_}).Slip
+            }
+
+            # An array of sort, add them if they're not empty
+            elsif %positional{$name} {
                 if $value.elems {
                     $name => $value.map(&mapify).List
                 }
             }
+
+            # A single value
             else {
                 $name => mapify($_) with $value;
             }
         }).Map;
 
-        $ordered ?? $map but ordered-list[@names] !! $map
+        $ordered ?? $map but ordered-list[@keys] !! $map
     }
 
     # Produce the JSON for the invocant

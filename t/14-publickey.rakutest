@@ -1,0 +1,58 @@
+use lib $*PROGRAM.parent;
+use Test;
+use SBOM::Signature;  # provides PublicKey
+use testers;
+
+plan 3;
+
+# Testing the different PublicKey configurations and additional properties
+
+my %EC is Map =
+  kty => "EC",
+  crv => "P-256",
+  x   => "P-521",
+  y   => "P-256"
+;
+
+test-map-json SBOM::PublicKey, %EC, Q:to/JSON/, "EC";
+{
+  "kty": "EC",
+  "crv": "P-256",
+  "x": "P-521",
+  "y": "P-256"
+}
+JSON
+
+my %OKP is Map =
+  kty => "OKP",
+  crv => "Ed25519",
+  x   => "32",
+  foo => "bar"
+;
+
+test-map-json SBOM::PublicKey, %OKP, Q:to/JSON/, "OKP";
+{
+  "kty": "OKP",
+  "crv": "Ed25519",
+  "x": "32",
+  "foo": "bar"
+}
+JSON
+
+my %RSA is Map =
+  kty => "RSA",
+  n   => "modulus",
+  e   => "exponent",
+  foo => "bar"
+;
+
+test-map-json SBOM::PublicKey, %RSA, Q:to/JSON/, "RSA";
+{
+  "kty": "RSA",
+  "n": "modulus",
+  "e": "exponent",
+  "foo": "bar"
+}
+JSON
+
+# vim: expandtab shiftwidth=4

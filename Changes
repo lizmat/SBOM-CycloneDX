@@ -3,7 +3,7 @@ Revision history for SBOM::CycloneDX
 {{$NEXT}}
     - Get error handling going, add method "build-errors"
     - Make sure any additional named arguments will throw unless
-      an attribute "@additional-properties" is specified
+      an attribute "@.additional-properties" is specified
     - Add support to instantiate directly from file
     - Added classes that combine other classes:
        - SBOM::Annotator

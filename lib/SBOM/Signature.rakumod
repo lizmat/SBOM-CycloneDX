@@ -10,10 +10,10 @@ use SBOM:ver<0.0.3>:auth<zef:lizmat>;
 
 #| Signature algorithm. If proprietary signature algorithms are added,
 #| they must be expressed as URIs.
-subset URLorAlgorithm where URL | SignatureAlgorithm;
+subset URLorAlgorithm of Str where URL | SignatureAlgorithm;
 
 #| EC curve name or EdDSA curve name
-subset CryptoCurve where ECCurve | EdDSA;
+subset CryptoCurve of Str where { ECCurve($_) || EdDSA($_) }
 
 #- PublicKey -------------------------------------------------------------------
 class SBOM::PublicKey:ver<0.0.3>:auth<zef:lizmat> does SBOM {
@@ -42,6 +42,9 @@ class SBOM::PublicKey:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 #| RSA exponent.
     has Str $.e;
 
+#| Any additional properties not otherwise seen in attributes
+    has Pair @.additional-properties;
+
     submethod TWEAK() {
         my $keytype := $!kty.Str;
 
@@ -52,15 +55,34 @@ class SBOM::PublicKey:ver<0.0.3>:auth<zef:lizmat> does SBOM {
             return if $!crv && $!x;
         }
         elsif $keytype eq "RSA" {
-            return if $!crv && $!n && $!e;
+            return if $!n && $!e;
         }
         die "did not specify all required arguments for key '$keytype'";
     }
 }
 
+#- ValidSignature --------------------------------------------------------------
+class SBOM::Signature        { ... }
+class SBOM::SignatureChain   { ... }
+class SBOM::SignatureSigners { ... }
+
+#| Enveloped signature in JSON Signature Format (JSF).
+class SBOM::ValidSignature:ver<0.0.3>:auth<zef:lizmat> {
+    multi method new(SBOM::ValidSignature:U: :$raw-error) {
+        my $class := %_<signers>
+          ?? SBOM::SignatureSigners
+          !! %_<chain>
+            ?? SBOM::SignatureChain
+            !! SBOM::Signature;
+
+        $class.new(:$raw-error, |%_)
+    }
+}
+
 #- Signature -------------------------------------------------------------------
 #| Unique top level property for simple signatures. (signaturecore)
-class SBOM::Signature:ver<0.0.3>:auth<zef:lizmat> does SBOM {
+class SBOM::Signature:ver<0.0.3>:auth<zef:lizmat>
+  is SBOM::ValidSignature does SBOM {
     has URLorAlgorithm $.algorithm is required;
 
 #| Optional. Application specific string identifying the signature key.
@@ -89,18 +111,16 @@ class SBOM::Signature:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 
 #- SignatureChain --------------------------------------------------------------
 #| Unique top level property for Signature Chains. (signaturechain)
-class SBOM::SignatureChain:ver<0.0.3>:auth<zef:lizmat> does SBOM {
+class SBOM::SignatureChain:ver<0.0.3>:auth<zef:lizmat>
+  is SBOM::ValidSignature does SBOM {
     has SBOM::Signature @.chain;
 }
 
 #- SignatureSigners ------------------------------------------------------------
 #| Unique top level property for Multiple Signatures. (multisignature)
-class SBOM::SignatureSigners:ver<0.0.3>:auth<zef:lizmat> does SBOM {
+class SBOM::SignatureSigners:ver<0.0.3>:auth<zef:lizmat>
+  is SBOM::ValidSignature does SBOM {
     has SBOM::Signature @.signers;
 }
-
-#| Enveloped signature in JSON Signature Format (JSF).
-subset SBOM::ValidSignature
-  where SBOM::SignatureSigners | SBOM::SignatureChain | SBOM::Signature;
 
 # vim: expandtab shiftwidth=4
