@@ -1,0 +1,33 @@
+use lib $*PROGRAM.parent;
+use Test;
+use SBOM::Property;  # provides StrOrProperty
+use testers;
+
+plan 4;
+
+# Testing the string or property logic
+
+my %complete is Map =
+  name  => "good",
+  value => "42"
+;
+
+test-map-json SBOM::StrOrProperty, %complete, Q:to/JSON/;
+{
+  "name": "good",
+  "value": "42"
+}
+JSON
+
+my %minimal is Map = name => "good";
+test-map-json SBOM::StrOrProperty, %minimal, Q:to/JSON/, "minimal";
+{
+  "name": "good"
+}
+JSON
+
+dies-ok { SBOM::StrOrProperty.new(:raw-error) }, "no args throws";
+
+isa-ok SBOM::StrOrProperty.new("foo"), Str;
+
+# vim: expandtab shiftwidth=4

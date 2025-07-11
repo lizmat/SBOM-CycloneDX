@@ -48,8 +48,22 @@ class SBOM::Licensing:ver<0.0.3>:auth<zef:lizmat> does SBOM {
     has DateTime $.expiration;
 }
 
+#- AnyLicense ------------------------------------------------------------------
+class SBOM::License     { ... }
+class SBOM::SPDXLicense { ... }
+
+#| Either a (modern) License object, or a legacy SPDX License object
+class SBOM::AnyLicense:ver<0.0.3>:auth<zef:lizmat> {
+    multi method new(SBOM::AnyLicense:U: :$raw-error) {
+        !%_ || %_<expression>
+          ?? SBOM::SPDXLicense.new(:$raw-error, |%_)
+          !! SBOM::License.new(:$raw-error, |%_)
+    }
+}
+
 #- License ---------------------------------------------------------------------
-class SBOM::License:ver<0.0.3>:auth<zef:lizmat> does SBOM {
+class SBOM::License:ver<0.0.3>:auth<zef:lizmat>
+  is SBOM::AnyLicense does SBOM {
 
 #| An optional identifier which can be used to reference the license
 #| elsewhere in the BOM.
@@ -87,7 +101,9 @@ class SBOM::License:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 }
 
 #- SPDXLicense -----------------------------------------------------------------
-class SBOM::SPDXLicense:ver<0.0.3>:auth<zef:lizmat> does SBOM {
+class SBOM::SPDXLicense:ver<0.0.3>:auth<zef:lizmat>
+  is SBOM::AnyLicense does SBOM {
+
 #| The SPDX license name (as opposed to ID).
     has LicenseName $.expression is required;
 
@@ -98,8 +114,5 @@ class SBOM::SPDXLicense:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 #| elsewhere in the BOM.
     has bom-ref $.bom-ref;
 }
-
-#| An SPDX licenses and/or named license
-subset SBOM::AnyLicense where SBOM::License | SBOM::SPDXLicense;
 
 # vim: expandtab shiftwidth=4

@@ -1,9 +1,11 @@
 use lib $*PROGRAM.parent;
 use Test;
-use SBOM::License;
+use SBOM::License;  # also provides SBOM::AnyLicense
 use testers;
 
-plan 3;
+my @classes = SBOM::License, SBOM::AnyLicense;
+
+plan 3 * @classes;
 
 # Testing an object with a required arrays and a merge-type
 
@@ -32,7 +34,7 @@ my %complete is Map =
   )
 ;
 
-test-map-json SBOM::License, %complete, Q:to/JSON/;
+test-map-json $_, %complete, Q:to/JSON/, "$_.^name(): complete" for @classes;
 {
   "bom-ref": "license-1",
   "id": "0BSD",
@@ -65,12 +67,12 @@ JSON
 my %minimal is Map =
   id => "0BSD"
 ;
-test-map-json SBOM::License, %minimal, Q:to/JSON/, "minimal";
+test-map-json $_, %minimal, Q:to/JSON/, "$_.^name(): minimal" for @classes;
 {
   "id": "0BSD"
 }
 JSON
 
-is-deeply SBOM::License.new, Nil, 'No args return Nil';
+is-deeply .new, Nil, "$_.^name(): no args return Nil" for @classes;
 
 # vim: expandtab shiftwidth=4
