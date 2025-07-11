@@ -169,6 +169,19 @@ role SBOM:ver<0.0.3>:auth<zef:lizmat> {
             }
         }
 
+        # Delete any schema related attributes for now
+        %in{$_}:delete for %in.keys.grep(*.starts-with('$'));
+
+        # Not all input arguments accounted for, either save as additional
+        # properties if supported, or call it a day.
+        if %in {
+            if %attribute<additional-properties> {
+                %out<additional-properties> := %in.pairs.List;
+            }
+            else {
+                die "Found extra keys: %in.keys.sort.join(", ")";
+            }
+        }
 
         my $result := do if %out || %required {
             self.bless: |%out
