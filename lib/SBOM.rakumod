@@ -15,12 +15,7 @@ role SBOM:ver<0.0.3>:auth<zef:lizmat> {
 
     # The attributes of the class, so we don't need to introspect
     # at runtime
-    my @attributes is List = $?CLASS.^attributes.grep: {
-        # No other reliable way to find out whether an Attribute
-        # will be built by .new at the moment of writing
-        use nqp;
-        nqp::getattr($_,Attribute,'$!is_built')
-    }
+    my @attributes is List = $?CLASS.^attributes.grep(*.is_built);
 
     # Attribute name to attribute object mapping: can also be used to
     # see if a name corresponds to a valid attribute

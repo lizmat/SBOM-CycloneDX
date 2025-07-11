@@ -10,7 +10,7 @@ use SBOM:ver<0.0.3>:auth<zef:lizmat>;
 
 #| Signature algorithm. If proprietary signature algorithms are added,
 #| they must be expressed as URIs.
-subset URLorAlgorithm of Str where URL | SignatureAlgorithm;
+subset URLOrAlgorithm of Str where URL | SignatureAlgorithm;
 
 #| EC curve name or EdDSA curve name
 subset CryptoCurve of Str where { ECCurve($_) || EdDSA($_) }
@@ -73,7 +73,9 @@ class SBOM::ValidSignature:ver<0.0.3>:auth<zef:lizmat> {
           ?? SBOM::SignatureSigners
           !! %_<chain>
             ?? SBOM::SignatureChain
-            !! SBOM::Signature;
+            !! %_
+              ?? SBOM::Signature
+              !! (return Nil);
 
         $class.new(:$raw-error, |%_)
     }
@@ -83,7 +85,7 @@ class SBOM::ValidSignature:ver<0.0.3>:auth<zef:lizmat> {
 #| Unique top level property for simple signatures. (signaturecore)
 class SBOM::Signature:ver<0.0.3>:auth<zef:lizmat>
   is SBOM::ValidSignature does SBOM {
-    has URLorAlgorithm $.algorithm is required;
+    has URLOrAlgorithm $.algorithm is required;
 
 #| Optional. Application specific string identifying the signature key.
     has Str $.keyId;
