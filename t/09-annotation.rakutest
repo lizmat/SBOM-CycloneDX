@@ -22,7 +22,7 @@ my %complete is Map =
       ,)
     }.Map
   }.Map,
-  timestamp => "2022-01-01T00:00:00Z",
+  timestamp => "2022-01-01T00:00:00+00:00",
   text => "This is a sample annotation made by an organization"
 ;
 
@@ -46,7 +46,7 @@ test-map-json SBOM::Annotation, %complete, Q:to/JSON/;
       ]
     }
   },
-  "timestamp": "2022-01-01T00:00:00Z",
+  "timestamp": "2022-01-01T00:00:00+00:00",
   "text": "This is a sample annotation made by an organization"
 }
 JSON
@@ -58,7 +58,7 @@ my %minimal is Map =
       name => "Acme, Inc.",
     }.Map
   }.Map,
-  timestamp => "2022-01-01T00:00:00Z",
+  timestamp => "2022-01-01T00:00:00+00:00",
   text => "This is a sample annotation made by an organization"
 ;
 test-map-json SBOM::Annotation, %minimal, Q:to/JSON/, "minimal";
@@ -71,7 +71,7 @@ test-map-json SBOM::Annotation, %minimal, Q:to/JSON/, "minimal";
       "name": "Acme, Inc."
     }
   },
-  "timestamp": "2022-01-01T00:00:00Z",
+  "timestamp": "2022-01-01T00:00:00+00:00",
   "text": "This is a sample annotation made by an organization"
 }
 JSON

@@ -24,6 +24,11 @@ role SBOM:ver<0.0.3>:auth<zef:lizmat> {
     # The attribute names in order of definition
     my @names is List = @attributes.map(*.name.substr(2));
 
+    # Allow consumers to specify additional named arguments (for which
+    # there is no direct attribute mapping) that will be handled by a
+    # TWEAK method
+    method TWEAK-nameds(::?CLASS:) { () }
+
     # Attribute name to positional mapper: returns True for an
     # attribute name if it was defined with a @ sigil
     my %positional is Map = @names.map: -> $name {
@@ -45,6 +50,10 @@ role SBOM:ver<0.0.3>:auth<zef:lizmat> {
     # The instantiator method, using standard .new semantics, except
     # that it will return Nil if no named arguments were given
     multi method new(::?CLASS: :$raw-error = False, *%in) {
+        self.ingest($raw-error, %in)
+    }
+
+    method ingest($raw-error, %in) is implementation-detail {
 
         # Inner SBOM creation logic
         with $*RAW-ERROR {
@@ -164,15 +173,28 @@ role SBOM:ver<0.0.3>:auth<zef:lizmat> {
             }
         }
 
-        # Delete any schema related attributes for now
-        %in{$_}:delete for %in.keys.grep(*.starts-with('$'));
-
-        # Not all input arguments accounted for, either save as additional
-        # properties if supported, or call it a day.
+        # First pass of checking unexpected named arguments
         if %in {
+
+            # Delete any schema related attributes for now
+            %in{$_}:delete for %in.keys.grep(*.starts-with('$'));
+
+            # Handle additionally supported named arguments
+            if %in{self.TWEAK-nameds}:delete:p -> @additional {
+                %out{.key} := .value for @additional;
+            }
+        }
+
+        # Second pass: not all input arguments accounted for, either save
+        # as additional properties if supported, or call it a day.
+        if %in {
+
+            # Handle any additional properties
             if %attribute<additional-properties> {
                 %out<additional-properties> := %in.pairs.List;
             }
+
+            # Alas, unexpected keys
             else {
                 die "Found extra keys in {self.^name}: %in.keys.sort.join(", ")";
             }
@@ -238,7 +260,7 @@ role SBOM:ver<0.0.3>:auth<zef:lizmat> {
                       !! $value
                     !! ($type ~~ DateTime)
                       ?? $value ~~ DateTime
-                        ?? $value.Str
+                        ?? $value.Str.subst("Z","+00:00")
                         !! $value
                       !! $value.Map(:$ordered)
             }

@@ -61,6 +61,11 @@ class SBOM::AnyLicense:ver<0.0.3>:auth<zef:lizmat> {
 }
 
 #- License ---------------------------------------------------------------------
+#| Specifies the details and attributes related to a software license.
+#| It can either include a valid SPDX license identifier or a named
+#| license, along with additional properties such as license
+#| acknowledgment, comprehensive commercial licensing information,
+#| and the full text of the license.
 class SBOM::License:ver<0.0.3>:auth<zef:lizmat>
   is SBOM::AnyLicense does SBOM {
 

@@ -195,7 +195,7 @@ class SBOM::Declarations:ver<0.0.3>:auth<zef:lizmat> does SBOM {
     has SBOM::Claim @.claims;
 
 #| The list of evidence.
-    has SBOM::DeclarationEvidence $.evidence;
+    has SBOM::DeclarationEvidence @.evidence;
 
 #| The list of targets which claims are made against.
     has SBOM::Target @.targets;

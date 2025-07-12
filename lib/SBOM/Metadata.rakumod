@@ -26,7 +26,12 @@ class SBOM::Metadata:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 
 #| The tool(s) used in the creation, enrichment, and validation of
 #| the BOM.
-    has SBOM::AnyTool $.tools;
+    has SBOM::Tool @.tools;
+
+#| [Deprecated] This will be removed in a future version. Use the
+#| "manufacturer" instead.  The organization that manufactured the
+#| component that the BOM describes.
+    has SBOM::Organization $.manufacture;
 
 #| The organization that created the BOM. Manufacturer is common in
 #| BOMs created through automated processes. BOMs created through
@@ -35,7 +40,7 @@ class SBOM::Metadata:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 
 #| The person(s) who created the BOM. Authors are common in BOMs
 #| created through manual processes. BOMs created through automated
-#| means may have @.manufacturer instead.
+#| means may have $.manufacturer instead.
     has SBOM::Contact @.authors;
 
 #| The component that the BOM describes.
@@ -53,11 +58,16 @@ class SBOM::Metadata:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 #| Any additional properties as name-value pairs.
     has SBOM::Property @.properties;
 
-    submethod TWEAK(:$tools, :$manufacture) {
+    submethod TWEAK() {
         die "Can only have one SPDX license"
         if @!licenses > 1 && @!licenses.first(SBOM::SPDXLicense);
 
-        $!manufacturer //= $manufacture if $manufacture;
+        die "Can only have a single Tool"
+          unless @!tools.are(SBOM::LegacyTool)  # also no tools
+            || (@!tools == 1 &&  @!tools.head.WHAT =:= SBOM::Tool);
+
+        die "Can only have one of 'manufacture' and 'manufacturer'"
+          if $!manufacture && $!manufacturer;
     }
 }
 

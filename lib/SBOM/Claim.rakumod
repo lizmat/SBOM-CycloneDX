@@ -26,7 +26,7 @@ class SBOM::Claim:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 #| mitigation strategies. Each mitigation strategy should include
 #| an explanation of how any weaknesses in the evidence will be
 #| mitigated.
-    has bom-ref @.mitigatinStrategies;
+    has bom-ref @.mitigationStrategies;
 
 #| The written explanation of why the evidence provided substantiates
 #| the claim.

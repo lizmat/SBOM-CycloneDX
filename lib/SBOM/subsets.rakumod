@@ -99,7 +99,7 @@ subset locale of Str where *.contains: /^ <[a..z]> ** 2 ['-' <[A..Z]> ** 2]? $/;
 
 #| The confidence value between and inclusive of 0 and 1, where 1 is
 #| 100% confidence.
-subset confidenceValue of Rat where 0 < * < 1;
+subset confidenceValue of Cool where 0 <= * <= 1;
 
 #| The conformance value between and inclusive of 0 and 1, where 1 is
 #| 100% conformant.
