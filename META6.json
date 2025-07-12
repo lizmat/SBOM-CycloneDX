@@ -14,7 +14,6 @@
   "perl": "6.d",
   "provides": {
     "SBOM": "lib/SBOM.rakumod",
-    "SBOM::Address": "lib/SBOM/Address.rakumod",
     "SBOM::AlgorithmProperties": "lib/SBOM/AlgorithmProperties.rakumod",
     "SBOM::Annotation": "lib/SBOM/Annotation.rakumod",
     "SBOM::Attachment": "lib/SBOM/Attachment.rakumod",
@@ -28,7 +27,6 @@
     "SBOM::Composition": "lib/SBOM/Composition.rakumod",
     "SBOM::Confidence": "lib/SBOM/Confidence.rakumod",
     "SBOM::Considerations": "lib/SBOM/Considerations.rakumod",
-    "SBOM::Contact": "lib/SBOM/Contact.rakumod",
     "SBOM::CryptoMaterialProperties": "lib/SBOM/CryptoMaterialProperties.rakumod",
     "SBOM::CryptoProperties": "lib/SBOM/CryptoProperties.rakumod",
     "SBOM::CryptoProtocolProperties": "lib/SBOM/CryptoProtocolProperties.rakumod",
@@ -88,6 +86,7 @@
     "enums/CryptoKey",
     "enums/CryptoProtocol",
     "enums/CryptoState",
+    "enums/DataFlow",
     "enums/DataSource",
     "enums/ECCurve",
     "enums/EdDSA",

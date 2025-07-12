@@ -4,7 +4,6 @@ use SBOM::enums:ver<0.0.3>:auth<zef:lizmat> <
 
 use SBOM:ver<0.0.3>:auth<zef:lizmat>;
 use SBOM::Component:ver<0.0.3>:auth<zef:lizmat>;
-use SBOM::Contact:ver<0.0.3>:auth<zef:lizmat>;
 use SBOM::License:ver<0.0.3>:auth<zef:lizmat>;
 use SBOM::Property:ver<0.0.3>:auth<zef:lizmat>;
 use SBOM::Organization:ver<0.0.3>:auth<zef:lizmat>;

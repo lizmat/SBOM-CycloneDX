@@ -1,0 +1,42 @@
+use lib $*PROGRAM.parent;
+use Test;
+use SBOM::Service;  # provides ServiceDataset
+use testers;
+
+plan 3;
+
+my %complete is Map =
+  flow           => "inbound",
+  classification => "PII",
+  name           => "fubarred data",
+  description    => "This data is the pits",
+  source         => "https://garbage.in",
+  destination    => "https://garbage.out",
+;
+
+test-map-json SBOM::ServiceDataset, %complete, Q:to/JSON/;
+{
+  "flow": "inbound",
+  "classification": "PII",
+  "name": "fubarred data",
+  "description": "This data is the pits",
+  "source": "https://garbage.in",
+  "destination": "https://garbage.out"
+}
+JSON
+
+my %minimal is Map =
+  flow           => "inbound",
+  classification => "PII"
+;
+
+test-map-json SBOM::ServiceDataset, %minimal, Q:to/JSON/, "minimal";
+{
+  "flow": "inbound",
+  "classification": "PII"
+}
+JSON
+
+dies-ok { SBOM::ServiceDataset.new(:raw-error) }, 'No args throws';
+
+# vim: expandtab shiftwidth=4

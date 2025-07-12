@@ -9,7 +9,6 @@ use SBOM::subsets:ver<0.0.3>:auth<zef:lizmat> <
 use SBOM:ver<0.0.3>:auth<zef:lizmat>;
 use SBOM::Claim:ver<0.0.3>:auth<zef:lizmat>;
 use SBOM::Component:ver<0.0.3>:auth<zef:lizmat>;
-use SBOM::Contact:ver<0.0.3>:auth<zef:lizmat>;
 use SBOM::DataContents:ver<0.0.3>:auth<zef:lizmat>;
 use SBOM::Governance:ver<0.0.3>:auth<zef:lizmat>;
 use SBOM::Organization:ver<0.0.3>:auth<zef:lizmat>;
@@ -66,6 +65,11 @@ class SBOM::Signatory:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 #| They may also establish specific relationships within or external
 #| to the BOM.
     has SBOM::Reference $.externalReference;
+
+    submethod TWEAK() {
+        die "Must either have 'signature', or 'externalReference' and 'organization' specified"
+          unless $!signature || ($!externalReference && $!organization);
+    }
 }
 
 #- Affirmation ----------------------------------------------------------------

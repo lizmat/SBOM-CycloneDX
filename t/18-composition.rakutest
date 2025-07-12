@@ -1,0 +1,44 @@
+use lib $*PROGRAM.parent;
+use Test;
+use SBOM::Composition;
+use testers;
+
+plan 3;
+
+my %complete is Map =
+  aggregate => "complete",
+  assemblies => (
+    "5366293e-0740-4dcf-b1d0-0c1fc26e4981",
+    "ee10d0a2-baba-4656-a5ac-d49e172a0d3d"
+  ),
+  "dependencies" => (
+    "5366293e-0740-4dcf-b1d0-0c1fc26e4981",
+  )
+;
+
+test-map-json SBOM::Composition, %complete, Q:to/JSON/;
+{
+  "aggregate": "complete",
+  "assemblies": [
+    "5366293e-0740-4dcf-b1d0-0c1fc26e4981",
+    "ee10d0a2-baba-4656-a5ac-d49e172a0d3d"
+  ],
+  "dependencies": [
+    "5366293e-0740-4dcf-b1d0-0c1fc26e4981"
+  ]
+}
+JSON
+
+my %minimal is Map =
+  aggregate => "not_specified"
+;
+
+test-map-json SBOM::Composition, %minimal, Q:to/JSON/, "minimal";
+{
+  "aggregate": "not_specified"
+}
+JSON
+
+is-deeply SBOM::Composition.new, Nil, 'No args return Nil';
+
+# vim: expandtab shiftwidth=4

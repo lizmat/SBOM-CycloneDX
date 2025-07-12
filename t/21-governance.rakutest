@@ -1,0 +1,80 @@
+use lib $*PROGRAM.parent;
+use Test;
+use SBOM::Governance;
+use testers;
+
+plan 2;
+
+my %complete is Map =
+  custodians => (
+    {
+      bom-ref => "ddoe",
+      name    => "Dunky Doe",
+      email   => "ddoe@foo.org",
+      phone   => "+31 123 456 780"
+    }.Map,
+  ),
+  stewards => (
+    {
+      bom-ref => "jdoe",
+      name    => "Jane Doe",
+      email   => "jdoe@foo.org",
+      phone   => "+31 123 456 789"
+    }.Map,
+  ),
+  owners => (
+    {
+      bom-ref => "AcmeInc",
+      name    => "ACME Inc.",
+      address => {
+        bom-ref             => "home",
+        country             => "NL",
+        region              => "Knoware",
+        locality            => "Schutter",
+        postOfficeBoxNumber => "27434",
+        postalCode          => "1000CS",
+        streetAddress       => "Voetboogstraat",
+      }.Map,
+    }.Map,
+  )
+;
+
+test-map-json SBOM::Governance, %complete, Q:to/JSON/;
+{
+  "custodians": [
+    {
+      "bom-ref": "ddoe",
+      "name": "Dunky Doe",
+      "email": "ddoe@foo.org",
+      "phone": "+31 123 456 780"
+    }
+  ],
+  "stewards": [
+    {
+      "bom-ref": "jdoe",
+      "name": "Jane Doe",
+      "email": "jdoe@foo.org",
+      "phone": "+31 123 456 789"
+    }
+  ],
+  "owners": [
+    {
+      "bom-ref": "AcmeInc",
+      "name": "ACME Inc.",
+      "address": {
+        "bom-ref": "home",
+        "country": "NL",
+        "region": "Knoware",
+        "locality": "Schutter",
+        "postOfficeBoxNumber": "27434",
+        "postalCode": "1000CS",
+        "streetAddress": "Voetboogstraat"
+      }
+    }
+  ]
+}
+JSON
+
+is-deeply SBOM::Governance.new, Nil, 'No args return Nil';
+
+# vim: expandtab shiftwidth=4

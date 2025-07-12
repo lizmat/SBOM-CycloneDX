@@ -113,7 +113,7 @@ role SBOM:ver<0.0.3>:auth<zef:lizmat> {
                     }
                     elsif $type ~~ Cool | Pair {
                         # Makes sure any types are checked
-                        @out = value.grep(*.defined)
+                        @out = value.grep(*.defined);
                     }
                     elsif $type ~~ DateTime {
                         for value.grep(*.defined) {
@@ -174,7 +174,7 @@ role SBOM:ver<0.0.3>:auth<zef:lizmat> {
                 %out<additional-properties> := %in.pairs.List;
             }
             else {
-                die "Found extra keys: %in.keys.sort.join(", ")";
+                die "Found extra keys in {self.^name}: %in.keys.sort.join(", ")";
             }
         }
 
@@ -198,7 +198,7 @@ role SBOM:ver<0.0.3>:auth<zef:lizmat> {
         self.^name ~ ".new(|" ~ self.Map.raku ~ ")"
     }
 
-    # Type objects get a empty Map
+    # Type objects get an empty Map
     multi method Map(::?CLASS:U:) { Map.new }
 
     # Produce a Map for the object, recursively if necessary.  Takes
@@ -245,7 +245,7 @@ role SBOM:ver<0.0.3>:auth<zef:lizmat> {
 
             # Have additional properties, so add them
             if $name eq 'additional-properties' {
-                $value.map({ @keys.push(.key); $_}).Slip
+                $value.map({ @keys.push(.key); $_ }).Slip
             }
 
             # An array of sort, add them if they're not empty

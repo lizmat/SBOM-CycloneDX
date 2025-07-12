@@ -1,0 +1,56 @@
+use lib $*PROGRAM.parent;
+use Test;
+use SBOM::Organization;  # provides Governor
+use testers;
+
+plan 3;
+
+my %contact is Map =
+  bom-ref => "ddoe",
+  name    => "Dunky Doe",
+  email   => "ddoe@foo.org",
+  phone   => "+31 123 456 780"
+;
+
+test-map-json SBOM::Governor, %contact, Q:to/JSON/;
+{
+  "bom-ref": "ddoe",
+  "name": "Dunky Doe",
+  "email": "ddoe@foo.org",
+  "phone": "+31 123 456 780"
+}
+JSON
+
+my %organization is Map =
+  bom-ref => "AcmeInc",
+  name    => "ACME Inc.",
+  address => {
+    bom-ref             => "home",
+    country             => "NL",
+    region              => "Knoware",
+    locality            => "Schutter",
+    postOfficeBoxNumber => "27434",
+    postalCode          => "1000CS",
+    streetAddress       => "Voetboogstraat",
+  }.Map
+;
+
+test-map-json SBOM::Governor, %organization, Q:to/JSON/;
+{
+  "bom-ref": "AcmeInc",
+  "name": "ACME Inc.",
+  "address": {
+    "bom-ref": "home",
+    "country": "NL",
+    "region": "Knoware",
+    "locality": "Schutter",
+    "postOfficeBoxNumber": "27434",
+    "postalCode": "1000CS",
+    "streetAddress": "Voetboogstraat"
+  }
+}
+JSON
+
+is-deeply SBOM::Governor.new, Nil, 'No args return Nil';
+
+# vim: expandtab shiftwidth=4

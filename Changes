@@ -9,6 +9,7 @@ Revision history for SBOM::CycloneDX
        - SBOM::Annotator
        - SBOM::IndividualOrOrganization
        - SBOM::AnyLicense
+       - SBOM::Governor
     - Added roles that combine other classes:
        - SBOM::StrOrProperty
 

@@ -8,7 +8,6 @@ use SBOM::subsets:ver<0.0.3>:auth<zef:lizmat> <
 
 use SBOM::Attachment:ver<0.0.3>:auth<zef:lizmat>;
 use SBOM::Commit:ver<0.0.3>:auth<zef:lizmat>;
-use SBOM::Contact:ver<0.0.3>:auth<zef:lizmat>;
 use SBOM::CryptoProperties:ver<0.0.3>:auth<zef:lizmat>;
 use SBOM::ComponentDataset:ver<0.0.3>:auth<zef:lizmat>;
 use SBOM::ComponentEvidence:ver<0.0.3>:auth<zef:lizmat>;

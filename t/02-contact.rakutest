@@ -1,6 +1,6 @@
 use lib $*PROGRAM.parent;
 use Test;
-use SBOM::Contact;
+use SBOM::Organization;  # provides Contact
 use testers;
 
 plan 3;

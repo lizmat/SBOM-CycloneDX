@@ -1,6 +1,6 @@
 use lib $*PROGRAM.parent;
 use Test;
-use SBOM::Address;
+use SBOM::Organization;  # provides Address
 use testers;
 
 plan 3;

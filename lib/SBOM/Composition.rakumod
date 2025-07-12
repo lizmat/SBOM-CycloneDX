@@ -3,7 +3,7 @@ use SBOM::enums:ver<0.0.3>:auth<zef:lizmat> <
 >;
 
 use SBOM::subsets:ver<0.0.3>:auth<zef:lizmat> <
-  bom-ref bomLinkElement
+  bom-ref bom-refOrLink
 >;
 
 use SBOM:ver<0.0.3>:auth<zef:lizmat>;
@@ -29,7 +29,7 @@ class SBOM::Composition:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 #| constituent part may include other constituent parts. References
 #| do not cascade to child parts. References are explicit for the
 #| specified constituent part only.
-    has bomLinkElement @.assemblies;
+    has bom-refOrLink @.assemblies;
 
 #| The bom-ref identifiers of the components or services being
 #| described. Dependencies refer to a relationship whereby an
@@ -37,10 +37,10 @@ class SBOM::Composition:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 #| constituent part. References do not cascade to transitive
 #| dependencies. References are explicit for the specified
 #| dependency only.
-    has bom-ref @.dependencies;;
+    has bom-ref @.dependencies;
 
 #| The bom-ref identifiers of the vulnerabilities being described.
-    has bom-ref @.vulnerabilities;;
+    has bom-ref @.vulnerabilities;
 
 #| Enveloped signature in JSON Signature Format (JSF).
     has SBOM::ValidSignature $.signature;
