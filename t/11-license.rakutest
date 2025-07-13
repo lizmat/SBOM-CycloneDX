@@ -10,69 +10,75 @@ plan 3 * @classes;
 # Testing an object with a required arrays and a merge-type
 
 my %complete is Map =
-  bom-ref         => "license-1",
-  id              => "0BSD",
-  name            => "The BSD license",
-  acknowledgement => "declared",
-  text            => {
-      contentType => "text/plain",
-      content     => "An attachment",
-  }.Map,
-  url             => "https://raku.org",
-  licensing       => {
-    altIds => ("foo","bar"),
-  }.Map,
-  properties      => (
-    {
-      name  => "good",
-      value => "42"
+  license => {
+    bom-ref         => "license-1",
+    id              => "0BSD",
+    name            => "The BSD license",
+    acknowledgement => "declared",
+    text            => {
+        contentType => "text/plain",
+        content     => "An attachment",
     }.Map,
-    {
-      name  => "bad",
-      value => "666"
-    }.Map
-  )
+    url             => "https://raku.org",
+    licensing       => {
+      altIds => ("foo","bar"),
+    }.Map,
+    properties      => (
+      {
+        name  => "good",
+        value => "42"
+      }.Map,
+      {
+        name  => "bad",
+        value => "666"
+      }.Map
+    )
+  }.Map
 ;
 
 test-map-json $_, %complete, Q:to/JSON/, "$_.^name(): complete" for @classes;
 {
-  "bom-ref": "license-1",
-  "id": "0BSD",
-  "name": "The BSD license",
-  "acknowledgement": "declared",
-  "text": {
-    "contentType": "text/plain",
-    "content": "An attachment"
-  },
-  "url": "https://raku.org",
-  "licensing": {
-    "altIds": [
-      "foo",
-      "bar"
-    ]
-  },
-  "properties": [
-    {
-      "name": "good",
-      "value": "42"
+  "license": {
+    "bom-ref": "license-1",
+    "id": "0BSD",
+    "name": "The BSD license",
+    "acknowledgement": "declared",
+    "text": {
+      "contentType": "text/plain",
+      "content": "An attachment"
     },
-    {
-      "name": "bad",
-      "value": "666"
-    }
-  ]
+    "url": "https://raku.org",
+    "licensing": {
+      "altIds": [
+        "foo",
+        "bar"
+      ]
+    },
+    "properties": [
+      {
+        "name": "good",
+        "value": "42"
+      },
+      {
+        "name": "bad",
+        "value": "666"
+      }
+    ]
+  }
 }
 JSON
 
 my %minimal is Map =
-  id => "0BSD"
+  license => { id => "0BSD" }.Map
 ;
 test-map-json $_, %minimal, Q:to/JSON/, "$_.^name(): minimal" for @classes;
 {
-  "id": "0BSD"
+  "license": {
+    "id": "0BSD"
+  }
 }
 JSON
 
-is-deeply .new, Nil, "$_.^name(): no args return Nil" for @classes;
+dies-ok { .new(:raw-error) }, "$_.^name(): no args throws" for @classes;
 
 # vim: expandtab shiftwidth=4

@@ -10,25 +10,25 @@ plan 3 * @classes;
 # Testing an object with a required arrays and a merge-type
 
 my %complete is Map =
-  expression      => "BSD Zero Clause License",
+  expression      => "EPL-2.0 OR BSD Zero Clause License",
   acknowledgement => "declared",
   bom-ref         => "bsd"
 ;
 
 test-map-json $_, %complete, Q:to/JSON/, "$_.^name(): complete" for @classes;
 {
-  "expression": "BSD Zero Clause License",
+  "expression": "EPL-2.0 OR BSD Zero Clause License",
   "acknowledgement": "declared",
   "bom-ref": "bsd"
 }
 JSON
 
 my %minimal is Map =
-  expression => "BSD Zero Clause License",
+  expression => "EPL-2.0 OR BSD Zero Clause License",
 ;
 test-map-json $_, %minimal, Q:to/JSON/, "$_.^name(): minimal" for @classes;
 {
-  "expression": "BSD Zero Clause License"
+  "expression": "EPL-2.0 OR BSD Zero Clause License"
 }
 JSON
 

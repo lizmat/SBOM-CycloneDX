@@ -50,13 +50,16 @@ class SBOM::Licensing:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 #- AnyLicense ------------------------------------------------------------------
 class SBOM::License     { ... }
 class SBOM::SPDXLicense { ... }
+class SBOM::LicenseInfo { ... }
 
 #| Either a (modern) License object, or a legacy SPDX License object
-class SBOM::AnyLicense:ver<0.0.3>:auth<zef:lizmat> {
+class SBOM::AnyLicense:ver<0.0.3>:auth<zef:lizmat> does SBOM {
     multi method new(SBOM::AnyLicense:U: :$raw-error) {
-        !%_ || %_<expression>
-          ?? SBOM::SPDXLicense.new(:$raw-error, |%_)
-          !! SBOM::License.new(:$raw-error, |%_)
+        %_<license>
+          ?? SBOM::License.ingest($raw-error, %_)
+          !! %_<expression>
+            ?? SBOM::SPDXLicense.ingest($raw-error, %_)
+            !! die "Must have either 'license' or 'expression' specified: %_.raku()"
     }
 }
 
@@ -68,6 +71,13 @@ class SBOM::AnyLicense:ver<0.0.3>:auth<zef:lizmat> {
 #| and the full text of the license.
 class SBOM::License:ver<0.0.3>:auth<zef:lizmat>
   is SBOM::AnyLicense does SBOM {
+
+#| Info on an SPDX license or named license.
+    has SBOM::LicenseInfo $.license is required;
+}
+
+#- LicenseInfo -----------------------------------------------------------------
+class SBOM::LicenseInfo:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 
 #| An optional identifier which can be used to reference the license
 #| elsewhere in the BOM.
@@ -109,7 +119,7 @@ class SBOM::SPDXLicense:ver<0.0.3>:auth<zef:lizmat>
   is SBOM::AnyLicense does SBOM {
 
 #| The SPDX license name (as opposed to ID).
-    has LicenseName $.expression is required;
+    has Str $.expression is required;
 
 #| Stage in licensing process.
     has Acknowledgement $.acknowledgement;
@@ -117,6 +127,13 @@ class SBOM::SPDXLicense:ver<0.0.3>:auth<zef:lizmat>
 #| An optional identifier which can be used to reference the license
 #| elsewhere in the BOM.
     has bom-ref $.bom-ref;
+
+    submethod TWEAK(:$expression!) {
+        die "Not an SPDX expression: $expression"
+          unless try $expression.split(
+            / \s+ OR|or|AND|and|WITH|with \s+ /  # XXX SPDX expression
+          ).map: { LicenseId($_) }
+    }
 }
 
 # vim: expandtab shiftwidth=4

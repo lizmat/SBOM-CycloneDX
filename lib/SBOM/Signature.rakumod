@@ -13,7 +13,7 @@ use SBOM:ver<0.0.3>:auth<zef:lizmat>;
 subset URLOrAlgorithm of Str where URL | SignatureAlgorithm;
 
 #| EC curve name or EdDSA curve name
-subset CryptoCurve of Str where { ECCurve($_) || EdDSA($_) }
+subset CryptoCurve of Str where { (try ECCurve($_)) || (try EdDSA($_)) }
 
 #- PublicKey -------------------------------------------------------------------
 class SBOM::PublicKey:ver<0.0.3>:auth<zef:lizmat> does SBOM {

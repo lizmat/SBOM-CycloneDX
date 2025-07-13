@@ -23,7 +23,7 @@ class SBOM::Reference:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 #| as CycloneDX BOM-Link to reference CycloneDX BOMs or any object
 #| within a BOM. BOM-Link transforms applicable external references
 #| into relationships that can be expressed in a BOM or across BOMs.
-    has referenceURL $.url  is required;
+    has referenceURL $.url is required;
 
 #| An optional comment describing the external reference.
     has Str $.comment;

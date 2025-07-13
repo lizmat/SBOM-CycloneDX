@@ -5,13 +5,18 @@ Revision history for SBOM::CycloneDX
     - Make sure any additional named arguments will throw unless
       an attribute "@.additional-properties" is specified
     - Add support to instantiate directly from file
+    - Make unsupported enum strings die, instead of returning Nil
     - Added classes that combine other classes:
        - SBOM::Annotator
        - SBOM::IndividualOrOrganization
        - SBOM::AnyLicense
        - SBOM::Governor
+    - Added classes to wrap up information:
+       - SBOM::LicenseInfo
     - Added roles that combine other classes:
        - SBOM::StrOrProperty
+    - Added more test files from Giuseppe Di Terlizzi (GDT)'s repo
+    - Various tweaks and fixes
 
 0.0.3  2025-07-09T20:50:33+02:00
     - Several example SBOM files are now ingested without errors

@@ -44,7 +44,8 @@ role Enumify {
         %enums{$name} // Nil
     }
     method CALL-ME(Enumify:U: Str:D $name) {
-        %enums{$name} // Nil
+        %enums{$name}
+          // die "Could not find " ~ self.^name ~ ":$name enum"
     }
 }
 
