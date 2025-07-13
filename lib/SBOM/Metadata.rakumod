@@ -24,10 +24,6 @@ class SBOM::Metadata:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 #| given lifecycle.
     has Phase @.lifecycles;
 
-#| The tool(s) used in the creation, enrichment, and validation of
-#| the BOM.
-    has SBOM::Tool @.tools;
-
 #| [Deprecated] This will be removed in a future version. Use the
 #| "manufacturer" instead.  The organization that manufactured the
 #| component that the BOM describes.
@@ -58,17 +54,34 @@ class SBOM::Metadata:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 #| Any additional properties as name-value pairs.
     has SBOM::Property @.properties;
 
-    submethod TWEAK() {
+#| The legacy tools used in the creation, enrichment, and validation
+#| the BOM.
+    has SBOM::LegacyTool @!tools;
+
+#| The tool used in the creation, enrichment, and validation of
+#| the BOM.
+    has SBOM::Tool $!tools;
+
+    method TWEAK-nameds(SBOM::Metadata:) { ("tools",) }
+
+    submethod TWEAK(:$tools) {
         die "Can only have one SPDX license"
         if @!licenses > 1 && @!licenses.first(SBOM::SPDXLicense);
 
-        die "Can only have a single Tool"
-          unless @!tools.are(SBOM::LegacyTool)  # also no tools
-            || (@!tools == 1 &&  @!tools.head.WHAT =:= SBOM::Tool);
-
         die "Can only have one of 'manufacture' and 'manufacturer'"
           if $!manufacture && $!manufacturer;
+
+        if $tools ~~ Positional {
+            @!tools = $tools<>.map: { 
+                $_ ~~ SBOM ?? $_ !! SBOM::LegacyTool.new(|$_)
+            }
+        }
+        elsif $tools.defined {
+            $!tools := $tools ~~ SBOM ?? $tools<> !! SBOM::Tool.new(|$tools<>);
+        }
     }
+
+    method tools(SBOM::Metadata:D:) { $!tools // @!tools }
 }
 
 # vim: expandtab shiftwidth=4

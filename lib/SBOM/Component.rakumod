@@ -89,6 +89,11 @@ class SBOM::Component:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 #| through automated means may have @.manufacturer instead.
     has SBOM::Contact @.authors;
 
+# [Deprecated] This will be removed in a future version. Use @.authors
+# or @.manufacturer instead. The person(s) or organization(s) that
+# authored the component.
+    has Str $.author;
+
 #| The person(s) or organization(s) that published the component.
     has Str $.publisher;
 
@@ -229,17 +234,9 @@ class SBOM::Component:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 #| Enveloped signature in JSON Signature Format (JSF).
     has SBOM::ValidSignature $.signature;
 
-    # Also allow "author" as a deprecated shortcut to @authors
-    method TWEAK-nameds(::?CLASS:) { ("author",) }
-
-    submethod TWEAK(:$author) {
+    submethod TWEAK() {
         die q/'data' can only be specified if the 'type' is "data"/
           if @!data && $!type.name ne 'data';
-
-# [Deprecated] This will be removed in a future version. Use @.authors
-# or @.manufacturer instead. The person(s) or organization(s) that
-# authored the component.
-        @!authors.push(SBOM::Contact.new(:name($author))) if $author;
 
         die "Can only have one SPDX license"
           if @!licenses > 1 && @!licenses.first(SBOM::SPDXLicense);

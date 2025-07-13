@@ -8,8 +8,6 @@ use SBOM::Reference:ver<0.0.3>:auth<zef:lizmat>;
 use SBOM::Service:ver<0.0.3>:auth<zef:lizmat>;
 
 #- Tool ------------------------------------------------------------------------
-class SBOM::LegacyTool { ... }
-
 #| Description of a tool used to identify, confirm, or score a
 #| vulnerability.
 class SBOM::Tool:ver<0.0.3>:auth<zef:lizmat> does SBOM {
@@ -21,27 +19,12 @@ class SBOM::Tool:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 #| function-as-a-service, and other types of network or intra-process
 #| services.
     has SBOM::Service @.services;
-
-    # Handle legacy tool here
-    multi method new(SBOM::Tool:U: :$raw-error) {
-        if %_<name>
-          || %_<vendor>
-          || %_<version>
-          || %_<hashes>
-          || %_<externalReferences> {
-            SBOM::LegacyTool.new(:$raw-error, |%_)
-        }
-        else {
-            self.ingest($raw-error, %_)
-        }
-    }
 }
 
 #- LegacyTool ------------------------------------------------------------------
 #| Legacy format of the description of a tool used to identify,
 #| confirm, or score a vulnerability.
-class SBOM::LegacyTool:ver<0.0.3>:auth<zef:lizmat>
-  is SBOM::Tool does SBOM {
+class SBOM::LegacyTool:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 
 #| The name of the vendor who created the tool.
     has Str $.vendor;
@@ -59,7 +42,7 @@ class SBOM::LegacyTool:ver<0.0.3>:auth<zef:lizmat>
 #| information that may be relevant but are not included with the BOM.
 #| They may also establish specific relationships within or external
 #| to the BOM.
-    has SBOM::Reference @.externalReferences
+    has SBOM::Reference @.externalReferences;
 }
 
 # vim: expandtab shiftwidth=4

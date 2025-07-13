@@ -32,7 +32,7 @@ role SBOM:ver<0.0.3>:auth<zef:lizmat> {
     # Attribute name to positional mapper: returns True for an
     # attribute name if it was defined with a @ sigil
     my %positional is Map = @names.map: -> $name {
-        $name => True if %attribute{$name}.type ~~ Positional
+        $name => True if %attribute{$name}.type ~~ Positional;
     }
 
     # Attribute name to required flag, if attribute was specified
@@ -243,37 +243,41 @@ role SBOM:ver<0.0.3>:auth<zef:lizmat> {
         }
 
         # Set up list of keys to render, may have additional keys
-        my @keys = @names;
+        my @keys = (@names,self.TWEAK-nameds).flat;
 
-        # Create initial version of the Map
-        my $map := @names.map(-> $name {
+        # Create initial version of the Map, needs clone as @keys can
+        # be added while iterating, causing double adds
+        my $map := @keys.clone.map(-> $name {
             my $value := self."$name"();
             my $type  := %type{$name};
 
             # Generic mapification logic
             sub mapify($value) {
-                $type ~~ Cool
-                  ?? $value
-                  !! ($type ~~ Enumify)
-                    ?? $value ~~ Enumify
-                      ?? $value.name
-                      !! $value
-                    !! ($type ~~ DateTime)
-                      ?? $value ~~ DateTime
-                        ?? $value.Str.subst("Z","+00:00")
+                $type =:= Nil
+                  ?? $value.Map(:$ordered)
+                  !! $type ~~ Cool
+                    ?? $value
+                    !! ($type ~~ Enumify)
+                      ?? $value ~~ Enumify
+                        ?? $value.name
                         !! $value
-                      !! $value.Map(:$ordered)
+                      !! ($type ~~ DateTime)
+                        ?? $value ~~ DateTime
+                          ?? $value.Str.subst("Z","+00:00")
+                          !! $value
+                        !! $value.Map(:$ordered)
             }
 
-            # Have additional properties, so add them
+            # Have additional properties, so add them so theu appear
+            # in the Map, and thus in the JSON
             if $name eq 'additional-properties' {
                 $value.map({ @keys.push(.key); $_ }).Slip
             }
 
             # An array of sort, add them if they're not empty
-            elsif %positional{$name} {
-                if $value.elems {
-                    $name => $value.map(&mapify).List
+            elsif %positional{$name} || $value ~~ Positional {
+                if $value<>.elems {
+                    $name => $value<>.map(&mapify).List
                 }
             }
 

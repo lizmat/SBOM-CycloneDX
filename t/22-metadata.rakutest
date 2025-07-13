@@ -6,8 +6,9 @@ use testers;
 plan 2;
 
 my %complete is Map =
-  timestamp => "2020-04-13T20:20:39+00:00",
-  tools     => ( 
+  timestamp   => "2020-04-13T20:20:39+00:00",
+  manufacture => { name => "Acme Inc" }.Map,
+  tools       => ( 
     { 
       vendor  => "Awesome Vendor",
       name    => "Awesome Tool",
@@ -23,13 +24,15 @@ my %complete is Map =
         }.Map
       ) 
     }.Map,
-  ),
-  manufacture => { name => "Acme Inc" }.Map,
+  )
 ;
 
 test-map-json SBOM::Metadata, %complete, Q:to/JSON/;
 {
   "timestamp": "2020-04-13T20:20:39+00:00",
+  "manufacture": {
+    "name": "Acme Inc"
+  },
   "tools": [
     {
       "vendor": "Awesome Vendor",
@@ -46,10 +49,7 @@ test-map-json SBOM::Metadata, %complete, Q:to/JSON/;
         }
       ]
     }
-  ],
-  "manufacture": {
-    "name": "Acme Inc"
-  }
+  ]
 }
 JSON
 
