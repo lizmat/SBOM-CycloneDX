@@ -61,7 +61,7 @@ subset mime-type of Str where *.contains: /^ <mime-part> '/' <mime-part> $/;
 #| ^([a-fA-F0-9]{32}|[a-fA-F0-9]{40}|[a-fA-F0-9]{64}|[a-fA-F0-9]{96}|[a-fA-F0-9]{128})$.
 subset contentHash of Str where {
   .contains(/^ <[0..9 a..f A..F]>+ $/)
-    && .chars == 32 | 40 | 64 | 128
+    && .chars == 32 | 40 | 64 | 96 | 128
 }
 
 subset bomLinkDocument of Str where *.contains:

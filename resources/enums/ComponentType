@@ -13,7 +13,7 @@ A packaging and/or runtime format, not specific to any particular technology, wh
 platform
 A runtime environment which interprets or executes software. This may include runtimes such as those that execute bytecode or low-code/no-code application platforms.
 
-Operating-system
+operating-system
 A software operating system without regard to deployment model (i.e. installed on physical hardware, virtual machine, image, etc) Refer to https://en.wikipedia.org/wiki/Operating_system.
 
 device

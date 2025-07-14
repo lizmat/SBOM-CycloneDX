@@ -34,7 +34,7 @@ class SBOM::AlgorithmProperties:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 
 #| The target and execution environment in which the algorithm is
 #| implemented in.
-    has ExecutionEnvironment $.executionEnvironmment;
+    has ExecutionEnvironment $.executionEnvironment;
 
 #| The target platform for which the algorithm is implemented. The
 #| implementation can be 'generic', running on any platform or for
@@ -45,7 +45,7 @@ class SBOM::AlgorithmProperties:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 #| algorithm has received, if any. Certifications include revisions
 #| and levels of FIPS 140 or Common Criteria of different Extended
 #| Assurance Levels (CC-EAL).
-    has Certification $.certficationLevel;
+    has Certification @.certificationLevel;
 
 #| The mode of operation in which the cryptographic algorithm
 #| (block cipher) is used.

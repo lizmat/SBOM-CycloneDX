@@ -30,8 +30,9 @@ class SBOM::EvidenceMethod:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 #- Identity --------------------------------------------------------------------
 #| Evidence that substantiates the identity of a component.
 class SBOM::Identity:ver<0.0.3>:auth<zef:lizmat> does SBOM {
+
 #| The identity field of the component which the evidence describes.
-    has Field $.type is required;
+    has Field $.field is required;
 
 #| The overall confidence of the evidence from 0 - 1, where 1 is
 #| 100% confidence.

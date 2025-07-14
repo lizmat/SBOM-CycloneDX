@@ -1,0 +1,69 @@
+use lib $*PROGRAM.parent;
+use Test;
+use SBOM::Identity;
+use testers;
+
+plan 3;
+
+my %complete is Map =
+  field      => "purl",
+  confidence => 1,
+  methods    => (
+    {
+      technique  => "filename",
+      confidence => 0.1,
+      value      =>  "findbugs-project-3.0.0.jar"
+    }.Map,
+    {
+      technique  => "ast-fingerprint",
+      confidence => 0.9,
+      value      => "61e4bc08251761c3a73b606b9110a65899cb7d44f3b14c81ebc1e67c98e1d9ab"
+    }.Map,
+    {
+      technique  => "hash-comparison",
+      confidence => 0.7,
+      value      =>  "7c547a9d67cc7bc315c93b6e2ff8e4b6b41ae5be454ac249655ecb5ca2a85abf"
+    }.Map
+  ),
+  tools       => (
+    "bom-ref-of-tool-that-performed-analysis",
+  )
+;
+
+test-map-json SBOM::Identity, %complete, Q:to/JSON/;
+{
+  "field": "purl",
+  "confidence": 1,
+  "methods": [
+    {
+      "technique": "filename",
+      "confidence": 0.1,
+      "value": "findbugs-project-3.0.0.jar"
+    },
+    {
+      "technique": "ast-fingerprint",
+      "confidence": 0.9,
+      "value": "61e4bc08251761c3a73b606b9110a65899cb7d44f3b14c81ebc1e67c98e1d9ab"
+    },
+    {
+      "technique": "hash-comparison",
+      "confidence": 0.7,
+      "value": "7c547a9d67cc7bc315c93b6e2ff8e4b6b41ae5be454ac249655ecb5ca2a85abf"
+    }
+  ],
+  "tools": [
+    "bom-ref-of-tool-that-performed-analysis"
+  ]
+}
+JSON
+
+my %minimal is Map = field => "purl";
+test-map-json SBOM::Identity, %minimal, Q:to/JSON/, "minimal";
+{
+  "field": "purl"
+}
+JSON
+
+is-deeply SBOM::Identity.new, Nil, "no args return Nil";
+
+# vim: expandtab shiftwidth=4
