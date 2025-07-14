@@ -98,23 +98,23 @@ or a hash containing named arguments.
 Providing the CycloneDX v1.6 JSON specification in Raku. Accepts these
 named arguments:
 
-=item BOMFormat C<$bomFormat> (required)
+=item BOMFormat C<:$bomFormat> (required)
 
 Specifies the format of the BOM. This helps to identify the file as
 CycloneDX since BOMs do not have a filename convention, nor does JSON
 schema support namespaces.
 
-=item Str C<$specVersion> (required)
+=item Str C<:$specVersion> (required)
 
 The version of the CycloneDX specification the BOM conforms to.
 
-=item serialNumber C<$serialNumber>
+=item serialNumber C<:$serialNumber>
 
 Every BOM generated SHOULD have a unique serial number, even if the
 contents of the BOM have not changed over time. If specified, the serial
 number must conform to RFC 4122. Use of serial numbers is recommended.
 
-=item PositiveInt C<$version>
+=item PositiveInt C<:$version>
 
 Whenever an existing BOM is modified, either manually or through
 automated processes, the version of the BOM SHOULD be incremented by 1.
@@ -122,44 +122,44 @@ When a system is presented with multiple BOMs with identical serial
 numbers, the system SHOULD use the most recent version of the BOM. The
 default version is '1'.
 
-=item SBOM::Metadata C<$metadata>
+=item SBOM::Metadata C<:$metadata>
 
 Provides additional information about a BOM.
 
-=item SBOM::Component C<@components>
+=item SBOM::Component C<:@components>
 
 A list of software and hardware components. All items must be unique.
 
-=item SBOM::Service C<@services>
+=item SBOM::Service C<:@services>
 
 A list of services. This may include microservices,
 function-as-a-service, and other types of network or intra-process
 services. All items must be unique.
 
-=item SBOM::Reference C<@externalReferences>
+=item SBOM::Reference C<:@externalReferences>
 
 External references provide a way to document systems, sites, and
 information that may be relevant but are not included with the BOM. They
 may also establish specific relationships within or external to the BOM.
 
-=item SBOM::Dependency C<@dependencies>
+=item SBOM::Dependency C<:@dependencies>
 
 Provides the ability to document dependency relationships including
 provided & implemented components. All items must be unique.
 
-=item SBOM::Composition C<@compositions>
+=item SBOM::Composition C<:@compositions>
 
 Compositions describe constituent parts (including components,
 services, and dependency relationships) and their completeness. The
 completeness of vulnerabilities expressed in a BOM may also be
 described.
 
-=item SBOM::Vulnerability C<@vulnerabilities>
+=item SBOM::Vulnerability C<:@vulnerabilities>
 
 Vulnerabilities identified in components or services. All items must be
 unique.
 
-=item SBOM::Annotation C<@annotations>
+=item SBOM::Annotation C<:@annotations>
 
 Comments made by people, organizations, or tools about any object with
 a bom-ref, such as components, services, vulnerabilities, or the BOM
@@ -168,7 +168,7 @@ or commentary from various stakeholders. Annotations may be inline (with
 inventory) or externalized viai BOM-Link and may optionally be signed.
 All items must be unique.
 
-=item SBOM::Formulation C<@formulation>
+=item SBOM::Formulation C<:@formulation>
 
 Describes how a component or service was manufactured or deployed. This
 is achieved through the use of formulas, workflows, tasks, and steps,
@@ -176,21 +176,21 @@ which declare the precise steps to reproduce along with the observed
 formulas describing the steps which transpired in the manufacturing
 process. All items must be unique.
 
-=item SBOM::Declarations C<$declarations>
+=item SBOM::Declarations C<:$declarations>
 
 The list of declarations which describe the conformance to standards.
 Each declaration may include attestations, claims, and evidence.
 
-=item SBOM::Definition C<@definitions>
+=item SBOM::Definition C<:@definitions>
 
 A collection of reusable objects that are defined and may be used
 elsewhere in the BOM.
 
-=item SBOM::Property C<@properties>
+=item SBOM::Property C<:@properties>
 
 Any additional properties as name-value pairs.
 
-=item SBOM::ValidSignature C<$signature>
+=item SBOM::ValidSignature C<:$signature>
 
 Enveloped signature in JSON Signature Format (JSF).
 
@@ -199,32 +199,32 @@ Enveloped signature in JSON Signature Format (JSF).
 The physical address (location) of the organization. Accepts these
 named arguments:
 
-=item bom-ref C<$bom-ref>
+=item bom-ref C<:$bom-ref>
 
 An optional identifier which can be used to reference the address
 elsewhere in the BOM.
 
-=item Str C<$country>
+=item Str C<:$country>
 
 The country name or the two-letter ISO 3166-1 country code.
 
-=item Str C<$region>
+=item Str C<:$region>
 
 The region or state in the country.
 
-=item Str C<$locality>
+=item Str C<:$locality>
 
 The locality or city within the country.
 
-=item Str C<$postOfficeBoxNumber>
+=item Str C<:$postOfficeBoxNumber>
 
 The post office box number.
 
-=item Str C<$postalCode>
+=item Str C<:$postalCode>
 
 The postal code.
 
-=item Str C<$streetAddress>
+=item Str C<:$streetAddress>
 
 The street address.
 
@@ -232,11 +232,11 @@ The street address.
 
 An advisory of a vulnerability. Accepts these named arguments:
 
-=item Str C<$title>
+=item Str C<:$title>
 
 An optional name of the advisory.
 
-=item URL C<$url> (required)
+=item URL C<:$url> (required)
 
 Location where the advisory can be obtained.
 
@@ -245,15 +245,15 @@ Location where the advisory can be obtained.
 A version or range of versions and their status. Accepts these named
 arguments:
 
-=item versionString C<$version>
+=item versionString C<:$version>
 
 A single version of a component or service.
 
-=item versionRange C<$range>
+=item versionRange C<:$range>
 
 A version range specified in Package URL Version Range syntax
 
-=item VersionAffection C<$status>
+=item VersionAffection C<:$status>
 
 The vulnerability status for the version or range of versions.
 
@@ -262,11 +262,11 @@ The vulnerability status for the version or range of versions.
 The components or services that are affected by the vulnerability.
 Accepts these named arguments:
 
-=item bom-refOrLink C<$ref> (required)
+=item bom-refOrLink C<:$ref> (required)
 
 References a component or service by the objects bom-ref.
 
-=item SBOM::AffectedVersion C<@versions>
+=item SBOM::AffectedVersion C<:@versions>
 
 Zero or more individual versions or range of versions.
 
@@ -278,18 +278,18 @@ acknowledgment. It includes a list of authorizedi signatories who assert
 the validity of the document on behalf of the organization. Accepts
 these named arguments:
 
-=item Str C<$statement>
+=item Str C<:$statement>
 
 The brief statement affirmed by an individual regarding all
 declarations. This could be an affirmation of acceptance by a
 third-party auditor or receiving individual of a file.
 
-=item SBOM::Signatory C<@signatories>
+=item SBOM::Signatory C<:@signatories>
 
 The list of signatories authorized on behalf of an organization to
 assert validity of this document.
 
-=item SBOM::ValidSignature C<$signature>
+=item SBOM::ValidSignature C<:$signature>
 
 Enveloped signature in JSON Signature Format (JSF).
 
@@ -298,12 +298,12 @@ Enveloped signature in JSON Signature Format (JSF).
 Properties specific to a cryptographic algorithm. Accepts these named
 arguments:
 
-=item AlgorithmPrimitive C<$primitive>
+=item AlgorithmPrimitive C<:$primitive>
 
 Cryptographic building blocks used in higher-level cryptographic
 systems and protocols.
 
-=item Str C<$parameterSetIdentifier>
+=item Str C<:$parameterSetIdentifier>
 
 An identifier for the parameter set of the cryptographic algorithm.
 Examples: in AES128, '128' identifies the key length in bits, in SHA256,
@@ -311,7 +311,7 @@ Examples: in AES128, '128' identifies the key length in bits, in SHA256,
 maximum security level in bits, and 'SHA2-128s' identifies a parameter
 set used in SLH-DSA (FIPS205).
 
-=item Str C<$curve>
+=item Str C<:$curve>
 
 The specific underlying Elliptic Curve (EC) definition employed which
 is an indicator of the level of security strength, performance and
@@ -319,43 +319,43 @@ complexity. Absent an authoritative source of curve names, CycloneDX
 recommends using curve names as defined at https://neuromancer.sk/std/,
 the source of which can be found at https://github.com/J08nY/std-curves.
 
-=item ExecutionEnvironment C<$executionEnvironment>
+=item ExecutionEnvironment C<:$executionEnvironment>
 
 The target and execution environment in which the algorithm is
 implemented in.
 
-=item Platform C<$implementationPlatform>
+=item Platform C<:$implementationPlatform>
 
 The target platform for which the algorithm is implemented. The
 implementation can be 'generic', running on any platform or for a
 specific platform.
 
-=item Certification C<@certificationLevel>
+=item Certification C<:@certificationLevel>
 
 The certification that the implementation of the cryptographic
 algorithm has received, if any. Certifications include revisions and
 levels of FIPS 140 or Common Criteria of different Extended Assurance
 Levels (CC-EAL).
 
-=item CertificationMode C<$mode>
+=item CertificationMode C<:$mode>
 
 The mode of operation in which the cryptographic algorithm (block
 cipher) is used.
 
-=item CertificationPadding C<$padding>
+=item CertificationPadding C<:$padding>
 
 The padding scheme that is used for the cryptographic algorithm.
 
-=item CryptoFunction C<@cryptoFunctions>
+=item CryptoFunction C<:@cryptoFunctions>
 
 The cryptographic functions implemented by the cryptographic algorithm.
 
-=item UInt C<$classicalSecurityLevel>
+=item UInt C<:$classicalSecurityLevel>
 
 The classical security level that a cryptographic algorithm provides
 (in bits).
 
-=item nistQuantumSecurityLevel C<$nistQuantumSecurityLevel>
+=item nistQuantumSecurityLevel C<:$nistQuantumSecurityLevel>
 
 The NIST security strength category as defined in
 https://csrc.nist.gov/projects/post-quantum-cryptography/post-quantum-cryptography-standardization/evaluation-criteria/security-(evaluation-criteria).
@@ -366,34 +366,34 @@ A value of 0 indicates that none of the categories are met.
 An assessment of the impact and exploitability of a vulnerability.
 Accepts these named arguments:
 
-=item VulnerabilityState C<$state>
+=item VulnerabilityState C<:$state>
 
 Declares the current state of an occurrence of a vulnerability, after
 automated or manual analysis.
 
-=item Justification C<$justification>
+=item Justification C<:$justification>
 
 The rationale of why the impact analysis state was asserted.
 
-=item Response C<@response>
+=item Response C<:@response>
 
 A response to the vulnerability by the manufacturer, supplier, or
 project responsible for the affected component or service. More than one
 response is allowed. Responses are strongly encouraged for
 vulnerabilities where the analysis state is exploitable.
 
-=item Str C<$detail>
+=item Str C<:$detail>
 
 Detailed description of the impact including methods used during
 assessment. If a vulnerability is not exploitable, this field should
 include specific details on why the component or service is not impacted
 by this vulnerability.
 
-=item DateTime C<$firstIssued>
+=item DateTime C<:$firstIssued>
 
 The date and time (timestamp) when the analysis was first issued.
 
-=item DateTime C<$lastUpdated>
+=item DateTime C<:$lastUpdated>
 
 The date and time (timestamp) when the analysis was last updated.
 
@@ -406,30 +406,30 @@ or commentary from various stakeholders. Annotations may be inline (with
 inventory) or externalized via BOM-Link and may optionally be signed.
 Accepts these named arguments:
 
-=item bom-ref C<$bom-ref>
+=item bom-ref C<:$bom-ref>
 
 An optional identifier which can be used to reference the annotation
 elsewhere in the BOM.
 
-=item referenceURL C<@subjects> (required)
+=item referenceURL C<:@subjects> (required)
 
 The object in the BOM identified by its bom-ref. This is often a
 component or service, but may be any object type supporting bom-refs.
 
-=item SBOM::Annotator C<$annotator> (required)
+=item SBOM::Annotator C<:$annotator> (required)
 
 The organization, person, component, or service which created the
 textual content of the annotation.
 
-=item DateTime C<$timestamp> (required)
+=item DateTime C<:$timestamp> (required)
 
 The date and time (timestamp) when the annotation was created.
 
-=item Str C<$text> (required)
+=item Str C<:$text> (required)
 
 The textual content of the annotation.
 
-=item SBOM::ValidSignature C<$signature>
+=item SBOM::ValidSignature C<:$signature>
 
 Enveloped signature in JSON Signature Format (JSF).
 
@@ -438,19 +438,19 @@ Enveloped signature in JSON Signature Format (JSF).
 Person, organization, component, service making an annotation Accepts
 these named arguments:
 
-=item SBOM::Contact C<$individual>
+=item SBOM::Contact C<:$individual>
 
 The person that created the annotation.
 
-=item SBOM::Organization C<$organization>
+=item SBOM::Organization C<:$organization>
 
 The organization that created the annotation.
 
-=item SBOM::Component C<$component>
+=item SBOM::Component C<:$component>
 
 The tool or component that created the annotation.
 
-=item SBOM::Service C<$service>
+=item SBOM::Service C<:$service>
 
 The service that created the annotation.
 
@@ -464,7 +464,7 @@ Accepts these named arguments:
 The overall approach to learning used by the model for problem solving.
 Accepts these named arguments:
 
-=item Learning C<$type>
+=item Learning C<:$type>
 
 Learning types describing the learning problem or hybrid learning
 problem.
@@ -475,17 +475,17 @@ An assessor evaluating claims and determining conformance to
 requirements and confidence in that assessment. Accepts these named
 arguments:
 
-=item bom-ref C<$bom-ref>
+=item bom-ref C<:$bom-ref>
 
 An optional identifier which can be used to reference the object
 elsewhere in the BOM.
 
-=item Bool C<$thirdParty>
+=item Bool C<:$thirdParty>
 
 The boolean indicating if the assessor is outside the organization
 generating claims. A value of false indicates a self assessor.
 
-=item SBOM::Organization C<$organization>
+=item SBOM::Organization C<:$organization>
 
 The entity issuing the assessment.
 
@@ -495,18 +495,18 @@ Supporting material that helps in reproducing or understanding. This
 may include screenshots, payloads, and PoC exploit code. Accepts these
 named arguments:
 
-=item mime-type C<$contentType>
+=item mime-type C<:$contentType>
 
 Specifies the format and nature of the data being attached, helping
 systems correctly interpret and process the content. Common content type
 examples include application/json for JSON data and text/plain for plan
 text documents.
 
-=item Encoding C<$encoding>
+=item Encoding C<:$encoding>
 
 Specifies the optional encoding the text is represented in.
 
-=item Str C<$content> (required)
+=item Str C<:$content> (required)
 
 The attachment data. Proactive controls such as input validation and
 sanitization should be employed to prevent misuse of attachment text.
@@ -516,20 +516,20 @@ sanitization should be employed to prevent misuse of attachment text.
 An attestations asserted by an assessor that maps requirements to
 claims. Accepts these named arguments:
 
-=item Str C<$summary>
+=item Str C<:$summary>
 
 The short description explaining the main points of the attestation.
 
-=item bom-ref C<$assessor>
+=item bom-ref C<:$assessor>
 
 The bom-ref to the assessor asserting the attestation.
 
-=item SBOM::RequirementGrouping C<@map>
+=item SBOM::RequirementGrouping C<:@map>
 
 The grouping of requirements to claims and the attestors declared
 conformance and confidence thereof.
 
-=item SBOM::ValidSignature C<$signature>
+=item SBOM::ValidSignature C<:$signature>
 
 Enveloped signature in JSON Signature Format (JSF).
 
@@ -538,7 +538,7 @@ Enveloped signature in JSON Signature Format (JSF).
 Evidence of component use through the callstack. Accepts these named
 arguments:
 
-=item SBOM::Frame C<@frames>
+=item SBOM::Frame C<:@frames>
 
 The frames seen in the callstack.
 
@@ -547,37 +547,37 @@ The frames seen in the callstack.
 Properties for cryptographic assets of asset type 'certificate' Accepts
 these named arguments:
 
-=item Str C<$subjectName>
+=item Str C<:$subjectName>
 
 The subject name for the certificate.
 
-=item Str C<$issuerName>
+=item Str C<:$issuerName>
 
 The issuer name for the certificate.
 
-=item DateTime C<$notValidBefore>
+=item DateTime C<:$notValidBefore>
 
 The date and time according to ISO-8601 standard from which the
 certificate is valid.
 
-=item DateTime C<$notValidAfter>
+=item DateTime C<:$notValidAfter>
 
 The date and time according to ISO-8601 standard from which the
 certificate is not valid anymore.
 
-=item Str C<$signatureAlgorithmRef>
+=item Str C<:$signatureAlgorithmRef>
 
 The bom-ref to signature algorithm used by the certificate.
 
-=item Str C<$subjectPublicKeyRef>
+=item Str C<:$subjectPublicKeyRef>
 
 The bom-ref to the public key of the subject.
 
-=item Str C<$certificateFormat>
+=item Str C<:$certificateFormat>
 
 The format of the certificate.
 
-=item Str C<$certificateExtension>
+=item Str C<:$certificateExtension>
 
 The file extension of the certificate.
 
@@ -585,15 +585,15 @@ The file extension of the certificate.
 
 A cipher suite related to a protocol. Accepts these named arguments:
 
-=item Str C<$name>
+=item Str C<:$name>
 
 A common name for the cipher suite.
 
-=item Str C<@algorithms>
+=item Str C<:@algorithms>
 
 A list of algorithms related to the cipher suite.
 
-=item Str C<@identifiers>
+=item Str C<:@identifiers>
 
 A list of common identifiers for the cipher suite.
 
@@ -601,47 +601,47 @@ A list of common identifiers for the cipher suite.
 
 A claim. Accepts these named arguments:
 
-=item bom-ref C<$bom-ref>
+=item bom-ref C<:$bom-ref>
 
 An optional identifier which can be used to reference the object
 elsewhere in the BOM.
 
-=item bom-ref C<$target>
+=item bom-ref C<:$target>
 
 The bom-ref to a target representing a specific system, application,
 API, module, team, person, process, business unit, company, etc... that
 this claim is being applied to.
 
-=item Str C<$predicate>
+=item Str C<:$predicate>
 
 The specific statement or assertion about the target.
 
-=item bom-ref C<@mitigationStrategies>
+=item bom-ref C<:@mitigationStrategies>
 
 The list of bom-ref to the evidence provided describing the mitigation
 strategies. Each mitigation strategy should include an explanation of
 how any weaknesses in the evidence will be mitigated.
 
-=item Str C<$reasoning>
+=item Str C<:$reasoning>
 
 The written explanation of why the evidence provided substantiates the
 claim.
 
-=item bom-ref C<@evidence>
+=item bom-ref C<:@evidence>
 
 The list of bom-ref to evidence that supports this claim.
 
-=item bom-ref C<@counterEvidence>
+=item bom-ref C<:@counterEvidence>
 
 The list of bom-ref to counter evidence that supports this claim.
 
-=item SBOM::Reference C<@externalReferences>
+=item SBOM::Reference C<:@externalReferences>
 
 External references provide a way to document systems, sites, and
 information that may be relevant but are not included with the BOM. They
 may also establish specific relationships within or external to the BOM.
 
-=item SBOM::ValidSignature C<$signature>
+=item SBOM::ValidSignature C<:$signature>
 
 Enveloped signature in JSON Signature Format (JSF).
 
@@ -649,11 +649,11 @@ Enveloped signature in JSON Signature Format (JSF).
 
 An expression of CO2 cost. Accepts these named arguments:
 
-=item number C<$value> (required)
+=item number C<:$value> (required)
 
 Quantity of carbon dioxide (CO2).
 
-=item CO2Cost C<$unit> (required)
+=item CO2Cost C<:$unit> (required)
 
 Unit of carbon dioxide (CO2).
 
@@ -661,11 +661,11 @@ Unit of carbon dioxide (CO2).
 
 Command or directive for a step Accepts these named arguments:
 
-=item Str C<$executed>
+=item Str C<:$executed>
 
 A text representation of the executed command.
 
-=item SBOM::Property C<@properties>
+=item SBOM::Property C<:@properties>
 
 Any additional properties as name-value pairs.
 
@@ -673,26 +673,26 @@ Any additional properties as name-value pairs.
 
 Specifies an individual commit. Accepts these named arguments:
 
-=item Str C<$uid>
+=item Str C<:$uid>
 
 A unique identifier of the commit. This may be version control
 specific. For example, Subversion uses revision numbers whereas git uses
 commit hashes.
 
-=item URL C<$url>
+=item URL C<:$url>
 
 The URL to the commit. This URL will typically point to a commit in a
 version control system.
 
-=item SBOM::Development C<$author>
+=item SBOM::Development C<:$author>
 
 The author who created the changes in the commit.
 
-=item SBOM::Development C<$committer>
+=item SBOM::Development C<:$committer>
 
 The person who committed or pushed the commit.
 
-=item Str C<$message>
+=item Str C<:$message>
 
 The text description of the contents of the commit.
 
@@ -700,50 +700,50 @@ The text description of the contents of the commit.
 
 A software or hardware component. Accepts these named arguments:
 
-=item ComponentType C<$type> (required)
+=item ComponentType C<:$type> (required)
 
 Specifies the type of the component. For software components, classify
 as application if no more specific appropriate classification is
 available or cannot be determined for the component.
 
-=item mime-type C<$mime-type>
+=item mime-type C<:$mime-type>
 
 The optional mime-type of the component. When used on file components,
 the mime-type can provide additional context about the kind of file
 being represented, such as an image, font, or executable. Some library
 or framework components may also have an associated mime-type.
 
-=item bom-ref C<$bom-ref>
+=item bom-ref C<:$bom-ref>
 
 An optional identifier which can be used to reference the component
 elsewhere in the BOM. Every bom-ref must be unique within the BOM. Value
 SHOULD not start with the BOM-Link intro 'urn:cdx:' to avoid conflicts
 with BOM-Links.
 
-=item SBOM::Organization C<$supplier>
+=item SBOM::Organization C<:$supplier>
 
 The organization that supplied the component. The supplier may often be
 the manufacturer, but may also be a distributor or repackager.
 
-=item SBOM::Organization C<$manufacturer>
+=item SBOM::Organization C<:$manufacturer>
 
 The organization that created the component. Manufacturer is common in
 components created through automated processes. Components created
 through manual means may have @.authors instead.
 
-=item SBOM::Contact C<@authors>
+=item SBOM::Contact C<:@authors>
 
 The person(s) who created the component. Authors are common in
 components created through manual processes. Components created through
 automated means may have @.manufacturer instead.
 
-=item Str C<$author>
+=item Str C<:$author>
 
-=item Str C<$publisher>
+=item Str C<:$publisher>
 
 The person(s) or organization(s) that published the component.
 
-=item Str C<$group>
+=item Str C<:$group>
 
 The grouping name or identifier. This will often be a shortened, single
 name of the company or project that produced the component, or the
@@ -751,40 +751,40 @@ source package or domain name. Whitespace and special characters should
 be avoided. Examples include: apache, org.apache.commons, and
 apache.org.
 
-=item Str C<$name> (required)
+=item Str C<:$name> (required)
 
 The name of the component. This will often be a shortened, single name
 of the component. Examples: commons-lang3 and jquery.
 
-=item versionString C<$version>
+=item versionString C<:$version>
 
 The component version. The version should ideally comply with semantic
 versioning but is not enforced.
 
-=item Str C<$description>
+=item Str C<:$description>
 
 Specifies a description for the component
 
-=item Scope C<$scope>
+=item Scope C<:$scope>
 
 Specifies the scope of the component. If scope is not specified,
 'required' scope SHOULD be assumed by the consumer of the BOM.
 
-=item SBOM::HashedString C<@hashes>
+=item SBOM::HashedString C<:@hashes>
 
 The hashes of the component.
 
-=item SBOM::AnyLicense C<@licenses>
+=item SBOM::AnyLicense C<:@licenses>
 
 EITHER (list of SPDX licenses and/or named licenses) OR (tuple of one
 SPDX License Expression)
 
-=item Str C<$copyright>
+=item Str C<:$copyright>
 
 A copyright notice informing users of the underlying claims to
 copyright ownership in a published work.
 
-=item CPE C<$cpe>
+=item CPE C<:$cpe>
 
 Asserts the identity of the component using CPE. The CPE must conform
 to the CPE 2.2 or 2.3 specification. See
@@ -792,7 +792,7 @@ https://nvd.nist.gov/products/cpe. Refer to @.evidence.identity to
 optionally provide evidence that substantiates the assertion of the
 component's identity.
 
-=item PURL C<$purl>
+=item PURL C<:$purl>
 
 Asserts the identity of the component using package-url (purl). The
 purl, if specified, must be valid and conform to the specification
@@ -800,7 +800,7 @@ defined at: https://github.com/package-url/purl-spec. Refer to
 @.evidence.identity to optionally provide evidence that substantiates
 the assertion of the component's identity.
 
-=item omniborId C<@omniborId>
+=item omniborId C<:@omniborId>
 
 Asserts the identity of the component using the OmniBOR Artifact ID.
 The OmniBOR, if specified, must be valid and conform to the
@@ -809,7 +809,7 @@ https://www.iana.org/assignments/uri-schemes/prov/gitoid. Refer to
 @.evidence.identity to optionally provide evidence that substantiates
 the assertion of the component's identity.
 
-=item SWHID C<@swhid>
+=item SWHID C<:@swhid>
 
 Asserts the identity of the component using the Software Heritage
 persistent identifier (SWHID). The SWHID, if specified, must be valid
@@ -818,14 +818,14 @@ https://docs.softwareheritage.org/devel/swh-model/persistent-identifiers.html.
 Refer to @.evidence.identity to optionally provide evidence that
 substantiates the assertion of the component's identity.
 
-=item SBOM::SWID C<$swid>
+=item SBOM::SWID C<:$swid>
 
 Asserts the identity of the component using ISO-IEC 19770-2 Software
 Identification (SWID) Tags. Refer to @.evidence.identity to optionally
 provide evidence that substantiates the assertion of the component's
 identity.
 
-=item Bool C<$modified>
+=item Bool C<:$modified>
 
 [Deprecated] This will be removed in a future version. Use the pedigree
 element instead to supply information on exactly how the component was
@@ -834,7 +834,7 @@ from the original. A value of true indicates the component is a
 derivative of the original. A value of false indicates the component has
 not been modified from the original.
 
-=item SBOM::Pedigree C<$pedigree>
+=item SBOM::Pedigree C<:$pedigree>
 
 Component pedigree is a way to document complex supply chain scenarios
 where components are created, distributed, modified, redistributed,
@@ -843,29 +843,29 @@ complex chain from the beginning, the end, or anywhere in the middle. It
 also provides a way to document variants where the exact relation may
 not be known.
 
-=item SBOM::Reference C<@externalReferences>
+=item SBOM::Reference C<:@externalReferences>
 
 External references provide a way to document systems, sites, and
 information that may be relevant but are not included with the BOM. They
 may also establish specific relationships within or external to the BOM.
 
-=item SBOM::Component C<@components>
+=item SBOM::Component C<:@components>
 
 A list of software and hardware components included in the parent
 component. This is not a dependency tree. It provides a way to specify a
 hierarchical representation of component assemblies, similar to system →
 subsystem → parts assembly in physical supply chains.
 
-=item SBOM::ComponentEvidence C<$evidence>
+=item SBOM::ComponentEvidence C<:$evidence>
 
 Provides the ability to document evidence collected through various
 forms of extraction or analysis.
 
-=item SBOM::ReleaseNotes C<$releaseNotes>
+=item SBOM::ReleaseNotes C<:$releaseNotes>
 
 Specifies optional release notes.
 
-=item SBOM::ModelCard C<$modelCard>
+=item SBOM::ModelCard C<:$modelCard>
 
 A model card describes the intended uses of a machine learning model
 and potential limitations, including biases and ethical considerations.
@@ -875,11 +875,11 @@ data useful for ML transparency. This object SHOULD be specified for any
 component of type machine-learning-model and must not be specified for
 other component types.
 
-=item SBOM::ComponentDataset C<@data>
+=item SBOM::ComponentDataset C<:@data>
 
 Data associated with a data component.
 
-=item SBOM::CryptoProperties C<$cryptoProperties>
+=item SBOM::CryptoProperties C<:$cryptoProperties>
 
 Cryptographic assets have properties that uniquely define them and that
 make them actionable for further reasoning. As an example, it makes a
@@ -890,17 +890,17 @@ are only defined by the definition of the algorithm variant. The
 presence of a weak cryptographic algorithm like SHA1 vs. HMAC-SHA1 also
 makes a difference.
 
-=item SBOM::Property C<@properties>
+=item SBOM::Property C<:@properties>
 
 Any additional properties as name-value pairs.
 
-=item Str C<@tags>
+=item Str C<:@tags>
 
 Textual strings that aid in discovery, search, and retrieval of the
 associated object. Tags often serve as a way to group or categorize
 similar or related objects by various attributes.
 
-=item SBOM::ValidSignature C<$signature>
+=item SBOM::ValidSignature C<:$signature>
 
 Enveloped signature in JSON Signature Format (JSF).
 
@@ -908,42 +908,42 @@ Enveloped signature in JSON Signature Format (JSF).
 
 A dataset associated with a component. Accepts these named arguments:
 
-=item bom-ref C<$bom-ref>
+=item bom-ref C<:$bom-ref>
 
 An optional identifier which can be used to reference the dataset
 elsewhere in the BOM.
 
-=item DataSource C<$type> (required)
+=item DataSource C<:$type> (required)
 
 The general theme or subject matter of the data being specified.
 
-=item Str C<$name>
+=item Str C<:$name>
 
 The name of the dataset.
 
-=item SBOM::DataContents C<$contents>
+=item SBOM::DataContents C<:$contents>
 
 The contents or references to the contents of the data being described.
 
-=item Str C<$classification>
+=item Str C<:$classification>
 
 Data classification tags data according to its type, sensitivity, and
 value if altered, stolen, or destroyed.
 
-=item Str C<@sensitiveData>
+=item Str C<:@sensitiveData>
 
 A description of any sensitive data in a dataset.
 
-=item SBOM::Graphics C<$graphics>
+=item SBOM::Graphics C<:$graphics>
 
 A collection of graphics that represent various measurements.
 
-=item Str C<$description>
+=item Str C<:$description>
 
 A description of the dataset. Can describe size of dataset, whether
 it's used for source code, training, testing, or validation, etc.
 
-=item SBOM::Governance C<$governance>
+=item SBOM::Governance C<:$governance>
 
 Data governance captures information regarding data ownership,
 stewardship, and custodianship, providing insights into the individuals
@@ -955,30 +955,30 @@ data throughout its lifecycle.
 The ability to document evidence about a component, collected through
 various forms of extraction or analysis. Accepts these named arguments:
 
-=item SBOM::Occurrence C<@occurrences>
+=item SBOM::Occurrence C<:@occurrences>
 
 Evidence of individual instances of a component spread across multiple
 locations.
 
-=item SBOM::Callstack C<$callstack>
+=item SBOM::Callstack C<:$callstack>
 
 Evidence of the components use through the callstack.
 
-=item SBOM::AnyLicense C<@licenses>
+=item SBOM::AnyLicense C<:@licenses>
 
 EITHER (list of SPDX licenses and/or named licenses) OR (tuple of one
 SPDX License Expression).
 
-=item SBOM::Copyright C<@copyright>
+=item SBOM::Copyright C<:@copyright>
 
 A copyright notice informing users of the underlying claims to
 copyright ownership in a published work.
 
-=item SBOM::Identity C<$identity>
+=item SBOM::Identity C<:$identity>
 
 [DEPRECATED] Evidence that substantiates the identity of a component.
 
-=item SBOM::Identity C<@identity>
+=item SBOM::Identity C<:@identity>
 
 Evidence that substantiates the identity of a component. The identity
 may be an object or an array of identity objects. Support for specifying
@@ -993,24 +993,24 @@ services, and dependency relationships) and their completeness. The
 completeness of vulnerabilities expressed in a BOM may also be
 described. Accepts these named arguments:
 
-=item bom-ref C<$bom-ref>
+=item bom-ref C<:$bom-ref>
 
 An optional identifier which can be used to reference the composition
 elsewhere in the BOM.
 
-=item Aggregate C<$aggregate>
+=item Aggregate C<:$aggregate>
 
 Specifies an aggregate type that describes how complete a relationship
 is.
 
-=item bom-refOrLink C<@assemblies>
+=item bom-refOrLink C<:@assemblies>
 
 The bom-ref identifiers of the components or services being described.
 Assemblies refer to nested relationships whereby a constituent part may
 include other constituent parts. References do not cascade to child
 parts. References are explicit for the specified constituent part only.
 
-=item bom-ref C<@dependencies>
+=item bom-ref C<:@dependencies>
 
 The bom-ref identifiers of the components or services being described.
 Dependencies refer to a relationship whereby an independent constituent
@@ -1018,11 +1018,11 @@ part requires another independent constituent part. References do not
 cascade to transitive dependencies. References are explicit for the
 specified dependency only.
 
-=item bom-ref C<@vulnerabilities>
+=item bom-ref C<:@vulnerabilities>
 
 The bom-ref identifiers of the vulnerabilities being described.
 
-=item SBOM::ValidSignature C<$signature>
+=item SBOM::ValidSignature C<:$signature>
 
 Enveloped signature in JSON Signature Format (JSF).
 
@@ -1031,16 +1031,16 @@ Enveloped signature in JSON Signature Format (JSF).
 A condition that was used to determine a trigger should be activated.
 Accepts these named arguments:
 
-=item Str C<$description>
+=item Str C<:$description>
 
 Describes the set of conditions which cause the trigger to activate.
 
-=item Str C<$expression>
+=item Str C<:$expression>
 
 The logical expression that was evaluated that determined the trigger
 should be fired.
 
-=item SBOM::Property C<@properties>
+=item SBOM::Property C<:@properties>
 
 Any additional properties as name-value pairs.
 
@@ -1049,12 +1049,12 @@ Any additional properties as name-value pairs.
 The confidence of the claim meeting the requirement. Accepts these
 named arguments:
 
-=item confidenceValue C<$score>
+=item confidenceValue C<:$score>
 
 The confidence of the claim between and inclusive of 0 and 1, where 1
 is 100% confidence.
 
-=item Str C<$rationale>
+=item Str C<:$rationale>
 
 The rationale for the confidence score.
 
@@ -1062,11 +1062,11 @@ The rationale for the confidence score.
 
 The confidence interval of a metric. Accepts these named arguments:
 
-=item Str C<$lowerBound>
+=item Str C<:$lowerBound>
 
 The lower bound of the confidence interval.
 
-=item Str C<$upperBound>
+=item Str C<:$upperBound>
 
 The upper bound of the confidence interval.
 
@@ -1075,16 +1075,16 @@ The upper bound of the confidence interval.
 The conformance of the claim meeting a requirement. Accepts these named
 arguments:
 
-=item conformanceValue C<$score>
+=item conformanceValue C<:$score>
 
 The conformance of the claim between and inclusive of 0 and 1, where 1
 is 100% conformance.
 
-=item Str C<$rationale>
+=item Str C<:$rationale>
 
 The rationale for the conformance score.
 
-=item bom-ref C<@mitigationStrategies>
+=item bom-ref C<:@mitigationStrategies>
 
 The list of bom-ref to the evidence provided describing the mitigation
 strategies.
@@ -1094,34 +1094,34 @@ strategies.
 What considerations should be taken into account regarding a model's
 construction, training, and application? Accepts these named arguments:
 
-=item Str C<@users>
+=item Str C<:@users>
 
 Who are the intended users of the model?
 
-=item Str C<@useCases>
+=item Str C<:@useCases>
 
 What are the intended use cases of the model?
 
-=item Str C<@technicalLimitations>
+=item Str C<:@technicalLimitations>
 
 What are the known technical limitations of the model? E.g. What
 kind(s) of data should the model be expected not to perform well on?
 What are the factors that might degrade model performance?
 
-=item Str C<@performanceTradeoffs>
+=item Str C<:@performanceTradeoffs>
 
 What are the known tradeoffs in accuracy/performance of the model?
 
-=item SBOM::EthicalConsideration C<@ethicalConsiderations>
+=item SBOM::EthicalConsideration C<:@ethicalConsiderations>
 
 What are the ethical risks involved in the application of this model?
 
-=item SBOM::EnvironmentalConsiderations C<$environmentalConsiderations>
+=item SBOM::EnvironmentalConsiderations C<:$environmentalConsiderations>
 
 What are the various environmental impacts the corresponding machine
 learning model has exhibited across its lifecycle?
 
-=item SBOM::FairnessAssessment C<@fairnessAssessments>
+=item SBOM::FairnessAssessment C<:@fairnessAssessments>
 
 How does the model affect groups at risk of being systematically
 disadvantaged? What are the harms and benefits to the various affected
@@ -1131,20 +1131,20 @@ groups?
 
 A person. Accepts these named arguments:
 
-=item bom-ref C<$bom-ref>
+=item bom-ref C<:$bom-ref>
 
 An optional identifier which can be used to reference the person
 elsewhere in the BOM.
 
-=item Str C<$name>
+=item Str C<:$name>
 
 The name of a contact.
 
-=item email C<$email>
+=item email C<:$email>
 
 The email address of the contact.
 
-=item Str C<$phone>
+=item Str C<:$phone>
 
 The phone number of the contact.
 
@@ -1154,7 +1154,7 @@ Copyright evidence captures intellectual property assertions, providing
 evidence of possible ownership and legal protection. Accepts these named
 arguments:
 
-=item Str C<$text> (required)
+=item Str C<:$text> (required)
 
 The textual content of the copyright.
 
@@ -1163,11 +1163,11 @@ The textual content of the copyright.
 Individuals or organizations credited with the discovery of a
 vulnerability. Accepts these named arguments:
 
-=item SBOM::Organization C<@organizations>
+=item SBOM::Organization C<:@organizations>
 
 The organizations credited with vulnerability discovery.
 
-=item SBOM::Contact C<@individuals>
+=item SBOM::Contact C<:@individuals>
 
 The individuals, not associated with organizations, that are credited
 with vulnerability discovery.
@@ -1177,56 +1177,56 @@ with vulnerability discovery.
 Properties for cryptographic assets of asset type:
 related-crypto-material Accepts these named arguments:
 
-=item Crypto C<$type>
+=item Crypto C<:$type>
 
 The type for the related cryptographic material
 
-=item Str C<$id>
+=item Str C<:$id>
 
 The optional unique identifier for the related cryptographic material.
 
-=item CryptoState C<$state>
+=item CryptoState C<:$state>
 
 The key state as defined by NIST SP 800-57.
 
-=item Str C<$algorithmRef>
+=item Str C<:$algorithmRef>
 
 The bom-ref to the algorithm used to generate the related cryptographic
 material.
 
-=item DateTime C<$creationDate>
+=item DateTime C<:$creationDate>
 
 The date and time (timestamp) when the related cryptographic material
 was created.
 
-=item DateTime C<$activationDate>
+=item DateTime C<:$activationDate>
 
 The date and time (timestamp) when the related cryptographic material
 was activated.
 
-=item DateTime C<$updateDate>
+=item DateTime C<:$updateDate>
 
 The date and time (timestamp) when the related cryptographic material
 was updated.
 
-=item DateTime C<$expirationDate>
+=item DateTime C<:$expirationDate>
 
 The date and time (timestamp) when the related cryptographic material
 expires.
 
-=item Str C<$value>
+=item Str C<:$value>
 
 The associated value of the cryptographic material.
 
-=item UInt C<$size>
+=item UInt C<:$size>
 
 The size of the cryptographic asset (in bits).
 
-=item Str C<$format>
+=item Str C<:$format>
 
 The format of the related cryptographic material (e.g. P8, PEM, DER).
 
-=item SBOM::CryptoSecurity C<$securedBy>
+=item SBOM::CryptoSecurity C<:$securedBy>
 
 The mechanism by which the cryptographic asset is secured by.
 
@@ -1241,28 +1241,28 @@ are only defined by the definition of the algorithm variant. The
 presence of a weak cryptographic algorithm like SHA1 vs. HMAC-SHA1 also
 makes a difference. Accepts these named arguments:
 
-=item CryptoAsset C<$assetType> (required)
+=item CryptoAsset C<:$assetType> (required)
 
 Type of crypto asset.
 
-=item SBOM::AlgorithmProperties C<$algorithmProperties>
+=item SBOM::AlgorithmProperties C<:$algorithmProperties>
 
 Additional properties specific to a cryptographic algorithm.
 
-=item SBOM::CertificateProperties C<$certificateProperties>
+=item SBOM::CertificateProperties C<:$certificateProperties>
 
 Properties for cryptographic assets of asset type 'certificate'.
 
-=item SBOM::CryptoMaterialProperties C<$relatedCryptoMaterialProperties>
+=item SBOM::CryptoMaterialProperties C<:$relatedCryptoMaterialProperties>
 
 Properties for cryptographic assets of asset type
 'related-crypto-material'.
 
-=item SBOM::CryptoProtocolProperties C<$protocolProperties>
+=item SBOM::CryptoProtocolProperties C<:$protocolProperties>
 
 Properties specific to cryptographic assets of type: protocol.
 
-=item Str C<$oid>
+=item Str C<:$oid>
 
 The object identifier (OID) of the cryptographic asset.
 
@@ -1271,24 +1271,24 @@ The object identifier (OID) of the cryptographic asset.
 Properties specific to cryptographic assets of type: protocol. Accepts
 these named arguments:
 
-=item CryptoProtocol C<$type>
+=item CryptoProtocol C<:$type>
 
 The concrete protocol type.
 
-=item versionString C<$version>
+=item versionString C<:$version>
 
 The version of the protocol.
 
-=item SBOM::CipherSuite C<@cipherSuites>
+=item SBOM::CipherSuite C<:@cipherSuites>
 
 A list of cipher suites related to the protocol.
 
-=item SBOM::IKEv2TransformTypes C<$ikev2TransformTypes>
+=item SBOM::IKEv2TransformTypes C<:$ikev2TransformTypes>
 
 The IKEv2 transform types supported (types 1-4), defined in RFC 7296
 section 3.3.2, and additional properties.
 
-=item IDnotbomLink C<@cryptoRefArray>
+=item IDnotbomLink C<:@cryptoRefArray>
 
 A list of protocol-related cryptographic assets, Identifier for
 referable and therefore interlinkable elements.
@@ -1298,11 +1298,11 @@ referable and therefore interlinkable elements.
 The mechanism by which a cryptographic asset is secured by. Accepts
 these named arguments:
 
-=item Str C<$mechanism>
+=item Str C<:$mechanism>
 
 Specifies the mechanism by which the cryptographic asset is secured by.
 
-=item Str C<$algorithmRef>
+=item Str C<:$algorithmRef>
 
 The bom-ref to the algorithm.
 
@@ -1311,15 +1311,15 @@ The bom-ref to the algorithm.
 The contents or references to the contents of data being described.
 Accepts these named arguments:
 
-=item SBOM::Attachment C<$attachment>
+=item SBOM::Attachment C<:$attachment>
 
 An optional way to include textual or encoded data.
 
-=item URL C<$url>
+=item URL C<:$url>
 
 The URL to where the data can be retrieved.
 
-=item SBOM::Property C<@properties>
+=item SBOM::Property C<:@properties>
 
 Any additional properties as name-value pairs.
 
@@ -1327,42 +1327,42 @@ Any additional properties as name-value pairs.
 
 Evidence used in a declaration. Accepts these named arguments:
 
-=item bom-ref C<$bom-ref>
+=item bom-ref C<:$bom-ref>
 
 An optional identifier which can be used to reference the object
 elsewhere in the BOM.
 
-=item propertyName C<$propertyName>
+=item propertyName C<:$propertyName>
 
 The reference to the property name as defined in the CycloneDX Property
 Taxonomy.
 
-=item Str C<$description>
+=item Str C<:$description>
 
 The written description of what this evidence is and how it was
 created.
 
-=item SBOM::EvidenceDataset C<@data>
+=item SBOM::EvidenceDataset C<:@data>
 
 The output or analysis that supports claims.
 
-=item DateTime C<$created>
+=item DateTime C<:$created>
 
 The date and time (timestamp) when the evidence was created.
 
-=item DateTime C<$expires>
+=item DateTime C<:$expires>
 
 The date and time (timestamp) when the evidence is no longer valid.
 
-=item SBOM::Contact C<$author>
+=item SBOM::Contact C<:$author>
 
 The author of the evidence.
 
-=item SBOM::Contact C<$reviewer>
+=item SBOM::Contact C<:$reviewer>
 
 The reviewer of the evidence.
 
-=item SBOM::ValidSignature C<$signature>
+=item SBOM::ValidSignature C<:$signature>
 
 Enveloped signature in JSON Signature Format (JSF).
 
@@ -1371,36 +1371,36 @@ Enveloped signature in JSON Signature Format (JSF).
 Describes the conformance to standards, may include attestations,
 claims, and evidence. Accepts these named arguments:
 
-=item SBOM::Assessor C<@assessors>
+=item SBOM::Assessor C<:@assessors>
 
 The list of assessors evaluating claims and determining conformance to
 requirements and confidence in that assessment.
 
-=item SBOM::Attestation C<@attestations>
+=item SBOM::Attestation C<:@attestations>
 
 The list of attestations asserted by an assessor that maps requirements
 to claims.
 
-=item SBOM::Claim C<@claims>
+=item SBOM::Claim C<:@claims>
 
 The list of claims.
 
-=item SBOM::DeclarationEvidence C<@evidence>
+=item SBOM::DeclarationEvidence C<:@evidence>
 
 The list of evidence.
 
-=item SBOM::Target C<@targets>
+=item SBOM::Target C<:@targets>
 
 The list of targets which claims are made against.
 
-=item SBOM::Affirmation C<$affirmation>
+=item SBOM::Affirmation C<:$affirmation>
 
 A concise statement affirmed by an individual regarding all
 declarations, often used for third-party auditor acceptance or recipient
 acknowledgment. It includes a list of authorized signatories who assert
 the validity of the document on behalf of the organization.
 
-=item SBOM::ValidSignature C<$signature>
+=item SBOM::ValidSignature C<:$signature>
 
 Enveloped signature in JSON Signature Format (JSF).
 
@@ -1409,7 +1409,7 @@ Enveloped signature in JSON Signature Format (JSF).
 Reusable object that may be used elsewhere in the BOM. Accepts these
 named arguments:
 
-=item SBOM::Standard C<@standards>
+=item SBOM::Standard C<:@standards>
 
 The list of standards which may consist of regulations, industry or
 organizational-specific standards, maturity models, best practices, or
@@ -1427,16 +1427,16 @@ indicator of an object being dependency-free. It is recommended to
 leverage compositions to indicate unknown dependency graphs. Accepts
 these named arguments:
 
-=item bom-ref C<$ref>
+=item bom-ref C<:$ref>
 
 References a component or service by its bom-ref attribute.
 
-=item bom-ref C<@dependsOn>
+=item bom-ref C<:@dependsOn>
 
 The bom-ref identifiers of the components or services that are
 dependencies of this dependency object.
 
-=item bom-ref C<@provides>
+=item bom-ref C<:@provides>
 
 The bom-ref identifiers of the components or services that define a
 given specification or standard, which are provided or implemented by
@@ -1449,15 +1449,15 @@ another component does not imply that the implementation is in use.
 An action during development, such as a commit. Accepts these named
 arguments:
 
-=item DateTime C<$timestamp>
+=item DateTime C<:$timestamp>
 
 The timestamp in which the action occurred.
 
-=item Str C<$name>
+=item Str C<:$name>
 
 The name of the individual who performed the action.
 
-=item email C<$email>
+=item email C<:$email>
 
 The email address of the individual who performed the action.
 
@@ -1466,11 +1466,11 @@ The email address of the individual who performed the action.
 The patch file (or diff) that shows changes. Refer to
 https://en.wikipedia.org/wiki/Diff Accepts these named arguments:
 
-=item SBOM::Attachment C<$text>
+=item SBOM::Attachment C<:$text>
 
 Specifies the optional text of the diff.
 
-=item URL C<$url>
+=item URL C<:$url>
 
 Specifies the URL to the diff.
 
@@ -1479,29 +1479,29 @@ Specifies the URL to the diff.
 Describes energy consumption information incurred during a component's
 lifecycle activities. Accepts these named arguments:
 
-=item Activity C<$activity> (required)
+=item Activity C<:$activity> (required)
 
 The type of activity that is part of a machine learning model
 development or operational lifecycle.
 
-=item SBOM::EnergyProvider C<@energyProviders> (required)
+=item SBOM::EnergyProvider C<:@energyProviders> (required)
 
 The provider(s) of the energy consumed by the associated model
 development lifecycle activity.
 
-=item SBOM::EnergyCost C<$activityEnergyCost> (required)
+=item SBOM::EnergyCost C<:$activityEnergyCost> (required)
 
 The total energy cost associated with the model lifecycle activity.
 
-=item SBOM::CO2Cost C<$co2CostEquivalent>
+=item SBOM::CO2Cost C<:$co2CostEquivalent>
 
 The CO2 cost (debit) equivalent to the total energy cost.
 
-=item SBOM::CO2Cost C<$co2CostOffset>
+=item SBOM::CO2Cost C<:$co2CostOffset>
 
 The CO2 offset (credit) for the CO2 equivalent cost.
 
-=item SBOM::Property C<@properties>
+=item SBOM::Property C<:@properties>
 
 Any additional properties as name-value pairs.
 
@@ -1510,11 +1510,11 @@ Any additional properties as name-value pairs.
 The energy provided by the energy source for an associated activity.
 Accepts these named arguments:
 
-=item number C<$value> (required)
+=item number C<:$value> (required)
 
 Quantity of energy.
 
-=item EnergyUnit C<$unit> (required)
+=item EnergyUnit C<:$unit> (required)
 
 Unit of energy.
 
@@ -1523,28 +1523,28 @@ Unit of energy.
 The provider of the energy consumed by a model during its development
 lifecycle activity. Accepts these named arguments:
 
-=item bom-ref C<$bom-ref>
+=item bom-ref C<:$bom-ref>
 
 An optional identifier which can be used to reference the energy
 provider elsewhere in the BOM.
 
-=item Str C<$description>
+=item Str C<:$description>
 
 A description of the energy provider.
 
-=item SBOM::Organization C<$organization> (required)
+=item SBOM::Organization C<:$organization> (required)
 
 The organization that provides energy.
 
-=item Energy C<$energySource> (required)
+=item Energy C<:$energySource> (required)
 
 The energy source for the energy provider.
 
-=item SBOM::EnergyCost C<$energyProvided> (required)
+=item SBOM::EnergyCost C<:$energyProvided> (required)
 
 The energy provided by the energy source for an associated activity.
 
-=item SBOM::Reference C<@externalReferences>
+=item SBOM::Reference C<:@externalReferences>
 
 External references provide a way to document systems, sites, and
 information that may be relevant but are not included with the BOM. They
@@ -1555,12 +1555,12 @@ may also establish specific relationships within or external to the BOM.
 What are the various environmental impacts a machine learning model has
 exhibited across its lifecycle? Accepts these named arguments:
 
-=item SBOM::EnergyConsumption C<@energyConsumptions>
+=item SBOM::EnergyConsumption C<:@energyConsumptions>
 
 Describes energy consumption information incurred for one or more
 component lifecycle activities.
 
-=item SBOM::Property C<@properties>
+=item SBOM::Property C<:@properties>
 
 Any additional properties as name-value pairs.
 
@@ -1569,11 +1569,11 @@ Any additional properties as name-value pairs.
 What are the ethical risks involved in the application of a model?
 Accepts these named arguments:
 
-=item Str C<$name>
+=item Str C<:$name>
 
 The name of the risk.
 
-=item Str C<$mitigationStrategy>
+=item Str C<:$mitigationStrategy>
 
 Strategy used to address this risk.
 
@@ -1582,31 +1582,31 @@ Strategy used to address this risk.
 The event data that caused the associated trigger to activate. Accepts
 these named arguments:
 
-=item Str C<$uid>
+=item Str C<:$uid>
 
 The unique identifier of the event.
 
-=item Str C<$description>
+=item Str C<:$description>
 
 A description of the event.
 
-=item DateTime C<$timeReceived>
+=item DateTime C<:$timeReceived>
 
 The date and time (timestamp) when the event was received.
 
-=item SBOM::Attachment C<$data>
+=item SBOM::Attachment C<:$data>
 
 Encoding of the raw event data.
 
-=item SBOM::ResourceReference C<$source>
+=item SBOM::ResourceReference C<:$source>
 
 References the component or service that was the source of the event.
 
-=item SBOM::ResourceReference C<$target>
+=item SBOM::ResourceReference C<:$target>
 
 References the component or service that was the target of the event.
 
-=item SBOM::Property C<@properties>
+=item SBOM::Property C<:@properties>
 
 Any additional properties as name-value pairs.
 
@@ -1615,24 +1615,24 @@ Any additional properties as name-value pairs.
 Data associated with evidence of a claim. Accepts these named
 arguments:
 
-=item Str C<$name>
+=item Str C<:$name>
 
 The name of the data.
 
-=item SBOM::DataContents C<$contents>
+=item SBOM::DataContents C<:$contents>
 
 The contents or references to the contents of the data being described.
 
-=item Str C<$classification>
+=item Str C<:$classification>
 
 Data classification tags data according to its type, sensitivity, and
 value if altered, stolen, or destroyed.
 
-=item Str C<@sensitiveData>
+=item Str C<:@sensitiveData>
 
 A description of any sensitive data included.
 
-=item SBOM::Governance C<$governance>
+=item SBOM::Governance C<:$governance>
 
 Data governance captures information regarding data ownership,
 stewardship, and custodianship, providing insights into the individuals
@@ -1644,17 +1644,17 @@ data throughout its lifecycle.
 A method used to extract and/or analyze the evidence. Accepts these
 named arguments:
 
-=item Evidence C<$technique> (required)
+=item Evidence C<:$technique> (required)
 
 The technique used in this method of analysis.
 
-=item confidenceValue C<$confidence> (required)
+=item confidenceValue C<:$confidence> (required)
 
 The confidence of the evidence from 0 - 1, where 1 is 100% confidence.
 Confidence is specific to the technique used. Each technique of analysis
 can have independent confidence.
 
-=item Str C<$value>
+=item Str C<:$value>
 
 The value or contents of the evidence.
 
@@ -1663,19 +1663,19 @@ The value or contents of the evidence.
 Executes specific commands or tools in order to accomplish its owning
 task as part of a sequence. Accepts these named arguments:
 
-=item Str C<$name>
+=item Str C<:$name>
 
 A name for the step.
 
-=item Str C<$description>
+=item Str C<:$description>
 
 A description for the step.
 
-=item SBOM::Command C<@commands>
+=item SBOM::Command C<:@commands>
 
 Ordered list of commands or directives for the step.
 
-=item SBOM::Property C<@properties>
+=item SBOM::Property C<:@properties>
 
 Any additional properties as name-value pairs.
 
@@ -1685,20 +1685,20 @@ How does the model affect groups at risk of being systematically
 disadvantaged? What are the harms and benefits to the various affected
 groups? Accepts these named arguments:
 
-=item Str C<$groupAtRisk>
+=item Str C<:$groupAtRisk>
 
 The groups or individuals at risk of being systematically disadvantaged
 by the model.
 
-=item Str C<$benefits>
+=item Str C<:$benefits>
 
 Expected benefits to the identified groups.
 
-=item Str C<$harms>
+=item Str C<:$harms>
 
 Expected harms to the identified groups.
 
-=item Str C<$mitigationStrategy>
+=item Str C<:$mitigationStrategy>
 
 With respect to the benefits and harms outlined, please describe any
 mitigation strategy implemented.
@@ -1711,27 +1711,27 @@ which declare the precise steps to reproduce along with the observed
 formulas describing the steps which transpired in the manufacturing
 process. Accepts these named arguments:
 
-=item bom-ref C<$bom-ref>
+=item bom-ref C<:$bom-ref>
 
 An optional identifier which can be used to reference the formula
 elsewhere in the BOM.
 
-=item SBOM::Component C<@components>
+=item SBOM::Component C<:@components>
 
 Transient components that are used in tasks that constitute one or more
 of this formula's workflows.
 
-=item SBOM::Service C<@services>
+=item SBOM::Service C<:@services>
 
 Transient services that are used in tasks that constitute one or more
 of this formula's workflows.
 
-=item SBOM::Workflow C<@workflows>
+=item SBOM::Workflow C<:@workflows>
 
 List of workflows that can be declared to accomplish specific
 orchestrated goals and independently triggered.
 
-=item SBOM::Property C<@properties>
+=item SBOM::Property C<:@properties>
 
 Any additional properties as name-value pairs.
 
@@ -1744,32 +1744,32 @@ forming an array-like structure that orchestrates the flow of program
 execution and manages the sequence of function invocations. Accepts
 these named arguments:
 
-=item Str C<$package>
+=item Str C<:$package>
 
 A package organizes modules into namespaces, providing a unique
 namespace for each type it contains.
 
-=item Str C<$module> (required)
+=item Str C<:$module> (required)
 
 A module or class that encloses functions/methods and other code.
 
-=item Str C<$function>
+=item Str C<:$function>
 
 A block of code designed to perform a particular task.
 
-=item Str C<@parameters>
+=item Str C<:@parameters>
 
 Optional arguments that are passed to the module or function.
 
-=item PositiveInt C<$line>
+=item PositiveInt C<:$line>
 
 The line number the code that is called resides on.
 
-=item PositiveInt C<$column>
+=item PositiveInt C<:$column>
 
 The column the code that is called resides.
 
-=item Str C<$fullFilename>
+=item Str C<:$fullFilename>
 
 The full path and filename of the module.
 
@@ -1780,17 +1780,17 @@ stewardship, and custodianship, providing insights into the individuals
 or entities responsible for managing, overseeing, and safeguarding the
 data throughout its lifecycle. Accepts these named arguments:
 
-=item SBOM::Governor C<@custodians>
+=item SBOM::Governor C<:@custodians>
 
 Data custodians are responsible for the safe custody, transport, and
 storage of data.
 
-=item SBOM::Governor C<@stewards>
+=item SBOM::Governor C<:@stewards>
 
 Data stewards are responsible for data content, context, and associated
 business rules.
 
-=item SBOM::Governor C<@owners>
+=item SBOM::Governor C<:@owners>
 
 Data owners are concerned with risk and appropriate access to data.
 
@@ -1798,11 +1798,11 @@ Data owners are concerned with risk and appropriate access to data.
 
 A person or organization governing data Accepts these named arguments:
 
-=item SBOM::Organization C<$organization>
+=item SBOM::Organization C<:$organization>
 
 A governing organization
 
-=item SBOM::Contact C<$contact>
+=item SBOM::Contact C<:$contact>
 
 A governing individual
 
@@ -1810,11 +1810,11 @@ A governing individual
 
 A single graphic Accepts these named arguments:
 
-=item Str C<$name>
+=item Str C<:$name>
 
 The name of the graphic.
 
-=item SBOM::Attachment C<$image>
+=item SBOM::Attachment C<:$image>
 
 The graphic (vector or raster).
 
@@ -1823,11 +1823,11 @@ The graphic (vector or raster).
 A collection of graphics that represent various measurements. Accepts
 these named arguments:
 
-=item Str C<$description>
+=item Str C<:$description>
 
 A description of this collection of graphics.
 
-=item SBOM::Graphic C<@collection>
+=item SBOM::Graphic C<:@collection>
 
 A collection of graphics.
 
@@ -1835,11 +1835,11 @@ A collection of graphics.
 
 A hashed representation of data Accepts these named arguments:
 
-=item HashAlgorithm C<$alg> (required)
+=item HashAlgorithm C<:$alg> (required)
 
 The algorithm that generated the hash value.
 
-=item contentHash C<$content> (required)
+=item contentHash C<:$content> (required)
 
 The value of the hash.
 
@@ -1848,25 +1848,25 @@ The value of the hash.
 Evidence that substantiates the identity of a component. Accepts these
 named arguments:
 
-=item Field C<$field> (required)
+=item Field C<:$field> (required)
 
 The identity field of the component which the evidence describes.
 
-=item confidenceValue C<$confidence>
+=item confidenceValue C<:$confidence>
 
 The overall confidence of the evidence from 0 - 1, where 1 is 100%
 confidence.
 
-=item Str C<$concludedValue>
+=item Str C<:$concludedValue>
 
 The value of the field (cpe, purl, etc) that has been concluded based
 on the aggregate of all methods (if available).
 
-=item SBOM::EvidenceMethod C<@methods>
+=item SBOM::EvidenceMethod C<:@methods>
 
 The methods used to extract and/or analyze the evidence.
 
-=item bom-refOrLink C<@tools>
+=item bom-refOrLink C<:@tools>
 
 The object in the BOM identified by its bom-ref. This is often a
 component or service but may be any object type supporting bom-refs.
@@ -1878,28 +1878,28 @@ the metadata/tools, components, or formulation.
 The IKEv2 transform types supported (types 1-4), defined in RFC 7296
 section 3.3.2, and additional properties. Accepts these named arguments:
 
-=item Str C<@encr>
+=item Str C<:@encr>
 
 Transform Type 1: encryption algorithms.
 
-=item Str C<@prf>
+=item Str C<:@prf>
 
 Transform Type 2: pseudorandom functions.
 
-=item Str C<@integ>
+=item Str C<:@integ>
 
 Transform Type 3: integrity algorithms.
 
-=item Str C<@ke>
+=item Str C<:@ke>
 
 Transform Type 4: Key Exchange Method (KE) per RFC 9370, formerly
 called Diffie-Hellman Group (D-H).
 
-=item Bool C<$esn>
+=item Bool C<:$esn>
 
 Specifies if an Extended Sequence Number (ESN) is used.
 
-=item IDnotbomLink C<@auth>
+=item IDnotbomLink C<:@auth>
 
 IKEv2 Authentication methods: identifier for referable and therefore
 interlinkable elements.
@@ -1909,34 +1909,34 @@ interlinkable elements.
 Type that represents various input data types and formats. Accepts
 these named arguments:
 
-=item SBOM::ResourceReference C<$source>
+=item SBOM::ResourceReference C<:$source>
 
 A reference to the component or service that provided the input to the
 task (e.g., reference to a service with data flow value of inbound)
 
-=item SBOM::ResourceReference C<$target>
+=item SBOM::ResourceReference C<:$target>
 
 A reference to the component or service that received or stored the
 input if not the task itself (e.g., a local, named storage workspace)
 
-=item SBOM::ResourceReference C<$resource>
+=item SBOM::ResourceReference C<:$resource>
 
 A reference to an independent resource provided as an input to a task
 by the workflow runtime.
 
-=item SBOM::Parameter C<@parameters>
+=item SBOM::Parameter C<:@parameters>
 
 Inputs that have the form of parameters with names and values.
 
-=item SBOM::Attachment C<$data>
+=item SBOM::Attachment C<:$data>
 
 Inputs that have the form of data.
 
-=item SBOM::Property C<@properties>
+=item SBOM::Property C<:@properties>
 
 Any additional properties as name-value pairs.
 
-=item Mu C<@environmentVars>
+=item Mu C<:@environmentVars>
 
 Inputs that have the form of parameters with names and values.
 
@@ -1945,23 +1945,23 @@ Inputs that have the form of parameters with names and values.
 Legacy format of the description of a tool used to identify, confirm,
 or score a vulnerability. Accepts these named arguments:
 
-=item Str C<$vendor>
+=item Str C<:$vendor>
 
 The name of the vendor who created the tool.
 
-=item Str C<$name>
+=item Str C<:$name>
 
 The name of the tool.
 
-=item versionString C<$version>
+=item versionString C<:$version>
 
 The version of the tool.
 
-=item SBOM::HashedString C<@hashes>
+=item SBOM::HashedString C<:@hashes>
 
 The hashes of the tool (if applicable).
 
-=item SBOM::Reference C<@externalReferences>
+=item SBOM::Reference C<:@externalReferences>
 
 External references provide a way to document systems, sites, and
 information that may be relevant but are not included with the BOM. They
@@ -1976,15 +1976,15 @@ Management (ITAM), and Software Asset Management (SAM). Thus, a BOM may
 include data specific to or only obtainable in a given lifecycle.
 Accepts these named arguments:
 
-=item Phase C<$phase>
+=item Phase C<:$phase>
 
 A pre-defined phase in the product lifecycle.
 
-=item Str C<$name>
+=item Str C<:$name>
 
 The name of the lifecycle phase.
 
-=item Str C<$description>
+=item Str C<:$description>
 
 The description of the lifecycle phase.
 
@@ -1993,57 +1993,57 @@ The description of the lifecycle phase.
 Provides additional information about a BOM. Accepts these named
 arguments:
 
-=item DateTime C<$timestamp>
+=item DateTime C<:$timestamp>
 
 The date and time (timestamp) when the BOM was created.
 
-=item SBOM::Lifecycle C<@lifecycles>
+=item SBOM::Lifecycle C<:@lifecycles>
 
 The product lifecycle(s) that this BOM represents.
 
-=item SBOM::Organization C<$manufacture>
+=item SBOM::Organization C<:$manufacture>
 
 [Deprecated] This will be removed in a future version. Use the
 "manufacturer" instead. The organization that manufactured the component
 that the BOM describes.
 
-=item SBOM::Organization C<$manufacturer>
+=item SBOM::Organization C<:$manufacturer>
 
 The organization that created the BOM. Manufacturer is common in BOMs
 created through automated processes. BOMs created through manual means
 may have @.authors instead.
 
-=item SBOM::Contact C<@authors>
+=item SBOM::Contact C<:@authors>
 
 The person(s) who created the BOM. Authors are common in BOMs created
 through manual processes. BOMs created through automated means may have
 $.manufacturer instead.
 
-=item SBOM::Component C<$component>
+=item SBOM::Component C<:$component>
 
 The component that the BOM describes.
 
-=item SBOM::Organization C<$supplier>
+=item SBOM::Organization C<:$supplier>
 
 The organization that supplied the component that the BOM describes.
 The supplier may often be the manufacturer, but may also be a
 distributor or repackager.
 
-=item SBOM::AnyLicense C<@licenses>
+=item SBOM::AnyLicense C<:@licenses>
 
 The license information for the BOM document. This may be different
 from the license(s) of the component(s) that the BOM describes.
 
-=item SBOM::Property C<@properties>
+=item SBOM::Property C<:@properties>
 
 Any additional properties as name-value pairs.
 
-=item SBOM::LegacyTool C<@tools>
+=item SBOM::LegacyTool C<:@tools>
 
 The legacy tools used in the creation, enrichment, and validation the
 BOM.
 
-=item SBOM::Tool C<$tools>
+=item SBOM::Tool C<:$tools>
 
 The tool used in the creation, enrichment, and validation of the BOM.
 
@@ -2055,22 +2055,22 @@ Model cards typically contain the training parameters, which datasets
 were used to train the model, performance metrics, and other relevant
 data useful for ML transparency. Accepts these named arguments:
 
-=item bom-ref C<$bom-ref>
+=item bom-ref C<:$bom-ref>
 
 An optional identifier which can be used to reference the model card
 elsewhere in the BOM.
 
-=item SBOM::ModelParameters C<$modelParameters>
+=item SBOM::ModelParameters C<:$modelParameters>
 
 Hyper-parameters for construction of the model.
 
-=item SBOM::QuantitativeAnalysis C<$quantitativeAnalysis>
+=item SBOM::QuantitativeAnalysis C<:$quantitativeAnalysis>
 
 A quantitative analysis of the model
 
-=item SBOM::Considerations C<$considerations>
+=item SBOM::Considerations C<:$considerations>
 
-=item SBOM::Property C<@properties>
+=item SBOM::Property C<:@properties>
 
 Any additional properties as name-value pairs.
 
@@ -2079,42 +2079,42 @@ Any additional properties as name-value pairs.
 A dataset used to train and evaluate the model. Accepts these named
 arguments:
 
-=item bom-ref C<$bom-ref>
+=item bom-ref C<:$bom-ref>
 
 An optional identifier which can be used to reference the dataset
 elsewhere in the BOM.
 
-=item DataSource C<$type> (required)
+=item DataSource C<:$type> (required)
 
 The general theme or subject matter of the data being specified.
 
-=item Str C<$name>
+=item Str C<:$name>
 
 The name of the dataset.
 
-=item SBOM::DataContents C<$contents>
+=item SBOM::DataContents C<:$contents>
 
 The contents or references to the contents of the data being described.
 
-=item Str C<$classification>
+=item Str C<:$classification>
 
 Data classification tags data according to its type, sensitivity, and
 value if altered, stolen, or destroyed.
 
-=item Str C<@sensitiveData>
+=item Str C<:@sensitiveData>
 
 A description of any sensitive data in a dataset.
 
-=item SBOM::Graphics C<$graphics>
+=item SBOM::Graphics C<:$graphics>
 
 A collection of graphics that represent various measurements.
 
-=item Str C<$description>
+=item Str C<:$description>
 
 A description of the dataset. Can describe size of dataset, whether
 it's used for source code, training, testing, or validation, etc.
 
-=item SBOM::Governance C<$governance>
+=item SBOM::Governance C<:$governance>
 
 Data governance captures information regarding data ownership,
 stewardship, and custodianship, providing insights into the individuals
@@ -2125,7 +2125,7 @@ data throughout its lifecycle.
 
 The input / output format of a model Accepts these named arguments:
 
-=item Str C<$format>
+=item Str C<:$format>
 
 The data format for input/output to the model, e.g. "string", "image",
 "time-series".
@@ -2135,35 +2135,35 @@ The data format for input/output to the model, e.g. "string", "image",
 Hyper-parameters for construction of the model. Accepts these named
 arguments:
 
-=item SBOM::Approach C<$approach>
+=item SBOM::Approach C<:$approach>
 
 The overall approach to learning used by the model for problem solving.
 
-=item Str C<$task>
+=item Str C<:$task>
 
 Directly influences the input and/or output. Examples include
 classification, regression, clustering, etc.
 
-=item Str C<$architectureFamily>
+=item Str C<:$architectureFamily>
 
 The model architecture family such as transformer network,
 convolutional neural network, residual neural network, LSTM neural
 network, etc.
 
-=item Str C<$modelArchitecture>
+=item Str C<:$modelArchitecture>
 
 The specific architecture of the model such as GPT-1, ResNet-50,
 YOLOv3, etc.
 
-=item SBOM::ModelDataset C<@datasets>
+=item SBOM::ModelDataset C<:@datasets>
 
 The datasets used to train and evaluate the model.
 
-=item SBOM::ModelFormat C<@inputs>
+=item SBOM::ModelFormat C<:@inputs>
 
 The input format(s) of the model.
 
-=item SBOM::ModelFormat C<@outputs>
+=item SBOM::ModelFormat C<:@outputs>
 
 The output format(s) of the model.
 
@@ -2172,12 +2172,12 @@ The output format(s) of the model.
 A release note containing the locale and content. Accepts these named
 arguments:
 
-=item locale C<$locale>
+=item locale C<:$locale>
 
 The ISO-639 (or higher) language code and optional ISO-3166 (or higher)
 country code.
 
-=item SBOM::Attachment C<$text> (required)
+=item SBOM::Attachment C<:$text> (required)
 
 Specifies the full content of the release note.
 
@@ -2186,28 +2186,28 @@ Specifies the full content of the release note.
 Evidence of instance of a component spread across multiple locations.
 Accepts these named arguments:
 
-=item bom-ref C<$bom-ref>
+=item bom-ref C<:$bom-ref>
 
 An optional identifier which can be used to reference the occurrence
 elsewhere in the BOM
 
-=item Str C<$location> (required)
+=item Str C<:$location> (required)
 
 The location or path to where the component was found.
 
-=item PositiveInt C<$line>
+=item PositiveInt C<:$line>
 
 The line number where the component was found.
 
-=item PositiveInt C<$offset>
+=item PositiveInt C<:$offset>
 
 The offset where the component was found.
 
-=item Str C<$symbol>
+=item Str C<:$symbol>
 
 The symbol name that was found associated with the component.
 
-=item Str C<$additionalContext>
+=item Str C<:$additionalContext>
 
 Any additional context of the detected component (e.g. a code snippet).
 
@@ -2215,24 +2215,24 @@ Any additional context of the detected component (e.g. a code snippet).
 
 An organization, as opposed to a person. Accepts these named arguments:
 
-=item bom-ref C<$bom-ref>
+=item bom-ref C<:$bom-ref>
 
 An optional identifier which can be used to reference the object
 elsewhere in the BOM.
 
-=item Str C<$name>
+=item Str C<:$name>
 
 The name of the organization.
 
-=item SBOM::Address C<$address>
+=item SBOM::Address C<:$address>
 
 The physical address (location) of the organization.
 
-=item URL C<@url>
+=item URL C<:@url>
 
 The URL of the organization. Multiple URLs are allowed.
 
-=item SBOM::Contact C<@contact>
+=item SBOM::Contact C<:@contact>
 
 A contact at the organization. Multiple contacts are allowed.
 
@@ -2241,33 +2241,33 @@ A contact at the organization. Multiple contacts are allowed.
 Represents resources and data output from a task at runtime by executor
 or task commands. Accepts these named arguments:
 
-=item OutputType C<$type>
+=item OutputType C<:$type>
 
 Describes the type of data output.
 
-=item SBOM::ResourceReference C<$source>
+=item SBOM::ResourceReference C<:$source>
 
 Component or service that generated or provided the output from a task
 (e.g., a build tool)
 
-=item SBOM::ResourceReference C<$target>
+=item SBOM::ResourceReference C<:$target>
 
 Component or service that received the output from the task (e.g.,
 reference to an artifactory service with data flow value of outbound).
 
-=item SBOM::ResourceReference C<$resource>
+=item SBOM::ResourceReference C<:$resource>
 
 A reference to an independent resource generated as output by a task.
 
-=item SBOM::Attachment C<$data>
+=item SBOM::Attachment C<:$data>
 
 Outputs that have the form of data.
 
-=item SBOM::Property C<@properties>
+=item SBOM::Property C<:@properties>
 
 Any additional properties as name-value pairs.
 
-=item Mu C<@environmentVars>
+=item Mu C<:@environmentVars>
 
 Outputs that have the form of environment variables.
 
@@ -2276,15 +2276,15 @@ Outputs that have the form of environment variables.
 A representation of a functional parameter. Accepts these named
 arguments:
 
-=item Str C<$name>
+=item Str C<:$name>
 
 The name of the parameter.
 
-=item Str C<$value>
+=item Str C<:$value>
 
 The value of the parameter.
 
-=item Str C<$dataType>
+=item Str C<:$dataType>
 
 The data type of the parameter.
 
@@ -2292,17 +2292,17 @@ The data type of the parameter.
 
 Specifies an individual patch Accepts these named arguments:
 
-=item Patch C<$type> (required)
+=item Patch C<:$type> (required)
 
 Specifies the purpose for the patch including the resolution of
 defects, security issues, or new behavior or functionality.
 
-=item SBOM::Diff C<$diff>
+=item SBOM::Diff C<:$diff>
 
 The patch file (or diff) that shows changes. Refer to
 https://en.wikipedia.org/wiki/Diff
 
-=item SBOM::Resolve C<@resolves>
+=item SBOM::Resolve C<:@resolves>
 
 A collection of issues the patch resolves.
 
@@ -2315,7 +2315,7 @@ complex chain from the beginning, the end, or anywhere in the middle. It
 also provides a way to document variants where the exact relation may
 not be known. Accepts these named arguments:
 
-=item SBOM::Component C<@ancestors>
+=item SBOM::Component C<:@ancestors>
 
 Describes zero or more components in which a component is derived from.
 This is commonly used to describe forks from existing projects where the
@@ -2326,30 +2326,30 @@ BOM. However, Component B contains a pedigree node with a single
 ancestor documenting Component A - the original component from which
 Component B is derived from.
 
-=item SBOM::Component C<@descendants>
+=item SBOM::Component C<:@descendants>
 
 Descendants are the exact opposite of ancestors. This provides a way to
 document all forks (and their forks) of an original or root component.
 
-=item SBOM::Component C<@variants>
+=item SBOM::Component C<:@variants>
 
 Variants describe relations where the relationship between the
 components is not known. For example, if Component A contains nearly
 identical code to Component B. They are both related, but it is unclear
 if one is derived from the other, or if they share a common ancestor.
 
-=item SBOM::Commit C<@commits>
+=item SBOM::Commit C<:@commits>
 
 A list of zero or more commits which provide a trail describing how the
 component deviates from an ancestor, descendant, or variant.
 
-=item SBOM::Patch C<@patches>
+=item SBOM::Patch C<:@patches>
 
 A list of zero or more patches describing how the component deviates
 from an ancestor, descendant, or variant. Patches may be complementary
 to commits or may be used in place of commits.
 
-=item Str C<$notes>
+=item Str C<:$notes>
 
 Notes, observations, and other non-structured commentary describing the
 components pedigree.
@@ -2360,20 +2360,20 @@ The model performance metrics being reported. Examples may include
 accuracy, F1 score, precision, top-3 error rates, MSC, etc. Accepts
 these named arguments:
 
-=item Str C<$type>
+=item Str C<:$type>
 
 The type of performance metric.
 
-=item Str C<$value>
+=item Str C<:$value>
 
 The value of the performance metric.
 
-=item Str C<$slice>
+=item Str C<:$slice>
 
 The name of the slice this metric was computed on. By default, assume
 this metric is not sliced.
 
-=item SBOM::ConfidenceInterval C<$confidenceInterval>
+=item SBOM::ConfidenceInterval C<:$confidenceInterval>
 
 The confidence interval of the metric.
 
@@ -2382,15 +2382,15 @@ The confidence interval of the metric.
 Evidence used to reproduce a vulnerability. Accepts these named
 arguments:
 
-=item Str C<$reproductionSteps>
+=item Str C<:$reproductionSteps>
 
 Precise steps to reproduce the vulnerability.
 
-=item Str C<$environment>
+=item Str C<:$environment>
 
 A description of the environment in which reproduction was possible.
 
-=item SBOM::Attachment C<@supportingMaterial>
+=item SBOM::Attachment C<:@supportingMaterial>
 
 Supporting material that helps in reproducing or understanding how
 reproduction is possible. This may include screenshots, payloads, and
@@ -2407,11 +2407,11 @@ the general public are encouraged to be registered in the CycloneDX
 Property Taxonomy. Formal registration is optional. Accepts these named
 arguments:
 
-=item Str C<$name> (required)
+=item Str C<:$name> (required)
 
 The name of the property. Duplicate names are allowed.
 
-=item Str C<$value>
+=item Str C<:$value>
 
 The value of the property.
 
@@ -2419,11 +2419,11 @@ The value of the property.
 
 A quantitative analysis of a model Accepts these named arguments:
 
-=item SBOM::PerformanceMetric C<@performanceMetrics>
+=item SBOM::PerformanceMetric C<:@performanceMetrics>
 
 The model performance metrics being reported.
 
-=item SBOM::Graphics C<$graphics>
+=item SBOM::Graphics C<:$graphics>
 
 A collection of graphics that represent various measurements.
 
@@ -2432,30 +2432,30 @@ A collection of graphics that represent various measurements.
 Defines the severity or risk ratings of a vulnerability. Accepts these
 named arguments:
 
-=item SBOM::Source C<$source>
+=item SBOM::Source C<:$source>
 
 The source that calculated the severity or risk rating of the
 vulnerability.
 
-=item number C<$score>
+=item number C<:$score>
 
 The numerical score of the rating.
 
-=item Severity C<$severity>
+=item Severity C<:$severity>
 
 Textual representation of the severity that corresponds to the
 numerical score of the rating.
 
-=item RiskMethodology C<$method>
+=item RiskMethodology C<:$method>
 
 Specifies the severity or risk scoring methodology or standard used.
 
-=item Str C<$vector>
+=item Str C<:$vector>
 
 Textual representation of the metric values used to score the
 vulnerability.
 
-=item Str C<$justification>
+=item Str C<:$justification>
 
 An optional reason for rating the vulnerability as it was.
 
@@ -2466,7 +2466,7 @@ information that may be relevant but are not included with the BOM. They
 may also establish specific relationships within or external to the BOM.
 Accepts these named arguments:
 
-=item referenceURL C<$url> (required)
+=item referenceURL C<:$url> (required)
 
 The URI (URL or URN) to the external reference. External references are
 URIs and therefore can accept any URL scheme including https (RFC-7230),
@@ -2476,65 +2476,65 @@ BOM-Link to reference CycloneDX BOMs or any object within a BOM.
 BOM-Link transforms applicable external references into relationships
 that can be expressed in a BOM or across BOMs.
 
-=item Str C<$comment>
+=item Str C<:$comment>
 
 An optional comment describing the external reference.
 
-=item ReferenceSource C<$type> (required)
+=item ReferenceSource C<:$type> (required)
 
 Specifies the type of external reference.
 
-=item SBOM::HashedString C<@hashes>
+=item SBOM::HashedString C<:@hashes>
 
 The hashes of the external reference (if applicable).
 
 =head2 SBOM::ReleaseNotes
 
-=item ReleaseLevel C<$type> (required)
+=item ReleaseLevel C<:$type> (required)
 
 The software versioning type the release note describes.
 
-=item Str C<$title>
+=item Str C<:$title>
 
 The title of the release.
 
-=item URL C<$featuredImage>
+=item URL C<:$featuredImage>
 
 The URL to an image that may be prominently displayed with the release
 note.
 
-=item URL C<$socialImage>
+=item URL C<:$socialImage>
 
 The URL to an image that may be used in messaging on social media
 platforms.
 
-=item Str C<$description>
+=item Str C<:$description>
 
 A short description of the release.
 
-=item DateTime C<$timestamp>
+=item DateTime C<:$timestamp>
 
 The date and time (timestamp) when the release note was created.
 
-=item Str C<@aliases>
+=item Str C<:@aliases>
 
 One or more alternate names the release may be referred to. This may
 include unofficial terms used by development and marketing teams (e.g.
 code names).
 
-=item Str C<@tags>
+=item Str C<:@tags>
 
 Textual strings that aid in discovery, search, and retrieval of the
 associated object. Tags often serve as a way to group or categorize
 similar or related objects by various attributes.
 
-=item SBOM::Resolve C<@resolves>
+=item SBOM::Resolve C<:@resolves>
 
 A collection of issues that have been resolved.
 
-=item SBOM::Note C<@notes>
+=item SBOM::Note C<:@notes>
 
-=item SBOM::Property C<@properties>
+=item SBOM::Property C<:@properties>
 
 Any additional properties as name-value pairs.
 
@@ -2542,45 +2542,45 @@ Any additional properties as name-value pairs.
 
 A requirement of a standard. Accepts these named arguments:
 
-=item bom-ref C<$bom-ref>
+=item bom-ref C<:$bom-ref>
 
 An optional identifier which can be used to reference the object
 elsewhere in the BOM.
 
-=item Str C<$identifier>
+=item Str C<:$identifier>
 
 The unique identifier used in the standard to identify a specific
 requirement. This should match what is in the standard and should not be
 the requirements bom-ref.
 
-=item Str C<$title>
+=item Str C<:$title>
 
 The title of the requirement.
 
-=item Str C<$text>
+=item Str C<:$text>
 
 The textual content of the requirement.
 
-=item Str C<@descriptions>
+=item Str C<:@descriptions>
 
 The supplemental text that provides additional guidance or context to
 the requirement, but is not directly part of the requirement.
 
-=item CRE C<@openCre>
+=item CRE C<:@openCre>
 
 The Common Requirements Enumeration (CRE) identifier(s).
 
-=item bom-ref C<$parent>
+=item bom-ref C<:$parent>
 
 The optional bom-ref to a parent requirement. This establishes a
 hierarchy of requirements. Top-level requirements must not define a
 parent. Only child requirements should define parents.
 
-=item SBOM::Property C<@properties>
+=item SBOM::Property C<:@properties>
 
 Any additional properties as name-value pairs.
 
-=item SBOM::Reference C<@externalReferences>
+=item SBOM::Reference C<:@externalReferences>
 
 External references provide a way to document systems, sites, and
 information that may be relevant but are not included with the BOM. They
@@ -2591,23 +2591,23 @@ may also establish specific relationships within or external to the BOM.
 The grouping of requirements to claims and the attestors declared
 conformance and confidence thereof. Accepts these named arguments:
 
-=item bom-ref C<$requirement>
+=item bom-ref C<:$requirement>
 
 The bom-ref to the requirement being attested to.
 
-=item bom-ref C<@claims>
+=item bom-ref C<:@claims>
 
 The list of bom-ref to the claims being attested to.
 
-=item bom-ref C<@counterClaims>
+=item bom-ref C<:@counterClaims>
 
 The list of bom-ref to the counter claims being attested to.
 
-=item SBOM::Conformance C<$conformance>
+=item SBOM::Conformance C<:$conformance>
 
 The conformance of the claim meeting a requirement.
 
-=item SBOM::Confidence C<$confidence>
+=item SBOM::Confidence C<:$confidence>
 
 The confidence of the claim meeting a requirement.
 
@@ -2615,24 +2615,24 @@ The confidence of the claim meeting a requirement.
 
 The requirement level of a claim. Accepts these named arguments:
 
-=item bom-ref C<$bom-ref>
+=item bom-ref C<:$bom-ref>
 
 An optional identifier which can be used to reference the object
 elsewhere in the BOM.
 
-=item Str C<$identifier>
+=item Str C<:$identifier>
 
 The identifier used in the standard to identify a specific level.
 
-=item Str C<$title>
+=item Str C<:$title>
 
 The title of the requirement.
 
-=item Str C<$description>
+=item Str C<:$description>
 
 The description of the requirement.
 
-=item bom-ref C<@requirements>
+=item bom-ref C<:@requirements>
 
 The list of requirement bom-refs that comprise the level.
 
@@ -2640,27 +2640,27 @@ The list of requirement bom-refs that comprise the level.
 
 An issue that has been resolved. Accepts these named arguments:
 
-=item ResolveType C<$type> (required)
+=item ResolveType C<:$type> (required)
 
 Specifies the type of issue.
 
-=item Str C<$id>
+=item Str C<:$id>
 
 The identifier of the issue assigned by the source of the issue.
 
-=item Str C<$name>
+=item Str C<:$name>
 
 The name of the issue.
 
-=item Str C<$description>
+=item Str C<:$description>
 
 A description of the issue.
 
-=item SBOM::Source C<$source>
+=item SBOM::Source C<:$source>
 
 The source of the issue where it is documented.
 
-=item URL C<@references>
+=item URL C<:@references>
 
 A collection of URL's for reference. Multiple URLs are allowed.
 
@@ -2669,11 +2669,11 @@ A collection of URL's for reference. Multiple URLs are allowed.
 A reference to a locally defined resource (e.g., a bom-ref) or an
 externally accessible resource. Accepts these named arguments:
 
-=item bom-refOrLink C<$ref>
+=item bom-refOrLink C<:$ref>
 
 References an object by its bom-ref attribute
 
-=item SBOM::Reference C<$externalReference>
+=item SBOM::Reference C<:$externalReference>
 
 Reference to an externally accessible resource.
 
@@ -2689,16 +2689,16 @@ indicator of an object being dependency-free. It is recommended to
 leverage compositions to indicate unknown dependency graphs. Accepts
 these named arguments:
 
-=item Str C<$ref> (required)
+=item Str C<:$ref> (required)
 
 References a component or service by its bom-ref attribute
 
-=item Str C<@dependsOn>
+=item Str C<:@dependsOn>
 
 The bom-ref identifiers of the components or services that are
 dependencies of this dependency object.
 
-=item Str C<@provides>
+=item Str C<:@provides>
 
 The bom-ref identifiers of the components or services that define a
 given specification or standard, which are provided or implemented by
@@ -2712,94 +2712,94 @@ A service, which may include microservices, function-as-a-service, and
 other types of network or intra-process services. Accepts these named
 arguments:
 
-=item bom-ref C<$bom-ref>
+=item bom-ref C<:$bom-ref>
 
 An optional identifier which can be used to reference the service
 elsewhere in the BOM. Every bom-ref must be unique within the BOM.
 
-=item SBOM::Organization C<$provider>
+=item SBOM::Organization C<:$provider>
 
 The organization that provides the service.
 
-=item Str C<$group>
+=item Str C<:$group>
 
 The grouping name, namespace, or identifier. This will often be a
 shortened, single name of the company or project that produced the
 service or domain name. Whitespace and special characters should be
 avoided.
 
-=item Str C<$name> (required)
+=item Str C<:$name> (required)
 
 The name of the service. This will often be a shortened, single name of
 the service.
 
-=item versionString C<$version>
+=item versionString C<:$version>
 
 The service version.
 
-=item Str C<$description>
+=item Str C<:$description>
 
 Specifies a description for the service.
 
-=item URL C<@endpoints>
+=item URL C<:@endpoints>
 
 The endpoint URIs of the service.
 
-=item Bool C<$authenticated>
+=item Bool C<:$authenticated>
 
 A boolean value indicating if the service requires authentication. A
 value of true indicates the service requires authentication prior to
 use. A value of false indicates the service does not require
 authentication.
 
-=item Bool C<$x-trust-boundary>
+=item Bool C<:$x-trust-boundary>
 
 A boolean value indicating if use of the service crosses a trust zone
 or boundary. A value of true indicates that by using the service, a
 trust boundary is crossed. A value of false indicates that by using the
 service, a trust boundary is not crossed.
 
-=item Str C<$trustZone>
+=item Str C<:$trustZone>
 
 The name of the trust zone the service resides in.
 
-=item SBOM::ServiceDataset C<@data>
+=item SBOM::ServiceDataset C<:@data>
 
 Specifies information about the data including the directional flow of
 data and the data classification.
 
-=item SBOM::AnyLicense C<@licenses>
+=item SBOM::AnyLicense C<:@licenses>
 
 EITHER (list of SPDX licenses and/or named licenses) OR (tuple of one
 SPDX License Expression).
 
-=item SBOM::Reference C<@externalReferences>
+=item SBOM::Reference C<:@externalReferences>
 
 External references provide a way to document systems, sites, and
 information that may be relevant but are not included with the BOM. They
 may also establish specific relationships within or external to the BOM.
 
-=item SBOM::Service C<@services>
+=item SBOM::Service C<:@services>
 
 A list of services included or deployed behind the parent service. This
 is not a dependency tree. It provides a way to specify ai hierarchical
 representation of service assemblies. All items must be unique.
 
-=item SBOM::ReleaseNotes C<$releaseNotes>
+=item SBOM::ReleaseNotes C<:$releaseNotes>
 
 Specifies optional release notes.
 
-=item SBOM::Property C<@properties>
+=item SBOM::Property C<:@properties>
 
 Any additional properties as name-value pairs.
 
-=item Str C<@tags>
+=item Str C<:@tags>
 
 Textual strings that aid in discovery, search, and retrieval of the
 associated object. Tags often serve as a way to group or categorize
 similar or related objects by various attributes.
 
-=item SBOM::ValidSignature C<$signature>
+=item SBOM::ValidSignature C<:$signature>
 
 Enveloped signature in JSON Signature Format (JSF).
 
@@ -2807,36 +2807,36 @@ Enveloped signature in JSON Signature Format (JSF).
 
 A dataset associated with a service. Accepts these named arguments:
 
-=item DataFlow C<$flow> (required)
+=item DataFlow C<:$flow> (required)
 
 Specifies the flow direction of the data, relative to the service.
 
-=item Str C<$classification> (required)
+=item Str C<:$classification> (required)
 
 Data classification tags data according to its type, sensitivity, and
 value if altered, stolen, or destroyed.
 
-=item Str C<$name>
+=item Str C<:$name>
 
 Name for the defined data.
 
-=item Str C<$description>
+=item Str C<:$description>
 
 Short description of the data content and usage.
 
-=item SBOM::Governance C<$governance>
+=item SBOM::Governance C<:$governance>
 
 Data governance captures information regarding data ownership,
 stewardship, and custodianship, providing insights into the individuals
 or entities responsible for managing, overseeing, and safeguarding the
 data throughout its lifecycle.
 
-=item Endpoint C<@source>
+=item Endpoint C<:@source>
 
 The URI, URL, or BOM-Link of the components or services the data came
 in from.
 
-=item Endpoint C<@destination>
+=item Endpoint C<:@destination>
 
 The URI, URL, or BOM-Link of the components or services the data is
 sent to.
@@ -2846,23 +2846,23 @@ sent to.
 A signatories authorized on behalf of an organization to assert
 validity of this document. Accepts these named arguments:
 
-=item Str C<$name>
+=item Str C<:$name>
 
 The signatory's name.
 
-=item Str C<$role>
+=item Str C<:$role>
 
 The signatory's role within an organization.
 
-=item SBOM::ValidSignature C<$signature>
+=item SBOM::ValidSignature C<:$signature>
 
 Enveloped signature in JSON Signature Format (JSF).
 
-=item SBOM::Organization C<$organization>
+=item SBOM::Organization C<:$organization>
 
 The signatory's organization.
 
-=item SBOM::Reference C<$externalReference>
+=item SBOM::Reference C<:$externalReference>
 
 External references provide a way to document systems, sites, and
 information that may be relevant but are not included with the BOM. They
@@ -2873,11 +2873,11 @@ may also establish specific relationships within or external to the BOM.
 Defines a source of documentation, e.g. about vulnerabilities. Accepts
 these named arguments:
 
-=item URL C<$url>
+=item URL C<:$url>
 
 The url of documentation as provided by the source.
 
-=item Str C<$name>
+=item Str C<:$name>
 
 The name of the source.
 
@@ -2886,11 +2886,11 @@ The name of the source.
 A reference to a source that published a vulnerability. Accepts these
 named arguments:
 
-=item Str C<$id>
+=item Str C<:$id>
 
 An identifier that uniquely identifies the vulnerability.
 
-=item SBOM::Source C<$source>
+=item SBOM::Source C<:$source>
 
 The source that published the vulnerability.
 
@@ -2901,45 +2901,45 @@ organizational-specific standards, maturity models, best practices, or
 any other requirements which can be evaluated against or attested to.
 Accepts these named arguments:
 
-=item bom-ref C<$bom-ref>
+=item bom-ref C<:$bom-ref>
 
 An optional identifier which can be used to reference the object
 elsewhere in the BOM.
 
-=item Str C<$name>
+=item Str C<:$name>
 
 The name of the standard. This will often be a shortened, single name
 of the standard.
 
-=item Str C<$version>
+=item Str C<:$version>
 
 The version of the standard.
 
-=item Str C<$description>
+=item Str C<:$description>
 
 The description of the standard.
 
-=item Str C<$owner>
+=item Str C<:$owner>
 
 The owner of the standard, often the entity responsible for its
 release.
 
-=item SBOM::Requirement C<@requirements>
+=item SBOM::Requirement C<:@requirements>
 
 The list of requirements comprising the standard.
 
-=item SBOM::RequirementLevel C<@levels>
+=item SBOM::RequirementLevel C<:@levels>
 
 The list of levels associated with the standard. Some standards have
 different levels of compliance.
 
-=item SBOM::Reference C<@externalReferences>
+=item SBOM::Reference C<:@externalReferences>
 
 External references provide a way to document systems, sites, and
 information that may be relevant but are not included with the BOM. They
 may also establish specific relationships within or external to the BOM.
 
-=item SBOM::ValidSignature C<$signature>
+=item SBOM::ValidSignature C<:$signature>
 
 Enveloped signature in JSON Signature Format (JSF).
 
@@ -2950,31 +2950,31 @@ Identification (SWID) Tags. Refer to @.evidence.identity to optionally
 provide evidence that substantiates the assertion of the component's
 identity. Accepts these named arguments:
 
-=item Str:D C<$tagId> (required)
+=item Str:D C<:$tagId> (required)
 
 Maps to the tagId of a SoftwareIdentity.
 
-=item Str:D C<$name> (required)
+=item Str:D C<:$name> (required)
 
 Maps to the name of a SoftwareIdentity.
 
-=item Str:D C<$version>
+=item Str:D C<:$version>
 
 Maps to the version of a SoftwareIdentity.
 
-=item Int:D C<@tagVersion>
+=item Int:D C<:@tagVersion>
 
 Maps to the tagVersion of a SoftwareIdentity.
 
-=item Bool:D C<$patch>
+=item Bool:D C<:$patch>
 
 Maps to the patch of a SoftwareIdentity.
 
-=item SBOM::Attachment C<$text>
+=item SBOM::Attachment C<:$text>
 
 Specifies the metadata and content of the SWID tag.
 
-=item URL C<$url>
+=item URL C<:$url>
 
 The URL to the SWID file.
 
@@ -2982,15 +2982,15 @@ The URL to the SWID file.
 
 A target against which claims are made. Accepts these named arguments:
 
-=item SBOM::Organization C<@organizations>
+=item SBOM::Organization C<:@organizations>
 
 The list of organizations which claims are made against.
 
-=item SBOM::Component C<@components>
+=item SBOM::Component C<:@components>
 
 The list of components which claims are made against.
 
-=item SBOM::Service C<@services>
+=item SBOM::Service C<:@services>
 
 The list of services which claims are made against.
 
@@ -2999,69 +2999,69 @@ The list of services which claims are made against.
 Describes the inputs, sequence of steps and resources used to
 accomplish a task and its output. Accepts these named arguments:
 
-=item bom-ref C<$bom-ref> (required)
+=item bom-ref C<:$bom-ref> (required)
 
 An optional identifier which can be used to reference the task
 elsewhere in the BOM.
 
-=item Str C<$uid> (required)
+=item Str C<:$uid> (required)
 
 The unique identifier for the resource instance within its deployment
 context.
 
-=item Str C<$name>
+=item Str C<:$name>
 
 The name of the resource instance.
 
-=item Str C<$description>
+=item Str C<:$description>
 
 A description of the resource instance.
 
-=item SBOM::ResourceReference C<@resourceReferences>
+=item SBOM::ResourceReference C<:@resourceReferences>
 
 References to component or service resources that are used to realize
 the resource instance.
 
-=item TaskActivity C<@taskTypes> (required)
+=item TaskActivity C<:@taskTypes> (required)
 
 Indicates the types of activities performed by the set of workflow
 tasks.
 
-=item SBOM::Trigger C<$trigger>
+=item SBOM::Trigger C<:$trigger>
 
 The trigger that initiated the task.
 
-=item SBOM::ExecutionStep C<@steps>
+=item SBOM::ExecutionStep C<:@steps>
 
 The sequence of steps for the task.
 
-=item SBOM::Input C<@inputs>
+=item SBOM::Input C<:@inputs>
 
 Represents resources and data brought into a task at runtime by
 executor or task commands.
 
-=item SBOM::Output C<@outputs>
+=item SBOM::Output C<:@outputs>
 
 Represents resources and data output from a task at runtime by executor
 or task commands
 
-=item DateTime C<$timeStart>
+=item DateTime C<:$timeStart>
 
 The date and time (timestamp) when the task started.
 
-=item DateTime C<$timeEnd>
+=item DateTime C<:$timeEnd>
 
 The date and time (timestamp) when the task ended.
 
-=item SBOM::Workspace C<@workspaces>
+=item SBOM::Workspace C<:@workspaces>
 
 A set of named filesystem or data resource shareable by workflow tasks.
 
-=item SBOM::RuntimeTopology C<@runtimeTopology>
+=item SBOM::RuntimeTopology C<:@runtimeTopology>
 
 A graph of the component runtime topology for task's instance.
 
-=item SBOM::Property C<@properties>
+=item SBOM::Property C<:@properties>
 
 Any additional properties as name-value pairs.
 
@@ -3070,11 +3070,11 @@ Any additional properties as name-value pairs.
 Description of a tool used to identify, confirm, or score a
 vulnerability. Accepts these named arguments:
 
-=item SBOM::Component C<@components>
+=item SBOM::Component C<:@components>
 
 A list of software and hardware components used as tools.
 
-=item SBOM::Service C<@services>
+=item SBOM::Service C<:@services>
 
 A list of services used as tools. This may include microservices,
 function-as-a-service, and other types of network or intra-process
@@ -3084,57 +3084,57 @@ services.
 
 The trigger that initiated a task. Accepts these named arguments:
 
-=item bom-ref C<$bom-ref> (required)
+=item bom-ref C<:$bom-ref> (required)
 
 An optional identifier which can be used to reference the trigger
 elsewhere in the BOM.
 
-=item Str C<$uid> (required)
+=item Str C<:$uid> (required)
 
 The unique identifier for the resource instance within its deployment
 context.
 
-=item Str C<$name>
+=item Str C<:$name>
 
 The name of the resource instance.
 
-=item Str C<$description>
+=item Str C<:$description>
 
 A description of the resource instance.
 
-=item SBOM::ResourceReference C<@resourceReferences>
+=item SBOM::ResourceReference C<:@resourceReferences>
 
 References to component or service resources that are used to realize
 the resource instance.
 
-=item TriggerEvent C<$type>
+=item TriggerEvent C<:$type>
 
 The source type of event which caused the trigger to fire.
 
-=item SBOM::Event C<$event>
+=item SBOM::Event C<:$event>
 
 The event data that caused the associated trigger to activate.
 
-=item SBOM::Condition C<@conditions>
+=item SBOM::Condition C<:@conditions>
 
 A list of conditions used to determine if a trigger should be
 activated.
 
-=item DateTime C<$timeActivated>
+=item DateTime C<:$timeActivated>
 
 The date and time (timestamp) when the trigger was activated.
 
-=item SBOM::Input C<@inputs>
+=item SBOM::Input C<:@inputs>
 
 Represents resources and data brought into a task at runtime by
 executor or task commands.
 
-=item SBOM::Output C<@outputs>
+=item SBOM::Output C<:@outputs>
 
 Represents resources and data output from a task at runtime by executor
 or task commands.
 
-=item SBOM::Property C<@properties>
+=item SBOM::Property C<:@properties>
 
 Any additional properties as name-value pairs.
 
@@ -3143,39 +3143,39 @@ Any additional properties as name-value pairs.
 Information about the actual volume instance allocated to the
 workspace. Accepts these named arguments:
 
-=item Str C<$uid>
+=item Str C<:$uid>
 
 The unique identifier for the volume instance within its deployment
 context.
 
-=item Str C<$name>
+=item Str C<:$name>
 
 The name of the volume instance.
 
-=item VolumeMode C<$mode>
+=item VolumeMode C<:$mode>
 
 The mode for the volume instance.
 
-=item Str C<$path>
+=item Str C<:$path>
 
 The underlying path created from the actual volume.
 
-=item Str C<$sizeAllocated>
+=item Str C<:$sizeAllocated>
 
 The allocated size of the volume accessible to the associated
 workspace. This should include the scalar size as well as IEC standard
 unit in either decimal or binary form.
 
-=item Bool C<$persistent>
+=item Bool C<:$persistent>
 
 Indicates if the volume persists beyond the life of the resource it is
 associated with.
 
-=item Bool C<$remote>
+=item Bool C<:$remote>
 
 Indicates if the volume is remotely (i.e., network) attached.
 
-=item SBOM::Property C<@properties>
+=item SBOM::Property C<:@properties>
 
 Any additional properties as name-value pairs.
 
@@ -3184,20 +3184,20 @@ Any additional properties as name-value pairs.
 A Vulnerability identified in components or services Accepts these
 named arguments:
 
-=item bom-ref C<$bom-ref>
+=item bom-ref C<:$bom-ref>
 
 An optional identifier which can be used to reference the vulnerability
 elsewhere in the BOM.
 
-=item Str C<$id>
+=item Str C<:$id>
 
 The identifier that uniquely identifies the vulnerability.
 
-=item SBOM::Source C<$source>
+=item SBOM::Source C<:$source>
 
 The source that published the vulnerability.
 
-=item SBOM::SourceReference C<@references>
+=item SBOM::SourceReference C<:@references>
 
 Zero or more pointers to vulnerabilities that are the equivalent of the
 vulnerability specified. Often times, the same vulnerability may exist
@@ -3205,87 +3205,87 @@ in multiple sources of vulnerability intelligence, but have different
 identifiers. References provide a way to correlate vulnerabilities
 across multiple sources of vulnerability intelligence.
 
-=item SBOM::Rating C<@ratings>
+=item SBOM::Rating C<:@ratings>
 
 List of vulnerability ratings.
 
-=item PositiveInt C<@cwes>
+=item PositiveInt C<:@cwes>
 
 List of Common Weaknesses Enumerations (CWEs) codes that describes this
 vulnerability. For example 399 (of
 https://cwe.mitre.org/data/definitions/399.html).
 
-=item Str C<$description>
+=item Str C<:$description>
 
 A description of the vulnerability as provided by the source.
 
-=item Str C<$detail>
+=item Str C<:$detail>
 
 If available, an in-depth description of the vulnerability as provided
 by the source organization. Details often include information useful in
 understanding root cause.
 
-=item Str C<$recommendation>
+=item Str C<:$recommendation>
 
 Recommendations of how the vulnerability can be remediated or
 mitigated.
 
-=item Str C<$workaround>
+=item Str C<:$workaround>
 
 A bypass, usually temporary, of the vulnerability that reduces its
 likelihood and/or impact. Workarounds often involve changes to
 configuration or deployments.
 
-=item SBOM::ProofOfConcept C<$proofOfConcept>
+=item SBOM::ProofOfConcept C<:$proofOfConcept>
 
 Evidence used to reproduce the vulnerability.
 
-=item SBOM::Advisory C<@advisories>
+=item SBOM::Advisory C<:@advisories>
 
 Published advisories of the vulnerability if provided.
 
-=item DateTime C<$created>
+=item DateTime C<:$created>
 
 The date and time (timestamp) when the vulnerability record was created
 in the vulnerability database.
 
-=item DateTime C<$published>
+=item DateTime C<:$published>
 
 The date and time (timestamp) when the vulnerability record was first
 published.
 
-=item DateTime C<$updated>
+=item DateTime C<:$updated>
 
 The date and time (timestamp) when the vulnerability record was last
 updated.
 
-=item DateTime C<$rejected>
+=item DateTime C<:$rejected>
 
 The date and time (timestamp) when the vulnerability record was
 rejected (if applicable).
 
-=item SBOM::Credits C<$credits>
+=item SBOM::Credits C<:$credits>
 
 Individuals or organizations credited with the discovery of the
 vulnerability.
 
-=item SBOM::Analysis C<$analysis>
+=item SBOM::Analysis C<:$analysis>
 
 An assessment of the impact and exploitability of the vulnerability.
 
-=item SBOM::Affects C<@affects>
+=item SBOM::Affects C<:@affects>
 
 The components or services that are affected by the vulnerability.
 
-=item SBOM::Property C<@properties>
+=item SBOM::Property C<:@properties>
 
 Any additional properties as name-value pairs.
 
-=item SBOM::LegacyTool C<@tools>
+=item SBOM::LegacyTool C<:@tools>
 
 The legacy tools used to identify, confirm, or score the vulnerability.
 
-=item SBOM::Tool C<$tools>
+=item SBOM::Tool C<:$tools>
 
 The tool used to identify, confirm, or score the vulnerability.
 
@@ -3293,77 +3293,77 @@ The tool used to identify, confirm, or score the vulnerability.
 
 A specialized orchestration task. Accepts these named arguments:
 
-=item bom-ref C<$bom-ref> (required)
+=item bom-ref C<:$bom-ref> (required)
 
 An optional identifier which can be used to reference the workflow
 elsewhere in the BOM.
 
-=item Str C<$uid> (required)
+=item Str C<:$uid> (required)
 
 The unique identifier for the resource instance within its deployment
 context.
 
-=item Str C<$name>
+=item Str C<:$name>
 
 The name of the resource instance.
 
-=item Str C<$description>
+=item Str C<:$description>
 
 A description of the resource instance.
 
-=item SBOM::ResourceReference C<@resourceReferences>
+=item SBOM::ResourceReference C<:@resourceReferences>
 
 References to component or service resources that are used toi realize
 the resource instance.
 
-=item SBOM::Task C<@tasks>
+=item SBOM::Task C<:@tasks>
 
 The tasks that comprise the workflow.
 
-=item SBOM::Dependency C<@taskDependencies>
+=item SBOM::Dependency C<:@taskDependencies>
 
 The graph of dependencies between tasks within the workflow.
 
-=item TaskActivity C<@taskTypes>
+=item TaskActivity C<:@taskTypes>
 
 Indicates the types of activities performed by the set of workflow
 tasks.
 
-=item SBOM::Trigger C<$trigger>
+=item SBOM::Trigger C<:$trigger>
 
 The trigger that initiated the task.
 
-=item SBOM::ExecutionStep C<@steps>
+=item SBOM::ExecutionStep C<:@steps>
 
 The sequence of steps for the task.
 
-=item SBOM::Input C<@inputs>
+=item SBOM::Input C<:@inputs>
 
 Represents resources and data brought into a task at runtime by
 executor or task commands.
 
-=item SBOM::Input C<@outputs>
+=item SBOM::Input C<:@outputs>
 
 Represents resources and data output from a task at runtime by executor
 or task commands.
 
-=item DateTime C<$timeStart>
+=item DateTime C<:$timeStart>
 
 The date and time (timestamp) when the task started.
 
-=item DateTime C<$timeEnd>
+=item DateTime C<:$timeEnd>
 
 The date and time (timestamp) when the task ended.
 
-=item SBOM::Workspace C<@workspaces>
+=item SBOM::Workspace C<:@workspaces>
 
 A set of named filesystem or data resource shareable by workflow tasks.
 
-=item SBOM::RuntimeTopology C<@runtimeTopology>
+=item SBOM::RuntimeTopology C<:@runtimeTopology>
 
 A graph of the component runtime topology for task's instance.
 
-=item SBOM::Property C<@properties>
+=item SBOM::Property C<:@properties>
 
 Any additional properties as name-value pairs.
 
@@ -3372,60 +3372,60 @@ Any additional properties as name-value pairs.
 A named filesystem or data resource shareable by workflow tasks.
 Accepts these named arguments:
 
-=item bom-ref C<$bom-ref> (required)
+=item bom-ref C<:$bom-ref> (required)
 
 An optional identifier which can be used to reference the workspace
 elsewhere in the BOM.
 
-=item Str C<$uid> (required)
+=item Str C<:$uid> (required)
 
 The unique identifier for the resource instance within its deployment
 context.
 
-=item Str C<$name>
+=item Str C<:$name>
 
 The name of the resource instance.
 
-=item Str C<@aliases>
+=item Str C<:@aliases>
 
 The names for the workspace as referenced by other workflow tasks.
 Effectively, a name mapping so other tasks can use their own local name
 in their steps.
 
-=item Str C<$description>
+=item Str C<:$description>
 
 A description of the resource instance.
 
-=item SBOM::ResourceReference C<@resourceReferences>
+=item SBOM::ResourceReference C<:@resourceReferences>
 
 References to component or service resources that are used to realize
 the resource instance.
 
-=item AccessMode C<$accessMode>
+=item AccessMode C<:$accessMode>
 
 Describes the read-write access Acontrol for the workspace relative to
 the owning resource instance.
 
-=item Str C<$mountPath>
+=item Str C<:$mountPath>
 
 A path to a location on disk where the workspace will be available to
 the associated task's steps.
 
-=item Str C<$managedDataType>
+=item Str C<:$managedDataType>
 
 The name of a domain-specific data type the workspace represents.
 
-=item Str C<$volumeRequest>
+=item Str C<:$volumeRequest>
 
 Identifies the reference to the request for a specific volume type and
 parameters.
 
-=item SBOM::Volume C<$volume>
+=item SBOM::Volume C<:$volume>
 
 Information about the actual volume instance allocated to the
 workspace.
 
-=item SBOM::Property C<@properties>
+=item SBOM::Property C<:@properties>
 
 Any additional properties as name-value pairs.
 
