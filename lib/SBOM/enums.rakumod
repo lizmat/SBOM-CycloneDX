@@ -295,7 +295,11 @@ BEGIN ::($_).setup($_) for $?DISTRIBUTION.meta<resources>.map: {
 }
 
 # Make sure the class lookup is read-only
-BEGIN { %classes := %classes.Map }
+BEGIN {
+    %classes<LicenseId>   := LicenseId;
+    %classes<LicenseName> := LicenseName;
+    %classes := %classes.Map
+}
 
 #- EXPORT ----------------------------------------------------------------------
 my sub EXPORT(*@names) {

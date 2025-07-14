@@ -17,11 +17,14 @@ subset serialNumber of Str where *.contains:
 #| characters long.
 subset bom-ref of Str where { .chars && !.starts-with('urn:cdx') }
 
-#| A numeric value
+#| A numeric value.
 subset number of Cool where Int | Rat;
 
+#| An email address.
 subset email of Str;  # XXX to be done
-subset URL   of Str;  # XXX fetch URL rules
+
+#| A URL.
+subset URL of Str;  # XXX fetch URL rules
 
 #| A CPE must conform to the CPE 2.2 or 2.3 specification. See
 #| https://nvd.nist.gov/products/cpe.
@@ -53,8 +56,8 @@ subset SWHID of Str;  # XXX fetch from https://docs.softwareheritage.org/devel/s
 #| Property Taxonomy.
 subset propertyName of Str;  # XXX fetch from https://github.com/CycloneDX/cyclonedx-property-taxonomy/
 
-#| A MIME-type.  Must match regular expression: ^[-+a-z0-9.]+/[-+a-z0-9.]+$
 my token mime-part { <[-+ a..z 0..9 ]>+ }
+#| A MIME-type.  Must match regular expression: ^[-+a-z0-9.]+/[-+a-z0-9.]+$
 subset mime-type of Str where *.contains: /^ <mime-part> '/' <mime-part> $/;
 
 #| The value of a hash.  Must match regular expression:
@@ -64,6 +67,7 @@ subset contentHash of Str where {
     && .chars == 32 | 40 | 64 | 96 | 128
 }
 
+#| A bomlink to an external document.
 subset bomLinkDocument of Str where *.contains:
   /^ 'urn:cdx:' <hexnum> ** 8
      '-'        <hexnum> ** 4
@@ -72,6 +76,8 @@ subset bomLinkDocument of Str where *.contains:
      '-'        <hexnum> ** 12
      '/'        <[ 1..9 ]> <[ 0..9 ]>*
   $/;
+
+#| A bomlink to an element.
 subset bomLinkElement of Str where *.contains:
   /^ 'urn:cdx:' <hexnum> ** 8
      '-'        <hexnum> ** 4
@@ -89,6 +95,7 @@ subset IDnotbomLink of Str where !*.starts-with('urn:cdx:');
 #| Reference that is either a bom-ref or a bomLinkElement
 subset bom-refOrLink of Str where bom-ref | bomLinkElement;
 
+#| Either a URL, a bomLinkDocument or a bomLinkElement.
 subset referenceURL of Str where
   URL | bomLinkDocument | bomLinkElement;
 
@@ -105,6 +112,7 @@ subset confidenceValue of Cool where 0 <= * <= 1;
 #| 100% conformant.
 subset conformanceValue of Numeric where 0 <= * <= 1;
 
+#| A positive integer value (> 0).
 subset PositiveInt of Int where * > 0;
 
 #| The NIST security strength category as defined in

@@ -15,7 +15,7 @@ use SBOM::Reference:ver<0.0.3>:auth<zef:lizmat>;
 use SBOM::ReleaseNotes:ver<0.0.3>:auth<zef:lizmat>;
 use SBOM::Signature:ver<0.0.3>:auth<zef:lizmat>;
 
-#| An endpoint for a source or destination of data
+#| An endpoint for a source or destination of data.
 subset Endpoint of Str where URL | bomLinkElement;
 
 #- ServiceDataset --------------------------------------------------------------
