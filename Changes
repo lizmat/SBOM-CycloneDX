@@ -1,6 +1,8 @@
 Revision history for SBOM::CycloneDX
 
 {{$NEXT}}
+
+0.0.4  2025-07-15T00:09:22+02:00
     - Full rendering of all documentation
     - Added a "cyclonedx" script for checking validity of files
     - Added a "cyclonedx-enums" script for obtain enum info

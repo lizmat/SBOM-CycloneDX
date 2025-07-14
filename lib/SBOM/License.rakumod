@@ -1,20 +1,20 @@
-use SBOM::enums:ver<0.0.3>:auth<zef:lizmat> <
+use SBOM::enums:ver<0.0.4>:auth<zef:lizmat> <
   Acknowledgement LicenseGranted LicenseId LicenseName
 >;
 
-use SBOM::subsets:ver<0.0.3>:auth<zef:lizmat> <
+use SBOM::subsets:ver<0.0.4>:auth<zef:lizmat> <
   bom-ref URL
 >;
 
-use SBOM:ver<0.0.3>:auth<zef:lizmat>;
-use SBOM::Organization:ver<0.0.3>:auth<zef:lizmat>;
-use SBOM::Property:ver<0.0.3>:auth<zef:lizmat>;
-use SBOM::Attachment:ver<0.0.3>:auth<zef:lizmat>;
+use SBOM:ver<0.0.4>:auth<zef:lizmat>;
+use SBOM::Organization:ver<0.0.4>:auth<zef:lizmat>;
+use SBOM::Property:ver<0.0.4>:auth<zef:lizmat>;
+use SBOM::Attachment:ver<0.0.4>:auth<zef:lizmat>;
 
 #- Licensing -------------------------------------------------------------------
 #| Licensing details describing the licensor/licensee, license type,
 #| renewal and expiration dates, and other important metadata.
-class SBOM::Licensing:ver<0.0.3>:auth<zef:lizmat> does SBOM {
+class SBOM::Licensing:ver<0.0.4>:auth<zef:lizmat> does SBOM {
 
 #| License identifiers that may be used to manage licenses and their lifecycle.
     has Str @.altIds;
@@ -53,7 +53,7 @@ class SBOM::SPDXLicense { ... }
 class SBOM::LicenseInfo { ... }
 
 #| Either a (modern) License object, or a legacy SPDX License object
-class SBOM::AnyLicense:ver<0.0.3>:auth<zef:lizmat> does SBOM {
+class SBOM::AnyLicense:ver<0.0.4>:auth<zef:lizmat> does SBOM {
     multi method new(SBOM::AnyLicense:U: :$raw-error) {
         %_<license>
           ?? SBOM::License.ingest($raw-error, %_)
@@ -69,7 +69,7 @@ class SBOM::AnyLicense:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 #| license, along with additional properties such as license
 #| acknowledgment, comprehensive commercial licensing information,
 #| and the full text of the license.
-class SBOM::License:ver<0.0.3>:auth<zef:lizmat>
+class SBOM::License:ver<0.0.4>:auth<zef:lizmat>
   is SBOM::AnyLicense does SBOM {
 
 #| Info on an SPDX license or named license.
@@ -77,7 +77,7 @@ class SBOM::License:ver<0.0.3>:auth<zef:lizmat>
 }
 
 #- LicenseInfo -----------------------------------------------------------------
-class SBOM::LicenseInfo:ver<0.0.3>:auth<zef:lizmat> does SBOM {
+class SBOM::LicenseInfo:ver<0.0.4>:auth<zef:lizmat> does SBOM {
 
 #| An optional identifier which can be used to reference the license
 #| elsewhere in the BOM.
@@ -115,7 +115,7 @@ class SBOM::LicenseInfo:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 }
 
 #- SPDXLicense -----------------------------------------------------------------
-class SBOM::SPDXLicense:ver<0.0.3>:auth<zef:lizmat>
+class SBOM::SPDXLicense:ver<0.0.4>:auth<zef:lizmat>
   is SBOM::AnyLicense does SBOM {
 
 #| The SPDX license name (as opposed to ID).

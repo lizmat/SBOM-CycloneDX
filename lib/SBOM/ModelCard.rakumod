@@ -1,16 +1,16 @@
-use SBOM::subsets:ver<0.0.3>:auth<zef:lizmat> <
+use SBOM::subsets:ver<0.0.4>:auth<zef:lizmat> <
   bom-ref
 >;
 
-use SBOM:ver<0.0.3>:auth<zef:lizmat>;
-use SBOM::Considerations:ver<0.0.3>:auth<zef:lizmat>;
-use SBOM::Graphics:ver<0.0.3>:auth<zef:lizmat>;
-use SBOM::ModelParameters:ver<0.0.3>:auth<zef:lizmat>;
-use SBOM::Property:ver<0.0.3>:auth<zef:lizmat>;
+use SBOM:ver<0.0.4>:auth<zef:lizmat>;
+use SBOM::Considerations:ver<0.0.4>:auth<zef:lizmat>;
+use SBOM::Graphics:ver<0.0.4>:auth<zef:lizmat>;
+use SBOM::ModelParameters:ver<0.0.4>:auth<zef:lizmat>;
+use SBOM::Property:ver<0.0.4>:auth<zef:lizmat>;
 
 #- ConfidenceInterval ----------------------------------------------------------
 #| The confidence interval of a metric.
-class SBOM::ConfidenceInterval:ver<0.0.3>:auth<zef:lizmat> does SBOM {
+class SBOM::ConfidenceInterval:ver<0.0.4>:auth<zef:lizmat> does SBOM {
 
 #| The lower bound of the confidence interval.
     has Str $.lowerBound;
@@ -22,7 +22,7 @@ class SBOM::ConfidenceInterval:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 #- PerformanceMetric -----------------------------------------------------------
 #| The model performance metrics being reported. Examples may include
 #| accuracy, F1 score, precision, top-3 error rates, MSC, etc.
-class SBOM::PerformanceMetric:ver<0.0.3>:auth<zef:lizmat> does SBOM {
+class SBOM::PerformanceMetric:ver<0.0.4>:auth<zef:lizmat> does SBOM {
 
 #| The type of performance metric.
     has Str $.type;
@@ -40,7 +40,7 @@ class SBOM::PerformanceMetric:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 
 #- QuantitativeAnalysis --------------------------------------------------------
 #| A quantitative analysis of a model
-class SBOM::QuantitativeAnalysis:ver<0.0.3>:auth<zef:lizmat> does SBOM {
+class SBOM::QuantitativeAnalysis:ver<0.0.4>:auth<zef:lizmat> does SBOM {
 
 #| The model performance metrics being reported.
     has SBOM::PerformanceMetric @.performanceMetrics;
@@ -55,7 +55,7 @@ class SBOM::QuantitativeAnalysis:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 #| Model cards typically contain the training parameters, which datasets
 #| were used to train the model, performance metrics, and other relevant
 #| data useful for ML transparency.
-class SBOM::ModelCard:ver<0.0.3>:auth<zef:lizmat> does SBOM {
+class SBOM::ModelCard:ver<0.0.4>:auth<zef:lizmat> does SBOM {
 
 #| An optional identifier which can be used to reference the model card
 #| elsewhere in the BOM.

@@ -4294,10 +4294,15 @@ say Enumify.keys;   # (AccessMode Acknowledgement Activity...
 
 The `keys` method can also be called on the underlying `Enumify` role to obtain a sorted list of the names of all classes of enums available.
 
+THANKS
+======
+
+This module wouldn't exist without the nudging and support of *Salve J. Nilsen*.
+
 CREDITS
 =======
 
-The SBOM test files in the `t/valid` directory were taken from [Giuseppe Di Terlizzi's SBOM::CycloneDX repoository](https://github.com/giterlizzi/perl-SBOM-CycloneDX/).
+The SBOM test files in the `t/valid` directory were taken from [Giuseppe Di Terlizzi's SBOM::CycloneDX repository](https://github.com/giterlizzi/perl-SBOM-CycloneDX/).
 
 AUTHOR
 ======

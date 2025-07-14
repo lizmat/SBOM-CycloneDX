@@ -1,8 +1,8 @@
 use JSON::Fast:ver<0.19+>:auth<cpan:TIMOTIMO>;
-use SBOM::enums:ver<0.0.3>:auth<zef:lizmat> <Enumify>;
+use SBOM::enums:ver<0.0.4>:auth<zef:lizmat> <Enumify>;
 
 #- SBOM ------------------------------------------------------------------------
-role SBOM:ver<0.0.3>:auth<zef:lizmat> {
+role SBOM:ver<0.0.4>:auth<zef:lizmat> {
 
     # Hidden attribute that collects pairs with errors, in which the
     # key is is the crumbs of where the error happened, and the value

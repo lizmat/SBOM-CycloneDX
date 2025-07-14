@@ -1,26 +1,26 @@
-use SBOM::enums:ver<0.0.3>:auth<zef:lizmat> <
+use SBOM::enums:ver<0.0.4>:auth<zef:lizmat> <
   DataSource
 >;
 
-use SBOM::subsets:ver<0.0.3>:auth<zef:lizmat> <
+use SBOM::subsets:ver<0.0.4>:auth<zef:lizmat> <
   bom-ref propertyName
 >;
 
-use SBOM:ver<0.0.3>:auth<zef:lizmat>;
-use SBOM::Claim:ver<0.0.3>:auth<zef:lizmat>;
-use SBOM::Component:ver<0.0.3>:auth<zef:lizmat>;
-use SBOM::DataContents:ver<0.0.3>:auth<zef:lizmat>;
-use SBOM::Governance:ver<0.0.3>:auth<zef:lizmat>;
-use SBOM::Organization:ver<0.0.3>:auth<zef:lizmat>;
-use SBOM::Graphics:ver<0.0.3>:auth<zef:lizmat>;
-use SBOM::Reference:ver<0.0.3>:auth<zef:lizmat>;
-use SBOM::RequirementGrouping:ver<0.0.3>:auth<zef:lizmat>;
-use SBOM::Service:ver<0.0.3>:auth<zef:lizmat>;
-use SBOM::Signature:ver<0.0.3>:auth<zef:lizmat>;
+use SBOM:ver<0.0.4>:auth<zef:lizmat>;
+use SBOM::Claim:ver<0.0.4>:auth<zef:lizmat>;
+use SBOM::Component:ver<0.0.4>:auth<zef:lizmat>;
+use SBOM::DataContents:ver<0.0.4>:auth<zef:lizmat>;
+use SBOM::Governance:ver<0.0.4>:auth<zef:lizmat>;
+use SBOM::Organization:ver<0.0.4>:auth<zef:lizmat>;
+use SBOM::Graphics:ver<0.0.4>:auth<zef:lizmat>;
+use SBOM::Reference:ver<0.0.4>:auth<zef:lizmat>;
+use SBOM::RequirementGrouping:ver<0.0.4>:auth<zef:lizmat>;
+use SBOM::Service:ver<0.0.4>:auth<zef:lizmat>;
+use SBOM::Signature:ver<0.0.4>:auth<zef:lizmat>;
 
 #- EvidenceDataset -------------------------------------------------------------
 #| Data associated with evidence of a claim.
-class SBOM::EvidenceDataset:ver<0.0.3>:auth<zef:lizmat> does SBOM {
+class SBOM::EvidenceDataset:ver<0.0.4>:auth<zef:lizmat> does SBOM {
 
 #| The name of the data.
     has Str $.name;
@@ -46,7 +46,7 @@ class SBOM::EvidenceDataset:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 #- Signatory -------------------------------------------------------------------
 #| A signatories authorized on behalf of an organization to assert
 #| validity of this document.
-class SBOM::Signatory:ver<0.0.3>:auth<zef:lizmat> does SBOM {
+class SBOM::Signatory:ver<0.0.4>:auth<zef:lizmat> does SBOM {
 
 #| The signatory's name.
     has Str $.name;
@@ -78,7 +78,7 @@ class SBOM::Signatory:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 #| recipient acknowledgment. It includes a list of authorizedi
 #| signatories who assert the validity of the document on behalf
 #| of the organization.
-class SBOM::Affirmation:ver<0.0.3>:auth<zef:lizmat> does SBOM {
+class SBOM::Affirmation:ver<0.0.4>:auth<zef:lizmat> does SBOM {
 
 #| The brief statement affirmed by an individual regarding all
 #| declarations.  This could be an affirmation of acceptance by a
@@ -96,7 +96,7 @@ class SBOM::Affirmation:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 #- Assessor --------------------------------------------------------------------
 #| An assessor evaluating claims and determining conformance to
 #| requirements and confidence in that assessment.
-class SBOM::Assessor:ver<0.0.3>:auth<zef:lizmat> does SBOM {
+class SBOM::Assessor:ver<0.0.4>:auth<zef:lizmat> does SBOM {
 
 #| An optional identifier which can be used to reference the object
 #| elsewhere in the BOM.
@@ -113,7 +113,7 @@ class SBOM::Assessor:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 #- Attestation -----------------------------------------------------------------
 #| An attestations asserted by an assessor that maps requirements
 #| to claims.
-class SBOM::Attestation:ver<0.0.3>:auth<zef:lizmat> does SBOM {
+class SBOM::Attestation:ver<0.0.4>:auth<zef:lizmat> does SBOM {
 
 #| The short description explaining the main points of the attestation.
     has Str $.summary;
@@ -131,7 +131,7 @@ class SBOM::Attestation:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 
 #- DeclarationEvidence ---------------------------------------------------------
 #| Evidence used in a declaration.
-class SBOM::DeclarationEvidence:ver<0.0.3>:auth<zef:lizmat> does SBOM {
+class SBOM::DeclarationEvidence:ver<0.0.4>:auth<zef:lizmat> does SBOM {
 
 #| An optional identifier which can be used to reference the object
 #| elsewhere in the BOM.
@@ -166,7 +166,7 @@ class SBOM::DeclarationEvidence:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 
 #- Target ----------------------------------------------------------------------
 #| A target against which claims are made.
-class SBOM::Target:ver<0.0.3>:auth<zef:lizmat> does SBOM {
+class SBOM::Target:ver<0.0.4>:auth<zef:lizmat> does SBOM {
 
 #| The list of organizations which claims are made against.
     has SBOM::Organization @.organizations;
@@ -181,7 +181,7 @@ class SBOM::Target:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 #- Declaration -----------------------------------------------------------------
 #| Describes the conformance to standards, may include attestations,
 #| claims, and evidence.
-class SBOM::Declarations:ver<0.0.3>:auth<zef:lizmat> does SBOM {
+class SBOM::Declarations:ver<0.0.4>:auth<zef:lizmat> does SBOM {
 
 #| The list of assessors evaluating claims and determining conformance
 #| to requirements and confidence in that assessment.

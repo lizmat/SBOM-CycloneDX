@@ -4360,10 +4360,15 @@ The C<keys> method can also be called on the underlying C<Enumify>
 role to obtain a sorted list of the names of all classes of enums
 available.
 
+=head1 THANKS
+
+This module wouldn't exist without the nudging and support of
+I<Salve J. Nilsen>.
+
 =head1 CREDITS
 
 The SBOM test files in the C<t/valid> directory were taken from
-L<Giuseppe Di Terlizzi's SBOM::CycloneDX repoository|https://github.com/giterlizzi/perl-SBOM-CycloneDX/>.
+L<Giuseppe Di Terlizzi's SBOM::CycloneDX repository|https://github.com/giterlizzi/perl-SBOM-CycloneDX/>.
 
 =head1 AUTHOR
 
