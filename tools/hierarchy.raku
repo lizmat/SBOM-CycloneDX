@@ -9,7 +9,7 @@ my %recurse;
 sub types(Mu $class, str $indent = "  ") {
     my %seen;
 
-    for $class.^attributes -> $attribute {
+    for $class.^attributes.grep(*.name ne '@!build-errors') -> $attribute {
         my $type := $attribute.type;
         $type := $type.of if $type ~~ Positional;
         my str $name = "$type.^name.subst("SBOM::") $attribute.name.subst("!")";
@@ -25,22 +25,23 @@ sub types(Mu $class, str $indent = "  ") {
         unless %seen{$name} {
             %seen{$name} := True;
 
-            say $indent eq "  "
-              ?? ("- $name " ~ "-" x (60 - $name.chars))
-              !! "$indent$name";
+#            say $indent eq "  "
+#              ?? ("- $name " ~ "-" x (60 - $name.chars))
+#              !! "$indent$name";
+            say "$indent$name";
 
 #            if $attribute.WHY // $type.WHY -> $WHY {
 #                say $WHY.Str.naive-word-wrapper(:60max, :$indent);
 #            }
-            say "";
+#            say "";
 
-            if $name eq 'Component' && $indent ne "  " {
-                # only recurse Component at "top" level
-            }
-            elsif !%recurse{$name} {
-                %recurse{$name} := True;
-                types($type, "$indent  ");
-            }
+#            if $name eq 'Component' && $indent ne "  " {
+#                # only recurse Component at "top" level
+#            }
+#            elsif !%recurse{$name} {
+#                %recurse{$name} := True;
+#                types($type, "$indent  ");
+#            }
         }
     }
 }

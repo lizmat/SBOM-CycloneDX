@@ -1,6 +1,7 @@
 Revision history for SBOM::CycloneDX
 
 {{$NEXT}}
+    - Full rendering of all documentation
     - Added a "cyclonedx" script for checking validity of files
     - Added a "cyclonedx-enums" script for obtain enum info
     - Added "keys" method to Enumify role.

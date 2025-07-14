@@ -125,7 +125,7 @@ my class CO2Cost:ver<0.0.3>:auth<zef:lizmat> does Enumify { }
 #| Specifies the type of a component.
 my class ComponentType:ver<0.0.3>:auth<zef:lizmat> does Enumify { }
 
-#| The type for the related cryptographic material
+#| The type for the related cryptographic material.
 my class Crypto:ver<0.0.3>:auth<zef:lizmat> does Enumify { }
 
 #| Cryptographic assets occur in several forms. Algorithms and protocols
