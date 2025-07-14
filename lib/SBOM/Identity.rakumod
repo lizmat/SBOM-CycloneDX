@@ -3,13 +3,10 @@ use SBOM::enums:ver<0.0.3>:auth<zef:lizmat> <
 >;
 
 use SBOM::subsets:ver<0.0.3>:auth<zef:lizmat> <
-  bomLinkElement bom-ref confidenceValue
+  bomLinkElement bom-ref bom-refOrLink confidenceValue
 >;
 
 use SBOM:ver<0.0.3>:auth<zef:lizmat>;
-
-#| A bom-ref or a bomlink element
-subset BomRefOrbomLinkElement of Str where bom-ref | bomLinkElement;
 
 #- EvidenceMethod --------------------------------------------------------------
 #| A method used to extract and/or analyze the evidence.
@@ -49,7 +46,7 @@ class SBOM::Identity:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 #| component or service but may be any object type supporting bom-refs.
 #| Tools used for analysis should already be defined in the BOM, either
 #| in the metadata/tools, components, or formulation.
-    has BomRefOrbomLinkElement @.tools;
+    has bom-refOrLink @.tools;
 }
 
 # vim: expandtab shiftwidth=4
