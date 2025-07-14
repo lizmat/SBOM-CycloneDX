@@ -259,7 +259,11 @@ Describes the read-write access control for a workspace relative to the
 owning resource instance.
 
 Supported strings:
-  read-only read-write read-write-once write-once write-only
+=item read-only
+=item read-write
+=item read-write-once
+=item write-once
+=item write-only
 
 =head2 Acknowledgement
 
@@ -278,7 +282,8 @@ and risk management. Observed licenses are defined in
 substantiate a concluded license.
 
 Supported strings:
-  concluded declared
+=item concluded
+=item declared
 
 =head2 Activity
 
@@ -286,8 +291,15 @@ The type of activity that is part of a machine learning model
 development or operational lifecycle.
 
 Supported strings:
-  data-collection data-preparation deployment design fine-tuning
-  inference other training validation
+=item data-collection
+=item data-preparation
+=item deployment
+=item design
+=item fine-tuning
+=item inference
+=item other
+=item training
+=item validation
 
 =head2 Aggregate
 
@@ -295,11 +307,16 @@ Specifies an aggregate type that describes how complete a relationship
 is.
 
 Supported strings:
-  complete incomplete incomplete_first_party_only
-  incomplete_first_party_opensource_only
-  incomplete_first_party_proprietary_only incomplete_third_party_only
-  incomplete_third_party_opensource_only
-  incomplete_third_party_proprietary_only not_specified unknown
+=item complete
+=item incomplete
+=item incomplete_first_party_only
+=item incomplete_first_party_opensource_only
+=item incomplete_first_party_proprietary_only
+=item incomplete_third_party_only
+=item incomplete_third_party_opensource_only
+=item incomplete_third_party_proprietary_only
+=item not_specified
+=item unknown
 
 =head2 AlgorithmPrimitive
 
@@ -316,8 +333,21 @@ authenticated encryption (ae, e.g. AES-GCM) and the combination of
 multiple algorithms (combiner, e.g. SP800-56Cr2).
 
 Supported strings:
-  ae block-cipher combiner drbg hash kdf kem key-agree mac other pke
-  signature stream-cipher unknown xof
+=item ae
+=item block-cipher
+=item combiner
+=item drbg
+=item hash
+=item kdf
+=item kem
+=item key-agree
+=item mac
+=item other
+=item pke
+=item signature
+=item stream-cipher
+=item unknown
+=item xof
 
 =head2 BOMFormat
 
@@ -326,14 +356,14 @@ CycloneDX since BOMs do not have a filename convention, nor does JSON
 schema support namespaces.
 
 Supported strings:
-  CycloneDX
+=item CycloneDX
 
 =head2 CO2Cost
 
 Unit of CO2 cost.
 
 Supported strings:
-  tCO2eq
+=item tCO2eq
 
 =head2 Certification
 
@@ -342,11 +372,35 @@ has received. Certifications include revisions and levels of FIPS 140 or
 Common Criteria of different Extended Assurance Levels (CC-EAL).
 
 Supported strings:
-  cc-eal1 cc-eal1+ cc-eal2 cc-eal2+ cc-eal3 cc-eal3+ cc-eal4 cc-eal4+
-  cc-eal5 cc-eal5+ cc-eal6 cc-eal6+ cc-eal7 cc-eal7+ fips140-1-l1
-  fips140-1-l2 fips140-1-l3 fips140-1-l4 fips140-2-l1 fips140-2-l2
-  fips140-2-l3 fips140-2-l4 fips140-3-l1 fips140-3-l2 fips140-3-l3
-  fips140-3-l4 none other unknown
+=item cc-eal1
+=item cc-eal1+
+=item cc-eal2
+=item cc-eal2+
+=item cc-eal3
+=item cc-eal3+
+=item cc-eal4
+=item cc-eal4+
+=item cc-eal5
+=item cc-eal5+
+=item cc-eal6
+=item cc-eal6+
+=item cc-eal7
+=item cc-eal7+
+=item fips140-1-l1
+=item fips140-1-l2
+=item fips140-1-l3
+=item fips140-1-l4
+=item fips140-2-l1
+=item fips140-2-l2
+=item fips140-2-l3
+=item fips140-2-l4
+=item fips140-3-l1
+=item fips140-3-l2
+=item fips140-3-l3
+=item fips140-3-l4
+=item none
+=item other
+=item unknown
 
 =head2 CertificationMode
 
@@ -354,32 +408,72 @@ The mode of operation in which a cryptographic algorithm (block cipher)
 is used.
 
 Supported strings:
-  cbc ccm cfb ctr ecb gcm ofb other unknown
+=item cbc
+=item ccm
+=item cfb
+=item ctr
+=item ecb
+=item gcm
+=item ofb
+=item other
+=item unknown
 
 =head2 CertificationPadding
 
 The padding scheme that is used for a cryptographic algorithm.
 
 Supported strings:
-  oaep other pkcs1v15 pkcs5 pkcs7 raw unknown
+=item oaep
+=item other
+=item pkcs1v15
+=item pkcs5
+=item pkcs7
+=item raw
+=item unknown
 
 =head2 ComponentType
 
 Specifies the type of a component.
 
 Supported strings:
-  application container cryptographic-asset data device device-driver
-  file firmware framework library machine-learning-model operating-system
-  platform
+=item application
+=item container
+=item cryptographic-asset
+=item data
+=item device
+=item device-driver
+=item file
+=item firmware
+=item framework
+=item library
+=item machine-learning-model
+=item operating-system
+=item platform
 
 =head2 Crypto
 
 The type for the related cryptographic material
 
 Supported strings:
-  additional-data ciphertext credential digest initialization-vector key
-  nonce other password private-key public-key salt secret-key seed
-  shared-secret signature tag token unknown
+=item additional-data
+=item ciphertext
+=item credential
+=item digest
+=item initialization-vector
+=item key
+=item nonce
+=item other
+=item password
+=item private-key
+=item public-key
+=item salt
+=item secret-key
+=item seed
+=item shared-secret
+=item signature
+=item tag
+=item token
+=item unknown
 
 =head2 CryptoAsset
 
@@ -390,95 +484,149 @@ Certificates and related cryptographic material like keys, tokens,
 secrets or passwords are other cryptographic assets to be modelled.
 
 Supported strings:
-  algorithm certificate protocol related-crypto-material
+=item algorithm
+=item certificate
+=item protocol
+=item related-crypto-material
 
 =head2 CryptoFunction
 
 A cryptographic function implemented by a cryptographic algorithm.
 
 Supported strings:
-  decapsulate decrypt digest encapsulate encrypt generate keyderive
-  keygen other sign tag unknown verify
+=item decapsulate
+=item decrypt
+=item digest
+=item encapsulate
+=item encrypt
+=item generate
+=item keyderive
+=item keygen
+=item other
+=item sign
+=item tag
+=item unknown
+=item verify
 
 =head2 CryptoKey
 
 Public key type indicator.
 
 Supported strings:
-  EC OKP RSA
+=item EC
+=item OKP
+=item RSA
 
 =head2 CryptoProtocol
 
 A concrete cryptographic protocol type.
 
 Supported strings:
-  ike ipsec other ssh sstp tls unknown wpa
+=item ike
+=item ipsec
+=item other
+=item ssh
+=item sstp
+=item tls
+=item unknown
+=item wpa
 
 =head2 CryptoState
 
 The key state as defined by NIST SP 800-57.
 
 Supported strings:
-  active compromised deactivated destroyed pre-activation suspended
+=item active
+=item compromised
+=item deactivated
+=item destroyed
+=item pre-activation
+=item suspended
 
 =head2 DataFlow
 
 Specifies information about the directional flow of data.
 
 Supported strings:
-  bi-directional inbound outbound unknown
+=item bi-directional
+=item inbound
+=item outbound
+=item unknown
 
 =head2 DataSource
 
 The general theme or subject matter of model data being specified.
 
 Supported strings:
-  configuration dataset definition other source-code
+=item configuration
+=item dataset
+=item definition
+=item other
+=item source-code
 
 =head2 ECCurve
 
 EC curve name.
 
 Supported strings:
-  P-256 P-384 P-521
+=item P-256
+=item P-384
+=item P-521
 
 =head2 EdDSA
 
 EdDSA curve name.
 
 Supported strings:
-  Ed25519 Ed448
+=item Ed25519
+=item Ed448
 
 =head2 Encoding
 
 Specifies the optional encoding a text is represented in.
 
 Supported strings:
-  base64
+=item base64
 
 =head2 Energy
 
 The energy source of an energy provider.
 
 Supported strings:
-  biofuel coal geothermal hydropower natural-gas nuclear oil other solar
-  unknown wind
+=item biofuel
+=item coal
+=item geothermal
+=item hydropower
+=item natural-gas
+=item nuclear
+=item oil
+=item other
+=item solar
+=item unknown
+=item wind
 
 =head2 EnergyUnit
 
 Unit of energy.
 
 Supported strings:
-  kWh
+=item kWh
 
 =head2 Evidence
 
 A technique used in method of analysis.
 
 Supported strings:
-  ast-fingerprint attestation binary-analysis dynamic-analysis filename
-  hash-comparison instrumentation manifest-analysis other
-  source-code-analysis
+=item ast-fingerprint
+=item attestation
+=item binary-analysis
+=item dynamic-analysis
+=item filename
+=item hash-comparison
+=item instrumentation
+=item manifest-analysis
+=item other
+=item source-code-analysis
 
 =head2 ExecutionEnvironment
 
@@ -486,33 +634,60 @@ The target and execution environment in which an algorithm is
 implemented in.
 
 Supported strings:
-  hardware other software-encrypted-ram software-plain-ram software-tee
-  unknown
+=item hardware
+=item other
+=item software-encrypted-ram
+=item software-plain-ram
+=item software-tee
+=item unknown
 
 =head2 Field
 
 The identity field of the component which an evidence describes.
 
 Supported strings:
-  cpe group hash name omniborId purl swhid swid version
+=item cpe
+=item group
+=item hash
+=item name
+=item omniborId
+=item purl
+=item swhid
+=item swid
+=item version
 
 =head2 HashAlgorithm
 
 An algorithm to generate a hash value with.
 
 Supported strings:
-  BLAKE2b-256 BLAKE2b-384 BLAKE2b-512 BLAKE3 MD5 SHA-1 SHA-256 SHA-384
-  SHA-512 SHA3-256 SHA3-384 SHA3-512
+=item BLAKE2b-256
+=item BLAKE2b-384
+=item BLAKE2b-512
+=item BLAKE3
+=item MD5
+=item SHA-1
+=item SHA-256
+=item SHA-384
+=item SHA-512
+=item SHA3-256
+=item SHA3-384
+=item SHA3-512
 
 =head2 Justification
 
 The rationale of why the impact analysis state was asserted.
 
 Supported strings:
-  code_not_present code_not_reachable protected_at_perimeter
-  protected_at_runtime protected_by_compiler
-  protected_by_mitigating_control requires_configuration
-  requires_dependency requires_environment
+=item code_not_present
+=item code_not_reachable
+=item protected_at_perimeter
+=item protected_at_runtime
+=item protected_by_compiler
+=item protected_by_mitigating_control
+=item requires_configuration
+=item requires_dependency
+=item requires_environment
 
 =head2 Learning
 
@@ -520,17 +695,33 @@ Learning types describing the learning problem or hybrid learning
 problem.
 
 Supported strings:
-  reinforcement-learning self-supervised semi-supervised supervised
-  unsupervised
+=item reinforcement-learning
+=item self-supervised
+=item semi-supervised
+=item supervised
+=item unsupervised
 
 =head2 LicenseGranted
 
 A type of license that was granted to the licensee.
 
 Supported strings:
-  academic appliance client-access concurrent-user core-points
-  custom-metric device evaluation named-user node-locked oem other
-  perpetual processor-points subscription user
+=item academic
+=item appliance
+=item client-access
+=item concurrent-user
+=item core-points
+=item custom-metric
+=item device
+=item evaluation
+=item named-user
+=item node-locked
+=item oem
+=item other
+=item perpetual
+=item processor-points
+=item subscription
+=item user
 
 =head2 LicenseId
 
@@ -549,7 +740,12 @@ A valid SPDX license name.
 Describes the type of data output.
 
 Supported strings:
-  artifact attestation evidence log metrics other
+=item artifact
+=item attestation
+=item evidence
+=item log
+=item metrics
+=item other
 
 =head2 Patch
 
@@ -557,7 +753,10 @@ Specifies the purpose for the patch including the resolution of
 defects, security issues, or new behavior or functionality.
 
 Supported strings:
-  backport cherry-pick monkey unofficial
+=item backport
+=item cherry-pick
+=item monkey
+=item unofficial
 
 =head2 Phase
 
@@ -568,45 +767,102 @@ Management (ITAM), and Software Asset Management (SAM). Thus, a BOM may
 include data specific to or only obtainable in a given lifecycle.
 
 Supported strings:
-  build decommision design discovery operations post-build pre-build
+=item build
+=item decommision
+=item design
+=item discovery
+=item operations
+=item post-build
+=item pre-build
 
 =head2 Platform
 
 A platform for which an algorithm is implemented.
 
 Supported strings:
-  armv7-a armv7-m armv8-a armv8-m armv9-a armv9-m generic other ppc64
-  ppc64le s390x unknown x86_32 x86_64
+=item armv7-a
+=item armv7-m
+=item armv8-a
+=item armv8-m
+=item armv9-a
+=item armv9-m
+=item generic
+=item other
+=item ppc64
+=item ppc64le
+=item s390x
+=item unknown
+=item x86_32
+=item x86_64
 
 =head2 ReferenceSource
 
 Specifies the type of external reference.
 
 Supported strings:
-  adversary-model advisories attestation bom build-meta build-system
-  certification-report chat codified-infrastructure
-  component-analysis-report configuration digital-signature distribution
-  distribution-intake documentation dynamic-analysis-report
-  electronic-signature evidence exploitability-statement formulation
-  issue-tracker license log mailing-list maturity-report model-card other
-  pentest-report poam quality-metrics release-notes rfc-9116
-  risk-assessment runtime-analysis-report security-contact social
-  source-distribution static-analysis-report support threat-model vcs
-  vulnerability-assertion website
+=item adversary-model
+=item advisories
+=item attestation
+=item bom
+=item build-meta
+=item build-system
+=item certification-report
+=item chat
+=item codified-infrastructure
+=item component-analysis-report
+=item configuration
+=item digital-signature
+=item distribution
+=item distribution-intake
+=item documentation
+=item dynamic-analysis-report
+=item electronic-signature
+=item evidence
+=item exploitability-statement
+=item formulation
+=item issue-tracker
+=item license
+=item log
+=item mailing-list
+=item maturity-report
+=item model-card
+=item other
+=item pentest-report
+=item poam
+=item quality-metrics
+=item release-notes
+=item rfc-9116
+=item risk-assessment
+=item runtime-analysis-report
+=item security-contact
+=item social
+=item source-distribution
+=item static-analysis-report
+=item support
+=item threat-model
+=item vcs
+=item vulnerability-assertion
+=item website
 
 =head2 ReleaseLevel
 
 The software versioning type of a release note.
 
 Supported strings:
-  internal major minor patch pre-release
+=item internal
+=item major
+=item minor
+=item patch
+=item pre-release
 
 =head2 ResolveType
 
 A type of issue resolvement.
 
 Supported strings:
-  defect enhancement security
+=item defect
+=item enhancement
+=item security
 
 =head2 Response
 
@@ -616,28 +872,46 @@ strongly encouraged for vulnerabilities where the analysis state is
 exploitable.
 
 Supported strings:
-  can_not_fix rollback update will_not_fix workaround_available
+=item can_not_fix
+=item rollback
+=item update
+=item will_not_fix
+=item workaround_available
 
 =head2 RiskMethodology
 
 Specifies the severity or risk scoring methodology or standard used.
 
 Supported strings:
-  CVSSv2 CVSSv3 CVSSv31 CVSSv4 OWASP SSVC other
+=item CVSSv2
+=item CVSSv3
+=item CVSSv31
+=item CVSSv4
+=item OWASP
+=item SSVC
+=item other
 
 =head2 Scope
 
 The scope of a component.
 
 Supported strings:
-  excluded optional required
+=item excluded
+=item optional
+=item required
 
 =head2 Severity
 
 Textual representation of a severity.
 
 Supported strings:
-  critical high info low medium none unknown
+=item critical
+=item high
+=item info
+=item low
+=item medium
+=item none
+=item unknown
 
 =head2 SignatureAlgorithm
 
@@ -646,8 +920,20 @@ Signature algorithm. The currently recognized JWA [RFC7518] and RFC8037
 requires explicit Ed* algorithm names instead ofi "EdDSA".
 
 Supported strings:
-  ES256 ES384 ES512 Ed25519 Ed448 HS256 HS384 HS512 PS256 PS384 PS512
-  RS256 RS384 RS512
+=item ES256
+=item ES384
+=item ES512
+=item Ed25519
+=item Ed448
+=item HS256
+=item HS384
+=item HS512
+=item PS256
+=item PS384
+=item PS512
+=item RS256
+=item RS384
+=item RS512
 
 =head2 TaskActivity
 
@@ -655,29 +941,45 @@ Indicates the types of activities performed by the set of workflow
 tasks.
 
 Supported strings:
-  build clean clone copy deliver deploy lint merge other release scan
-  test
+=item build
+=item clean
+=item clone
+=item copy
+=item deliver
+=item deploy
+=item lint
+=item merge
+=item other
+=item release
+=item scan
+=item test
 
 =head2 TriggerEvent
 
 The source type of event which caused a trigger to fire.
 
 Supported strings:
-  api manual scheduled webhook
+=item api
+=item manual
+=item scheduled
+=item webhook
 
 =head2 VersionAffection
 
 The vulnerability status for the version or range of versions.
 
 Supported strings:
-  affected unaffected unknown
+=item affected
+=item unaffected
+=item unknown
 
 =head2 VolumeMode
 
 The mode for a volume instance.
 
 Supported strings:
-  block filesystem
+=item block
+=item filesystem
 
 =head2 VulnerabilityState
 
@@ -685,8 +987,12 @@ Declares the current state of an occurrence of a vulnerability, after
 automated or manual analysis.
 
 Supported strings:
-  exploitable false_positive in_triage not_affected resolved
-  resolved_with_pedigree
+=item exploitable
+=item false_positive
+=item in_triage
+=item not_affected
+=item resolved
+=item resolved_with_pedigree
 
 =head1 ENUMS API
 

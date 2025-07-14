@@ -253,217 +253,713 @@ AccessMode
 
 Describes the read-write access control for a workspace relative to the owning resource instance.
 
-Supported strings: read-only read-write read-write-once write-once write-only
+Supported strings:
+
+  * read-only
+
+  * read-write
+
+  * read-write-once
+
+  * write-once
+
+  * write-only
 
 Acknowledgement
 ---------------
 
 Declared licenses and concluded licenses represent two different stages in the licensing process within software development. Declared licenses refer to the initial intention of the software authors regarding the licensing terms under which their code is released. On the other hand, concluded licenses are the result of a comprehensive analysis of the project's codebase to identify and confirm the actual licenses of the components used, which may differ from the initially declared licenses. While declared licenses provide an upfront indication of the licensing intentions, concluded licenses offer a more thorough understanding of the actual licensing within a project, facilitating proper compliance and risk management. Observed licenses are defined in @.evidence.licenses. Observed licenses form the evidence necessary to substantiate a concluded license.
 
-Supported strings: concluded declared
+Supported strings:
+
+  * concluded
+
+  * declared
 
 Activity
 --------
 
 The type of activity that is part of a machine learning model development or operational lifecycle.
 
-Supported strings: data-collection data-preparation deployment design fine-tuning inference other training validation
+Supported strings:
+
+  * data-collection
+
+  * data-preparation
+
+  * deployment
+
+  * design
+
+  * fine-tuning
+
+  * inference
+
+  * other
+
+  * training
+
+  * validation
 
 Aggregate
 ---------
 
 Specifies an aggregate type that describes how complete a relationship is.
 
-Supported strings: complete incomplete incomplete_first_party_only incomplete_first_party_opensource_only incomplete_first_party_proprietary_only incomplete_third_party_only incomplete_third_party_opensource_only incomplete_third_party_proprietary_only not_specified unknown
+Supported strings:
+
+  * complete
+
+  * incomplete
+
+  * incomplete_first_party_only
+
+  * incomplete_first_party_opensource_only
+
+  * incomplete_first_party_proprietary_only
+
+  * incomplete_third_party_only
+
+  * incomplete_third_party_opensource_only
+
+  * incomplete_third_party_proprietary_only
+
+  * not_specified
+
+  * unknown
 
 AlgorithmPrimitive
 ------------------
 
 Cryptographic building blocks used in higher-level cryptographic systems and protocols. Primitives represent different cryptographic routines: deterministic random bit generators (drbg, e.g. CTR_DRBG from NIST SP800-90A-r1), message authentication codes (mac, e.g. HMAC-SHA-256), blockciphers (e.g. AES), streamciphers (e.g. Salsa20), signatures (e.g. ECDSA), hash functions (e.g. SHA-256), public-key encryption schemes (pke, e.g. RSA), extended output functions (xof, e.g. SHAKE256), key derivation functions (e.g. pbkdf2), key agreement algorithms (e.g. ECDH), key encapsulation mechanisms (e.g. ML-KEM), authenticated encryption (ae, e.g. AES-GCM) and the combination of multiple algorithms (combiner, e.g. SP800-56Cr2).
 
-Supported strings: ae block-cipher combiner drbg hash kdf kem key-agree mac other pke signature stream-cipher unknown xof
+Supported strings:
+
+  * ae
+
+  * block-cipher
+
+  * combiner
+
+  * drbg
+
+  * hash
+
+  * kdf
+
+  * kem
+
+  * key-agree
+
+  * mac
+
+  * other
+
+  * pke
+
+  * signature
+
+  * stream-cipher
+
+  * unknown
+
+  * xof
 
 BOMFormat
 ---------
 
 Specifies the format of the BOM. This helps to identify the file as CycloneDX since BOMs do not have a filename convention, nor does JSON schema support namespaces.
 
-Supported strings: CycloneDX
+Supported strings:
+
+  * CycloneDX
 
 CO2Cost
 -------
 
 Unit of CO2 cost.
 
-Supported strings: tCO2eq
+Supported strings:
+
+  * tCO2eq
 
 Certification
 -------------
 
 The certification that an implementation of a cryptographic algorithm has received. Certifications include revisions and levels of FIPS 140 or Common Criteria of different Extended Assurance Levels (CC-EAL).
 
-Supported strings: cc-eal1 cc-eal1+ cc-eal2 cc-eal2+ cc-eal3 cc-eal3+ cc-eal4 cc-eal4+ cc-eal5 cc-eal5+ cc-eal6 cc-eal6+ cc-eal7 cc-eal7+ fips140-1-l1 fips140-1-l2 fips140-1-l3 fips140-1-l4 fips140-2-l1 fips140-2-l2 fips140-2-l3 fips140-2-l4 fips140-3-l1 fips140-3-l2 fips140-3-l3 fips140-3-l4 none other unknown
+Supported strings:
+
+  * cc-eal1
+
+  * cc-eal1+
+
+  * cc-eal2
+
+  * cc-eal2+
+
+  * cc-eal3
+
+  * cc-eal3+
+
+  * cc-eal4
+
+  * cc-eal4+
+
+  * cc-eal5
+
+  * cc-eal5+
+
+  * cc-eal6
+
+  * cc-eal6+
+
+  * cc-eal7
+
+  * cc-eal7+
+
+  * fips140-1-l1
+
+  * fips140-1-l2
+
+  * fips140-1-l3
+
+  * fips140-1-l4
+
+  * fips140-2-l1
+
+  * fips140-2-l2
+
+  * fips140-2-l3
+
+  * fips140-2-l4
+
+  * fips140-3-l1
+
+  * fips140-3-l2
+
+  * fips140-3-l3
+
+  * fips140-3-l4
+
+  * none
+
+  * other
+
+  * unknown
 
 CertificationMode
 -----------------
 
 The mode of operation in which a cryptographic algorithm (block cipher) is used.
 
-Supported strings: cbc ccm cfb ctr ecb gcm ofb other unknown
+Supported strings:
+
+  * cbc
+
+  * ccm
+
+  * cfb
+
+  * ctr
+
+  * ecb
+
+  * gcm
+
+  * ofb
+
+  * other
+
+  * unknown
 
 CertificationPadding
 --------------------
 
 The padding scheme that is used for a cryptographic algorithm.
 
-Supported strings: oaep other pkcs1v15 pkcs5 pkcs7 raw unknown
+Supported strings:
+
+  * oaep
+
+  * other
+
+  * pkcs1v15
+
+  * pkcs5
+
+  * pkcs7
+
+  * raw
+
+  * unknown
 
 ComponentType
 -------------
 
 Specifies the type of a component.
 
-Supported strings: application container cryptographic-asset data device device-driver file firmware framework library machine-learning-model operating-system platform
+Supported strings:
+
+  * application
+
+  * container
+
+  * cryptographic-asset
+
+  * data
+
+  * device
+
+  * device-driver
+
+  * file
+
+  * firmware
+
+  * framework
+
+  * library
+
+  * machine-learning-model
+
+  * operating-system
+
+  * platform
 
 Crypto
 ------
 
 The type for the related cryptographic material
 
-Supported strings: additional-data ciphertext credential digest initialization-vector key nonce other password private-key public-key salt secret-key seed shared-secret signature tag token unknown
+Supported strings:
+
+  * additional-data
+
+  * ciphertext
+
+  * credential
+
+  * digest
+
+  * initialization-vector
+
+  * key
+
+  * nonce
+
+  * other
+
+  * password
+
+  * private-key
+
+  * public-key
+
+  * salt
+
+  * secret-key
+
+  * seed
+
+  * shared-secret
+
+  * signature
+
+  * tag
+
+  * token
+
+  * unknown
 
 CryptoAsset
 -----------
 
 Cryptographic assets occur in several forms. Algorithms and protocols are most commonly implemented in specialized cryptographic libraries. They may, however, also be 'hardcoded' in software components. Certificates and related cryptographic material like keys, tokens, secrets or passwords are other cryptographic assets to be modelled.
 
-Supported strings: algorithm certificate protocol related-crypto-material
+Supported strings:
+
+  * algorithm
+
+  * certificate
+
+  * protocol
+
+  * related-crypto-material
 
 CryptoFunction
 --------------
 
 A cryptographic function implemented by a cryptographic algorithm.
 
-Supported strings: decapsulate decrypt digest encapsulate encrypt generate keyderive keygen other sign tag unknown verify
+Supported strings:
+
+  * decapsulate
+
+  * decrypt
+
+  * digest
+
+  * encapsulate
+
+  * encrypt
+
+  * generate
+
+  * keyderive
+
+  * keygen
+
+  * other
+
+  * sign
+
+  * tag
+
+  * unknown
+
+  * verify
 
 CryptoKey
 ---------
 
 Public key type indicator.
 
-Supported strings: EC OKP RSA
+Supported strings:
+
+  * EC
+
+  * OKP
+
+  * RSA
 
 CryptoProtocol
 --------------
 
 A concrete cryptographic protocol type.
 
-Supported strings: ike ipsec other ssh sstp tls unknown wpa
+Supported strings:
+
+  * ike
+
+  * ipsec
+
+  * other
+
+  * ssh
+
+  * sstp
+
+  * tls
+
+  * unknown
+
+  * wpa
 
 CryptoState
 -----------
 
 The key state as defined by NIST SP 800-57.
 
-Supported strings: active compromised deactivated destroyed pre-activation suspended
+Supported strings:
+
+  * active
+
+  * compromised
+
+  * deactivated
+
+  * destroyed
+
+  * pre-activation
+
+  * suspended
 
 DataFlow
 --------
 
 Specifies information about the directional flow of data.
 
-Supported strings: bi-directional inbound outbound unknown
+Supported strings:
+
+  * bi-directional
+
+  * inbound
+
+  * outbound
+
+  * unknown
 
 DataSource
 ----------
 
 The general theme or subject matter of model data being specified.
 
-Supported strings: configuration dataset definition other source-code
+Supported strings:
+
+  * configuration
+
+  * dataset
+
+  * definition
+
+  * other
+
+  * source-code
 
 ECCurve
 -------
 
 EC curve name.
 
-Supported strings: P-256 P-384 P-521
+Supported strings:
+
+  * P-256
+
+  * P-384
+
+  * P-521
 
 EdDSA
 -----
 
 EdDSA curve name.
 
-Supported strings: Ed25519 Ed448
+Supported strings:
+
+  * Ed25519
+
+  * Ed448
 
 Encoding
 --------
 
 Specifies the optional encoding a text is represented in.
 
-Supported strings: base64
+Supported strings:
+
+  * base64
 
 Energy
 ------
 
 The energy source of an energy provider.
 
-Supported strings: biofuel coal geothermal hydropower natural-gas nuclear oil other solar unknown wind
+Supported strings:
+
+  * biofuel
+
+  * coal
+
+  * geothermal
+
+  * hydropower
+
+  * natural-gas
+
+  * nuclear
+
+  * oil
+
+  * other
+
+  * solar
+
+  * unknown
+
+  * wind
 
 EnergyUnit
 ----------
 
 Unit of energy.
 
-Supported strings: kWh
+Supported strings:
+
+  * kWh
 
 Evidence
 --------
 
 A technique used in method of analysis.
 
-Supported strings: ast-fingerprint attestation binary-analysis dynamic-analysis filename hash-comparison instrumentation manifest-analysis other source-code-analysis
+Supported strings:
+
+  * ast-fingerprint
+
+  * attestation
+
+  * binary-analysis
+
+  * dynamic-analysis
+
+  * filename
+
+  * hash-comparison
+
+  * instrumentation
+
+  * manifest-analysis
+
+  * other
+
+  * source-code-analysis
 
 ExecutionEnvironment
 --------------------
 
 The target and execution environment in which an algorithm is implemented in.
 
-Supported strings: hardware other software-encrypted-ram software-plain-ram software-tee unknown
+Supported strings:
+
+  * hardware
+
+  * other
+
+  * software-encrypted-ram
+
+  * software-plain-ram
+
+  * software-tee
+
+  * unknown
 
 Field
 -----
 
 The identity field of the component which an evidence describes.
 
-Supported strings: cpe group hash name omniborId purl swhid swid version
+Supported strings:
+
+  * cpe
+
+  * group
+
+  * hash
+
+  * name
+
+  * omniborId
+
+  * purl
+
+  * swhid
+
+  * swid
+
+  * version
 
 HashAlgorithm
 -------------
 
 An algorithm to generate a hash value with.
 
-Supported strings: BLAKE2b-256 BLAKE2b-384 BLAKE2b-512 BLAKE3 MD5 SHA-1 SHA-256 SHA-384 SHA-512 SHA3-256 SHA3-384 SHA3-512
+Supported strings:
+
+  * BLAKE2b-256
+
+  * BLAKE2b-384
+
+  * BLAKE2b-512
+
+  * BLAKE3
+
+  * MD5
+
+  * SHA-1
+
+  * SHA-256
+
+  * SHA-384
+
+  * SHA-512
+
+  * SHA3-256
+
+  * SHA3-384
+
+  * SHA3-512
 
 Justification
 -------------
 
 The rationale of why the impact analysis state was asserted.
 
-Supported strings: code_not_present code_not_reachable protected_at_perimeter protected_at_runtime protected_by_compiler protected_by_mitigating_control requires_configuration requires_dependency requires_environment
+Supported strings:
+
+  * code_not_present
+
+  * code_not_reachable
+
+  * protected_at_perimeter
+
+  * protected_at_runtime
+
+  * protected_by_compiler
+
+  * protected_by_mitigating_control
+
+  * requires_configuration
+
+  * requires_dependency
+
+  * requires_environment
 
 Learning
 --------
 
 Learning types describing the learning problem or hybrid learning problem.
 
-Supported strings: reinforcement-learning self-supervised semi-supervised supervised unsupervised
+Supported strings:
+
+  * reinforcement-learning
+
+  * self-supervised
+
+  * semi-supervised
+
+  * supervised
+
+  * unsupervised
 
 LicenseGranted
 --------------
 
 A type of license that was granted to the licensee.
 
-Supported strings: academic appliance client-access concurrent-user core-points custom-metric device evaluation named-user node-locked oem other perpetual processor-points subscription user
+Supported strings:
+
+  * academic
+
+  * appliance
+
+  * client-access
+
+  * concurrent-user
+
+  * core-points
+
+  * custom-metric
+
+  * device
+
+  * evaluation
+
+  * named-user
+
+  * node-locked
+
+  * oem
+
+  * other
+
+  * perpetual
+
+  * processor-points
+
+  * subscription
+
+  * user
 
 LicenseId
 ---------
@@ -484,119 +980,409 @@ OutputType
 
 Describes the type of data output.
 
-Supported strings: artifact attestation evidence log metrics other
+Supported strings:
+
+  * artifact
+
+  * attestation
+
+  * evidence
+
+  * log
+
+  * metrics
+
+  * other
 
 Patch
 -----
 
 Specifies the purpose for the patch including the resolution of defects, security issues, or new behavior or functionality.
 
-Supported strings: backport cherry-pick monkey unofficial
+Supported strings:
+
+  * backport
+
+  * cherry-pick
+
+  * monkey
+
+  * unofficial
 
 Phase
 -----
 
 Lifecycles communicate the stage(s) in which data in the BOM was captured. Different types of data may be available at various phases of a lifecycle, such as the Software Development Lifecycle (SDLC), IT Asset Management (ITAM), and Software Asset Management (SAM). Thus, a BOM may include data specific to or only obtainable in a given lifecycle.
 
-Supported strings: build decommision design discovery operations post-build pre-build
+Supported strings:
+
+  * build
+
+  * decommision
+
+  * design
+
+  * discovery
+
+  * operations
+
+  * post-build
+
+  * pre-build
 
 Platform
 --------
 
 A platform for which an algorithm is implemented.
 
-Supported strings: armv7-a armv7-m armv8-a armv8-m armv9-a armv9-m generic other ppc64 ppc64le s390x unknown x86_32 x86_64
+Supported strings:
+
+  * armv7-a
+
+  * armv7-m
+
+  * armv8-a
+
+  * armv8-m
+
+  * armv9-a
+
+  * armv9-m
+
+  * generic
+
+  * other
+
+  * ppc64
+
+  * ppc64le
+
+  * s390x
+
+  * unknown
+
+  * x86_32
+
+  * x86_64
 
 ReferenceSource
 ---------------
 
 Specifies the type of external reference.
 
-Supported strings: adversary-model advisories attestation bom build-meta build-system certification-report chat codified-infrastructure component-analysis-report configuration digital-signature distribution distribution-intake documentation dynamic-analysis-report electronic-signature evidence exploitability-statement formulation issue-tracker license log mailing-list maturity-report model-card other pentest-report poam quality-metrics release-notes rfc-9116 risk-assessment runtime-analysis-report security-contact social source-distribution static-analysis-report support threat-model vcs vulnerability-assertion website
+Supported strings:
+
+  * adversary-model
+
+  * advisories
+
+  * attestation
+
+  * bom
+
+  * build-meta
+
+  * build-system
+
+  * certification-report
+
+  * chat
+
+  * codified-infrastructure
+
+  * component-analysis-report
+
+  * configuration
+
+  * digital-signature
+
+  * distribution
+
+  * distribution-intake
+
+  * documentation
+
+  * dynamic-analysis-report
+
+  * electronic-signature
+
+  * evidence
+
+  * exploitability-statement
+
+  * formulation
+
+  * issue-tracker
+
+  * license
+
+  * log
+
+  * mailing-list
+
+  * maturity-report
+
+  * model-card
+
+  * other
+
+  * pentest-report
+
+  * poam
+
+  * quality-metrics
+
+  * release-notes
+
+  * rfc-9116
+
+  * risk-assessment
+
+  * runtime-analysis-report
+
+  * security-contact
+
+  * social
+
+  * source-distribution
+
+  * static-analysis-report
+
+  * support
+
+  * threat-model
+
+  * vcs
+
+  * vulnerability-assertion
+
+  * website
 
 ReleaseLevel
 ------------
 
 The software versioning type of a release note.
 
-Supported strings: internal major minor patch pre-release
+Supported strings:
+
+  * internal
+
+  * major
+
+  * minor
+
+  * patch
+
+  * pre-release
 
 ResolveType
 -----------
 
 A type of issue resolvement.
 
-Supported strings: defect enhancement security
+Supported strings:
+
+  * defect
+
+  * enhancement
+
+  * security
 
 Response
 --------
 
 A response to the vulnerability by the manufacturer, supplier, or project responsible for the affected component or service. Responses are strongly encouraged for vulnerabilities where the analysis state is exploitable.
 
-Supported strings: can_not_fix rollback update will_not_fix workaround_available
+Supported strings:
+
+  * can_not_fix
+
+  * rollback
+
+  * update
+
+  * will_not_fix
+
+  * workaround_available
 
 RiskMethodology
 ---------------
 
 Specifies the severity or risk scoring methodology or standard used.
 
-Supported strings: CVSSv2 CVSSv3 CVSSv31 CVSSv4 OWASP SSVC other
+Supported strings:
+
+  * CVSSv2
+
+  * CVSSv3
+
+  * CVSSv31
+
+  * CVSSv4
+
+  * OWASP
+
+  * SSVC
+
+  * other
 
 Scope
 -----
 
 The scope of a component.
 
-Supported strings: excluded optional required
+Supported strings:
+
+  * excluded
+
+  * optional
+
+  * required
 
 Severity
 --------
 
 Textual representation of a severity.
 
-Supported strings: critical high info low medium none unknown
+Supported strings:
+
+  * critical
+
+  * high
+
+  * info
+
+  * low
+
+  * medium
+
+  * none
+
+  * unknown
 
 SignatureAlgorithm
 ------------------
 
 Signature algorithm. The currently recognized JWA [RFC7518] and RFC8037 [RFC8037] asymmetric key algorithms. Unlike RFC8037 [RFC8037] JSF requires explicit Ed* algorithm names instead ofi "EdDSA".
 
-Supported strings: ES256 ES384 ES512 Ed25519 Ed448 HS256 HS384 HS512 PS256 PS384 PS512 RS256 RS384 RS512
+Supported strings:
+
+  * ES256
+
+  * ES384
+
+  * ES512
+
+  * Ed25519
+
+  * Ed448
+
+  * HS256
+
+  * HS384
+
+  * HS512
+
+  * PS256
+
+  * PS384
+
+  * PS512
+
+  * RS256
+
+  * RS384
+
+  * RS512
 
 TaskActivity
 ------------
 
 Indicates the types of activities performed by the set of workflow tasks.
 
-Supported strings: build clean clone copy deliver deploy lint merge other release scan test
+Supported strings:
+
+  * build
+
+  * clean
+
+  * clone
+
+  * copy
+
+  * deliver
+
+  * deploy
+
+  * lint
+
+  * merge
+
+  * other
+
+  * release
+
+  * scan
+
+  * test
 
 TriggerEvent
 ------------
 
 The source type of event which caused a trigger to fire.
 
-Supported strings: api manual scheduled webhook
+Supported strings:
+
+  * api
+
+  * manual
+
+  * scheduled
+
+  * webhook
 
 VersionAffection
 ----------------
 
 The vulnerability status for the version or range of versions.
 
-Supported strings: affected unaffected unknown
+Supported strings:
+
+  * affected
+
+  * unaffected
+
+  * unknown
 
 VolumeMode
 ----------
 
 The mode for a volume instance.
 
-Supported strings: block filesystem
+Supported strings:
+
+  * block
+
+  * filesystem
 
 VulnerabilityState
 ------------------
 
 Declares the current state of an occurrence of a vulnerability, after automated or manual analysis.
 
-Supported strings: exploitable false_positive in_triage not_affected resolved resolved_with_pedigree
+Supported strings:
+
+  * exploitable
+
+  * false_positive
+
+  * in_triage
+
+  * not_affected
+
+  * resolved
+
+  * resolved_with_pedigree
 
 ENUMS API
 =========
