@@ -42,7 +42,7 @@ sub produce-pod(Mu $class) {
     for $class.^attributes.grep(*.name ne '@!build-errors') -> $attribute {
         my $type := $attribute.type;
         $type := $type.of if $type ~~ Positional;
-        my str $name = "$type.^name() $attribute.name.subst("!")";
+        my str $name = "$type.^name() C<$attribute.name.subst("!")>";
         $name ~= " (required)" if $attribute.required;
 
         say "=item $name";
