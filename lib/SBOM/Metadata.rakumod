@@ -9,6 +9,30 @@ use SBOM::Property:ver<0.0.3>:auth<zef:lizmat>;
 use SBOM::Organization:ver<0.0.3>:auth<zef:lizmat>;
 use SBOM::Tool:ver<0.0.3>:auth<zef:lizmat>;
 
+#- Lifecycle -------------------------------------------------------------------
+#| Lifecycles communicate the stage(s) in which data in the BOM was
+#| captured. Different types of data may be available at various phases
+#| of a lifecycle, such as the Software Development Lifecycle (SDLC),
+#| IT Asset Management (ITAM), and Software Asset Management (SAM).
+#| Thus, a BOM may include data specific to or only obtainable in a
+#| given lifecycle.
+class SBOM::Lifecycle:ver<0.0.3>:auth<zef:lizmat> does SBOM {
+
+#| A pre-defined phase in the product lifecycle.
+    has Phase $.phase;
+
+#| The name of the lifecycle phase.
+    has Str $.name;
+
+#| The description of the lifecycle phase.
+    has Str $.description;
+
+    submethod TWEAK() {
+        die "Must have 'phase' or 'name' specified"
+          if ($!phase && $!name) || (!$!phase && !$!name);
+    }
+}
+
 #- Metadata --------------------------------------------------------------------
 #| Provides additional information about a BOM.
 class SBOM::Metadata:ver<0.0.3>:auth<zef:lizmat> does SBOM {
@@ -16,13 +40,8 @@ class SBOM::Metadata:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 #| The date and time (timestamp) when the BOM was created.
     has DateTime $.timestamp;
 
-#| Lifecycles communicate the stage(s) in which data in the BOM was
-#| captured. Different types of data may be available at various phases
-#| of a lifecycle, such as the Software Development Lifecycle (SDLC),
-#| IT Asset Management (ITAM), and Software Asset Management (SAM).
-#| Thus, a BOM may include data specific to or only obtainable in a
-#| given lifecycle.
-    has Phase @.lifecycles;
+#| The product lifecycle(s) that this BOM represents.
+    has SBOM::Lifecycle @.lifecycles;
 
 #| [Deprecated] This will be removed in a future version. Use the
 #| "manufacturer" instead.  The organization that manufactured the

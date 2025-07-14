@@ -12,6 +12,7 @@ Revision history for SBOM::CycloneDX
        - SBOM::AnyLicense
        - SBOM::Governor
        - SBOM::ResourceReference
+       - SBOM::Lifecycle
     - Added classes to wrap up information:
        - SBOM::LicenseInfo
     - Added more test files from Giuseppe Di Terlizzi (GDT)'s repo

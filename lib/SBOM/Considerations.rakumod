@@ -10,7 +10,7 @@ class SBOM::EthicalConsideration:ver<0.0.3>:auth<zef:lizmat> does SBOM {
     has Str $.name;
 
 #| Strategy used to address this risk.
-    has Str $.mitigationStragegy;
+    has Str $.mitigationStrategy;
 }
 
 #- EnvironmentalConsiderations -------------------------------------------------

@@ -7,7 +7,7 @@ Model data acquisition including search, selection and transfer.
 data-preparation
 Model data preparation including data cleaning, labeling and conversion.
 
-Training
+training
 Model building, training and generalized tuning.
 
 fine-tuning

@@ -16,7 +16,7 @@ class SBOM::ConfidenceInterval:ver<0.0.3>:auth<zef:lizmat> does SBOM {
     has Str $.lowerBound;
 
 #| The upper bound of the confidence interval.
-    has Str $.UpperBound;
+    has Str $.upperBound;
 }
 
 #- PerformanceMetric -----------------------------------------------------------
