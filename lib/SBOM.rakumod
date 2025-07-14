@@ -254,7 +254,9 @@ role SBOM:ver<0.0.3>:auth<zef:lizmat> {
             # Generic mapification logic
             sub mapify($value) {
                 $type =:= Nil
-                  ?? $value.Map(:$ordered)
+                  ?? $value ~~ Str:D  # tweaked args that can be Str
+                    ?? $value
+                    !! $value.Map(:$ordered)
                   !! $type ~~ Cool
                     ?? $value
                     !! ($type ~~ Enumify)

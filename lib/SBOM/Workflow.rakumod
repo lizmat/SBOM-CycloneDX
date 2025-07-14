@@ -69,7 +69,7 @@ class SBOM::Workflow:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 
 #| A set of named filesystem or data resource shareable by workflow
 #| tasks.
-    has SBOM::Workspace @.worksSpaces;
+    has SBOM::Workspace @.workspaces;
 
 #| A graph of the component runtime topology for task's instance.
     has SBOM::RuntimeTopology @.runtimeTopology;

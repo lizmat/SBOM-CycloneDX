@@ -32,16 +32,23 @@ class SBOM::Input:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 #| Inputs that have the form of parameters with names and values.
     has SBOM::Parameter @.parameters;
 
-#| Inputs that have the form of parameters with names and values.
-    has SBOM::StrOrProperty @.environmentVars;
-
 #| Inputs that have the form of data.
     has SBOM::Attachment $.data;
 
 #| Any additional properties as name-value pairs.
     has SBOM::Property @.properties;
 
-    submethod TWEAK() {
+#| Inputs that have the form of parameters with names and values.
+    has @.environmentVars is built(False);
+
+    method TWEAK-nameds(SBOM::Input:) { ("environmentVars",) }
+
+    submethod TWEAK(:@!environmentVars) {
+
+        for @!environmentVars {
+            $_ = SBOM::Property.new(|$_) if $_ ~~ Associative;
+        }
+
         die "Must have at least 'resource', 'parameters', 'environmentVars' or 'data'"
           unless $!resource || @!parameters || @!environmentVars || $!data;
     }

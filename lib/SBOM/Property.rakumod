@@ -1,18 +1,5 @@
 use SBOM:ver<0.0.3>:auth<zef:lizmat>;
 
-#- StrOrProperty ---------------------------------------------------------------
-class SBOM::Property { ... }
-
-#| Allow for a Property or a string
-role SBOM::StrOrProperty:ver<0.0.3>:auth<zef:lizmat> {
-    multi method new(SBOM::StrOrProperty:U: Str:D $string) {
-        $string but SBOM::StrOrProperty
-    }
-    multi method new(SBOM::StrOrProperty:U: :$raw-error) is default {
-        SBOM::Property.new(:$raw-error, |%_)
-    }
-}
-
 #- Property --------------------------------------------------------------------
 #| Provides the ability to document properties in a name-value store.
 #| This provides flexibility to include data not officially supported
@@ -22,8 +9,7 @@ role SBOM::StrOrProperty:ver<0.0.3>:auth<zef:lizmat> {
 #| Property names of interest to the general public are encouraged to
 #| be registered in the CycloneDX Property Taxonomy. Formal registration
 #| is optional.
-class SBOM::Property:ver<0.0.3>:auth<zef:lizmat>
-  does SBOM::StrOrProperty does SBOM {
+class SBOM::Property:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 
 #| The name of the property. Duplicate names are allowed.
     has Str $.name is required;

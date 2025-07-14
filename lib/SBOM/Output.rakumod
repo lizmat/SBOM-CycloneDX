@@ -30,13 +30,20 @@ class SBOM::Output:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 #| Outputs that have the form of data.
     has SBOM::Attachment $.data;
 
-#| Outputs that have the form of environment variables.
-    has SBOM::StrOrProperty @.environmentVars;
-
 #| Any additional properties as name-value pairs.
     has SBOM::Property @.properties;
 
-    submethod TWEAK() {
+#| Outputs that have the form of environment variables.
+    has @.environmentVars is built(False);
+
+    method TWEAK-nameds(SBOM::Output:) { ("environmentVars",) }
+
+    submethod TWEAK(:@!environmentVars) {
+
+        for @!environmentVars {
+            $_ = SBOM::Property.new(|$_) if $_ ~~ Associative;
+        }
+
         die "Must have at least 'resource', 'environmentVars' or 'data'"
           unless $!resource  || @!environmentVars || $!data;
     }
