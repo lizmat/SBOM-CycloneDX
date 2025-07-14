@@ -30,7 +30,7 @@ class SBOM::Requirement:ver<0.0.3>:auth<zef:lizmat> does SBOM {
     has Str @.descriptions;
 
 #| The Common Requirements Enumeration (CRE) identifier(s).
-    has CRE @.openCRE;
+    has CRE @.openCre;
 
 #| The optional bom-ref to a parent requirement. This establishes a
 #| hierarchy of requirements. Top-level requirements must not define

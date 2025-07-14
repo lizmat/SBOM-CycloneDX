@@ -10,8 +10,8 @@ my %complete is Map =
   classification => "PII",
   name           => "fubarred data",
   description    => "This data is the pits",
-  source         => "https://garbage.in",
-  destination    => "https://garbage.out",
+  source         => ("https://garbage.in",) ,
+  destination    => ("https://garbage.out",),
 ;
 
 test-map-json SBOM::ServiceDataset, %complete, Q:to/JSON/;
@@ -20,8 +20,12 @@ test-map-json SBOM::ServiceDataset, %complete, Q:to/JSON/;
   "classification": "PII",
   "name": "fubarred data",
   "description": "This data is the pits",
-  "source": "https://garbage.in",
-  "destination": "https://garbage.out"
+  "source": [
+    "https://garbage.in"
+  ],
+  "destination": [
+    "https://garbage.out"
+  ]
 }
 JSON
 

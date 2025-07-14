@@ -8,33 +8,39 @@ plan 2;
 my %complete is Map =
   custodians => (
     {
-      bom-ref => "ddoe",
-      name    => "Dunky Doe",
-      email   => "ddoe@foo.org",
-      phone   => "+31 123 456 780"
+      contact => {
+        bom-ref => "ddoe",
+        name    => "Dunky Doe",
+        email   => "ddoe@foo.org",
+        phone   => "+31 123 456 780"
+      }.Map
     }.Map,
   ),
   stewards => (
     {
-      bom-ref => "jdoe",
-      name    => "Jane Doe",
-      email   => "jdoe@foo.org",
-      phone   => "+31 123 456 789"
+      contact => {
+        bom-ref => "jdoe",
+        name    => "Jane Doe",
+        email   => "jdoe@foo.org",
+        phone   => "+31 123 456 789"
+      }.Map
     }.Map,
   ),
   owners => (
     {
-      bom-ref => "AcmeInc",
-      name    => "ACME Inc.",
-      address => {
-        bom-ref             => "home",
-        country             => "NL",
-        region              => "Knoware",
-        locality            => "Schutter",
-        postOfficeBoxNumber => "27434",
-        postalCode          => "1000CS",
-        streetAddress       => "Voetboogstraat",
-      }.Map,
+      organization => {
+        bom-ref => "AcmeInc",
+        name    => "ACME Inc.",
+        address => {
+          bom-ref             => "home",
+          country             => "NL",
+          region              => "Knoware",
+          locality            => "Schutter",
+          postOfficeBoxNumber => "27434",
+          postalCode          => "1000CS",
+          streetAddress       => "Voetboogstraat",
+        }.Map
+      }.Map
     }.Map,
   )
 ;
@@ -43,32 +49,38 @@ test-map-json SBOM::Governance, %complete, Q:to/JSON/;
 {
   "custodians": [
     {
-      "bom-ref": "ddoe",
-      "name": "Dunky Doe",
-      "email": "ddoe@foo.org",
-      "phone": "+31 123 456 780"
+      "contact": {
+        "bom-ref": "ddoe",
+        "name": "Dunky Doe",
+        "email": "ddoe@foo.org",
+        "phone": "+31 123 456 780"
+      }
     }
   ],
   "stewards": [
     {
-      "bom-ref": "jdoe",
-      "name": "Jane Doe",
-      "email": "jdoe@foo.org",
-      "phone": "+31 123 456 789"
+      "contact": {
+        "bom-ref": "jdoe",
+        "name": "Jane Doe",
+        "email": "jdoe@foo.org",
+        "phone": "+31 123 456 789"
+      }
     }
   ],
   "owners": [
     {
-      "bom-ref": "AcmeInc",
-      "name": "ACME Inc.",
-      "address": {
-        "bom-ref": "home",
-        "country": "NL",
-        "region": "Knoware",
-        "locality": "Schutter",
-        "postOfficeBoxNumber": "27434",
-        "postalCode": "1000CS",
-        "streetAddress": "Voetboogstraat"
+      "organization": {
+        "bom-ref": "AcmeInc",
+        "name": "ACME Inc.",
+        "address": {
+          "bom-ref": "home",
+          "country": "NL",
+          "region": "Knoware",
+          "locality": "Schutter",
+          "postOfficeBoxNumber": "27434",
+          "postalCode": "1000CS",
+          "streetAddress": "Voetboogstraat"
+        }
       }
     }
   ]

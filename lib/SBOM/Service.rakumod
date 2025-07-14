@@ -43,11 +43,11 @@ class SBOM::ServiceDataset:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 
 #| The URI, URL, or BOM-Link of the components or services the data
 #| came in from.
-    has Endpoint $.source;
+    has Endpoint @.source;
 
 #| The URI, URL, or BOM-Link of the components or services the data
 #| is sent to.
-    has Endpoint $.destination;
+    has Endpoint @.destination;
 }
 
 #- Service ---------------------------------------------------------------------

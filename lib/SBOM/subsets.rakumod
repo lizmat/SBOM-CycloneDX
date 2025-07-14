@@ -33,7 +33,7 @@ subset CPE of Str;  # XXX fetch from https://nvd.nist.gov/products/cpe
 #| topic identifier (a Common Requirement). Through this shared topic
 #| link, all resources map to each other. Use of CRE promotes clear and
 #| unambiguous communication among stakeholders.
-subset CRE of Str where *.contains /^ 'CRE:' <[0..9]>+ '-' <[0..9]>+ $/;
+subset CRE of Str where *.contains: /^ 'CRE:' <[0..9]>+ '-' <[0..9]>+ $/;
 
 #| A package-url (purl). The purl, if specified, must be valid and conform
 #| to the specification defined at: https://github.com/package-url/purl-spec.

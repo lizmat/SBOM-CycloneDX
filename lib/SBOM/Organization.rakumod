@@ -4,21 +4,6 @@ use SBOM::subsets:ver<0.0.3>:auth<zef:lizmat> <
 
 use SBOM:ver<0.0.3>:auth<zef:lizmat>;
 
-#- Governor --------------------------------------------------------------------
-class SBOM::Contact      { ... }
-class SBOM::Organization { ... }
-
-#| A person or organization governing data
-class SBOM::Governor:ver<0.0.3>:auth<zef:lizmat> does SBOM {
-    multi method new(SBOM::Governor:U: :$raw-error) {
-        my $class := %_<contact> || %_<address> || %_<url>
-          ?? SBOM::Organization
-          !! SBOM::Contact;
-
-        $class.new(:$raw-error, |%_)
-    }
-}
-
 #- Address ---------------------------------------------------------------------
 #| The physical address (location) of the organization.
 class SBOM::Address:ver<0.0.3>:auth<zef:lizmat> does SBOM {
@@ -48,8 +33,7 @@ class SBOM::Address:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 
 #- Contact ---------------------------------------------------------------------
 #| A person.
-class SBOM::Contact:ver<0.0.3>:auth<zef:lizmat>
-  is SBOM::Governor does SBOM {
+class SBOM::Contact:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 
 #| An optional identifier which can be used to reference the person
 #| elsewhere in the BOM.
@@ -67,8 +51,7 @@ class SBOM::Contact:ver<0.0.3>:auth<zef:lizmat>
 
 #- Organization ----------------------------------------------------------------
 #| An organization, as opposed to a person.
-class SBOM::Organization:ver<0.0.3>:auth<zef:lizmat>
-  is SBOM::Governor does SBOM {
+class SBOM::Organization:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 
 #| An optional identifier which can be used to reference the object
 #| elsewhere in the BOM.
@@ -100,6 +83,22 @@ class SBOM::IndividualOrOrganization:ver<0.0.3>:auth<zef:lizmat> does SBOM {
     submethod TWEAK() {
         die "Must either have 'individual' or 'organization' specified"
           unless one($!individual, $!organization);
+    }
+}
+
+#- Governor --------------------------------------------------------------------
+#| A person or organization governing data
+class SBOM::Governor:ver<0.0.3>:auth<zef:lizmat> does SBOM {
+
+#| A governing organization
+    has SBOM::Organization $.organization;
+
+#| A governing individual
+    has SBOM::Contact $.contact;
+
+    submethod TWEAK() {
+        die "Must either have 'organization' or 'contact'"
+          if $!organization && $!contact;
     }
 }
 
