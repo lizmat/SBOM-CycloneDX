@@ -87,15 +87,18 @@ A number of introspection methods will be provided, making it easier
 to search for certain conditions in a given SBOM.  Suggestions for
 types of introspection are very welcome.
 
-=head1 TOP LEVEL ARGUMENTS
+=head1 CLASSES PROVIDED
 
-This provides an overview of the named arguments that can be passed
-to the top level C<SBOM::CycloneDX> object.
+All classes can be instantiated by calling the C<.new> method with
+named arguments.  Each named argument can either be a C<SBOM::> object,
+or a hash containing named arguments.
 
-=begin output :type<top>
-=end output
+=head2 SBOM::CycloneDX
 
 =head1 ENUMS PROVIDED
+
+
+=head1 ENUMS API
 
 The C<SBOM::enums> module provides a number of functional enum values.
 Note however that these are B<NOT> enums in the pure Raku sense, but
@@ -117,7 +120,7 @@ by considering it an C<Associative>.
 =begin code :lang<raku>
 use SBOM::enums <DataFlow>;  # Just import DataFlow enum
 
-say DataFlow.WHY;           # Specifies information about the directional...
+say DataFlow.WHY;           # Specifies information about the...
 say DataFlow<inbound>.WHY;  # Data that enters a service.
 
 =end code
@@ -150,7 +153,7 @@ available.
 
 =head1 CREDITS
 
-The SBOM test files in the C<t/valid> directory  were taken from
+The SBOM test files in the C<t/valid> directory were taken from
 L<Giuseppe Di Terlizzi's SBOM::CycloneDX repoository|https://github.com/giterlizzi/perl-SBOM-CycloneDX/>.
 
 =head1 AUTHOR

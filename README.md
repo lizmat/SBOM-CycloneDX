@@ -87,13 +87,19 @@ INTROSPECTION METHODS
 
 A number of introspection methods will be provided, making it easier to search for certain conditions in a given SBOM. Suggestions for types of introspection are very welcome.
 
-TOP LEVEL ARGUMENTS
-===================
+CLASSES PROVIDED
+================
 
-This provides an overview of the named arguments that can be passed to the top level `SBOM::CycloneDX` object.
+All classes can be instantiated by calling the `.new` method with named arguments. Each named argument can either be a `SBOM::` object, or a hash containing named arguments.
+
+SBOM::CycloneDX
+---------------
 
 ENUMS PROVIDED
 ==============
+
+ENUMS API
+=========
 
 The `SBOM::enums` module provides a number of functional enum values. Note however that these are **NOT** enums in the pure Raku sense, but Raku classes doing the `Enumify` role. This to allow for an easy check to see whether a given string is allowed for the given "enum".
 
@@ -111,7 +117,7 @@ One can check for the validity of a string for the given enum class by consideri
 ```raku
 use SBOM::enums <DataFlow>;  # Just import DataFlow enum
 
-say DataFlow.WHY;           # Specifies information about the directional...
+say DataFlow.WHY;           # Specifies information about the...
 say DataFlow<inbound>.WHY;  # Data that enters a service.
 ```
 
