@@ -37,7 +37,7 @@ class SBOM::Task:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 
 #| References to component or service resources that are used to
 #| realize the resource instance.
-    has SBOM::resourceRef @.resourceReferences;
+    has SBOM::ResourceReference @.resourceReferences;
 
 #| Indicates the types of activities performed by the set of
 #| workflow tasks.
@@ -77,7 +77,7 @@ class SBOM::Task:ver<0.0.3>:auth<zef:lizmat> does SBOM {
         if @!resourceReferences {
             die "Mixed references"
               unless @!resourceReferences.are(SBOM::Reference)
-                  || @!resourceReferences.all ~~ SBOM::resourceRef;
+                  || @!resourceReferences.all ~~ SBOM::ResourceReference;
         }
     }
 }

@@ -35,7 +35,21 @@ class SBOM::Reference:ver<0.0.3>:auth<zef:lizmat> does SBOM {
     has SBOM::HashedString @.hashes;
 }
 
-#| Either a referenceURL or a Reference are allowed.
-subset SBOM::resourceRef where referenceURL | SBOM::Reference;
+#- ResourceReference -----------------------------------------------------------
+#| A reference to a locally defined resource (e.g., a bom-ref) or an
+#| externally accessible resource.
+class SBOM::ResourceReference:ver<0.0.3>:auth<zef:lizmat> does SBOM {
+
+#| References an object by its bom-ref attribute
+    has bom-refOrLink $.ref;
+
+#| Reference to an externally accessible resource.
+    has SBOM::Reference $.externalReference;
+
+    submethod TWEAK() {
+        die "Must either have 'ref' or 'externalReference'"
+          unless $!ref || $!externalReference;
+    }
+}
 
 # vim: expandtab shiftwidth=4

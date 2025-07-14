@@ -46,10 +46,10 @@ class SBOM::Event:ver<0.0.3>:auth<zef:lizmat> does SBOM {
     has SBOM::Attachment $.data;
 
 #| References the component or service that was the source of the event.
-    has SBOM::resourceRef $.source;
+    has SBOM::ResourceReference $.source;
 
 #| References the component or service that was the target of the event.
-    has SBOM::resourceRef $.target;
+    has SBOM::ResourceReference $.target;
 
 #| Any additional properties as name-value pairs.
     has SBOM::Property @.properties;
@@ -75,7 +75,7 @@ class SBOM::Trigger:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 
 #| References to component or service resources that are used to
 #| realize the resource instance.
-    has SBOM::resourceRef @.resourceReferences;
+    has SBOM::ResourceReference @.resourceReferences;
 
 #| The source type of event which caused the trigger to fire.
     has TriggerEvent $.type;
@@ -105,7 +105,7 @@ class SBOM::Trigger:ver<0.0.3>:auth<zef:lizmat> does SBOM {
         if @!resourceReferences {
             die "Mixed references"
               unless @!resourceReferences.are(SBOM::Reference)
-                  || @!resourceReferences.all ~~ SBOM::resourceRef;
+                  || @!resourceReferences.all ~~ SBOM::ResourceReference;
         }
     }
 }

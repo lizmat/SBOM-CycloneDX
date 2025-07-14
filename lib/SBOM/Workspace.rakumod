@@ -68,7 +68,7 @@ class SBOM::Workspace:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 
 #| References to component or service resources that are used to realize
 #| the resource instance.
-    has SBOM::resourceRef @.resourceReferences;
+    has SBOM::ResourceReference @.resourceReferences;
 
 #| Describes the read-write access Acontrol for the workspace relative
 #| to the owning resource instance.

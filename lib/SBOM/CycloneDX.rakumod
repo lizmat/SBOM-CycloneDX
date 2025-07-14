@@ -88,7 +88,7 @@ class SBOM::CycloneDX:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 #| and steps, which declare the precise steps to reproduce along with
 #| the observed formulas describing the steps which transpired in the
 #| manufacturing process. All items must be unique.
-    has SBOM::Formulation @.formulations;
+    has SBOM::Formulation @.formulation;
 
 #| The list of declarations which describe the conformance to
 #| standards. Each declaration may include attestations, claims,

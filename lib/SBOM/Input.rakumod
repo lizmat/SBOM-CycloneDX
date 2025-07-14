@@ -21,13 +21,13 @@ class SBOM::Parameter:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 class SBOM::Input:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 
 #| A reference to the component or service that provided the input to the task (e.g., reference to a service with data flow value of inbound)
-    has SBOM::resourceRef $.source;
+    has SBOM::ResourceReference $.source;
 
 #| A reference to the component or service that received or stored the input if not the task itself (e.g., a local, named storage workspace)
-    has SBOM::resourceRef $.target;
+    has SBOM::ResourceReference $.target;
 
 #| A reference to an independent resource provided as an input to a task by the workflow runtime.
-    has SBOM::resourceRef $.resource;
+    has SBOM::ResourceReference $.resource;
 
 #| Inputs that have the form of parameters with names and values.
     has SBOM::Parameter @.parameters;

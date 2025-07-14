@@ -17,15 +17,15 @@ class SBOM::Output:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 
 #| Component or service that generated or provided the output from
 #| a task (e.g., a build tool)
-    has SBOM::resourceRef $.source;
+    has SBOM::ResourceReference $.source;
 
 #| Component or service that received the output from the task
 #| (e.g., reference to an artifactory service with data flow value
 #| of outbound).
-    has SBOM::resourceRef $.target;
+    has SBOM::ResourceReference $.target;
 
 #| A reference to an independent resource generated as output by a task.
-    has SBOM::resourceRef $.resource;
+    has SBOM::ResourceReference $.resource;
 
 #| Outputs that have the form of data.
     has SBOM::Attachment $.data;

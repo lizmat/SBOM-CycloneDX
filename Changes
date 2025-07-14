@@ -11,6 +11,7 @@ Revision history for SBOM::CycloneDX
        - SBOM::IndividualOrOrganization
        - SBOM::AnyLicense
        - SBOM::Governor
+       - SBOM::ResourceReference
     - Added classes to wrap up information:
        - SBOM::LicenseInfo
     - Added roles that combine other classes:
