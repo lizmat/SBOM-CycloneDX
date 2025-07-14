@@ -22,6 +22,7 @@ use SBOM::Signature:ver<0.0.3>:auth<zef:lizmat>;
 use SBOM::Vulnerability:ver<0.0.3>:auth<zef:lizmat>;
 
 #- CycloneDX -------------------------------------------------------------------
+#| Providing the CycloneDX v1.6 JSON specification in Raku.
 class SBOM::CycloneDX:ver<0.0.3>:auth<zef:lizmat> does SBOM {
 
 #| Specifies the format of the BOM. This helps to identify the file as
@@ -106,10 +107,6 @@ class SBOM::CycloneDX:ver<0.0.3>:auth<zef:lizmat> does SBOM {
     has SBOM::ValidSignature $.signature;
 
     method updated() { ++$!version }
-
-    method WHY() {
-        self.bomFormat ~ " " ~ self.specVersion;
-    }
 }
 
 # vim: expandtab shiftwidth=4
