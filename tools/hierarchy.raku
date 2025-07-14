@@ -29,9 +29,9 @@ sub types(Mu $class, str $indent = "  ") {
               ?? ("- $name " ~ "-" x (60 - $name.chars))
               !! "$indent$name";
 
-            if $attribute.WHY // $type.WHY -> $WHY {
-                say $WHY.Str.naive-word-wrapper(:60max, :$indent);
-            }
+#            if $attribute.WHY // $type.WHY -> $WHY {
+#                say $WHY.Str.naive-word-wrapper(:60max, :$indent);
+#            }
             say "";
 
             if $name eq 'Component' && $indent ne "  " {

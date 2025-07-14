@@ -1,14 +1,18 @@
 use JSON::Fast:ver<0.19+>:auth<cpan:TIMOTIMO>;
 
+# The keys of the enum classes supported
+my %classes is default(Nil);
+
 #| Role for creating SBOM "enums", which are in fact just classes
 #| that consume this role
-role Enumify {
+my role Enumify {
     has $.name;
     has $.WHY;
 
     my %enums is Map;
 
     multi method setup(Enumify:U: Str:D $key) {
+        %classes{$key} := self;
         self.setup(%?RESOURCES{"enums/$key"}.open.lines(:close).Array)
     }
 
@@ -40,12 +44,17 @@ role Enumify {
     multi method raku(Enumify:D:) { $?CLASS.^name ~ "($!name.raku())" }
     multi method Str(Enumify:D:) { $.name }
 
-    method AT-KEY(Enumify:U: Str:D $name) {
-        %enums{$name} // Nil
+    multi method keys(Enumify:U:) {
+        (self.^name eq 'Enumify' ?? %classes !! %enums).keys.sort
     }
+
+    multi method AT-KEY(Enumify:U: Str:D $name) {
+        (self.^name eq 'Enumify' ?? %classes !! %enums){$name}
+    }
+
     method CALL-ME(Enumify:U: Str:D $name) {
         %enums{$name}
-          // die "Could not find " ~ self.^name ~ ":$name enum"
+          // die "Could not find enum: " ~ self.^name ~ ":$name"
     }
 }
 
@@ -284,6 +293,9 @@ my class VulnerabilityState:ver<0.0.3>:auth<zef:lizmat> does Enumify { }
 BEGIN ::($_).setup($_) for $?DISTRIBUTION.meta<resources>.map: {
     .substr(6) if .starts-with("enums/")
 }
+
+# Make sure the class lookup is read-only
+BEGIN { %classes := %classes.Map }
 
 #- EXPORT ----------------------------------------------------------------------
 my sub EXPORT(*@names) {

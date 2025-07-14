@@ -1,0 +1,42 @@
+use SBOM::enums <Enumify>;
+my %*SUB-MAIN-OPTS = :named-anywhere, :coerce-allomorphs-to(Str);
+
+#| Provide SBOM enum info
+unit sub MAIN(
+    Str   $name = "all",  #= enum name
+    Bool :$verbose;       #= whether to show WHY info
+    Bool :$silent;        #= whether to skip headers
+) {
+    my $type := do if $name eq "all" {
+        say "All possible enum classes:\n"
+          unless $silent;
+        Enumify
+    }
+    else {
+        my $class := Enumify.AT-KEY($name);
+
+        # "name" failed
+        if $class =:= Nil {
+            note "'$name' is not a valid enum class";
+            exit 1;
+        }
+        say "All possible values in the '$name' enum:\n"
+          unless $silent;
+        $class
+    }
+
+    if $verbose {
+        for $type.keys -> $key {
+            say "$key:";
+            with $type{$key}.WHY -> $text {
+                say $text.naive-word-wrapper;
+            }
+            say "";
+        }
+    }
+    else {
+        .say for $type.keys;
+    }
+}
+
+# vim: expandtab shiftwidth=4

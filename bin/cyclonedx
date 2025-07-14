@@ -1,0 +1,28 @@
+use SBOM::CycloneDX;
+my %*SUB-MAIN-OPTS = :named-anywhere, :coerce-allomorphs-to(Str);
+
+#| Check a CycloneDX SBOM file
+unit sub MAIN(
+    Str   $path,    #= The path of a CycloneDX SBOM file
+    Bool :$raw,     #= whether to show raw errors
+    Bool :$silent,  #= whether to be silent on success
+) {
+    if $raw {
+        SBOM::CycloneDX.new(:raw-error, $path);
+    }
+    orwith try SBOM::CycloneDX.new($path) -> $sbom {
+        if $sbom.build-errors -> @errors {
+            note "Found @errors.elems() build errors:";
+            note "  $_" for @errors;
+            exit 1;
+        }
+    }
+    else {
+        note "'$path' does NOT contain SBOM information" unless $silent;
+        exit 1;
+    }
+
+    say "'$path' contains a valid CycloneDX SBOM" unless $silent;
+}
+
+# vim: expandtab shiftwidth=4
