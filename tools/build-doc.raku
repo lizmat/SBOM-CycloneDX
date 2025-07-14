@@ -35,7 +35,7 @@ introspect(SBOM::CycloneDX);
 sub produce-pod(Mu $class) {
     say "";
     with $class.WHY -> $rakudoc {
-        say $rakudoc.Str.naive-word-wrapper;
+        say "$rakudoc.Str()  Accepts these named arguments:".naive-word-wrapper;
         say "";
     }
 
@@ -45,7 +45,7 @@ sub produce-pod(Mu $class) {
         my str $name = "$type.^name() $attribute.name.subst("!")";
         $name ~= " (required)" if $attribute.required;
 
-        say "=head3 $name";
+        say "=item $name";
         say "";
         with $attribute.WHY -> $rakudoc {
             say $rakudoc.Str.naive-word-wrapper;
