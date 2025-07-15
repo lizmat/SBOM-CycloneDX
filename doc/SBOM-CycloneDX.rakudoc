@@ -235,6 +235,35 @@ Any additional properties as name-value pairs.
 
 Enveloped signature in JSON Signature Format (JSF).
 
+=head3 .Hash
+
+=begin code :lang<raku>
+use SBOM::CycloneDX;
+
+my %sbom := SBOM::CycloneDX.Hash;
+%sbom<components>.push: {
+  type => "library",
+  name => "My first library",
+}
+
+say SBOM::CycloneDX.new(|%sbom).JSON;
+# {
+#   "bomFormat": "CycloneDX",
+#   "specVersion": "1.6",
+#   "version": 1,
+#   "components": [
+#     {
+#       "type": "library",
+#       "name": "My first library"
+#     }
+#   ]
+# }
+=end code
+
+The C<.Hash> method called on the C<SBOM::CycloneDX> type object
+returns a C<Hash> with the information to create a minimally
+viable C<SBOM::CycloneDX> object.
+
 =head2 SBOM::Address
 
 The physical address (location) of the organization. Accepts these

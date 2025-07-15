@@ -68,13 +68,16 @@ while @lines && @lines.shift -> $line {
     print $line;
 
     if $line eq "=head2 SBOM::CycloneDX\n" {
-        skip-until "=head1 SUBSETS PROVIDED\n";
+        skip-until "=head3 .Hash\n";
 
         produce-pod(SBOM::CycloneDX);
+    }
+    elsif $line eq "=head2 SBOM::Address\n" {
+        skip-until "=head1 SUBSETS PROVIDED\n";
 
         %classes<SBOM::CycloneDX>:delete;
         for %classes.sort(*.key.fc) {
-            say "=head2 $_.key()";
+            say "=head2 $_.key()" unless .key eq 'SBOM::Address';
             produce-pod(.value);
         }
     }
