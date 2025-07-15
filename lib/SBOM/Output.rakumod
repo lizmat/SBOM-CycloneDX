@@ -1,16 +1,16 @@
-use SBOM::enums:ver<0.0.4>:auth<zef:lizmat> <
+use SBOM::enums:ver<0.0.5>:auth<zef:lizmat> <
   OutputType
 >;
 
-use SBOM:ver<0.0.4>:auth<zef:lizmat>;
-use SBOM::Property:ver<0.0.4>:auth<zef:lizmat>;
-use SBOM::Reference:ver<0.0.4>:auth<zef:lizmat>;
-use SBOM::Attachment:ver<0.0.4>:auth<zef:lizmat>;
+use SBOM:ver<0.0.5>:auth<zef:lizmat>;
+use SBOM::Property:ver<0.0.5>:auth<zef:lizmat>;
+use SBOM::Reference:ver<0.0.5>:auth<zef:lizmat>;
+use SBOM::Attachment:ver<0.0.5>:auth<zef:lizmat>;
 
 #- Output ----------------------------------------------------------------------
 #| Represents resources and data output from a task at runtime by
 #| executor or task commands.
-class SBOM::Output:ver<0.0.4>:auth<zef:lizmat> does SBOM {
+class SBOM::Output:ver<0.0.5>:auth<zef:lizmat> does SBOM {
 
 #| Describes the type of data output.
     has OutputType $.type;

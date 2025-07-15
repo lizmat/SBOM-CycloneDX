@@ -1,13 +1,13 @@
-use SBOM::enums:ver<0.0.4>:auth<zef:lizmat> <
+use SBOM::enums:ver<0.0.5>:auth<zef:lizmat> <
    Phase
 >;
 
-use SBOM:ver<0.0.4>:auth<zef:lizmat>;
-use SBOM::Component:ver<0.0.4>:auth<zef:lizmat>;
-use SBOM::License:ver<0.0.4>:auth<zef:lizmat>;
-use SBOM::Property:ver<0.0.4>:auth<zef:lizmat>;
-use SBOM::Organization:ver<0.0.4>:auth<zef:lizmat>;
-use SBOM::Tool:ver<0.0.4>:auth<zef:lizmat>;
+use SBOM:ver<0.0.5>:auth<zef:lizmat>;
+use SBOM::Component:ver<0.0.5>:auth<zef:lizmat>;
+use SBOM::License:ver<0.0.5>:auth<zef:lizmat>;
+use SBOM::Property:ver<0.0.5>:auth<zef:lizmat>;
+use SBOM::Organization:ver<0.0.5>:auth<zef:lizmat>;
+use SBOM::Tool:ver<0.0.5>:auth<zef:lizmat>;
 
 #- Lifecycle -------------------------------------------------------------------
 #| Lifecycles communicate the stage(s) in which data in the BOM was
@@ -16,7 +16,7 @@ use SBOM::Tool:ver<0.0.4>:auth<zef:lizmat>;
 #| IT Asset Management (ITAM), and Software Asset Management (SAM).
 #| Thus, a BOM may include data specific to or only obtainable in a
 #| given lifecycle.
-class SBOM::Lifecycle:ver<0.0.4>:auth<zef:lizmat> does SBOM {
+class SBOM::Lifecycle:ver<0.0.5>:auth<zef:lizmat> does SBOM {
 
 #| A pre-defined phase in the product lifecycle.
     has Phase $.phase;
@@ -35,7 +35,7 @@ class SBOM::Lifecycle:ver<0.0.4>:auth<zef:lizmat> does SBOM {
 
 #- Metadata --------------------------------------------------------------------
 #| Provides additional information about a BOM.
-class SBOM::Metadata:ver<0.0.4>:auth<zef:lizmat> does SBOM {
+class SBOM::Metadata:ver<0.0.5>:auth<zef:lizmat> does SBOM {
 
 #| The date and time (timestamp) when the BOM was created.
     has DateTime $.timestamp;

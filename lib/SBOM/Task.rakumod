@@ -1,25 +1,25 @@
-use SBOM::enums:ver<0.0.4>:auth<zef:lizmat> <
+use SBOM::enums:ver<0.0.5>:auth<zef:lizmat> <
   TaskActivity
 >;
 
-use SBOM::subsets:ver<0.0.4>:auth<zef:lizmat> <
+use SBOM::subsets:ver<0.0.5>:auth<zef:lizmat> <
   bom-ref
 >;
 
-use SBOM:ver<0.0.4>:auth<zef:lizmat>;
-use SBOM::ExecutionStep:ver<0.0.4>:auth<zef:lizmat>;
-use SBOM::Input:ver<0.0.4>:auth<zef:lizmat>;
-use SBOM::Property:ver<0.0.4>:auth<zef:lizmat>;
-use SBOM::Output:ver<0.0.4>:auth<zef:lizmat>;
-use SBOM::Reference:ver<0.0.4>:auth<zef:lizmat>;
-use SBOM::RuntimeTopology:ver<0.0.4>:auth<zef:lizmat>;
-use SBOM::Trigger:ver<0.0.4>:auth<zef:lizmat>;
-use SBOM::Workspace:ver<0.0.4>:auth<zef:lizmat>;
+use SBOM:ver<0.0.5>:auth<zef:lizmat>;
+use SBOM::ExecutionStep:ver<0.0.5>:auth<zef:lizmat>;
+use SBOM::Input:ver<0.0.5>:auth<zef:lizmat>;
+use SBOM::Property:ver<0.0.5>:auth<zef:lizmat>;
+use SBOM::Output:ver<0.0.5>:auth<zef:lizmat>;
+use SBOM::Reference:ver<0.0.5>:auth<zef:lizmat>;
+use SBOM::RuntimeTopology:ver<0.0.5>:auth<zef:lizmat>;
+use SBOM::Trigger:ver<0.0.5>:auth<zef:lizmat>;
+use SBOM::Workspace:ver<0.0.5>:auth<zef:lizmat>;
 
 #- Task ------------------------------------------------------------------------
 #| Describes the inputs, sequence of steps and resources used to
 #| accomplish a task and its output.
-class SBOM::Task:ver<0.0.4>:auth<zef:lizmat> does SBOM {
+class SBOM::Task:ver<0.0.5>:auth<zef:lizmat> does SBOM {
 
 #| An optional identifier which can be used to reference the task
 #| elsewhere in the BOM.

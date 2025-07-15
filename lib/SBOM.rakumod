@@ -1,8 +1,8 @@
 use JSON::Fast:ver<0.19+>:auth<cpan:TIMOTIMO>;
-use SBOM::enums:ver<0.0.4>:auth<zef:lizmat> <Enumify>;
+use SBOM::enums:ver<0.0.5>:auth<zef:lizmat> <Enumify>;
 
 #- SBOM ------------------------------------------------------------------------
-role SBOM:ver<0.0.4>:auth<zef:lizmat> {
+role SBOM:ver<0.0.5>:auth<zef:lizmat> {
 
     # Hidden attribute that collects pairs with errors, in which the
     # key is is the crumbs of where the error happened, and the value
@@ -91,6 +91,16 @@ role SBOM:ver<0.0.4>:auth<zef:lizmat> {
           !!  @*ERRORS.push(@*CRUMBS.join("/") => $_);
     }
 
+    # DateTime handling is a bit more strict in CycloneDX, so be a
+    # little more strict here
+    my sub makeDateTime(Str:D $string) {
+        if try $string.DateTime -> $datetime {
+            my int $chars = $string.chars;
+            return $datetime if $string.chars >= 20
+        }
+        die "Invalid DateTime string '$string'; use an ISO 8601 timestamp (yyyy-mm-ddThh:mm:ss+00:00) instead";
+    }
+
     # The actual instantiation logic, setting @*CRUMBS as appropriate
     method !ingest(%in) {
         my %out;
@@ -126,7 +136,9 @@ role SBOM:ver<0.0.4>:auth<zef:lizmat> {
                     }
                     elsif $type ~~ DateTime {
                         for value.grep(*.defined) {
-                            @out.push($_ ~~ DateTime ?? $_ !! .DateTime);
+                            @out.push(
+                              $_ ~~ DateTime ?? $_ !! makeDateTime($_)
+                            );
                         }
                     }
                     elsif $type ~~ SBOM {
@@ -156,16 +168,20 @@ role SBOM:ver<0.0.4>:auth<zef:lizmat> {
                     }
                 }
                 elsif $type ~~ Enumify {
-                    %out{$name} := $_ ~~ Enumify ?? $_ !! $type($_) with value;
+                    %out{$name} := $_ ~~ Enumify ?? $_ !! $type($_)
+                      with value;
                 }
                 elsif $type ~~ DateTime {
-                    %out{$name} := $_ ~~ DateTime ?? $_ !! .DateTime with value;
+                    %out{$name} := $_ ~~ DateTime ?? $_ !! makeDateTime($_)
+                      with value;
                 }
                 elsif value ~~ Cool {
-                    %out{$name} := $_ with value;
+                    %out{$name} := $_
+                      with value;
                 }
                 elsif $type ~~ SBOM {
-                    %out{$name} := $_ ~~ SBOM ?? $_ !! $type.new(|$_) with value;
+                    %out{$name} := $_ ~~ SBOM ?? $_ !! $type.new(|$_)
+                      with value;
                 }
                 else {
                     die "Don't know how to handle type $type.^name()";

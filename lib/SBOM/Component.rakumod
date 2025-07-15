@@ -1,32 +1,32 @@
-use SBOM::enums:ver<0.0.4>:auth<zef:lizmat> <
+use SBOM::enums:ver<0.0.5>:auth<zef:lizmat> <
   ComponentType Patch Scope
 >;
 
-use SBOM::subsets:ver<0.0.4>:auth<zef:lizmat> <
+use SBOM::subsets:ver<0.0.5>:auth<zef:lizmat> <
   bom-ref CPE mime-type omniborId PURL SWHID URL
 >;
 
-use SBOM::Attachment:ver<0.0.4>:auth<zef:lizmat>;
-use SBOM::Commit:ver<0.0.4>:auth<zef:lizmat>;
-use SBOM::CryptoProperties:ver<0.0.4>:auth<zef:lizmat>;
-use SBOM::ComponentDataset:ver<0.0.4>:auth<zef:lizmat>;
-use SBOM::ComponentEvidence:ver<0.0.4>:auth<zef:lizmat>;
-use SBOM::HashedString:ver<0.0.4>:auth<zef:lizmat>;
-use SBOM::License:ver<0.0.4>:auth<zef:lizmat>;
-use SBOM::ModelCard:ver<0.0.4>:auth<zef:lizmat>;
-use SBOM::Property:ver<0.0.4>:auth<zef:lizmat>;
-use SBOM::Organization:ver<0.0.4>:auth<zef:lizmat>;
-use SBOM::Reference:ver<0.0.4>:auth<zef:lizmat>;
-use SBOM::ReleaseNotes:ver<0.0.4>:auth<zef:lizmat>;
-use SBOM::Resolve:ver<0.0.4>:auth<zef:lizmat>;
-use SBOM::Signature:ver<0.0.4>:auth<zef:lizmat>;
+use SBOM::Attachment:ver<0.0.5>:auth<zef:lizmat>;
+use SBOM::Commit:ver<0.0.5>:auth<zef:lizmat>;
+use SBOM::CryptoProperties:ver<0.0.5>:auth<zef:lizmat>;
+use SBOM::ComponentDataset:ver<0.0.5>:auth<zef:lizmat>;
+use SBOM::ComponentEvidence:ver<0.0.5>:auth<zef:lizmat>;
+use SBOM::HashedString:ver<0.0.5>:auth<zef:lizmat>;
+use SBOM::License:ver<0.0.5>:auth<zef:lizmat>;
+use SBOM::ModelCard:ver<0.0.5>:auth<zef:lizmat>;
+use SBOM::Property:ver<0.0.5>:auth<zef:lizmat>;
+use SBOM::Organization:ver<0.0.5>:auth<zef:lizmat>;
+use SBOM::Reference:ver<0.0.5>:auth<zef:lizmat>;
+use SBOM::ReleaseNotes:ver<0.0.5>:auth<zef:lizmat>;
+use SBOM::Resolve:ver<0.0.5>:auth<zef:lizmat>;
+use SBOM::Signature:ver<0.0.5>:auth<zef:lizmat>;
 
 #- SWID ------------------------------------------------------------------------
 #| Asserts the identity of the component using ISO-IEC 19770-2 Software
 #| Identification (SWID) Tags. Refer to @.evidence.identity to
 #| optionally provide evidence that substantiates the assertion of
 #| the component's identity.
-class SBOM::SWID:ver<0.0.4>:auth<zef:lizmat> does SBOM {
+class SBOM::SWID:ver<0.0.5>:auth<zef:lizmat> does SBOM {
 
 #| Maps to the tagId of a SoftwareIdentity.
     has Str:D $.tagId is required;
@@ -54,7 +54,7 @@ class SBOM::SWID:ver<0.0.4>:auth<zef:lizmat> does SBOM {
 class SBOM::Pedigree { ... }
 
 #| A software or hardware component.
-class SBOM::Component:ver<0.0.4>:auth<zef:lizmat> does SBOM {
+class SBOM::Component:ver<0.0.5>:auth<zef:lizmat> does SBOM {
 
 #| Specifies the type of the component. For software components,
 #| classify as application if no more specific appropriate
@@ -246,7 +246,7 @@ class SBOM::Component:ver<0.0.4>:auth<zef:lizmat> does SBOM {
 #- Diff ------------------------------------------------------------------------
 #| The patch file (or diff) that shows changes. Refer to
 #| https://en.wikipedia.org/wiki/Diff
-class SBOM::Diff:ver<0.0.4>:auth<zef:lizmat> does SBOM {
+class SBOM::Diff:ver<0.0.5>:auth<zef:lizmat> does SBOM {
 
 #| Specifies the optional text of the diff.
     has SBOM::Attachment $.text;
@@ -257,7 +257,7 @@ class SBOM::Diff:ver<0.0.4>:auth<zef:lizmat> does SBOM {
 
 #- Patch -----------------------------------------------------------------------
 #| Specifies an individual patch
-class SBOM::Patch:ver<0.0.4>:auth<zef:lizmat> does SBOM {
+class SBOM::Patch:ver<0.0.5>:auth<zef:lizmat> does SBOM {
 
 #| Specifies the purpose for the patch including the resolution of
 #| defects, security issues, or new behavior or functionality.
@@ -278,7 +278,7 @@ class SBOM::Patch:ver<0.0.4>:auth<zef:lizmat> does SBOM {
 #| complex chain from the beginning, the end, or anywhere in the middle.
 #| It also provides a way to document variants where the exact relation
 #| may not be known.
-class SBOM::Pedigree:ver<0.0.4>:auth<zef:lizmat> does SBOM {
+class SBOM::Pedigree:ver<0.0.5>:auth<zef:lizmat> does SBOM {
 
 #| Describes zero or more components in which a component is derived
 #| from. This is commonly used to describe forks from existing projects

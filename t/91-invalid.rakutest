@@ -1,0 +1,169 @@
+use Test;
+use SBOM::CycloneDX;
+use JSON::Fast:ver<0.19+>:auth<cpan:TIMOTIMO>;
+
+my @files = $*PROGRAM.sibling("invalid").dir.sort(*.basename);
+plan +@files;
+
+# Error messages if impossible to create object at all
+my %raw =
+  'invalid-bomformat-1.6.json' => Q/Unknown enum: BOMFormat:AnotherFormat/,
+  'invalid-serialnumber-1.6.json' => Q/Type check failed in assignment to $!serialNumber; expected serialNumber but got Str ("urn:uuid:3e671687-3...)/,
+;
+
+# Expected error messages
+my %expected =
+  "invalid-component-ref-1.6.json" => (
+    'CycloneDX/Component' => Q/Type check failed in assignment to $!bom-ref; expected bom-ref but got Str ("")/,
+  ),
+  'invalid-component-swid-1.6.json' => (
+    'CycloneDX/Component/SWID' => Q/The attribute '$!tagId' is required, but you did not provide a value for it./,
+  ),
+  'invalid-component-type-1.6.json' => (
+    'CycloneDX/Component' => Q/Unknown enum: ComponentType:foo/,
+  ),
+  'invalid-dependency-1.6.json' => (
+    'CycloneDX/Dependency' => Q/Type check failed in assignment to $!ref; expected bom-ref but got Str ("")/,
+  ),
+  'invalid-empty-component-1.6.json' => (
+    'CycloneDX/Component' => Q/The attribute '$!name' is required, but you did not provide a value for it./,
+  ),
+  'invalid-hash-alg-1.6.json' => (
+    'CycloneDX/Component/HashedString' => Q/Unknown enum: HashAlgorithm:FOO/,
+  ),
+  'invalid-hash-md5-1.6.json' => (
+    'CycloneDX/Component/HashedString' => Q/Type check failed in assignment to $!content; expected contentHash but got Str ("foo")/,
+  ),
+  'invalid-hash-sha1-1.6.json' => (
+    'CycloneDX/Component/HashedString' => Q/Type check failed in assignment to $!content; expected contentHash but got Str ("foo")/,
+  ),
+  'invalid-hash-sha256-1.6.json' => (
+    'CycloneDX/Component/HashedString' => Q/Type check failed in assignment to $!content; expected contentHash but got Str ("foo")/,
+  ),
+  'invalid-hash-sha512-1.6.json' => (
+    'CycloneDX/Component/HashedString' => Q/Type check failed in assignment to $!content; expected contentHash but got Str ("foo")/,
+  ),
+  'invalid-issue-type-1.6.json' => (
+    'CycloneDX/Component/Pedigree/Patch/Resolve' => Q/Unknown enum: ResolveType:foo/,
+  ),
+  'invalid-license-choice-1.6.json' => (
+    'CycloneDX/Component' => Q/Cannot have both 'license' and 'expression' specified/,
+  ),
+  'invalid-license-encoding-1.6.json' => (
+    'CycloneDX/Component/License/LicenseInfo/Attachment' => Q/Unknown enum: Encoding:base85/,
+  ),
+  'invalid-license-id-1.6.json' => (
+    'CycloneDX/Component/License/LicenseInfo' => Q/Unknown enum: LicenseId:Apache-2/,
+    'CycloneDX/Component/License' => Q/Must have 'id' or 'name' specified/,
+  ),
+  'invalid-license-missing-id-and-name-1.6.json' => (
+    'CycloneDX/Component/License' => Q/Must have 'id' or 'name' specified/,
+  ),
+  'invalid-metadata-license-1.6.json' => (
+    'CycloneDX/Metadata/License/LicenseInfo' => Q/Unknown enum: LicenseId:Apache-2/,
+    'CycloneDX/Metadata/License' => Q/Must have 'id' or 'name' specified/,
+  ),
+  'invalid-metadata-timestamp-1.6.json' => (
+    'CycloneDX/Metadata' => Q/Invalid DateTime string '2020-04-13'; use an ISO 8601 timestamp (yyyy-mm-ddThh:mm:ss+00:00) instead/,
+  ),
+  'invalid-missing-component-type-1.6.json' => (
+    'CycloneDX/Component' => Q/The attribute '$!type' is required, but you did not provide a value for it./,
+  ),
+  'invalid-patch-type-1.6.json' => (
+    'CycloneDX/Component/Pedigree/Patch' => Q/Unknown enum: Patch:foo/,
+  ),
+  'invalid-properties-1.6.json' => (
+    'CycloneDX/Metadata/Property' => Q/The attribute '$!name' is required, but you did not provide a value for it./,
+    'CycloneDX/Metadata/Property' => Q/Found extra keys in SBOM::Property: unexpected-property/,
+    'CycloneDX/Metadata/Property' => Q/The attribute '$!name' is required, but you did not provide a value for it./,
+    'CycloneDX/Component/License/LicenseInfo/Property' => Q/The attribute '$!name' is required, but you did not provide a value for it./,
+    'CycloneDX/Component/License/LicenseInfo/Property' => Q/Found extra keys in SBOM::Property: unexpected-property/,
+    'CycloneDX/Component/License/LicenseInfo/Property' => Q/The attribute '$!name' is required, but you did not provide a value for it./,
+    'CycloneDX/Component/Property' => Q/The attribute '$!name' is required, but you did not provide a value for it./,
+    'CycloneDX/Component/Property' => Q/Found extra keys in SBOM::Property: unexpected-property/,
+    'CycloneDX/Component/Property' => Q/The attribute '$!name' is required, but you did not provide a value for it./,
+    'CycloneDX/Service/Property' => Q/The attribute '$!name' is required, but you did not provide a value for it./,
+    'CycloneDX/Service/Property' => Q/Found extra keys in SBOM::Property: unexpected-property/,
+    'CycloneDX/Service/Property' => Q/The attribute '$!name' is required, but you did not provide a value for it./,
+  ),
+  'invalid-scope-1.6.json' => (
+    'CycloneDX/Component' => Q/Unknown enum: Scope:foo/,
+  ),
+  'invalid-service-data-1.6.json' => (
+    'CycloneDX/Service/ServiceDataset' => Q/Unknown enum: DataFlow:bar/,
+  ),
+;
+
+# Testing invalid SBOMs
+
+for @files -> $io {
+    my $basename := $io.basename;
+    subtest "Testing $io" => {
+        my %args := from-json $io.slurp;
+
+        # Try ingesting, throwing immediately on any error
+        my $sbom := try SBOM::CycloneDX.new(:raw-error, |%args);
+        # Failed as expected
+        if isa-ok(
+          $sbom, Nil, ':raw-error: should not have succeeded in building'
+        ) {
+            my $error := $!;
+
+            # Not expected to be able to create an object at all
+            if %raw{$basename} -> $message {
+                is $error.message, $message, 'did we get expected raw message';
+            }
+
+            # Failed, see if there are any expected errors
+            elsif %expected{$basename} -> @expected {
+
+                # Try again without any raw errors
+                $sbom := try SBOM::CycloneDX.new(|%args);
+
+                # Got an 
+                if isa-ok(
+                  $sbom, SBOM, 'Could create an object'
+                ) {
+                    my @build-errors := $sbom.build-errors;
+                    if ok(
+                      @build-errors && @build-errors == @expected,
+                      'Same number of errors'
+                    ) {
+                        for @expected.kv -> $index, $pair {
+                            is
+                              @build-errors[$index].key,
+                              $pair.key,
+                              "Is the crumb trail correct";
+                            is
+                              @build-errors[$index].value.message,
+                              $pair.value,
+                              "Is the error message correct";
+                        }
+                    }
+                    else {
+                        for @build-errors {
+                            say "'$_.key()' => Q/$_.value.message()/,";
+                        }
+                    }
+                }
+            }
+
+            # No raw messages, and no expected message, wtf?
+            else {
+                $sbom := SBOM::CycloneDX.new(|%args);
+                say "  '$basename' => (";
+                for $sbom.build-errors {
+                    say "    '$_.key()' => Q/$_.value.message()/,";
+                }
+                say "  ),";
+            }
+        }
+        else {
+            say $sbom.Map;
+            say $sbom.JSON;
+        }
+        done-testing;
+    }
+}
+
+# vim: expandtab shiftwidth=4

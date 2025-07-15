@@ -1,15 +1,15 @@
-use SBOM::subsets:ver<0.0.4>:auth<zef:lizmat> <
+use SBOM::subsets:ver<0.0.5>:auth<zef:lizmat> <
   bom-ref
 >;
 
-use SBOM:ver<0.0.4>:auth<zef:lizmat>;
-use SBOM::Organization:ver<0.0.4>:auth<zef:lizmat>;
-use SBOM::RequirementGrouping:ver<0.0.4>:auth<zef:lizmat>;
-use SBOM::Signature:ver<0.0.4>:auth<zef:lizmat>;
+use SBOM:ver<0.0.5>:auth<zef:lizmat>;
+use SBOM::Organization:ver<0.0.5>:auth<zef:lizmat>;
+use SBOM::RequirementGrouping:ver<0.0.5>:auth<zef:lizmat>;
+use SBOM::Signature:ver<0.0.5>:auth<zef:lizmat>;
 
 #| An attestations asserted by an assessor that maps requirements
 #| to claims.
-class SBOM::Attestation:ver<0.0.4>:auth<zef:lizmat> does SBOM {
+class SBOM::Attestation:ver<0.0.5>:auth<zef:lizmat> does SBOM {
 
 #| The short description explaining the main points of the attestation.
     has Str $.summary;

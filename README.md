@@ -92,6 +92,26 @@ CLASSES PROVIDED
 
 All classes can be instantiated by calling the `.new` method with named arguments. Each named argument can either be a `SBOM::` object, or a hash containing named arguments.
 
+All `SBOM::` classes also provide the following methods on instances:
+
+  * .build-errors
+
+Returns a list of `Pair`s indicating any elements that were for some reason incorrect, and where thus not added to the object. Should be empty for a completely succesful creation of an instance of a `SBOM::` class.
+
+The key contains the crumb trail of where in the object the problem occurred (e.g. "CycloneDX/Component"), and the value is the `Exception` object that was caught. Usually one is only interested in the `.message` on that object, but during development the complete stack trace provided by the `Exception` object may also be of interest.
+
+  * .JSON
+
+Returns a JSON representation of the instance.
+
+  * .Map
+
+Returns a `Map` representation of the instance, which can be used as an input to `.new` when flattened.
+
+  * .raku
+
+Returns a string representation of the instance, which can be used in an `EVAL`.
+
 SBOM::CycloneDX
 ---------------
 

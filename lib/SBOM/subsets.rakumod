@@ -28,7 +28,8 @@ subset URL of Str;  # XXX fetch URL rules
 
 #| A CPE must conform to the CPE 2.2 or 2.3 specification. See
 #| https://nvd.nist.gov/products/cpe.
-subset CPE of Str;  # XXX fetch from https://nvd.nist.gov/products/cpe
+subset CPE of Str where *.starts-with('cpe:');
+# XXX fetch from https://nvd.nist.gov/products/cpe
 
 #| A Common Requirements Enumeration (CRE) identifier. CRE is a
 #| structured and standardized framework for uniting security standards

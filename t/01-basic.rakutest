@@ -1,8 +1,22 @@
 use Test;
 use SBOM::CycloneDX;
 
-pass "replace me";
+plan 4;
 
-done-testing;
+my constant $format = "CycloneDX";
+my constant $spec   = "1.6";
+
+my %minimal =
+  bomFormat   => $format,
+  specVersion => $spec,
+;
+
+my $sbom := SBOM::CycloneDX.new(|%minimal);
+isa-ok $sbom, SBOM::CycloneDX;
+
+is $sbom.bomFormat,   $format, 'is the bomFormat correct';
+is $sbom.specVersion, $spec,   'is the specVersion correct';
+
+is-deeply $sbom.version, 1, 'is the version correct';
 
 # vim: expandtab shiftwidth=4
