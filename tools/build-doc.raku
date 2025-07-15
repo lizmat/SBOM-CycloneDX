@@ -60,15 +60,47 @@ my $io := $*PROGRAM.parent.sibling("doc/SBOM-CycloneDX.rakudoc");
 my @lines = $io.lines(:!chomp);
 my $*OUT = $io.open(:w);
 
+my sub skip-until(Str:D $string) {
+    @lines.shift until @lines.head eq $string;
+}
+
 while @lines && @lines.shift -> $line {
     print $line;
 
-    if $line eq "=head1 ENUMS PROVIDED\n" {
-        until @lines.head eq "=head1 ENUMS API\n" {
-            @lines.shift;
-        }
-        say "";
+    if $line eq "=head2 SBOM::CycloneDX\n" {
+        skip-until "=head1 SUBSETS PROVIDED\n";
 
+        produce-pod(SBOM::CycloneDX);
+
+        %classes<SBOM::CycloneDX>:delete;
+        for %classes.sort(*.key.fc) {
+            say "=head2 $_.key()";
+            produce-pod(.value);
+        }
+    }
+    elsif $line eq "=head1 SUBSETS PROVIDED\n" {
+        skip-until "=head1 SUBSETS API\n";
+
+        say "";
+        for %subsets.sort(*.key.fc) {
+            my $name   := .key;
+            my $subset := .value;
+
+            say "=head2 $name";
+            say "";
+            if $subset.WHY -> $rakudoc {
+                say $rakudoc.Str.naive-word-wrapper;
+            }
+            elsif $name eq 'UInt' {  # provided by core without WHY
+                say "An unsigned integer value (>= 0)";
+            }
+            say "";
+        }
+    }
+    elsif $line eq "=head1 ENUMS PROVIDED\n" {
+        skip-until "=head1 ENUMS API\n";
+
+        say "";
         for Enumify.keys -> $name {
             my $enum := Enumify.AT-KEY($name);
 
@@ -87,40 +119,6 @@ while @lines && @lines.shift -> $line {
             }
             say "";
 
-        }
-    }
-    elsif $line eq "=head1 SUBSETS PROVIDED\n" {
-        until @lines.head eq "=head1 SUBSETS API\n" {
-            @lines.shift;
-        }
-        say "";
-
-        for %subsets.sort(*.key.fc) {
-            my $name   := .key;
-            my $subset := .value;
-
-            say "=head2 $name";
-            say "";
-            if $subset.WHY -> $rakudoc {
-                say $rakudoc.Str.naive-word-wrapper;
-            }
-            elsif $name eq 'UInt' {  # provided by core without WHY
-                say "An unsigned integer value (>= 0)";
-            }
-            say "";
-        }
-    }
-    elsif $line eq "=head2 SBOM::CycloneDX\n" {
-        until @lines.head eq "=head1 SUBSETS PROVIDED\n" {
-            @lines.shift;
-        }
-
-        produce-pod(SBOM::CycloneDX);
-
-        %classes<SBOM::CycloneDX>:delete;
-        for %classes.sort(*.key.fc) {
-            say "=head2 $_.key()";
-            produce-pod(.value);
         }
     }
 }
