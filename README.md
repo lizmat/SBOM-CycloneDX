@@ -11,14 +11,20 @@ SYNOPSIS
 ```raku
 use SBOM::CycloneDX;
 
+# Reading an existing file
 my $from-path = SBOM::CycloneDX.new($path);  # read from path
 
 my $from-io = SBOM::CycloneDX.new($io);      # read from IO object
 
-my $minimal = SBOM::CycloneDX.new(           # create from named args
-  bomFormat   => "CycloneDX",
-  specVersion => "1.6"
-);
+# create from scratch
+my %sbom := SBOM::CycloneDX.Hash;  # create Hash with minimal keys
+%sbom<components>.push: {
+  name => "My first library",
+  type => "library",
+}
+my $first = SBOM::CycloneDX.new(|%sbom);
+
+"new.json".IO.spurt: $first.JSON;  # write to file
 ```
 
 DESCRIPTION
