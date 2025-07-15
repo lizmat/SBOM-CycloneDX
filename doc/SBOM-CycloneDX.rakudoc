@@ -122,6 +122,13 @@ Returns a JSON representation of the instance.
 Returns a C<Map> representation of the instance, which can be used as
 an input to C<.new> when flattened.
 
+=item .Hash
+
+Returns a C<Hash> representation of the instance, which can be used as
+an input to C<.new> when flattened.  This is the mutable version of
+C<.Map>, intended to be used for creation / updates by modifying the
+returned hash, and using that to create a new object with.
+
 =item .raku
 
 Returns a string representation of the instance, which can be used in

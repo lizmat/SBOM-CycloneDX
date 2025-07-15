@@ -7,14 +7,14 @@ plan 3;
 
 # Testing a simple object with just optional string-like attributes
 
-my %complete is Map =
+my %complete =
   bom-ref => "jdoe",
   name    => "Jane Doe",
   email   => "jdoe@foo.org",
   phone   => "+31 123 456 789"
 ;
 
-test-map-json SBOM::Contact, %complete, Q:to/JSON/;
+test-hash-json SBOM::Contact, %complete, Q:to/JSON/;
 {
   "bom-ref": "jdoe",
   "name": "Jane Doe",
@@ -23,8 +23,8 @@ test-map-json SBOM::Contact, %complete, Q:to/JSON/;
 }
 JSON
 
-my %minimal is Map = bom-ref => "jdoe";
-test-map-json SBOM::Contact, %minimal, Q:to/JSON/, "minimal";
+my %minimal = bom-ref => "jdoe";
+test-hash-json SBOM::Contact, %minimal, Q:to/JSON/, "minimal";
 {
   "bom-ref": "jdoe"
 }

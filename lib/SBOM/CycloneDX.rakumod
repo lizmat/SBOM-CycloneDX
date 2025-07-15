@@ -106,6 +106,11 @@ class SBOM::CycloneDX:ver<0.0.5>:auth<zef:lizmat> does SBOM {
 #| Enveloped signature in JSON Signature Format (JSF).
     has SBOM::ValidSignature $.signature;
 
+    # Type objects get a minimal hash to allow further building upon
+    multi method Hash(SBOM::CycloneDX:U:) {
+        Hash.new( (:bomFormat<CycloneDX>, :specVersion("1.6")) )
+    }
+
     method updated() { ++$!version }
 }
 

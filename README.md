@@ -112,6 +112,10 @@ Returns a JSON representation of the instance.
 
 Returns a `Map` representation of the instance, which can be used as an input to `.new` when flattened.
 
+  * .Hash
+
+Returns a `Hash` representation of the instance, which can be used as an input to `.new` when flattened. This is the mutable version of `.Map`, intended to be used for creation / updates by modifying the returned hash, and using that to create a new object with.
+
   * .raku
 
 Returns a string representation of the instance, which can be used in an `EVAL`.

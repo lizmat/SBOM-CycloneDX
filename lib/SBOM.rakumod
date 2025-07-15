@@ -265,6 +265,20 @@ role SBOM:ver<0.0.5>:auth<zef:lizmat> {
         self.^name ~ ".new(|" ~ self.Map.raku ~ ")"
     }
 
+    # This role allows to-json to generate all hashes in the order
+    # of the attributes by mixing in a "list" method, which is what
+    # JSON::Fast uses internally on any associative translation to
+    # JSON.  Because roles do *NOT* close over the scope they're in,
+    # we need to parameterize the role to be mixed in with the names
+    # of the attributes.
+    my role ordered-list[@NAMES] {
+        method list() {
+            @NAMES.map({
+                Pair.new($_, self.AT-KEY($_)) if self.EXISTS-KEY($_);
+            }).List
+        }
+    }
+
     # Type objects get an empty Map
     multi method Map(::?CLASS:U:) { Map.new }
 
@@ -272,20 +286,6 @@ role SBOM:ver<0.0.5>:auth<zef:lizmat> {
     # an optional :ordered named argument to create a special type of
     # map that will produce keys in the attribute definition order.
     multi method Map(::?CLASS:D: :$ordered) {
-
-        # This role allows to-json to generate all hashes in the order
-        # of the attributes by mixing in a "list" method, which is what
-        # JSON::Fast uses internally on any associative translation to
-        # JSON.  Because roles do *NOT* close over the scope they're in,
-        # we need to parameterize the role to be mixed in with the names
-        # of the attributes.
-        my role ordered-list[@NAMES] {
-            method list() {
-                @NAMES.map({
-                    Pair.new($_, self.AT-KEY($_)) if self.EXISTS-KEY($_);
-                }).List
-            }
-        }
 
         # Set up list of keys to render, may have additional keys
         my @keys = (@names,self.TWEAK-nameds).flat;
@@ -335,6 +335,64 @@ role SBOM:ver<0.0.5>:auth<zef:lizmat> {
         }).Map;
 
         $ordered ?? $map but ordered-list[@keys] !! $map
+    }
+
+    # Type objects get an empty Hash
+    multi method Hash(::?CLASS:U:) { Hash.new }
+
+    # Produce a Hash for the object, recursively if necessary.  Takes
+    # an optional :ordered named argument to create a special type of
+    # Hash that will produce keys in the attribute definition order.
+    multi method Hash(::?CLASS:D: :$ordered) {
+
+        # Set up list of keys to render, may have additional keys
+        my @keys = (@names,self.TWEAK-nameds).flat;
+
+        # Create initial version of the Hash, needs clone as @keys can
+        # be added while iterating, causing double adds
+        my %hash = @keys.clone.map: -> $name {
+            my $value := self."$name"();
+            my $type  := %type{$name};
+
+            # Generic mapification logic
+            sub mapify($value) {
+                $type =:= Nil
+                  ?? $value ~~ Str:D  # tweaked args that can be Str
+                    ?? $value
+                    !! $value.Hash(:$ordered)
+                  !! $type ~~ Cool
+                    ?? $value
+                    !! ($type ~~ Enumify)
+                      ?? $value ~~ Enumify
+                        ?? $value.name
+                        !! $value
+                      !! ($type ~~ DateTime)
+                        ?? $value ~~ DateTime
+                          ?? $value.Str.subst("Z","+00:00")
+                          !! $value
+                        !! $value.Hash(:$ordered)
+            }
+
+            # Have additional properties, so add them so theu appear
+            # in the Map, and thus in the JSON
+            if $name eq 'additional-properties' {
+                $value.map({ @keys.push(.key); $_ }).Slip
+            }
+
+            # An array of sort, add them if they're not empty
+            elsif %positional{$name} || $value ~~ Positional {
+                if $value<>.elems {
+                    $name => $value<>.map(&mapify).List
+                }
+            }
+
+            # A single value
+            else {
+                $name => mapify($_) with $value;
+            }
+        }
+
+        $ordered ?? %hash but ordered-list[@keys] !! %hash
     }
 
     # Produce the JSON for the invocant

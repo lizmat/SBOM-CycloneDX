@@ -9,20 +9,20 @@ plan 3 * @classes;
 
 # Basic Signature testing
 
-my %complete is Map =
+my %complete =
   signers => (
     {
       algorithm =>  "ES256",
       value     => "6A77T3RBTAuVpZOgFFFfOvGOQ1hqMbfSQ91VucRM1RIP6QqX9kEF1Pi1_vCl37qpVzK51kIyppgUF_i9s999XA"
-    }.Map,
+    },
     {
       algorithm =>  "ES256",
       value     => "lm6wx-elyBTbNMKNF8riooZhvrm6f5j8JpvgP9JtVv50dd7sXQLH7PqJcn9fmKV8eoF8cszPllEsQQhEQOM4hA"
-    }.Map
+    },
   )
 ;
 
-test-map-json $_, %complete, Q:to/JSON/, "$_.^name() complete" for @classes;
+test-hash-json $_, %complete, Q:to/JSON/, "$_.^name() complete" for @classes;
 {
   "signers": [
     {
@@ -37,15 +37,15 @@ test-map-json $_, %complete, Q:to/JSON/, "$_.^name() complete" for @classes;
 }
 JSON
 
-my %minimal is Map =
+my %minimal =
   signers => (
     {
       algorithm =>  "ES256",
       value     => "6A77T3RBTAuVpZOgFFFfOvGOQ1hqMbfSQ91VucRM1RIP6QqX9kEF1Pi1_vCl37qpVzK51kIyppgUF_i9s999XA"
-    }.Map,
+    },
   )
 ;
-test-map-json $_, %minimal, Q:to/JSON/, "$_.^name() minimal" for @classes;
+test-hash-json $_, %minimal, Q:to/JSON/, "$_.^name() minimal" for @classes;
 {
   "signers": [
     {

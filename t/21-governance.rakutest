@@ -5,7 +5,7 @@ use testers;
 
 plan 2;
 
-my %complete is Map =
+my %complete =
   custodians => (
     {
       contact => {
@@ -13,8 +13,8 @@ my %complete is Map =
         name    => "Dunky Doe",
         email   => "ddoe@foo.org",
         phone   => "+31 123 456 780"
-      }.Map
-    }.Map,
+      },
+    },
   ),
   stewards => (
     {
@@ -23,8 +23,8 @@ my %complete is Map =
         name    => "Jane Doe",
         email   => "jdoe@foo.org",
         phone   => "+31 123 456 789"
-      }.Map
-    }.Map,
+      },
+    },
   ),
   owners => (
     {
@@ -39,13 +39,13 @@ my %complete is Map =
           postOfficeBoxNumber => "27434",
           postalCode          => "1000CS",
           streetAddress       => "Voetboogstraat",
-        }.Map
-      }.Map
-    }.Map,
+        },
+      },
+    },
   )
 ;
 
-test-map-json SBOM::Governance, %complete, Q:to/JSON/;
+test-hash-json SBOM::Governance, %complete, Q:to/JSON/;
 {
   "custodians": [
     {

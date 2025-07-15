@@ -25,7 +25,7 @@ test-map-json SBOM::Governor, %contact, Q:to/JSON/, :bom-ref<ddoe>;
 }
 JSON
 
-my %organization is Map =
+my %organization =
   organization => {
     bom-ref => "AcmeInc",
     name    => "ACME Inc.",
@@ -37,11 +37,11 @@ my %organization is Map =
       postOfficeBoxNumber => "27434",
       postalCode          => "1000CS",
       streetAddress       => "Voetboogstraat",
-    }.Map
-  }.Map
+    },
+  }
 ;
 
-test-map-json SBOM::Governor, %organization, Q:to/JSON/, :bom-refs<AcmeInc home>;
+test-hash-json SBOM::Governor, %organization, Q:to/JSON/, :bom-refs<AcmeInc home>;
 {
   "organization": {
     "bom-ref": "AcmeInc",

@@ -9,7 +9,7 @@ plan 3 * @classes;
 
 # Testing an object with a required arrays and a merge-type
 
-my %complete is Map =
+my %complete =
   license => {
     bom-ref         => "license-1",
     id              => "0BSD",
@@ -18,25 +18,25 @@ my %complete is Map =
     text            => {
         contentType => "text/plain",
         content     => "An attachment",
-    }.Map,
+    },
     url             => "https://raku.org",
     licensing       => {
       altIds => ("foo","bar"),
-    }.Map,
+    },
     properties      => (
       {
         name  => "good",
         value => "42"
-      }.Map,
+      },
       {
         name  => "bad",
         value => "666"
-      }.Map
+      },
     )
-  }.Map
+  }
 ;
 
-test-map-json $_, %complete, Q:to/JSON/, "$_.^name(): complete" for @classes;
+test-hash-json $_, %complete, Q:to/JSON/, "$_.^name(): complete" for @classes;
 {
   "license": {
     "bom-ref": "license-1",
@@ -68,10 +68,9 @@ test-map-json $_, %complete, Q:to/JSON/, "$_.^name(): complete" for @classes;
 }
 JSON
 
-my %minimal is Map =
-  license => { id => "0BSD" }.Map
+my %minimal = license => { id => "0BSD" };
 ;
-test-map-json $_, %minimal, Q:to/JSON/, "$_.^name(): minimal" for @classes;
+test-hash-json $_, %minimal, Q:to/JSON/, "$_.^name(): minimal" for @classes;
 {
   "license": {
     "id": "0BSD"

@@ -11,7 +11,7 @@ my %complete is Map =
   state         => "exploitable",
   justification => "requires_configuration",
   detail        => "Detailed description",
-  response      => ("will_not_fix", "update"),
+  response      => <will_not_fix update>,
   firstIssued   => "2025-07-09T10:39:57.833699+02:00",
   lastUpdated   => "2025-07-09T10:39:57.835142+02:00",
 ;

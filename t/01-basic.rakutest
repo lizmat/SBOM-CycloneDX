@@ -1,7 +1,7 @@
 use Test;
 use SBOM::CycloneDX;
 
-plan 4;
+plan 2 * 4;
 
 my constant $format = "CycloneDX";
 my constant $spec   = "1.6";
@@ -11,12 +11,17 @@ my %minimal =
   specVersion => $spec,
 ;
 
-my $sbom := SBOM::CycloneDX.new(|%minimal);
-isa-ok $sbom, SBOM::CycloneDX;
+for
+  "minimal", %minimal,
+  "Hash",    SBOM::CycloneDX.Hash
+-> $name, %args {
+    my $sbom := SBOM::CycloneDX.new(|%args);
+    isa-ok $sbom, SBOM::CycloneDX, "Ok object with $name";
 
-is $sbom.bomFormat,   $format, 'is the bomFormat correct';
-is $sbom.specVersion, $spec,   'is the specVersion correct';
+    is $sbom.bomFormat,   $format, "$name: is the bomFormat correct";
+    is $sbom.specVersion, $spec,   "$name: is the specVersion correct";
 
-is-deeply $sbom.version, 1, 'is the version correct';
+    is-deeply $sbom.version, 1, "$name: is the version correct";
+}
 
 # vim: expandtab shiftwidth=4

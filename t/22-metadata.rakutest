@@ -5,9 +5,9 @@ use testers;
 
 plan 2;
 
-my %complete is Map =
+my %complete =
   timestamp   => "2020-04-13T20:20:39+00:00",
-  manufacture => { name => "Acme Inc" }.Map,
+  manufacture => { name => "Acme Inc" },
   tools       => ( 
     { 
       vendor  => "Awesome Vendor",
@@ -17,17 +17,17 @@ my %complete is Map =
         { 
           alg     => "SHA-1",
           content => "25ed8e31b995bb927966616df2a42b979a2717f0"
-        }.Map,
+        },
         { 
           alg => "SHA-256",
           content => "a74f733635a19aefb1f73e5947cef59cd7440c6952ef0f03d09d974274cbd6df"
-        }.Map
+        },
       ) 
-    }.Map,
+    },
   )
 ;
 
-test-map-json SBOM::Metadata, %complete, Q:to/JSON/;
+test-hash-json SBOM::Metadata, %complete, Q:to/JSON/;
 {
   "timestamp": "2020-04-13T20:20:39+00:00",
   "manufacture": {

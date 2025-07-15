@@ -7,24 +7,24 @@ plan 3;
 
 # Testing an object with a required arrays and a merge-type
 
-my %complete is Map =
+my %complete =
   altIds         => ("foo","bar"),
   licensor       => {
-    organization => { name => "Disney" }.Map,
-  }.Map,
+    organization => { name => "Disney" },
+  },
   licensee       => {
-    individual => { name => "Micky Mouse" }.Map,
-  }.Map,
+    individual => { name => "Micky Mouse" },
+  },
   purchaser      => {
-    individual => { name => "A small kid" }.Map,
-  }.Map,
+    individual => { name => "A small kid" },
+  },
   purchaseOrder  => "Mommy, please!",
   licenseTypes   => ("user", "perpetual"),
   lastRenewal    => "2025-07-10T19:09:43.121897+02:00",
   expiration     => "2125-07-10T19:09:43.121897+02:00"
 ;
 
-test-map-json SBOM::Licensing, %complete, Q:to/JSON/;
+test-hash-json SBOM::Licensing, %complete, Q:to/JSON/;
 {
   "altIds": [
     "foo",
@@ -55,10 +55,8 @@ test-map-json SBOM::Licensing, %complete, Q:to/JSON/;
 }
 JSON
 
-my %minimal is Map =
-  "altIds" => ("foo","bar")
-;
-test-map-json SBOM::Licensing, %minimal, Q:to/JSON/, "minimal";
+my %minimal = "altIds" => ("foo","bar") ;
+test-hash-json SBOM::Licensing, %minimal, Q:to/JSON/, "minimal";
 {
   "altIds": [
     "foo",

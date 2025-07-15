@@ -5,7 +5,7 @@ use testers;
 
 plan 2;
 
-my %complete is Map =
+my %complete =
   vendor  => "Awesome Vendor",
   name    => "Awesome Tool",
   version => "9.1.2",
@@ -13,15 +13,15 @@ my %complete is Map =
     {
       alg     => "SHA-1",
       content => "25ed8e31b995bb927966616df2a42b979a2717f0"
-    }.Map,
+    },
     {
       alg => "SHA-256",
       content => "a74f733635a19aefb1f73e5947cef59cd7440c6952ef0f03d09d974274cbd6df"
-    }.Map
+    },
   )
 ;
 
-test-map-json SBOM::LegacyTool, %complete, Q:to/JSON/;
+test-hash-json SBOM::LegacyTool, %complete, Q:to/JSON/;
 {
   "vendor": "Awesome Vendor",
   "name": "Awesome Tool",

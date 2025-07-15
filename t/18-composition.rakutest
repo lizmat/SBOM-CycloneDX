@@ -29,9 +29,7 @@ test-map-json SBOM::Composition, %complete, Q:to/JSON/;
 }
 JSON
 
-my %minimal is Map =
-  aggregate => "not_specified"
-;
+my %minimal is Map = aggregate => "not_specified";
 
 test-map-json SBOM::Composition, %minimal, Q:to/JSON/, "minimal";
 {

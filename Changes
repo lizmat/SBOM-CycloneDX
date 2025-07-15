@@ -2,6 +2,7 @@ Revision history for SBOM::CycloneDX
 
 {{$NEXT}}
     - Added method "bom-refs" + documentation and tests
+    - Added method "Hash" + documentation and tests
 
 0.0.5  2025-07-15T17:27:01+02:00
     - Added test files marked as invalid from GDT's repo

@@ -7,7 +7,7 @@ plan 3;
 
 # Testing a an object that contains other SBOM objects
 
-my %complete is Map =
+my %complete =
   bom-ref => "AcmeInc",
   name    => "ACME Inc.",
   address => {
@@ -18,17 +18,17 @@ my %complete is Map =
     postOfficeBoxNumber => "27434",
     postalCode          => "1000CS",
     streetAddress       => "Voetboogstraat",
-  }.Map,
+  },
   url     => ( "https://acme.org", ),
   contact => ( {
     bom-ref => "jdoe",
     name    => "Jane Doe",
     email   => "jdoe@foo.org",
     phone   => "+31 123 456 789"
-  }.Map, )
+  }, )
 ;
 
-test-map-json SBOM::Organization, %complete, Q:to/JSON/;
+test-hash-json SBOM::Organization, %complete, Q:to/JSON/;
 {
   "bom-ref": "AcmeInc",
   "name": "ACME Inc.",
@@ -55,8 +55,8 @@ test-map-json SBOM::Organization, %complete, Q:to/JSON/;
 }
 JSON
 
-my %minimal is Map = "name" => "ACME Inc.";
-test-map-json SBOM::Organization, %minimal, Q:to/JSON/, "minimal";
+my %minimal = "name" => "ACME Inc.";
+test-hash-json SBOM::Organization, %minimal, Q:to/JSON/, "minimal";
 {
   "name": "ACME Inc."
 }

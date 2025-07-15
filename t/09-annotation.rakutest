@@ -7,7 +7,7 @@ plan 3;
 
 # Testing an object with a required arrays and a merge-type
 
-my %complete is Map =
+my %complete =
   bom-ref => "annotation-1",
   subjects => ("component-a",),
   annotator => {
@@ -18,15 +18,15 @@ my %complete is Map =
         {
           name => "Acme Professional Services",
           email => "professional.services@example.com"
-        }.Map
-      ,)
-    }.Map
-  }.Map,
+        },
+      )
+    }
+  },
   timestamp => "2022-01-01T00:00:00+00:00",
   text => "This is a sample annotation made by an organization"
 ;
 
-test-map-json SBOM::Annotation, %complete, Q:to/JSON/;
+test-hash-json SBOM::Annotation, %complete, Q:to/JSON/;
 {
   "bom-ref": "annotation-1",
   "subjects": [
@@ -51,17 +51,17 @@ test-map-json SBOM::Annotation, %complete, Q:to/JSON/;
 }
 JSON
 
-my %minimal is Map =
+my %minimal =
   subjects => ("component-a",),
   annotator => {
     organization => {
       name => "Acme, Inc.",
-    }.Map
-  }.Map,
+    }
+  },
   timestamp => "2022-01-01T00:00:00+00:00",
   text => "This is a sample annotation made by an organization"
 ;
-test-map-json SBOM::Annotation, %minimal, Q:to/JSON/, "minimal";
+test-hash-json SBOM::Annotation, %minimal, Q:to/JSON/, "minimal";
 {
   "subjects": [
     "component-a"
