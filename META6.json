@@ -33,7 +33,6 @@
     "SBOM::Declarations": "lib/SBOM/Declarations.rakumod",
     "SBOM::Definition": "lib/SBOM/Definition.rakumod",
     "SBOM::Dependency": "lib/SBOM/Dependency.rakumod",
-    "SBOM::EnergyConsumption": "lib/SBOM/EnergyConsumption.rakumod",
     "SBOM::ExecutionStep": "lib/SBOM/ExecutionStep.rakumod",
     "SBOM::Formulation": "lib/SBOM/Formulation.rakumod",
     "SBOM::Governance": "lib/SBOM/Governance.rakumod",
