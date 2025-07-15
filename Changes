@@ -1,6 +1,8 @@
 Revision history for SBOM::CycloneDX
 
 {{$NEXT}}
+
+0.0.6  2025-07-15T22:27:02+02:00
     - Added method "bom-refs" + documentation and tests
     - Added method "Hash" + documentation and tests
 

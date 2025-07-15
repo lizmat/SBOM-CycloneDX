@@ -1,11 +1,11 @@
-use SBOM::subsets:ver<0.0.5>:auth<zef:lizmat> <
+use SBOM::subsets:ver<0.0.6>:auth<zef:lizmat> <
   confidenceValue
 >;
 
-use SBOM:ver<0.0.5>:auth<zef:lizmat>;
+use SBOM:ver<0.0.6>:auth<zef:lizmat>;
 
 #| The confidence of the claim meeting the requirement.
-class SBOM::Confidence:ver<0.0.5>:auth<zef:lizmat> does SBOM {
+class SBOM::Confidence:ver<0.0.6>:auth<zef:lizmat> does SBOM {
 
 #| The confidence of the claim between and inclusive of 0 and 1,
 #| where 1 is 100% confidence.

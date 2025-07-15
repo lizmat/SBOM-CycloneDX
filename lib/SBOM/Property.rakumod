@@ -1,4 +1,4 @@
-use SBOM:ver<0.0.5>:auth<zef:lizmat>;
+use SBOM:ver<0.0.6>:auth<zef:lizmat>;
 
 #- Property --------------------------------------------------------------------
 #| Provides the ability to document properties in a name-value store.
@@ -9,7 +9,7 @@ use SBOM:ver<0.0.5>:auth<zef:lizmat>;
 #| Property names of interest to the general public are encouraged to
 #| be registered in the CycloneDX Property Taxonomy. Formal registration
 #| is optional.
-class SBOM::Property:ver<0.0.5>:auth<zef:lizmat> does SBOM {
+class SBOM::Property:ver<0.0.6>:auth<zef:lizmat> does SBOM {
 
 #| The name of the property. Duplicate names are allowed.
     has Str $.name is required;

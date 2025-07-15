@@ -1,12 +1,12 @@
-use SBOM::subsets:ver<0.0.5>:auth<zef:lizmat> <
+use SBOM::subsets:ver<0.0.6>:auth<zef:lizmat> <
   bom-ref
 >;
 
-use SBOM:ver<0.0.5>:auth<zef:lizmat>;
-use SBOM::Component:ver<0.0.5>:auth<zef:lizmat>;
-use SBOM::Property:ver<0.0.5>:auth<zef:lizmat>;
-use SBOM::Service:ver<0.0.5>:auth<zef:lizmat>;
-use SBOM::Workflow:ver<0.0.5>:auth<zef:lizmat>;
+use SBOM:ver<0.0.6>:auth<zef:lizmat>;
+use SBOM::Component:ver<0.0.6>:auth<zef:lizmat>;
+use SBOM::Property:ver<0.0.6>:auth<zef:lizmat>;
+use SBOM::Service:ver<0.0.6>:auth<zef:lizmat>;
+use SBOM::Workflow:ver<0.0.6>:auth<zef:lizmat>;
 
 #- Formulation -----------------------------------------------------------------
 #| Describes how a component or service was manufactured or deployed.
@@ -14,7 +14,7 @@ use SBOM::Workflow:ver<0.0.5>:auth<zef:lizmat>;
 #| steps, which declare the precise steps to reproduce along with the
 #| observed formulas describing the steps which transpired in the
 #| manufacturing process.
-class SBOM::Formulation:ver<0.0.5>:auth<zef:lizmat> does SBOM {
+class SBOM::Formulation:ver<0.0.6>:auth<zef:lizmat> does SBOM {
 
 #| An optional identifier which can be used to reference the formula
 #| elsewhere in the BOM.
