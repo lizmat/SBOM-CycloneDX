@@ -19,7 +19,6 @@
     "SBOM::Attachment": "lib/SBOM/Attachment.rakumod",
     "SBOM::Attestation": "lib/SBOM/Attestation.rakumod",
     "SBOM::Claim": "lib/SBOM/Claim.rakumod",
-    "SBOM::Commit": "lib/SBOM/Commit.rakumod",
     "SBOM::Component": "lib/SBOM/Component.rakumod",
     "SBOM::ComponentDataset": "lib/SBOM/ComponentDataset.rakumod",
     "SBOM::ComponentEvidence": "lib/SBOM/ComponentEvidence.rakumod",
