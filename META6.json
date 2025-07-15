@@ -18,7 +18,6 @@
     "SBOM::Annotation": "lib/SBOM/Annotation.rakumod",
     "SBOM::Attachment": "lib/SBOM/Attachment.rakumod",
     "SBOM::Attestation": "lib/SBOM/Attestation.rakumod",
-    "SBOM::Callstack": "lib/SBOM/Callstack.rakumod",
     "SBOM::Claim": "lib/SBOM/Claim.rakumod",
     "SBOM::Commit": "lib/SBOM/Commit.rakumod",
     "SBOM::Component": "lib/SBOM/Component.rakumod",
