@@ -1,6 +1,6 @@
 use lib $*PROGRAM.parent;
 use Test;
-use SBOM::Signature;  # provides SignatureChain and ValidSignature
+use SBOM::CycloneDX;
 use testers;
 
 my @classes = SBOM::SignatureChain, SBOM::ValidSignature;

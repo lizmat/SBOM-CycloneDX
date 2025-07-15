@@ -1,6 +1,6 @@
 use lib $*PROGRAM.parent;
 use Test;
-use SBOM::License;  # provides SPDXLicense and AnyLicense
+use SBOM::CycloneDX;
 use testers;
 
 my @classes = SBOM::SPDXLicense, SBOM::AnyLicense;

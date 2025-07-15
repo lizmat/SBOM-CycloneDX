@@ -1,6 +1,6 @@
 use lib $*PROGRAM.parent;
 use Test;
-use SBOM::Service;  # provides ServiceDataset
+use SBOM::CycloneDX;
 use testers;
 
 plan 3;

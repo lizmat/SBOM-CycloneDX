@@ -1,6 +1,6 @@
 use lib $*PROGRAM.parent;
 use Test;
-use SBOM::License;  # also provides SBOM::AnyLicense
+use SBOM::CycloneDX;
 use testers;
 
 my @classes = SBOM::License, SBOM::AnyLicense;
