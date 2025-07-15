@@ -4,10 +4,24 @@ use SBOM::enums:ver<0.0.5>:auth<zef:lizmat> <Enumify>;
 #- SBOM ------------------------------------------------------------------------
 role SBOM:ver<0.0.5>:auth<zef:lizmat> {
 
-    # Hidden attribute that collects pairs with errors, in which the
-    # key is is the crumbs of where the error happened, and the value
-    # is the actual exception.
-    has @.build-errors is built(False);
+    # Hidden attribute to store any extra information, such as build
+    # errors and bom-refs seen.  Supports the following keys:
+    #
+    # build-errors
+    # Array with pairs with errors, in which the key is is the crumb
+    # trail of where the error happened, and the value is the actual
+    # exception.
+    has %!additional-object-info is built(False);
+
+    # Give access to the build errors
+    method build-errors(::?CLASS:D:) {
+        %!additional-object-info<build-errors> // ()
+    }
+
+    # Give access to the bom-refs seen
+    method bom-refs(::?CLASS:D:) {
+        %!additional-object-info<bom-refs> // ()
+    }
 
     # This code is run at compile time when the role is being consumed.
     # So this effectively creaes constants, hence the .Map and .List
@@ -62,13 +76,26 @@ role SBOM:ver<0.0.5>:auth<zef:lizmat> {
 
         # Outer SBOM creation logic
         else {
+            # Save the initial setting as a dynamic variable so we
+            # can access it at any time/level even if :raw-error
+            # wasn't passed explicitely
             my $*RAW-ERROR = $raw-error;
+
+            # The bread crumbs of where we are in the data structure,
+            # to be used for error message and other informational
+            # purposes
             my @*CRUMBS;
+
+            # Where any build error are stored
             my @*ERRORS;
+
+            # To keep track of any bom-refs that were specified, so
+            # that they can easily be produced whenever needed
+            my %*BOM-REFS;
 
             my $sbom := self!ingest(%in);
             $sbom.defined
-              ?? $sbom!set-build-errors
+              ?? $sbom!save-dynamic-vars
               !! $sbom
         }
     }
@@ -78,9 +105,11 @@ role SBOM:ver<0.0.5>:auth<zef:lizmat> {
         self.new(:$raw-error, |from-json $io.slurp)
     }
 
-    # Helper method to set @*ERRORS on the outer SBOM object
-    method !set-build-errors() {
-        @!build-errors := @*ERRORS;
+    # Helper method to set dynamic variable like @*ERRORS and %*BOM-REFS
+    # on the outer SBOM object
+    method !save-dynamic-vars() {
+        %!additional-object-info<build-errors> := @*ERRORS.List;
+        %!additional-object-info<bom-refs>     := %*BOM-REFS.keys.sort(*.fc).List;
         self
     }
 

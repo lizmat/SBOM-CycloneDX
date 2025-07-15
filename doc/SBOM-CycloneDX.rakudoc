@@ -109,6 +109,10 @@ in the C<.message> on that object, but during development the complete
 stack trace provided by the C<Exception> object may also be of
 interest.
 
+=item .bom-refs
+
+Returns a sorted list of bom-refs that have been seen in the instance.
+
 =item .JSON
 
 Returns a JSON representation of the instance.

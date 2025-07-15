@@ -15,7 +15,14 @@ subset serialNumber of Str where *.contains:
 #| Identifier which can be used to reference a component in the BOM.
 #| Every bom-ref must be unique within the BOM. Must be at least 1
 #| characters long.
-subset bom-ref of Str where { .chars && !.starts-with('urn:cdx') }
+subset bom-ref of Str where {
+    if .chars && !.starts-with('urn:cdx') {
+        with %*BOM-REFS -> %bom-refs {
+            %bom-refs{$_} := True;
+        }
+        True
+    }
+}
 
 #| A numeric value.
 subset number of Cool where Int | Rat;

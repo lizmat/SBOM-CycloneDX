@@ -1,6 +1,7 @@
 Revision history for SBOM::CycloneDX
 
 {{$NEXT}}
+    - Added method "bom-refs" + documentation and tests
 
 0.0.5  2025-07-15T17:27:01+02:00
     - Added test files marked as invalid from GDT's repo
@@ -16,11 +17,11 @@ Revision history for SBOM::CycloneDX
     - Added a "cyclonedx" script for checking validity of files
     - Added a "cyclonedx-enums" script for obtain enum info
     - Added "keys" method to Enumify role.
-    - Get error handling going, add method "build-errors"
-    - Make sure any additional named arguments will throw unless
+    - Get error handling going, added method "build-errors"
+    - Made sure any additional named arguments will throw unless
       an attribute "@.additional-properties" is specified
-    - Add support to instantiate directly from file
-    - Make unsupported enum strings die, instead of returning Nil
+    - Added support to instantiate directly from file
+    - Made unsupported enum strings die, instead of returning Nil
     - Added classes that combine other classes:
        - SBOM::Annotator
        - SBOM::IndividualOrOrganization
@@ -35,7 +36,7 @@ Revision history for SBOM::CycloneDX
 
 0.0.3  2025-07-09T20:50:33+02:00
     - Several example SBOM files are now ingested without errors
-    - Make sure input parameters are handled in order of attribute
+    - Made sure input parameters are handled in order of attribute
       definition, to ensure consistent error reporting on large
       SBOMs with potential errors (or errors in the handling of
       such files)

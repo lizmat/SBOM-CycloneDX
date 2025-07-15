@@ -100,6 +100,10 @@ Returns a list of `Pair`s indicating any elements that were for some reason inco
 
 The key contains the crumb trail of where in the object the problem occurred (e.g. "CycloneDX/Component"), and the value is the `Exception` object that was caught. Usually one is only interested in the `.message` on that object, but during development the complete stack trace provided by the `Exception` object may also be of interest.
 
+  * .bom-refs
+
+Returns a sorted list of bom-refs that have been seen in the instance.
+
   * .JSON
 
 Returns a JSON representation of the instance.

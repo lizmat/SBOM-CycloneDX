@@ -4,16 +4,20 @@ use SBOM::subsets;  # for .EVAL
 use SBOM::CycloneDX;
 
 my sub test-map-json(
-  $class, \args, $json, $description = 'complete'
+  $class, \args, $json, $description = 'complete',
+  :@bom-refs, :$bom-ref
 ) is test-assertion is export {
+    my @bom-refs-seen := @bom-refs || ($bom-ref,);
 
     subtest "$class.^name(): $description" => {
-        plan 6;
+        plan 6 + ?@bom-refs;
 
         my $instance := $class.new(:raw-error, |args);
         isa-ok $instance, $class;
 
         nok $instance.build-errors, 'should be without errors';
+        is-deeply $instance.bom-refs, @bom-refs-seen, "Are the bom-refs ok"
+          if @bom-refs;
 
         my %map := $instance.Map;
         # Cannot use is-deeply, as some objects may have a role

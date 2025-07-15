@@ -14,7 +14,7 @@ my %contact is Map =
   }.Map
 ;
 
-test-map-json SBOM::Governor, %contact, Q:to/JSON/;
+test-map-json SBOM::Governor, %contact, Q:to/JSON/, :bom-ref<ddoe>;
 {
   "contact": {
     "bom-ref": "ddoe",
@@ -41,7 +41,7 @@ my %organization is Map =
   }.Map
 ;
 
-test-map-json SBOM::Governor, %organization, Q:to/JSON/;
+test-map-json SBOM::Governor, %organization, Q:to/JSON/, :bom-refs<AcmeInc home>;
 {
   "organization": {
     "bom-ref": "AcmeInc",

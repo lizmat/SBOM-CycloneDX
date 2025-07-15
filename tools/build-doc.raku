@@ -39,7 +39,9 @@ sub produce-pod(Mu $class) {
         say "";
     }
 
-    for $class.^attributes.grep(*.name ne '@!build-errors') -> $attribute {
+    for $class.^attributes.grep(
+      *.name ne '%!additional-object-info'
+    ) -> $attribute {
         my $type := $attribute.type;
         $type := $type.of if $type ~~ Positional;
         my str $name = "$type.^name() C<:$attribute.name.subst("!")>";
