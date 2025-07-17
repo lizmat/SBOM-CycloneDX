@@ -6,7 +6,9 @@
   "build-depends": [
   ],
   "depends": [
-    "JSON::Fast:ver<0.19+>:auth<cpan:TIMOTIMO>"
+    "Email::Valid:ver<1.0.7+>:auth<zef:demayl>",
+    "JSON::Fast:ver<0.19+>:auth<cpan:TIMOTIMO>",
+    "PURL:ver<0.0.2+>:auth<zef:lizmat>"
   ],
   "description": "Software Bill Of Materials, CycloneDX style",
   "license": "Artistic-2.0",

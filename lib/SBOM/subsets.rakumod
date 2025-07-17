@@ -1,3 +1,5 @@
+use PURL:ver<0.0.2+>:auth<zef:lizmat>;
+
 my token hexnum { <[0..9 a..f]> }
 #| Every BOM generated SHOULD have a unique serial number, even if the
 #| contents of the BOM have not changed over time. If specified, the
@@ -28,7 +30,11 @@ subset bom-ref of Str where {
 subset number of Cool where Int | Rat;
 
 #| An email address.
-subset email of Str;  # XXX to be done
+use Email::Valid:ver<1.0.7+>:auth<zef:demayl>;
+subset email of Str where {
+    state $email = Email::Valid.new(:simple);
+    $email.validate($_)
+}
 
 #| A URL.
 subset URL of Str;  # XXX fetch URL rules
@@ -48,7 +54,7 @@ subset CRE of Str where *.contains: /^ 'CRE:' <[0..9]>+ '-' <[0..9]>+ $/;
 
 #| A package-url (purl). The purl, if specified, must be valid and conform
 #| to the specification defined at: https://github.com/package-url/purl-spec.
-subset PURL of URL;  # XXX fetch from https://github.com/package-url/purl-spec
+subset purl of Str where { PURL($_) }
 
 #| An OmniBOR Artifact ID. The OmniBOR, if specified, must be valid and
 #| conform to the specification defined at:
@@ -143,7 +149,7 @@ my sub EXPORT(*@names) {
       bomLinkDocunment bomLinkElement bom-ref bom-refOrLink
       confidenceValue conformanceValue contentHash CPE CRE email
       IDnotbomLink locale mime-type nistQuantumSecurityLevel number
-      omniborId PositiveInt PURL referenceURL serialNumber SWHID URL
+      omniborId PositiveInt purl referenceURL serialNumber SWHID URL
       versionRange versionString
     >;
     Map.new: @names.map: {

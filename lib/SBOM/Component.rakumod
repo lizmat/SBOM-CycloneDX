@@ -3,7 +3,7 @@ use SBOM::enums:ver<0.0.6>:auth<zef:lizmat> <
 >;
 
 use SBOM::subsets:ver<0.0.6>:auth<zef:lizmat> <
-  bom-ref CPE email mime-type omniborId PURL SWHID URL
+  bom-ref CPE email mime-type omniborId purl SWHID URL
 >;
 
 use SBOM::Attachment:ver<0.0.6>:auth<zef:lizmat>;
@@ -178,7 +178,7 @@ class SBOM::Component:ver<0.0.6>:auth<zef:lizmat> does SBOM {
 #| specification defined at: https://github.com/package-url/purl-spec.
 #| Refer to @.evidence.identity to optionally provide evidence that
 #| substantiates the assertion of the component's identity.
-    has PURL $.purl;
+    has purl $.purl;
 
 #| Asserts the identity of the component using the OmniBOR Artifact ID.
 #| The OmniBOR, if specified, must be valid and conform to the
