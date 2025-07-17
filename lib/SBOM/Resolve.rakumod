@@ -1,17 +1,17 @@
-use SBOM::enums:ver<0.0.6>:auth<zef:lizmat> <
+use SBOM::enums:ver<0.0.7>:auth<zef:lizmat> <
   ResolveType
 >;
 
-use SBOM::subsets:ver<0.0.6>:auth<zef:lizmat> <
+use SBOM::subsets:ver<0.0.7>:auth<zef:lizmat> <
   URL
 >;
 
-use SBOM:ver<0.0.6>:auth<zef:lizmat>;
-use SBOM::Source:ver<0.0.6>:auth<zef:lizmat>;
+use SBOM:ver<0.0.7>:auth<zef:lizmat>;
+use SBOM::Source:ver<0.0.7>:auth<zef:lizmat>;
 
 #- Resolve ---------------------------------------------------------------------
 #| An issue that has been resolved.
-class SBOM::Resolve:ver<0.0.6>:auth<zef:lizmat> does SBOM {
+class SBOM::Resolve:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| Specifies the type of issue.
     has ResolveType $.type is required;

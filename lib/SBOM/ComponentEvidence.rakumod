@@ -1,10 +1,10 @@
-use SBOM::subsets:ver<0.0.6>:auth<zef:lizmat> <
+use SBOM::subsets:ver<0.0.7>:auth<zef:lizmat> <
   bom-ref PositiveInt
 >;
 
-use SBOM:ver<0.0.6>:auth<zef:lizmat>;
-use SBOM::Identity:ver<0.0.6>:auth<zef:lizmat>;
-use SBOM::License:ver<0.0.6>:auth<zef:lizmat>;
+use SBOM:ver<0.0.7>:auth<zef:lizmat>;
+use SBOM::Identity:ver<0.0.7>:auth<zef:lizmat>;
+use SBOM::License:ver<0.0.7>:auth<zef:lizmat>;
 
 #- Frame -----------------------------------------------------------------------
 #| Within a call stack, a frame is a discrete unit that encapsulates
@@ -13,7 +13,7 @@ use SBOM::License:ver<0.0.6>:auth<zef:lizmat>;
 #| onto the stack, forming an array-like structure that orchestrates
 #| the flow of program execution and manages the sequence of function
 #| invocations.
-class SBOM::Frame:ver<0.0.6>:auth<zef:lizmat> does SBOM {
+class SBOM::Frame:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| A package organizes modules into namespaces, providing a unique
 #| namespace for each type it contains.
@@ -40,7 +40,7 @@ class SBOM::Frame:ver<0.0.6>:auth<zef:lizmat> does SBOM {
 
 #- Callstack -------------------------------------------------------------------
 #| Evidence of component use through the callstack.
-class SBOM::Callstack:ver<0.0.6>:auth<zef:lizmat> does SBOM {
+class SBOM::Callstack:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| The frames seen in the callstack.
     has SBOM::Frame @.frames;
@@ -49,7 +49,7 @@ class SBOM::Callstack:ver<0.0.6>:auth<zef:lizmat> does SBOM {
 #- Copyright -------------------------------------------------------------------
 #| Copyright evidence captures intellectual property assertions,
 #| providing evidence of possible ownership and legal protection.
-class SBOM::Copyright:ver<0.0.6>:auth<zef:lizmat> does SBOM {
+class SBOM::Copyright:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| The textual content of the copyright.
     has Str $.text is required;
@@ -57,7 +57,7 @@ class SBOM::Copyright:ver<0.0.6>:auth<zef:lizmat> does SBOM {
 
 #- Occurrence ------------------------------------------------------------------
 #| Evidence of instance of a component spread across multiple locations.
-class SBOM::Occurrence:ver<0.0.6>:auth<zef:lizmat> does SBOM {
+class SBOM::Occurrence:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| An optional identifier which can be used to reference the occurrence
 #| elsewhere in the BOM
@@ -82,7 +82,7 @@ class SBOM::Occurrence:ver<0.0.6>:auth<zef:lizmat> does SBOM {
 #- ComponentEvidence -----------------------------------------------------------
 #| The ability to document evidence about a component, collected
 #| through various forms of extraction or analysis.
-class SBOM::ComponentEvidence:ver<0.0.6>:auth<zef:lizmat> does SBOM {
+class SBOM::ComponentEvidence:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| Evidence of individual instances of a component spread across
 #| multiple locations.

@@ -1,12 +1,12 @@
-use SBOM::enums:ver<0.0.6>:auth<zef:lizmat> <
+use SBOM::enums:ver<0.0.7>:auth<zef:lizmat> <
   CryptoKey ECCurve EdDSA SignatureAlgorithm
 >;
 
-use SBOM::subsets:ver<0.0.6>:auth<zef:lizmat> <
+use SBOM::subsets:ver<0.0.7>:auth<zef:lizmat> <
   URL
 >;
 
-use SBOM:ver<0.0.6>:auth<zef:lizmat>;
+use SBOM:ver<0.0.7>:auth<zef:lizmat>;
 
 #| Signature algorithm. If proprietary signature algorithms are added,
 #| they must be expressed as URIs.
@@ -16,7 +16,7 @@ subset URLOrAlgorithm of Str where URL | SignatureAlgorithm;
 subset CryptoCurve of Str where { (try ECCurve($_)) || (try EdDSA($_)) }
 
 #- PublicKey -------------------------------------------------------------------
-class SBOM::PublicKey:ver<0.0.6>:auth<zef:lizmat> does SBOM {
+class SBOM::PublicKey:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| Key type indicator.
     has CryptoKey $.kty is required;
@@ -67,7 +67,7 @@ class SBOM::SignatureChain   { ... }
 class SBOM::SignatureSigners { ... }
 
 #| Enveloped signature in JSON Signature Format (JSF).
-class SBOM::ValidSignature:ver<0.0.6>:auth<zef:lizmat> {
+class SBOM::ValidSignature:ver<0.0.7>:auth<zef:lizmat> {
     multi method new(SBOM::ValidSignature:U: :$raw-error) {
         my $class := %_<signers>
           ?? SBOM::SignatureSigners
@@ -83,7 +83,7 @@ class SBOM::ValidSignature:ver<0.0.6>:auth<zef:lizmat> {
 
 #- Signature -------------------------------------------------------------------
 #| Unique top level property for simple signatures. (signaturecore)
-class SBOM::Signature:ver<0.0.6>:auth<zef:lizmat>
+class SBOM::Signature:ver<0.0.7>:auth<zef:lizmat>
   is SBOM::ValidSignature does SBOM {
     has URLOrAlgorithm $.algorithm is required;
 
@@ -113,14 +113,14 @@ class SBOM::Signature:ver<0.0.6>:auth<zef:lizmat>
 
 #- SignatureChain --------------------------------------------------------------
 #| Unique top level property for Signature Chains. (signaturechain)
-class SBOM::SignatureChain:ver<0.0.6>:auth<zef:lizmat>
+class SBOM::SignatureChain:ver<0.0.7>:auth<zef:lizmat>
   is SBOM::ValidSignature does SBOM {
     has SBOM::Signature @.chain;
 }
 
 #- SignatureSigners ------------------------------------------------------------
 #| Unique top level property for Multiple Signatures. (multisignature)
-class SBOM::SignatureSigners:ver<0.0.6>:auth<zef:lizmat>
+class SBOM::SignatureSigners:ver<0.0.7>:auth<zef:lizmat>
   is SBOM::ValidSignature does SBOM {
     has SBOM::Signature @.signers;
 }

@@ -1,16 +1,16 @@
-use SBOM::enums:ver<0.0.6>:auth<zef:lizmat> <
+use SBOM::enums:ver<0.0.7>:auth<zef:lizmat> <
   HashAlgorithm
 >;
 
-use SBOM::subsets:ver<0.0.6>:auth<zef:lizmat> <
+use SBOM::subsets:ver<0.0.7>:auth<zef:lizmat> <
   contentHash
 >;
 
-use SBOM:ver<0.0.6>:auth<zef:lizmat>;
+use SBOM:ver<0.0.7>:auth<zef:lizmat>;
 
 #- HashedString ----------------------------------------------------------------
 #| A hashed representation of data
-class SBOM::HashedString:ver<0.0.6>:auth<zef:lizmat> does SBOM {
+class SBOM::HashedString:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| The algorithm that generated the hash value.
     has HashAlgorithm $.alg is required;

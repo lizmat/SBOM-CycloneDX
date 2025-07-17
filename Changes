@@ -1,6 +1,8 @@
 Revision history for SBOM::CycloneDX
 
 {{$NEXT}}
+
+0.0.7  2025-07-17T20:52:44+02:00
     - Added dependency on PURL to check validity of the
       "purl" subset
     - Added dependency on Email::Valid to check validity

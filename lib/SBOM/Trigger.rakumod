@@ -1,22 +1,22 @@
-use SBOM::enums:ver<0.0.6>:auth<zef:lizmat> <
+use SBOM::enums:ver<0.0.7>:auth<zef:lizmat> <
   TriggerEvent
 >;
 
-use SBOM::subsets:ver<0.0.6>:auth<zef:lizmat> <
+use SBOM::subsets:ver<0.0.7>:auth<zef:lizmat> <
   bom-ref
 >;
 
-use SBOM:ver<0.0.6>:auth<zef:lizmat>;
-use SBOM::Attachment:ver<0.0.6>:auth<zef:lizmat>;
-use SBOM::Input:ver<0.0.6>:auth<zef:lizmat>;
-use SBOM::Property:ver<0.0.6>:auth<zef:lizmat>;
-use SBOM::Output:ver<0.0.6>:auth<zef:lizmat>;
-use SBOM::Property:ver<0.0.6>:auth<zef:lizmat>;
-use SBOM::Reference:ver<0.0.6>:auth<zef:lizmat>;
+use SBOM:ver<0.0.7>:auth<zef:lizmat>;
+use SBOM::Attachment:ver<0.0.7>:auth<zef:lizmat>;
+use SBOM::Input:ver<0.0.7>:auth<zef:lizmat>;
+use SBOM::Property:ver<0.0.7>:auth<zef:lizmat>;
+use SBOM::Output:ver<0.0.7>:auth<zef:lizmat>;
+use SBOM::Property:ver<0.0.7>:auth<zef:lizmat>;
+use SBOM::Reference:ver<0.0.7>:auth<zef:lizmat>;
 
 #- Condition -------------------------------------------------------------------
 #| A condition that was used to determine a trigger should be activated.
-class SBOM::Condition:ver<0.0.6>:auth<zef:lizmat> does SBOM {
+class SBOM::Condition:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| Describes the set of conditions which cause the trigger to activate.
     has Str $.description;
@@ -31,7 +31,7 @@ class SBOM::Condition:ver<0.0.6>:auth<zef:lizmat> does SBOM {
 
 #- Event -----------------------------------------------------------------------
 #| The event data that caused the associated trigger to activate.
-class SBOM::Event:ver<0.0.6>:auth<zef:lizmat> does SBOM {
+class SBOM::Event:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| The unique identifier of the event.
     has Str $.uid;
@@ -57,7 +57,7 @@ class SBOM::Event:ver<0.0.6>:auth<zef:lizmat> does SBOM {
 
 #- Trigger ---------------------------------------------------------------------
 #| The trigger that initiated a task.
-class SBOM::Trigger:ver<0.0.6>:auth<zef:lizmat> does SBOM {
+class SBOM::Trigger:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| An optional identifier which can be used to reference the trigger
 #| elsewhere in the BOM.
