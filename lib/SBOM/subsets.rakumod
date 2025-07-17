@@ -146,7 +146,7 @@ subset versionString of Str where 0 < *.chars <= 1024;
 #- EXPORT ----------------------------------------------------------------------
 my sub EXPORT(*@names) {
     @names ||= <
-      bomLinkDocunment bomLinkElement bom-ref bom-refOrLink
+      bomLinkDocument bomLinkElement bom-ref bom-refOrLink
       confidenceValue conformanceValue contentHash CPE CRE email
       IDnotbomLink locale mime-type nistQuantumSecurityLevel number
       omniborId PositiveInt purl referenceURL serialNumber SWHID URL
