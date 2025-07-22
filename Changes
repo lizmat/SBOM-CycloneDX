@@ -1,6 +1,7 @@
 Revision history for SBOM::CycloneDX
 
 {{$NEXT}}
+    - Bump dependency on PURL because we can
 
 0.0.7  2025-07-17T20:52:44+02:00
     - Added dependency on PURL to check validity of the

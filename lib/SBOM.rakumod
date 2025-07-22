@@ -67,6 +67,16 @@ role SBOM:ver<0.0.7>:auth<zef:lizmat> {
         self.ingest($raw-error, %in)
     }
 
+    # Instantiate from a hash, bypassing flattening
+    multi method new(::?CLASS: %in, :$raw-error = False) {
+        self.ingest($raw-error, %in)
+    }
+
+    # Instantiate from a path, either as a string or as an IO object
+    multi method new(::?CLASS: IO(Str) $io, :$raw-error = False) {
+        self.ingest($raw-error, from-json $io.slurp)
+    }
+
     method ingest($raw-error, %in) is implementation-detail {
 
         # Inner SBOM creation logic
@@ -98,11 +108,6 @@ role SBOM:ver<0.0.7>:auth<zef:lizmat> {
               ?? $sbom!save-dynamic-vars
               !! $sbom
         }
-    }
-
-    # Instantiate from a path, either as a string or as an IO object
-    multi method new(::?CLASS: IO(Str) $io, :$raw-error = False) {
-        self.new(:$raw-error, |from-json $io.slurp)
     }
 
     # Helper method to set dynamic variable like @*ERRORS and %*BOM-REFS

@@ -1,4 +1,4 @@
-use PURL:ver<0.0.2+>:auth<zef:lizmat>;
+use PURL:ver<0.0.5+>:auth<zef:lizmat>;
 
 my token hexnum { <[0..9 a..f]> }
 #| Every BOM generated SHOULD have a unique serial number, even if the
