@@ -1,16 +1,16 @@
-use SBOM::enums:ver<0.0.7>:auth<zef:lizmat> <
+use SBOM::enums:ver<0.0.8>:auth<zef:lizmat> <
   CryptoProtocol
 >;
 
-use SBOM::subsets:ver<0.0.7>:auth<zef:lizmat> <
+use SBOM::subsets:ver<0.0.8>:auth<zef:lizmat> <
   IDnotbomLink versionString
 >;
 
-use SBOM:ver<0.0.7>:auth<zef:lizmat>;
+use SBOM:ver<0.0.8>:auth<zef:lizmat>;
 
 #- CipherSuite -----------------------------------------------------------------
 #| A cipher suite related to a protocol.
-class SBOM::CipherSuite:ver<0.0.7>:auth<zef:lizmat> does SBOM {
+class SBOM::CipherSuite:ver<0.0.8>:auth<zef:lizmat> does SBOM {
 
 #| A common name for the cipher suite.
     has Str $.name;
@@ -29,7 +29,7 @@ class SBOM::CipherSuite:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 #- IKEv2TransformTypes ---------------------------------------------------------
 #| The IKEv2 transform types supported (types 1-4), defined in RFC 7296
 #| section 3.3.2, and additional properties.
-class SBOM::IKEv2TransformTypes:ver<0.0.7>:auth<zef:lizmat> does SBOM {
+class SBOM::IKEv2TransformTypes:ver<0.0.8>:auth<zef:lizmat> does SBOM {
 
 #| Transform Type 1: encryption algorithms.
     has Str @.encr;
@@ -61,7 +61,7 @@ class SBOM::IKEv2TransformTypes:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #- CryptoProtocolProperties ----------------------------------------------------
 #| Properties specific to cryptographic assets of type: protocol.
-class SBOM::CryptoProtocolProperties:ver<0.0.7>:auth<zef:lizmat> does SBOM {
+class SBOM::CryptoProtocolProperties:ver<0.0.8>:auth<zef:lizmat> does SBOM {
 
 #| The concrete protocol type.
     has CryptoProtocol $.type;

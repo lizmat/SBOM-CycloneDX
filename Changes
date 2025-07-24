@@ -1,6 +1,8 @@
 Revision history for SBOM::CycloneDX
 
 {{$NEXT}}
+
+0.0.8  2025-07-24T13:41:04+02:00
     - Made sure that all @-sigilled attributes return an
       immutable list with their accessor (even though they
       are defined as typed arrays)

@@ -1,9 +1,9 @@
-use SBOM:ver<0.0.7>:auth<zef:lizmat>;
-use SBOM::Attachment:ver<0.0.7>:auth<zef:lizmat>;
+use SBOM:ver<0.0.8>:auth<zef:lizmat>;
+use SBOM::Attachment:ver<0.0.8>:auth<zef:lizmat>;
 
 #- Graphic ---------------------------------------------------------------------
 #| A single graphic
-class SBOM::Graphic:ver<0.0.7>:auth<zef:lizmat> does SBOM {
+class SBOM::Graphic:ver<0.0.8>:auth<zef:lizmat> does SBOM {
 
 #| The name of the graphic.
     has Str $.name;
@@ -14,7 +14,7 @@ class SBOM::Graphic:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #- Graphics --------------------------------------------------------------------
 #| A collection of graphics that represent various measurements.
-class SBOM::Graphics:ver<0.0.7>:auth<zef:lizmat> does SBOM {
+class SBOM::Graphics:ver<0.0.8>:auth<zef:lizmat> does SBOM {
 
 #| A description of this collection of graphics.
     has Str $.description;
