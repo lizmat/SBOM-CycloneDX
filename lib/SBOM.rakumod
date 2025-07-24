@@ -259,7 +259,9 @@ role SBOM:ver<0.0.8>:auth<zef:lizmat> {
         if %out || %required {
             my $sbom := self.bless: |%out;
 
-            %*BOM-REFS{$sbom.bom-ref} := $sbom if $has-bom-ref;
+            if $has-bom-ref {
+                %*BOM-REFS{$_} := $sbom with $sbom.bom-ref;
+            }
             @*CRUMBS.pop;
             $sbom
         }
