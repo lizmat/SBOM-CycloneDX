@@ -58,7 +58,12 @@ class SBOM::EnergyProvider:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 #| information that may be relevant but are not included with the BOM.
 #| They may also establish specific relationships within or external
 #| to the BOM.
-    has SBOM::Reference    @.externalReferences;
+    has SBOM::Reference @.externalReferences;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method externalReferences(SBOM::EnergyProvider:D:) {
+        @!externalReferences.List
+    }
 }
 
 #- EnergyConsumption -----------------------------------------------------------
@@ -85,6 +90,14 @@ class SBOM::EnergyConsumption:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| Any additional properties as name-value pairs.
     has SBOM::Property @.properties;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method energyProviders(SBOM::EnergyConsumption:D:) {
+        @!energyProviders.List
+    }
+    method properties(SBOM::EnergyConsumption:D:) {
+        @!properties.List
+    }
 }
 
 #- EthicalConsideration --------------------------------------------------------
@@ -109,6 +122,14 @@ class SBOM::EnvironmentalConsiderations:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| Any additional properties as name-value pairs.
     has SBOM::Property @.properties;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method energyConsumptions(SBOM::EnvironmentalConsiderations:D:) {
+        @!energyConsumptions.List
+    }
+    method properties(SBOM::EnvironmentalConsiderations:D:) {
+        @!properties.List
+    }
 }
 
 #- FairnessAssessment ----------------------------------------------------------
@@ -161,7 +182,27 @@ class SBOM::Considerations:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 #| How does the model affect groups at risk of being systematically
 #| disadvantaged? What are the harms and benefits to the various
 #| affected groups?
-    has SBOM::FairnessAssessment          @.fairnessAssessments;
+    has SBOM::FairnessAssessment @.fairnessAssessments;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method users(SBOM::Considerations:D:) {
+        @!users.List
+    }
+    method useCases(SBOM::Considerations:D:) {
+        @!useCases.List
+    }
+    method technicalLimitations(SBOM::Considerations:D:) {
+        @!technicalLimitations.List
+    }
+    method performanceTradeoffs(SBOM::Considerations:D:) {
+        @!performanceTradeoffs.List
+    }
+    method ethicalConsiderations(SBOM::Considerations:D:) {
+        @!ethicalConsiderations.List
+    }
+    method fairnessAssessments(SBOM::Considerations:D:) {
+        @!fairnessAssessments.List
+    }
 }
 
 # vim: expandtab shiftwidth=4

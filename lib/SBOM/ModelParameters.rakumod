@@ -57,6 +57,9 @@ class SBOM::ModelDataset:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 #| individuals or entities responsible for managing, overseeing,
 #| and safeguarding the data throughout its lifecycle.
     has SBOM::Governance $.governance;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method sensitiveData(SBOM::ModelDataset:D:) { @!sensitiveData.List }
 }
 
 #- ModelFormat -----------------------------------------------------------------
@@ -97,6 +100,11 @@ class SBOM::ModelParameters:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| The output format(s) of the model.
     has SBOM::ModelFormat @.outputs;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method datasets(SBOM::ModelParameters:D:) { @!datasets.List }
+    method inputs(  SBOM::ModelParameters:D:) { @!inputs.List   }
+    method outputs( SBOM::ModelParameters:D:) { @!outputs.List  }
 }
 
 # vim: expandtab shiftwidth=4

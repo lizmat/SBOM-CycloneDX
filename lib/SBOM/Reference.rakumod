@@ -33,6 +33,9 @@ class SBOM::Reference:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| The hashes of the external reference (if applicable).
     has SBOM::HashedString @.hashes;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method hashes(SBOM::Reference:D:) { @!hashes.List }
 }
 
 #- ResourceReference -----------------------------------------------------------

@@ -21,6 +21,9 @@ class SBOM::Graphics:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| A collection of graphics.
     has SBOM::Graphic @.collection;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method collection(SBOM::Graphics:D:) { @!collection.List }
 }
 
 # vim: expandtab shiftwidth=4

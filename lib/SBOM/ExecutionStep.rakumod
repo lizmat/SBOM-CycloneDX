@@ -10,6 +10,9 @@ class SBOM::Command:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| Any additional properties as name-value pairs.
     has SBOM::Property @.properties;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method properties(SBOM::Command:D:) { @!properties.List }
 }
 
 #- ExecutionStep ---------------------------------------------------------------
@@ -28,6 +31,10 @@ class SBOM::ExecutionStep:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| Any additional properties as name-value pairs.
     has SBOM::Property @.properties;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method commands(  SBOM::ExecutionStep:D:) { @!commands.List   }
+    method properties(SBOM::ExecutionStep:D:) { @!properties.List }
 }
 
 # vim: expandtab shiftwidth=4

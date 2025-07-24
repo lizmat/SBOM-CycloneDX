@@ -111,7 +111,17 @@ class SBOM::CycloneDX:ver<0.0.7>:auth<zef:lizmat> does SBOM {
         Hash.new( (:bomFormat<CycloneDX>, :specVersion("1.6")) )
     }
 
-    method updated() { ++$!version }
+    # These should probably be auto-generated in RakUAST at some point
+    method components(        SBOM::CycloneDX:D:) { @!components.List         }
+    method services(          SBOM::CycloneDX:D:) { @!services.List           }
+    method externalReferences(SBOM::CycloneDX:D:) { @!externalReferences.List }
+    method dependencies(      SBOM::CycloneDX:D:) { @!dependencies.List       }
+    method compositions(      SBOM::CycloneDX:D:) { @!compositions.List       }
+    method vulnerabilities(   SBOM::CycloneDX:D:) { @!vulnerabilities.List    }
+    method annotations(       SBOM::CycloneDX:D:) { @!annotations.List        }
+    method formulation(       SBOM::CycloneDX:D:) { @!formulation.List        }
+    method definitions(       SBOM::CycloneDX:D:) { @!definitions.List        }
+    method properties(        SBOM::CycloneDX:D:) { @!properties.List         }
 }
 
 # vim: expandtab shiftwidth=4

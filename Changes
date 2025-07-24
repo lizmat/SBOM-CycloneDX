@@ -1,6 +1,11 @@
 Revision history for SBOM::CycloneDX
 
 {{$NEXT}}
+    - Made sure that all @-sigilled attributes return an
+      immutable list with their accessor (even though they
+      are defined as typed arrays)
+    - Made "bom-refs" return a Map with the bom-ref as
+      key, and the associated SBOM object as its value
     - Bump dependency on PURL because we can
 
 0.0.7  2025-07-17T20:52:44+02:00

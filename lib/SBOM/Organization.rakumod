@@ -68,6 +68,10 @@ class SBOM::Organization:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| A contact at the organization. Multiple contacts are allowed.
     has SBOM::Contact @.contact;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method url(    SBOM::Organization:D:) { @!url.List     }
+    method contact(SBOM::Organization:D:) { @!contact.List }
 }
 
 #-------------------------------------------------------------------------------

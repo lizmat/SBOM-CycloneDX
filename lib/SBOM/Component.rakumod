@@ -74,7 +74,7 @@ class SBOM::SWID:ver<0.0.7>:auth<zef:lizmat> does SBOM {
     has Str:D $.version = "0.0";
 
 #| Maps to the tagVersion of a SoftwareIdentity.
-    has Int:D @.tagVersion = 1;
+    has Int:D $.tagVersion = 1;
 
 #| Maps to the patch of a SoftwareIdentity.
     has Bool:D $.patch = False;
@@ -277,6 +277,18 @@ class SBOM::Component:ver<0.0.7>:auth<zef:lizmat> does SBOM {
         die "Can only have one SPDX license"
           if @!licenses > 1 && @!licenses.first(SBOM::SPDXLicense);
     }
+
+    # These should probably be auto-generated in RakUAST at some point
+    method authors(           SBOM::Component:D:) { @!authors.List            }
+    method hashes(            SBOM::Component:D:) { @!hashes.List             }
+    method licenses(          SBOM::Component:D:) { @!licenses.List           }
+    method omniborId(         SBOM::Component:D:) { @!omniborId.List          }
+    method swhid(             SBOM::Component:D:) { @!swhid.List              }
+    method externalReferences(SBOM::Component:D:) { @!externalReferences.List }
+    method components(        SBOM::Component:D:) { @!components.List         }
+    method data(              SBOM::Component:D:) { @!data.List               }
+    method properties(        SBOM::Component:D:) { @!properties.List         }
+    method tags(              SBOM::Component:D:) { @!tags.List               }
 }
 
 #- Diff ------------------------------------------------------------------------
@@ -305,6 +317,9 @@ class SBOM::Patch:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| A collection of issues the patch resolves.
     has SBOM::Resolve @.resolves;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method resolves(SBOM::Patch:D:) { @!resolves.List }
 }
 
 #- Pedigree --------------------------------------------------------------------
@@ -350,6 +365,13 @@ class SBOM::Pedigree:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 #| Notes, observations, and other non-structured commentary describing
 #| the components pedigree.
     has Str $.notes;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method ancestors(  SBOM::Pedigree:D:) { @!ancestors.List   }
+    method descendants(SBOM::Pedigree:D:) { @!descendants.List }
+    method variants(   SBOM::Pedigree:D:) { @!variants.List    }
+    method commits(    SBOM::Pedigree:D:) { @!commits.List     }
+    method patches(    SBOM::Pedigree:D:) { @!patches.List     }
 }
 
 # vim: expandtab shiftwidth=4

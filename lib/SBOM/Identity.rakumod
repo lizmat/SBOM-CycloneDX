@@ -47,6 +47,10 @@ class SBOM::Identity:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 #| Tools used for analysis should already be defined in the BOM, either
 #| in the metadata/tools, components, or formulation.
     has bom-refOrLink @.tools;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method methods(SBOM::Identity:D:) { @!methods.List }
+    method tools(  SBOM::Identity:D:) { @!tools.List   }
 }
 
 # vim: expandtab shiftwidth=4

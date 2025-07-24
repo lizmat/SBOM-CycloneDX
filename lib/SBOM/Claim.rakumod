@@ -46,6 +46,12 @@ class SBOM::Claim:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| Enveloped signature in JSON Signature Format (JSF).
     has SBOM::ValidSignature $.signature;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method mitigationStrategies(SBOM::Claim:D:) { @!mitigationStrategies.List }
+    method evidence(            SBOM::Claim:D:) { @!evidence.List             }
+    method counterEvidence(     SBOM::Claim:D:) { @!counterEvidence.List      }
+    method externalReferences(  SBOM::Claim:D:) { @!externalReferences.List   }
 }
 
 # vim: expandtab shiftwidth=4

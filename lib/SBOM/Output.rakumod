@@ -47,6 +47,10 @@ class SBOM::Output:ver<0.0.7>:auth<zef:lizmat> does SBOM {
         die "Must have at least 'resource', 'environmentVars' or 'data'"
           unless $!resource  || @!environmentVars || $!data;
     }
+
+    # These should probably be auto-generated in RakUAST at some point
+    method properties(     SBOM::Output:D:) { @!properties.List      }
+    method environmentVars(SBOM::Output:D:) { @!environmentVars.List }
 }
 
 # vim: expandtab shiftwidth=4

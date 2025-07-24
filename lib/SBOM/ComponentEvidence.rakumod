@@ -36,6 +36,9 @@ class SBOM::Frame:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| The full path and filename of the module.
     has Str $.fullFilename;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method parameters(SBOM::Frame:D:) { @!parameters.List }
 }
 
 #- Callstack -------------------------------------------------------------------
@@ -44,6 +47,9 @@ class SBOM::Callstack:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| The frames seen in the callstack.
     has SBOM::Frame @.frames;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method frames(SBOM::Callstack:D:) { @!frames.List }
 }
 
 #- Copyright -------------------------------------------------------------------
@@ -128,9 +134,14 @@ class SBOM::ComponentEvidence:ver<0.0.7>:auth<zef:lizmat> does SBOM {
         }
 
         method identity(SBOM::ComponentEvidence:D:) {
-            $!identity // @!identity
+            $!identity // @!identity.List
         }
     }
+
+    # These should probably be auto-generated in RakUAST at some point
+    method occurrences(SBOM::ComponentEvidence:D:) { @!occurrences.List }
+    method licenses(   SBOM::ComponentEvidence:D:) { @!licenses.List    }
+    method copyright(  SBOM::ComponentEvidence:D:) { @!copyright.List   }
 }
 
 # vim: expandtab shiftwidth=4

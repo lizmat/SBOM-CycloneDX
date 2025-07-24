@@ -63,6 +63,9 @@ class SBOM::Annotation:ver<0.0.7>:auth<zef:lizmat> does SBOM {
     submethod TWEAK() is hidden-from-backtrace {
         self.must-have-elements(@!subjects);
     }
+
+    # These should probably be auto-generated in RakUAST at some point
+    method subjects(SBOM::Annotation:D:) { @!subjects.List }
 }
 
 # vim: expandtab shiftwidth=4

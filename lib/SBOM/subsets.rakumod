@@ -20,7 +20,7 @@ subset serialNumber of Str where *.contains:
 subset bom-ref of Str where {
     if .chars && !.starts-with('urn:cdx') {
         with %*BOM-REFS -> %bom-refs {
-            %bom-refs{$_} := True;
+            %bom-refs{$_} := Nil;
         }
         True
     }

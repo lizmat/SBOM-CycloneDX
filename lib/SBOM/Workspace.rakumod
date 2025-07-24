@@ -41,6 +41,9 @@ class SBOM::Volume:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| Any additional properties as name-value pairs.
     has SBOM::Property @.properties;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method properties(SBOM::Volume:D:) { @!properties.List }
 }
 
 #- Workspace -------------------------------------------------------------------
@@ -91,6 +94,11 @@ class SBOM::Workspace:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| Any additional properties as name-value pairs.
     has SBOM::Property @.properties;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method aliases(           SBOM::Workspace:D:) { @!aliases.List            }
+    method resourceReferences(SBOM::Workspace:D:) { @!resourceReferences.List }
+    method properties(        SBOM::Workspace:D:) { @!properties.List         }
 }
 
 # vim: expandtab shiftwidth=4

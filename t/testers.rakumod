@@ -10,14 +10,20 @@ my sub test-map-json(
     my @bom-refs-seen := $bom-ref ?? ($bom-ref,) !! @bom-refs;
 
     subtest "$class.^name(): $description" => {
-        plan 6 + ?@bom-refs-seen;
+        plan 6 + @bom-refs-seen;
 
         my $instance := $class.new(:raw-error, |args);
         isa-ok $instance, $class;
 
         nok $instance.build-errors, 'should be without errors';
-        is-deeply $instance.bom-refs, @bom-refs-seen, "Are the bom-refs ok"
-          if @bom-refs-seen;
+
+        if @bom-refs-seen {
+            my %bom-refs := $instance.bom-refs;
+            for @bom-refs-seen -> $bom-ref {
+                isa-ok %bom-refs{$bom-ref}, SBOM,
+                  "Does $bom-ref provide an instance";
+            }
+        }
 
         my %map := $instance.Map;
         # Cannot use is-deeply, as some objects may have a role
@@ -45,14 +51,19 @@ my sub test-hash-json(
     my @bom-refs-seen := $bom-ref ?? ($bom-ref,) !! @bom-refs;
 
     subtest "$class.^name(): $description" => {
-        plan 6 + ?@bom-refs-seen;
+        plan 6 + @bom-refs-seen;
 
         my $instance := $class.new(:raw-error, |args);
         isa-ok $instance, $class;
 
         nok $instance.build-errors, 'should be without errors';
-        is-deeply $instance.bom-refs, @bom-refs-seen, "Are the bom-refs ok"
-          if @bom-refs-seen;
+        if @bom-refs-seen {
+            my %bom-refs := $instance.bom-refs;
+            for @bom-refs-seen -> $bom-ref {
+                isa-ok %bom-refs{$bom-ref}, SBOM,
+                  "Does $bom-ref provide an instance";
+            }
+        }
 
         my %hash := $instance.Hash;
         # Cannot use is-deeply, as some objects may have a role

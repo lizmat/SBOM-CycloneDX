@@ -19,6 +19,10 @@ class SBOM::Tool:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 #| function-as-a-service, and other types of network or intra-process
 #| services.
     has SBOM::Service @.services;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method components(SBOM::Tool:D:) { @!components.List }
+    method services(  SBOM::Tool:D:) { @!services.List   }
 }
 
 #- LegacyTool ------------------------------------------------------------------
@@ -43,6 +47,10 @@ class SBOM::LegacyTool:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 #| They may also establish specific relationships within or external
 #| to the BOM.
     has SBOM::Reference @.externalReferences;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method hashes(            SBOM::LegacyTool:D:) { @!hashes.List             }
+    method externalReferences(SBOM::LegacyTool:D:) { @!externalReferences.List }
 }
 
 # vim: expandtab shiftwidth=4

@@ -26,6 +26,9 @@ class SBOM::RequirementLevel:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| The list of requirement bom-refs that comprise the level.
     has bom-ref @.requirements;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method requirements(SBOM::RequirementLevel:D:) { @!requirements.List }
 }
 
 #- Standard --------------------------------------------------------------------
@@ -68,6 +71,11 @@ class SBOM::Standard:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| Enveloped signature in JSON Signature Format (JSF).
     has SBOM::ValidSignature $.signature;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method requirements(      SBOM::Standard:D:) { @!requirements.List       }
+    method levels(            SBOM::Standard:D:) { @!levels.List             }
+    method externalReferences(SBOM::Standard:D:) { @!externalReferences.List }
 }
 
 #- Definition ------------------------------------------------------------------
@@ -79,6 +87,9 @@ class SBOM::Definition:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 #| practices, or any other requirements which can be evaluated against
 #| or attested to.
     has SBOM::Standard @.standards;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method standards(SBOM::Definition:D:) { @!standards.List }
 }
 
 # vim: expandtab shiftwidth=4

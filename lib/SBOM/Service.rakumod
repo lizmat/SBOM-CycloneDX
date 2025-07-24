@@ -48,6 +48,10 @@ class SBOM::ServiceDataset:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 #| The URI, URL, or BOM-Link of the components or services the data
 #| is sent to.
     has Endpoint @.destination;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method source(     SBOM::ServiceDataset:D:) { @!source.List      }
+    method destination(SBOM::ServiceDataset:D:) { @!destination.List }
 }
 
 #- Service ---------------------------------------------------------------------
@@ -134,6 +138,15 @@ class SBOM::Service:ver<0.0.7>:auth<zef:lizmat> does SBOM {
         die "Can only have one SPDX license"
           if @!licenses > 1 && @!licenses.first(SBOM::SPDXLicense);
     }
+
+    # These should probably be auto-generated in RakUAST at some point
+    method endpoints(         SBOM::Service:D:) { @!endpoints.List          }
+    method data(              SBOM::Service:D:) { @!data.List               }
+    method licenses(          SBOM::Service:D:) { @!licenses.List           }
+    method externalReferences(SBOM::Service:D:) { @!externalReferences.List }
+    method services(          SBOM::Service:D:) { @!services.List           }
+    method properties(        SBOM::Service:D:) { @!properties.List         }
+    method tags(              SBOM::Service:D:) { @!tags.List               }
 }
 
 # vim: expandtab shiftwidth=4

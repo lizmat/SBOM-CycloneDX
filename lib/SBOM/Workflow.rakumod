@@ -84,6 +84,18 @@ class SBOM::Workflow:ver<0.0.7>:auth<zef:lizmat> does SBOM {
                   || @!resourceReferences.all ~~ SBOM::ResourceReference;
         }
     }
+
+    # These should probably be auto-generated in RakUAST at some point
+    method resourceReferences(SBOM::Workflow:D:) { @!resourceReferences.List }
+    method tasks(             SBOM::Workflow:D:) { @!tasks.List              }
+    method taskDependecies(   SBOM::Workflow:D:) { @!taskDependencies.List   }
+    method taskTypes(         SBOM::Workflow:D:) { @!taskTypes.List          }
+    method steps(             SBOM::Workflow:D:) { @!steps.List              }
+    method inputs(            SBOM::Workflow:D:) { @!inputs.List             }
+    method outputs(           SBOM::Workflow:D:) { @!outputs.List            }
+    method workspaces(        SBOM::Workflow:D:) { @!workspaces.List         }
+    method runtimeTopology(   SBOM::Workflow:D:) { @!runtimeTopology.List    }
+    method properties(        SBOM::Workflow:D:) { @!properties.List         }
 }
 
 # vim: expandtab shiftwidth=4

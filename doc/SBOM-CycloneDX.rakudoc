@@ -117,7 +117,10 @@ interest.
 
 =item .bom-refs
 
-Returns a sorted list of bom-refs that have been seen in the instance.
+Returns a C<Map> of the bom-refs that have been seen in the instance,
+with the bom-ref as key, and the associated C<SBOM> object as its
+value.  If a bom-ref was only mentioned, but not identified, the
+value will be C<Nil>.
 
 =item .JSON
 

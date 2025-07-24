@@ -45,6 +45,10 @@ class SBOM::Licensing:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 #| The timestamp indicating when the current license expires (if
 #| applicable).
     has DateTime $.expiration;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method altIds(      SBOM::Licensing:D:) { @!altIds.List       }
+    method licenseTypes(SBOM::Licensing:D:) { @!licenseTypes.List }
 }
 
 #- AnyLicense ------------------------------------------------------------------
@@ -125,6 +129,9 @@ class SBOM::LicenseInfo:ver<0.0.7>:auth<zef:lizmat> does SBOM {
         die "Must have 'id' or 'name' specified"
           unless $!id || $!name;
     }
+
+    # These should probably be auto-generated in RakUAST at some point
+    method properties(SBOM::LicenseInfo:D:) { @!properties.List }
 }
 
 #- SPDXLicense -----------------------------------------------------------------

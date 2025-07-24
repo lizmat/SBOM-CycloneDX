@@ -29,6 +29,10 @@ class SBOM::Dependency:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 #| implements a cryptographic algorithm. A component which implements
 #| another component does not imply that the implementation is in use.
     has bom-ref @.provides;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method dependsOn(SBOM::Dependency:D:) { @!dependsOn.List }
+    method provides( SBOM::Dependency:D:) { @!provides.List  }
 }
 
 # vim: expandtab shiftwidth=4

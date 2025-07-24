@@ -58,10 +58,21 @@ class SBOM::ReleaseNotes:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| A collection of issues that have been resolved.
     has SBOM::Resolve @.resolves;
+
+#| Zero or more release notes containing the locale and content.
+#| Multiple note objects may be specified to support release notes
+#| in a wide variety of languages.
     has SBOM::Note @.notes;
 
 #| Any additional properties as name-value pairs.
     has SBOM::Property @.properties;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method aliases(   SBOM::ReleaseNotes:D:) { @!aliases.List    }
+    method tags(      SBOM::ReleaseNotes:D:) { @!tags.List       }
+    method resolves(  SBOM::ReleaseNotes:D:) { @!resolves.List   }
+    method notes(     SBOM::ReleaseNotes:D:) { @!notes.List      }
+    method properties(SBOM::ReleaseNotes:D:) { @!properties.List }
 }
 
 # vim: expandtab shiftwidth=4

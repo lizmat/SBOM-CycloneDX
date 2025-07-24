@@ -11,6 +11,9 @@ role SBOM:ver<0.0.7>:auth<zef:lizmat> {
     # Array with pairs with errors, in which the key is is the crumb
     # trail of where the error happened, and the value is the actual
     # exception.
+    #
+    # bom-refs
+    # Map with bom-ref as key, and object instance as value
     has %!additional-object-info is built(False);
 
     # Give access to the build errors
@@ -20,7 +23,7 @@ role SBOM:ver<0.0.7>:auth<zef:lizmat> {
 
     # Give access to the bom-refs seen
     method bom-refs(::?CLASS:D:) {
-        %!additional-object-info<bom-refs> // ()
+        %!additional-object-info<bom-refs> // Map.new
     }
 
     # This code is run at compile time when the role is being consumed.
@@ -37,6 +40,9 @@ role SBOM:ver<0.0.7>:auth<zef:lizmat> {
 
     # The attribute names in order of definition
     my @names is List = @attributes.map(*.name.substr(2));
+
+    # Flag: whether there is an attribute called "bom-ref"
+    my $has-bom-ref = ?@names.first(* eq 'bom-ref');
 
     # Allow consumers to specify additional named arguments (for which
     # there is no direct attribute mapping) that will be handled by a
@@ -114,7 +120,7 @@ role SBOM:ver<0.0.7>:auth<zef:lizmat> {
     # on the outer SBOM object
     method !save-dynamic-vars() {
         %!additional-object-info<build-errors> := @*ERRORS.List;
-        %!additional-object-info<bom-refs>     := %*BOM-REFS.keys.sort(*.fc).List;
+        %!additional-object-info<bom-refs>     := %*BOM-REFS.Map;
         self
     }
 
@@ -250,15 +256,17 @@ role SBOM:ver<0.0.7>:auth<zef:lizmat> {
             }
         }
 
-        my $result := do if %out || %required {
-            self.bless: |%out
+        if %out || %required {
+            my $sbom := self.bless: |%out;
+
+            %*BOM-REFS{$sbom.bom-ref} := $sbom if $has-bom-ref;
+            @*CRUMBS.pop;
+            $sbom
         }
         else {
+            @*CRUMBS.pop;
             Nil
         }
-
-        @*CRUMBS.pop;
-        $result
     }
 
     # Cannot use the standard .raku semantics, as that would process

@@ -23,6 +23,9 @@ class SBOM::Attestation:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| Enveloped signature in JSON Signature Format (JSF).
     has SBOM::ValidSignature $.signature;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method map(SBOM::Attestation:D:) { @!map.List }
 }
 
 # vim: expandtab shiftwidth=4

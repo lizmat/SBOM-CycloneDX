@@ -41,6 +41,9 @@ class SBOM::EvidenceDataset:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 #| individuals or entities responsible for managing, overseeing,
 #| and safeguarding the data throughout its lifecycle.
     has SBOM::Governance $.governance;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method sensitiveData(SBOM::EvidenceDataset:D:) { @!sensitiveData.List }
 }
 
 #- Signatory -------------------------------------------------------------------
@@ -91,6 +94,9 @@ class SBOM::Affirmation:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| Enveloped signature in JSON Signature Format (JSF).
     has SBOM::ValidSignature $.signature;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method signatories(SBOM::Affirmation:D:) { @!signatories.List }
 }
 
 #- Assessor --------------------------------------------------------------------
@@ -127,6 +133,9 @@ class SBOM::Attestation:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| Enveloped signature in JSON Signature Format (JSF).
     has SBOM::ValidSignature $.signature;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method map(SBOM::Attestation:D:) { @!map.List }
 }
 
 #- DeclarationEvidence ---------------------------------------------------------
@@ -162,6 +171,9 @@ class SBOM::DeclarationEvidence:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| Enveloped signature in JSON Signature Format (JSF).
     has SBOM::ValidSignature $.signature;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method data(SBOM::DeclarationEvidence:D:) { @!data.List }
 }
 
 #- Target ----------------------------------------------------------------------
@@ -176,6 +188,11 @@ class SBOM::Target:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| The list of services which claims are made against.
     has SBOM::Service @.services;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method organizations(SBOM::Target:D:) { @!organizations.List }
+    method components(   SBOM::Target:D:) { @!components.List    }
+    method services(     SBOM::Target:D:) { @!services.List      }
 }
 
 #- Declaration -----------------------------------------------------------------
@@ -209,6 +226,13 @@ class SBOM::Declarations:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| Enveloped signature in JSON Signature Format (JSF).
     has SBOM::ValidSignature $.signature;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method assessors(   SBOM::Declarations:D:) { @!assessors.List    }
+    method attestations(SBOM::Declarations:D:) { @!attestations.List }
+    method claims(      SBOM::Declarations:D:) { @!claims.List       }
+    method evidence(    SBOM::Declarations:D:) { @!evidence.List     }
+    method targets(     SBOM::Declarations:D:) { @!targets.List      }
 }
 
 # vim: expandtab shiftwidth=4

@@ -27,6 +27,9 @@ class SBOM::Condition:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| Any additional properties as name-value pairs.
     has SBOM::Property @.properties;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method properties(SBOM::Condition:D:) { @!properties.List }
 }
 
 #- Event -----------------------------------------------------------------------
@@ -53,6 +56,9 @@ class SBOM::Event:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| Any additional properties as name-value pairs.
     has SBOM::Property @.properties;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method properties(SBOM::Event:D:) { @!properties.List }
 }
 
 #- Trigger ---------------------------------------------------------------------
@@ -108,6 +114,13 @@ class SBOM::Trigger:ver<0.0.7>:auth<zef:lizmat> does SBOM {
                   || @!resourceReferences.all ~~ SBOM::ResourceReference;
         }
     }
+
+    # These should probably be auto-generated in RakUAST at some point
+    method resourceReferences(SBOM::Trigger:D:) { @!resourceReferences.List }
+    method conditions(        SBOM::Trigger:D:) { @!conditions.List         }
+    method inputs(            SBOM::Trigger:D:) { @!inputs.List             }
+    method outputs(           SBOM::Trigger:D:) { @!outputs.List            }
+    method properties(        SBOM::Trigger:D:) { @!properties.List         }
 }
 
 # vim: expandtab shiftwidth=4

@@ -19,6 +19,11 @@ class SBOM::Conformance:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 #| The list of bom-ref to the evidence provided describing the
 #| mitigation strategies.
     has bom-ref @.mitigationStrategies;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method mitigationStrategies(SBOM::Conformance:D:) {
+        @!mitigationStrategies.List
+    }
 }
 
 #- RequirementGrouping ---------------------------------------------------------
@@ -40,6 +45,14 @@ class SBOM::RequirementGrouping:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| The confidence of the claim meeting a requirement.
     has SBOM::Confidence $.confidence;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method claims(SBOM::RequirementGrouping:D:) {
+        @!claims.List
+    }
+    method counterClaims(SBOM::RequirementGrouping:D:) {
+        @!counterClaims.List
+    }
 }
 
 # vim: expandtab shiftwidth=4

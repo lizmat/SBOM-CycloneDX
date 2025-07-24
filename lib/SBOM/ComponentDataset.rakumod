@@ -48,6 +48,9 @@ class SBOM::ComponentDataset:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 #| individuals or entities responsible for managing, overseeing, and
 #| safeguarding the data throughout its lifecycle.
     has SBOM::Governance $.governance;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method sensitiveData(SBOM::ComponentDataset:D:) { @!sensitiveData.List }
 }
 
 # vim: expandtab shiftwidth=4

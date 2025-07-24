@@ -59,6 +59,11 @@ class SBOM::PublicKey:ver<0.0.7>:auth<zef:lizmat> does SBOM {
         }
         die "did not specify all required arguments for key '$keytype'";
     }
+
+    # These should probably be auto-generated in RakUAST at some point
+    method additional-properties(SBOM::PublicKey:D:) {
+        @!additional-properties.List
+    }
 }
 
 #- ValidSignature --------------------------------------------------------------
@@ -104,25 +109,39 @@ class SBOM::Signature:ver<0.0.7>:auth<zef:lizmat>
 #| process. Since both the "excludes" property and the associated data
 #| it points to are unsigned, a conforming JSF implementation must
 #| provide options for specifying which properties to accept.
-    has Str @.excludes;;
+    has Str @.excludes;
 
 #| The signature data. Note that the binary representation must follow
 #| the JWA [RFC7518] specifications.
     has Str $.value is required;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method certificatePath(SBOM::Signature:D:) { @!certificatePath.List }
+    method excludes(       SBOM::Signature:D:) { @!excludes.List        }
 }
 
 #- SignatureChain --------------------------------------------------------------
 #| Unique top level property for Signature Chains. (signaturechain)
 class SBOM::SignatureChain:ver<0.0.7>:auth<zef:lizmat>
   is SBOM::ValidSignature does SBOM {
+
+#| Signature chain
     has SBOM::Signature @.chain;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method chain(SBOM::SignatureChain:D:) { @!chain.List }
 }
 
 #- SignatureSigners ------------------------------------------------------------
 #| Unique top level property for Multiple Signatures. (multisignature)
 class SBOM::SignatureSigners:ver<0.0.7>:auth<zef:lizmat>
   is SBOM::ValidSignature does SBOM {
+
+#| Signature signers
     has SBOM::Signature @.signers;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method signers(SBOM::SignatureSigners:D:) { @!signers.List }
 }
 
 # vim: expandtab shiftwidth=4

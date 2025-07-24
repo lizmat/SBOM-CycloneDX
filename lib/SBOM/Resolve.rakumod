@@ -30,6 +30,9 @@ class SBOM::Resolve:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| A collection of URL's for reference. Multiple URLs are allowed.
     has URL @.references;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method references(SBOM::Resolve:D:) { @!references.List }
 }
 
 # vim: expandtab shiftwidth=4

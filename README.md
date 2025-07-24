@@ -108,7 +108,7 @@ The key contains the crumb trail of where in the object the problem occurred (e.
 
   * .bom-refs
 
-Returns a sorted list of bom-refs that have been seen in the instance.
+Returns a `Map` of the bom-refs that have been seen in the instance, with the bom-ref as key, and the associated `SBOM` object as its value. If a bom-ref was only mentioned, but not identified, the value will be `Nil`.
 
   * .JSON
 

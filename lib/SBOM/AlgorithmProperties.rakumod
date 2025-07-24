@@ -65,6 +65,14 @@ class SBOM::AlgorithmProperties:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 #| The NIST security strength category as defined in
 #| https://csrc.nist.gov/projects/post-quantum-cryptography/post-quantum-cryptography-standardization/evaluation-criteria/security-(evaluation-criteria). A value of 0 indicates that none of the categories are met.
     has nistQuantumSecurityLevel $.nistQuantumSecurityLevel;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method certificationLevel(SBOM::AlgorithmProperties:D:) {
+        @!certificationLevel.List
+    }
+    method cryptoFunctions(SBOM::AlgorithmProperties:D:) {
+        @!cryptoFunctions.List
+    }
 }
 
 # vim: expandtab shiftwidth=4

@@ -45,6 +45,20 @@ class SBOM::Requirement:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 #| They may also establish specific relationships within or external
 #| to the BOM.
     has SBOM::Reference @.externalReferences;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method descriptions(SBOM::Requirement:D:) {
+        @!descriptions.List
+    }
+    method openCre(SBOM::Requirement:D:) {
+        @!openCre.List
+    }
+    method properties(SBOM::Requirement:D:) {
+        @!properties.List
+    }
+    method externalReferences(SBOM::Requirement:D:) {
+        @!externalReferences.List
+    }
 }
 
 # vim: expandtab shiftwidth=4

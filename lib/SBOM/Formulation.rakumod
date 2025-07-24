@@ -34,6 +34,12 @@ class SBOM::Formulation:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| Any additional properties as name-value pairs.
     has SBOM::Property @.properties;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method components(SBOM::Formulation:D:) { @!components.List }
+    method services(  SBOM::Formulation:D:) { @!services.List   }
+    method workflows( SBOM::Formulation:D:) { @!workflows.List  }
+    method properties(SBOM::Formulation:D:) { @!properties.List }
 }
 
 # vim: expandtab shiftwidth=4

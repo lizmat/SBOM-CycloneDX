@@ -52,6 +52,11 @@ class SBOM::Input:ver<0.0.7>:auth<zef:lizmat> does SBOM {
         die "Must have at least 'resource', 'parameters', 'environmentVars' or 'data'"
           unless $!resource || @!parameters || @!environmentVars || $!data;
     }
+
+    # These should probably be auto-generated in RakUAST at some point
+    method parameters(     SBOM::Input:D:) { @!parameters.List      }
+    method properties(     SBOM::Input:D:) { @!properties.List      }
+    method environmentVars(SBOM::Input:D:) { @!environmentVars.List }
 }
 
 # vim: expandtab shiftwidth=4

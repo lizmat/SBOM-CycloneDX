@@ -24,6 +24,10 @@ class SBOM::RuntimeTopology:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 #| implements a cryptographic algorithm. A component which implements
 #| another component does not imply that the implementation is in use.
     has Str @.provides;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method dependsOn(SBOM::RuntimeTopology:D:) { @!dependsOn.List }
+    method provides( SBOM::RuntimeTopology:D:) { @!provides.List  }
 }
 
 # vim: expandtab shiftwidth=4

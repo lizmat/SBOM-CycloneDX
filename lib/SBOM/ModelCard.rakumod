@@ -47,6 +47,11 @@ class SBOM::QuantitativeAnalysis:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| A collection of graphics that represent various measurements.
     has SBOM::Graphics $.graphics;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method performanceMetrics(SBOM::QuantitativeAnalysis:D:) {
+        @!performanceMetrics.List
+    }
 }
 
 #- ModelCard -------------------------------------------------------------------
@@ -70,6 +75,9 @@ class SBOM::ModelCard:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| Any additional properties as name-value pairs.
     has SBOM::Property @.properties;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method properties(SBOM::ModelCard:D:) { @!properties.List }
 }
 
 # vim: expandtab shiftwidth=4

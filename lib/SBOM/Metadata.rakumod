@@ -100,7 +100,13 @@ class SBOM::Metadata:ver<0.0.7>:auth<zef:lizmat> does SBOM {
         }
     }
 
-    method tools(SBOM::Metadata:D:) { $!tools // @!tools }
+    method tools(SBOM::Metadata:D:) { $!tools // @!tools.List }
+
+    # These should probably be auto-generated in RakUAST at some point
+    method lifecycles(SBOM::Metadata:D:) { @!lifecycles.List }
+    method authors(   SBOM::Metadata:D:) { @!authors.List    }
+    method licenses(  SBOM::Metadata:D:) { @!licenses.List   }
+    method properties(SBOM::Metadata:D:) { @!properties.List }
 }
 
 # vim: expandtab shiftwidth=4

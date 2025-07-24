@@ -18,6 +18,9 @@ class SBOM::DataContents:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| Any additional properties as name-value pairs.
     has SBOM::Property @.properties;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method properties(SBOM::DataContents:D:) { @!properties.List }
 }
 
 # vim: expandtab shiftwidth=4

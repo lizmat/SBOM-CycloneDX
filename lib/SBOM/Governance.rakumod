@@ -18,6 +18,11 @@ class SBOM::Governance:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| Data owners are concerned with risk and appropriate access to data.
     has SBOM::Governor @.owners;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method custodians(SBOM::Governance:D:) { @!custodians.List }
+    method stewards(  SBOM::Governance:D:) { @!stewards.List   }
+    method owners(    SBOM::Governance:D:) { @!owners.List     }
 }
 
 # vim: expandtab shiftwidth=4

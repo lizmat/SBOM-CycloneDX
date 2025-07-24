@@ -20,6 +20,10 @@ class SBOM::CipherSuite:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 
 #| A list of common identifiers for the cipher suite.
     has Str @.identifiers;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method algorithms( SBOM::CipherSuite:D:) { @!algorithms.List  }
+    method identifiers(SBOM::CipherSuite:D:) { @!identifiers.List }
 }
 
 #- IKEv2TransformTypes ---------------------------------------------------------
@@ -46,6 +50,13 @@ class SBOM::IKEv2TransformTypes:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 #| IKEv2 Authentication methods: identifier for referable and therefore
 #| interlinkable elements.
     has IDnotbomLink @.auth;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method encr( SBOM::IKEv2TransformTypes:D:) { @!encr.List  }
+    method prf(  SBOM::IKEv2TransformTypes:D:) { @!prf.List   }
+    method integ(SBOM::IKEv2TransformTypes:D:) { @!integ.List }
+    method ke(   SBOM::IKEv2TransformTypes:D:) { @!ke.List    }
+    method auth( SBOM::IKEv2TransformTypes:D:) { @!auth.List  }
 }
 
 #- CryptoProtocolProperties ----------------------------------------------------
@@ -68,6 +79,14 @@ class SBOM::CryptoProtocolProperties:ver<0.0.7>:auth<zef:lizmat> does SBOM {
 #| A list of protocol-related cryptographic assets, Identifier for
 #| referable and therefore interlinkable elements.
     has IDnotbomLink @.cryptoRefArray;
+
+    # These should probably be auto-generated in RakUAST at some point
+    method cipherSuites(SBOM::CryptoProtocolProperties:D:) {
+        @!cipherSuites.List
+    }
+    method cryptoRefArray(SBOM::CryptoProtocolProperties:D:) {
+        @!cryptoRefArray.List
+    }
 }
 
 # vim: expandtab shiftwidth=4
