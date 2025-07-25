@@ -1,6 +1,9 @@
 Revision history for SBOM::CycloneDX
 
 {{$NEXT}}
+    - Treat undefined values in ingest as not specified
+      (instead of as unsuspected named arguments)
+    - Bump dependency on PURL because we can
 
 0.0.8  2025-07-24T13:41:04+02:00
     - Made sure that all @-sigilled attributes return an

@@ -1,19 +1,19 @@
-use SBOM::enums:ver<0.0.8>:auth<zef:lizmat> <
+use SBOM::enums:ver<0.0.9>:auth<zef:lizmat> <
   ReleaseLevel
 >;
 
-use SBOM::subsets:ver<0.0.8>:auth<zef:lizmat> <
+use SBOM::subsets:ver<0.0.9>:auth<zef:lizmat> <
   locale URL
 >;
 
-use SBOM:ver<0.0.8>:auth<zef:lizmat>;
-use SBOM::Attachment:ver<0.0.8>:auth<zef:lizmat>;
-use SBOM::Property:ver<0.0.8>:auth<zef:lizmat>;
-use SBOM::Resolve:ver<0.0.8>:auth<zef:lizmat>;
+use SBOM:ver<0.0.9>:auth<zef:lizmat>;
+use SBOM::Attachment:ver<0.0.9>:auth<zef:lizmat>;
+use SBOM::Property:ver<0.0.9>:auth<zef:lizmat>;
+use SBOM::Resolve:ver<0.0.9>:auth<zef:lizmat>;
 
 #- Note ------------------------------------------------------------------------
 #| A release note containing the locale and content.
-class SBOM::Note:ver<0.0.8>:auth<zef:lizmat> does SBOM {
+class SBOM::Note:ver<0.0.9>:auth<zef:lizmat> does SBOM {
 
 #| The ISO-639 (or higher) language code and optional ISO-3166 (or
 #| higher) country code.
@@ -24,7 +24,7 @@ class SBOM::Note:ver<0.0.8>:auth<zef:lizmat> does SBOM {
 }
 
 #- ReleaseNotes ----------------------------------------------------------------
-class SBOM::ReleaseNotes:ver<0.0.8>:auth<zef:lizmat> does SBOM {
+class SBOM::ReleaseNotes:ver<0.0.9>:auth<zef:lizmat> does SBOM {
 
 #| The software versioning type the release note describes.
     has ReleaseLevel $.type is required;

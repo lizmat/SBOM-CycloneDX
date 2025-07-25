@@ -1,8 +1,8 @@
 use JSON::Fast:ver<0.19+>:auth<cpan:TIMOTIMO>;
-use SBOM::enums:ver<0.0.8>:auth<zef:lizmat> <Enumify>;
+use SBOM::enums:ver<0.0.9>:auth<zef:lizmat> <Enumify>;
 
 #- SBOM ------------------------------------------------------------------------
-role SBOM:ver<0.0.8>:auth<zef:lizmat> {
+role SBOM:ver<0.0.9>:auth<zef:lizmat> {
 
     # Hidden attribute to store any extra information, such as build
     # errors and bom-refs seen.  Supports the following keys:
@@ -155,12 +155,17 @@ role SBOM:ver<0.0.8>:auth<zef:lizmat> {
         }
 
         # Process any defined value without container in attribute order
-        for @names.grep({ %in{$_}.defined }) -> $name {
+        for @names -> $name {
             my \value := (%in{$name}:delete)<>;
             my $type  := %type{$name};
 
+            # Can only set defined values
+            if !value.defined {
+                # no action
+            }
+
             # We potentially got multiple values
-            if %positional{$name} {
+            elsif %positional{$name} {
                 # Handle if there any elements in there
                 if +value {
                     my @out := Array[$type].new;
@@ -208,20 +213,22 @@ role SBOM:ver<0.0.8>:auth<zef:lizmat> {
                     }
                 }
                 elsif $type ~~ Enumify {
-                    %out{$name} := $_ ~~ Enumify ?? $_ !! $type($_)
-                      with value;
+                    %out{$name} := value ~~ Enumify
+                      ?? value
+                      !! $type(value);
                 }
                 elsif $type ~~ DateTime {
-                    %out{$name} := $_ ~~ DateTime ?? $_ !! makeDateTime($_)
-                      with value;
+                    %out{$name} := value ~~ DateTime
+                      ?? value
+                      !! makeDateTime(value);
                 }
                 elsif value ~~ Cool {
-                    %out{$name} := $_
-                      with value;
+                    %out{$name} := value;
                 }
                 elsif $type ~~ SBOM {
-                    %out{$name} := $_ ~~ SBOM ?? $_ !! $type.new(|$_)
-                      with value;
+                    %out{$name} := value ~~ SBOM
+                      ?? value
+                      !! $type.new(|value);
                 }
                 else {
                     die "Don't know how to handle type $type.^name()";

@@ -1,14 +1,14 @@
-use SBOM::subsets:ver<0.0.8>:auth<zef:lizmat> <
+use SBOM::subsets:ver<0.0.9>:auth<zef:lizmat> <
   bom-ref CRE
 >;
 
-use SBOM:ver<0.0.8>:auth<zef:lizmat>;
-use SBOM::Property:ver<0.0.8>:auth<zef:lizmat>;
-use SBOM::Reference:ver<0.0.8>:auth<zef:lizmat>;
+use SBOM:ver<0.0.9>:auth<zef:lizmat>;
+use SBOM::Property:ver<0.0.9>:auth<zef:lizmat>;
+use SBOM::Reference:ver<0.0.9>:auth<zef:lizmat>;
 
 #- Requirement -----------------------------------------------------------------
 #| A requirement of a standard.
-class SBOM::Requirement:ver<0.0.8>:auth<zef:lizmat> does SBOM {
+class SBOM::Requirement:ver<0.0.9>:auth<zef:lizmat> does SBOM {
 
 #| An optional identifier which can be used to reference the object
 #| elsewhere in the BOM.

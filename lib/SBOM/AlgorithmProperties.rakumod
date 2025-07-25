@@ -1,17 +1,17 @@
-use SBOM::enums:ver<0.0.8>:auth<zef:lizmat> <
+use SBOM::enums:ver<0.0.9>:auth<zef:lizmat> <
   AlgorithmPrimitive Certification CertificationMode CertificationPadding
   CryptoFunction ExecutionEnvironment Platform
 >;
 
-use SBOM::subsets:ver<0.0.8>:auth<zef:lizmat> <
+use SBOM::subsets:ver<0.0.9>:auth<zef:lizmat> <
   nistQuantumSecurityLevel
 >;
 
-use SBOM:ver<0.0.8>:auth<zef:lizmat>;
+use SBOM:ver<0.0.9>:auth<zef:lizmat>;
 
 #- AlgorithmProperties ---------------------------------------------------------
 #| Properties specific to a cryptographic algorithm.
-class SBOM::AlgorithmProperties:ver<0.0.8>:auth<zef:lizmat> does SBOM {
+class SBOM::AlgorithmProperties:ver<0.0.9>:auth<zef:lizmat> does SBOM {
 
 #| Cryptographic building blocks used in higher-level cryptographic
 #| systems and protocols.

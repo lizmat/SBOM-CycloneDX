@@ -3,7 +3,7 @@ use Test;
 use SBOM::CycloneDX;
 use testers;
 
-plan 3;
+plan 4;
 
 # Testing a simple object with just optional string-like attributes
 
@@ -25,6 +25,13 @@ JSON
 
 my %minimal = bom-ref => "jdoe";
 test-hash-json SBOM::Contact, %minimal, Q:to/JSON/, "minimal";
+{
+  "bom-ref": "jdoe"
+}
+JSON
+
+is SBOM::Contact.new(:bom-ref<jdoe>, :name(Mu), :email(Mu), :phone(Mu)).JSON,
+  Q:to/JSON/.chomp, 'Any as arguments should be ignored';
 {
   "bom-ref": "jdoe"
 }

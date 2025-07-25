@@ -1,4 +1,5 @@
-use PURL:ver<0.0.5+>:auth<zef:lizmat>;
+use Email::Valid:ver<1.0.7+>:auth<zef:demayl>;
+use PURL:ver<0.0.6+>:auth<zef:lizmat>;
 
 my token hexnum { <[0..9 a..f]> }
 #| Every BOM generated SHOULD have a unique serial number, even if the
@@ -30,7 +31,6 @@ subset bom-ref of Str where {
 subset number of Cool where Int | Rat;
 
 #| An email address.
-use Email::Valid:ver<1.0.7+>:auth<zef:demayl>;
 subset email of Str where {
     state $email = Email::Valid.new(:simple);
     $email.validate($_)
