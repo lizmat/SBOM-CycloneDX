@@ -115,11 +115,11 @@ class SBOM::LicenseInfo:ver<0.0.10>:auth<zef:lizmat> does SBOM {
     has SBOM::Attachment $.text;
 
 #| The URL to the license file. If specified, a 'license'
-#| externalReference should also be specified for completeness
+#| externalReference should also be specified for completeness.
     has URL $.url;
 
 #| Licensing details describing the licensor/licensee, license type,
-#| renewal and expiration dates, and other important metadata
+#| renewal and expiration dates, and other important metadata.
     has SBOM::Licensing $.licensing;
 
 #| Any additional properties as name-value pairs.
