@@ -742,7 +742,7 @@ A copyright notice informing users of the underlying claims to copyright ownersh
 
 Asserts the identity of the component using CPE. The CPE must conform to the CPE 2.2 or 2.3 specification. See https://nvd.nist.gov/products/cpe. Refer to @.evidence.identity to optionally provide evidence that substantiates the assertion of the component's identity.
 
-  * PURL `:$purl`
+  * purl `:$purl`
 
 Asserts the identity of the component using package-url (purl). The purl, if specified, must be valid and conform to the specification defined at: https://github.com/package-url/purl-spec. Refer to @.evidence.identity to optionally provide evidence that substantiates the assertion of the component's identity.
 
@@ -2251,6 +2251,8 @@ A collection of issues that have been resolved.
 
   * SBOM::Note `:@notes`
 
+Zero or more release notes containing the locale and content. Multiple note objects may be specified to support release notes in a wide variety of languages.
+
   * SBOM::Property `:@properties`
 
 Any additional properties as name-value pairs.
@@ -2624,7 +2626,7 @@ Maps to the name of a SoftwareIdentity.
 
 Maps to the version of a SoftwareIdentity.
 
-  * Int:D `:@tagVersion`
+  * Int:D `:$tagVersion`
 
 Maps to the tagVersion of a SoftwareIdentity.
 
@@ -3132,7 +3134,7 @@ propertyName
 
 A reference to the property name as defined in the CycloneDX Property Taxonomy.
 
-PURL
+purl
 ----
 
 A package-url (purl). The purl, if specified, must be valid and conform to the specification defined at: https://github.com/package-url/purl-spec.
@@ -3894,7 +3896,7 @@ Supported strings:
 LicenseId
 ---------
 
-A valid SPDX license identifier.
+A valid SPDX license identifier. Also gives access to any associated URL with more information about the license.
 
 699 strings supported.
 

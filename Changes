@@ -1,6 +1,8 @@
 Revision history for SBOM::CycloneDX
 
 {{$NEXT}}
+
+0.0.10  2025-07-28T21:48:55+02:00
     - Add "url" attribute/method to LicenseId enum
     - Bump dependency on PURL to get new api semantics
     - A few documentation tweaks
