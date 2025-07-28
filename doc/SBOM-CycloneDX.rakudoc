@@ -871,7 +871,7 @@ https://nvd.nist.gov/products/cpe. Refer to @.evidence.identity to
 optionally provide evidence that substantiates the assertion of the
 component's identity.
 
-=item PURL C<:$purl>
+=item purl C<:$purl>
 
 Asserts the identity of the component using package-url (purl). The
 purl, if specified, must be valid and conform to the specification
@@ -2613,6 +2613,10 @@ A collection of issues that have been resolved.
 
 =item SBOM::Note C<:@notes>
 
+Zero or more release notes containing the locale and content. Multiple
+note objects may be specified to support release notes in a wide variety
+of languages.
+
 =item SBOM::Property C<:@properties>
 
 Any additional properties as name-value pairs.
@@ -3041,7 +3045,7 @@ Maps to the name of a SoftwareIdentity.
 
 Maps to the version of a SoftwareIdentity.
 
-=item Int:D C<:@tagVersion>
+=item Int:D C<:$tagVersion>
 
 Maps to the tagVersion of a SoftwareIdentity.
 
@@ -3598,7 +3602,7 @@ A positive integer value (> 0).
 A reference to the property name as defined in the CycloneDX Property
 Taxonomy.
 
-=head2 PURL
+=head2 purl
 
 A package-url (purl). The purl, if specified, must be valid and conform
 to the specification defined at:
@@ -4117,7 +4121,8 @@ Supported strings:
 
 =head2 LicenseId
 
-A valid SPDX license identifier.
+A valid SPDX license identifier. Also gives access to any associated
+URL with more information about the license.
 
 699 strings supported.
 

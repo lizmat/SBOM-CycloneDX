@@ -1,6 +1,9 @@
 Revision history for SBOM::CycloneDX
 
 {{$NEXT}}
+    - Add "url" attribute/method to LicenseId enum
+    - Bump dependency on PURL to get new api semantics
+    - A few documentation tweaks
 
 0.0.9  2025-07-25T21:08:37+02:00
     - Treat undefined values in ingest as not specified

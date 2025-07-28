@@ -8,7 +8,7 @@
   "depends": [
     "Email::Valid:ver<1.0.7+>:auth<zef:demayl>",
     "JSON::Fast:ver<0.19+>:auth<cpan:TIMOTIMO>",
-    "PURL:ver<0.0.6+>:auth<zef:lizmat>"
+    "PURL:ver<0.0.8+>:auth<zef:lizmat>"
   ],
   "description": "Software Bill Of Materials, CycloneDX style",
   "license": "Artistic-2.0",
@@ -127,5 +127,5 @@
   ],
   "test-depends": [
   ],
-  "version": "0.0.9"
+  "version": "0.0.10"
 }

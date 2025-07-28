@@ -1,7 +1,11 @@
 use Test;
 use SBOM::CycloneDX;
+use SBOM::enums;
 
-plan 2 * 4;
+plan 1 + 2 * 4;
+
+is LicenseId("0BSD").url, "https://spdx.org/licenses/0BSD.json",
+  'did we get the correct URL for BSD';
 
 my constant $format = "CycloneDX";
 my constant $spec   = "1.6";
