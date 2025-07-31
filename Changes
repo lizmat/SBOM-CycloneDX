@@ -1,6 +1,7 @@
 Revision history for SBOM::CycloneDX
 
 {{$NEXT}}
+    - Bump dependency on PURL to VERS checking
 
 0.0.10  2025-07-28T21:48:55+02:00
     - Add "url" attribute/method to LicenseId enum
