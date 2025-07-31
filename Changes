@@ -1,6 +1,8 @@
 Revision history for SBOM::CycloneDX
 
 {{$NEXT}}
+
+0.0.11  2025-07-31T21:26:29+02:00
     - Modernized the META6.json
     - Added methods "all-components", "all-services",
       "all-purls" and "all-verses"
