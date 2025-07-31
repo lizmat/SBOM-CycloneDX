@@ -54,6 +54,18 @@ sub produce-pod(Mu $class) {
             say "";
         }
     }
+
+    if $class.^methods.grep(*.WHY) -> @methods {
+        say "=head2 ADDITIONAL METHODS";
+        say "";
+
+        for @methods {
+            say "=head3 $_.name()";
+            say "";
+            say .WHY.Str.naive-word-wrapper;
+            say "";
+        }
+    }
 }
 
 my $io := $*PROGRAM.parent.sibling("doc/SBOM-CycloneDX.rakudoc");

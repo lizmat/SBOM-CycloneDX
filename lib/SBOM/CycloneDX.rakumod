@@ -1,29 +1,31 @@
-use SBOM::enums:ver<0.0.10>:auth<zef:lizmat> <
+use SBOM::enums:ver<0.0.11>:auth<zef:lizmat> <
   BOMFormat
 >;
 
-use SBOM::subsets:ver<0.0.10>:auth<zef:lizmat> <
+use SBOM::subsets:ver<0.0.11>:auth<zef:lizmat> <
   PositiveInt serialNumber
 >;
 
-use SBOM:ver<0.0.10>:auth<zef:lizmat>;
-use SBOM::Annotation:ver<0.0.10>:auth<zef:lizmat>;
-use SBOM::Component:ver<0.0.10>:auth<zef:lizmat>;
-use SBOM::Composition:ver<0.0.10>:auth<zef:lizmat>;
-use SBOM::Declarations:ver<0.0.10>:auth<zef:lizmat>;
-use SBOM::Definition:ver<0.0.10>:auth<zef:lizmat>;
-use SBOM::Dependency:ver<0.0.10>:auth<zef:lizmat>;
-use SBOM::Formulation:ver<0.0.10>:auth<zef:lizmat>;
-use SBOM::Metadata:ver<0.0.10>:auth<zef:lizmat>;
-use SBOM::Property:ver<0.0.10>:auth<zef:lizmat>;
-use SBOM::Reference:ver<0.0.10>:auth<zef:lizmat>;
-use SBOM::Service:ver<0.0.10>:auth<zef:lizmat>;
-use SBOM::Signature:ver<0.0.10>:auth<zef:lizmat>;
-use SBOM::Vulnerability:ver<0.0.10>:auth<zef:lizmat>;
+use SBOM:ver<0.0.11>:auth<zef:lizmat>;
+use SBOM::Annotation:ver<0.0.11>:auth<zef:lizmat>;
+use SBOM::Component:ver<0.0.11>:auth<zef:lizmat>;
+use SBOM::Composition:ver<0.0.11>:auth<zef:lizmat>;
+use SBOM::Declarations:ver<0.0.11>:auth<zef:lizmat>;
+use SBOM::Definition:ver<0.0.11>:auth<zef:lizmat>;
+use SBOM::Dependency:ver<0.0.11>:auth<zef:lizmat>;
+use SBOM::Formulation:ver<0.0.11>:auth<zef:lizmat>;
+use SBOM::Metadata:ver<0.0.11>:auth<zef:lizmat>;
+use SBOM::Property:ver<0.0.11>:auth<zef:lizmat>;
+use SBOM::Reference:ver<0.0.11>:auth<zef:lizmat>;
+use SBOM::Service:ver<0.0.11>:auth<zef:lizmat>;
+use SBOM::Signature:ver<0.0.11>:auth<zef:lizmat>;
+use SBOM::Vulnerability:ver<0.0.11>:auth<zef:lizmat>;
+
+use PURL:ver<0.0.12+>:auth<zef:lizmat>;
 
 #- CycloneDX -------------------------------------------------------------------
 #| Providing the CycloneDX v1.6 JSON specification in Raku.
-class SBOM::CycloneDX:ver<0.0.10>:auth<zef:lizmat> does SBOM {
+class SBOM::CycloneDX:ver<0.0.11>:auth<zef:lizmat> does SBOM {
 
 #| Specifies the format of the BOM. This helps to identify the file as
 #| CycloneDX since BOMs do not have a filename convention, nor does
@@ -122,6 +124,46 @@ class SBOM::CycloneDX:ver<0.0.10>:auth<zef:lizmat> does SBOM {
     method formulation(       SBOM::CycloneDX:D:) { @!formulation.List        }
     method definitions(       SBOM::CycloneDX:D:) { @!definitions.List        }
     method properties(        SBOM::CycloneDX:D:) { @!properties.List         }
+
+#| Returns all C<SBOM::Component> objects that can be found.
+    method all-components(SBOM::CycloneDX:D:) {
+        my @components;
+
+        my sub recursed-components(@deeper) {
+            @components.append: @deeper;
+            recursed-components(.components) for @deeper;
+        }
+
+        recursed-components( ($_,) ) with self.metadata andthen .component;
+        recursed-components(self.components);
+
+        @components.List
+    }
+
+#| Returns all L<C<PURL>|https://raku.land/zef:lizmat/PURL> objects
+#| that can be found.
+    method all-purls(SBOM::CycloneDX:D:) {
+        self.all-components.map: { PURL.new($_) with .purl }
+    }
+
+#| Returns all L<C<VERS>|https://raku.land/zef:lizmat/VERS> objects
+#| that can be found.
+    method all-verses(SBOM::CycloneDX:D:) {
+        self.all-purls.map: { $_ with .VERS }
+    }
+
+#| Returns all C<SBOM::Service> objects that can be found.
+    method all-services(SBOM::CycloneDX:D:) {
+        my @services;
+
+        my sub recursed-services(@deeper) {
+            @services.append: @deeper;
+            recursed-services(.services) for @deeper;
+        }
+
+        recursed-services(self.services);
+        @services.List
+    }
 }
 
 # vim: expandtab shiftwidth=4

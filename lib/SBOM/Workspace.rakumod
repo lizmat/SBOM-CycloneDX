@@ -1,18 +1,18 @@
-use SBOM::enums:ver<0.0.10>:auth<zef:lizmat> <
+use SBOM::enums:ver<0.0.11>:auth<zef:lizmat> <
   AccessMode VolumeMode
 >;
 
-use SBOM::subsets:ver<0.0.10>:auth<zef:lizmat> <
+use SBOM::subsets:ver<0.0.11>:auth<zef:lizmat> <
   bom-ref
 >;
 
-use SBOM:ver<0.0.10>:auth<zef:lizmat>;
-use SBOM::Property:ver<0.0.10>:auth<zef:lizmat>;
-use SBOM::Reference:ver<0.0.10>:auth<zef:lizmat>;
+use SBOM:ver<0.0.11>:auth<zef:lizmat>;
+use SBOM::Property:ver<0.0.11>:auth<zef:lizmat>;
+use SBOM::Reference:ver<0.0.11>:auth<zef:lizmat>;
 
 #- Volume ----------------------------------------------------------------------
 #| Information about the actual volume instance allocated to the workspace.
-class SBOM::Volume:ver<0.0.10>:auth<zef:lizmat> does SBOM {
+class SBOM::Volume:ver<0.0.11>:auth<zef:lizmat> does SBOM {
 
 #| The unique identifier for the volume instance within its deployment
 #| context.
@@ -48,7 +48,7 @@ class SBOM::Volume:ver<0.0.10>:auth<zef:lizmat> does SBOM {
 
 #- Workspace -------------------------------------------------------------------
 #| A named filesystem or data resource shareable by workflow tasks.
-class SBOM::Workspace:ver<0.0.10>:auth<zef:lizmat> does SBOM {
+class SBOM::Workspace:ver<0.0.11>:auth<zef:lizmat> does SBOM {
 
 #| An optional identifier which can be used to reference the workspace
 #| elsewhere in the BOM.

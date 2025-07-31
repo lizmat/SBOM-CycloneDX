@@ -1,17 +1,20 @@
 Revision history for SBOM::CycloneDX
 
 {{$NEXT}}
+    - Modernized the META6.json
+    - Added methods "all-components", "all-services",
+      "all-purls" and "all-verses"
     - Bump dependency on PURL to VERS checking
 
 0.0.10  2025-07-28T21:48:55+02:00
-    - Add "url" attribute/method to LicenseId enum
-    - Bump dependency on PURL to get new api semantics
+    - Added "url" attribute/method to LicenseId enum
+    - Bumped dependency on PURL to get new api semantics
     - A few documentation tweaks
 
 0.0.9  2025-07-25T21:08:37+02:00
     - Treat undefined values in ingest as not specified
       (instead of as unsuspected named arguments)
-    - Bump dependency on PURL because we can
+    - Bumped dependency on PURL because we can
 
 0.0.8  2025-07-24T13:41:04+02:00
     - Made sure that all @-sigilled attributes return an
@@ -19,7 +22,7 @@ Revision history for SBOM::CycloneDX
       are defined as typed arrays)
     - Made "bom-refs" return a Map with the bom-ref as
       key, and the associated SBOM object as its value
-    - Bump dependency on PURL because we can
+    - Bumped dependency on PURL because we can
 
 0.0.7  2025-07-17T20:52:44+02:00
     - Added dependency on PURL to check validity of the

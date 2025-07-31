@@ -199,6 +199,25 @@ Any additional properties as name-value pairs.
 
 Enveloped signature in JSON Signature Format (JSF).
 
+ADDITIONAL METHODS
+------------------
+
+### all-components
+
+Returns all `SBOM::Component` objects that can be found.
+
+### all-purls
+
+Returns all [`PURL`](https://raku.land/zef:lizmat/PURL) objects that can be found.
+
+### all-verses
+
+Returns all [`VERS`](https://raku.land/zef:lizmat/VERS) objects that can be found.
+
+### all-services
+
+Returns all `SBOM::Service` objects that can be found.
+
 ### .Hash
 
 ```raku

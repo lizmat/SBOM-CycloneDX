@@ -244,6 +244,26 @@ Any additional properties as name-value pairs.
 
 Enveloped signature in JSON Signature Format (JSF).
 
+=head2 ADDITIONAL METHODS
+
+=head3 all-components
+
+Returns all C<SBOM::Component> objects that can be found.
+
+=head3 all-purls
+
+Returns all L<C<PURL>|https://raku.land/zef:lizmat/PURL> objects that
+can be found.
+
+=head3 all-verses
+
+Returns all L<C<VERS>|https://raku.land/zef:lizmat/VERS> objects that
+can be found.
+
+=head3 all-services
+
+Returns all C<SBOM::Service> objects that can be found.
+
 =head3 .Hash
 
 =begin code :lang<raku>

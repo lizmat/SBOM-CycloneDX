@@ -1,19 +1,19 @@
-use SBOM::enums:ver<0.0.10>:auth<zef:lizmat> <
+use SBOM::enums:ver<0.0.11>:auth<zef:lizmat> <
   DataSource
 >;
 
-use SBOM::subsets:ver<0.0.10>:auth<zef:lizmat> <
+use SBOM::subsets:ver<0.0.11>:auth<zef:lizmat> <
   bom-ref
 >;
 
-use SBOM:ver<0.0.10>:auth<zef:lizmat>;
-use SBOM::DataContents:ver<0.0.10>:auth<zef:lizmat>;
-use SBOM::Governance:ver<0.0.10>:auth<zef:lizmat>;
-use SBOM::Graphics:ver<0.0.10>:auth<zef:lizmat>;
+use SBOM:ver<0.0.11>:auth<zef:lizmat>;
+use SBOM::DataContents:ver<0.0.11>:auth<zef:lizmat>;
+use SBOM::Governance:ver<0.0.11>:auth<zef:lizmat>;
+use SBOM::Graphics:ver<0.0.11>:auth<zef:lizmat>;
 
 #- ComponentDataset ------------------------------------------------------------
 #| A dataset associated with a component.
-class SBOM::ComponentDataset:ver<0.0.10>:auth<zef:lizmat> does SBOM {
+class SBOM::ComponentDataset:ver<0.0.11>:auth<zef:lizmat> does SBOM {
 
 #| An optional identifier which can be used to reference the dataset
 #| elsewhere in the BOM.

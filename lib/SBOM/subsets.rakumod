@@ -1,5 +1,5 @@
 use Email::Valid:ver<1.0.7+>:auth<zef:demayl>;
-use PURL:ver<0.0.10+>:auth<zef:lizmat>;
+use PURL:ver<0.0.12+>:auth<zef:lizmat>;
 
 my token hexnum { <[0..9 a..f]> }
 #| Every BOM generated SHOULD have a unique serial number, even if the

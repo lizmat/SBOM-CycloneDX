@@ -1,0 +1,34 @@
+use Test;
+use SBOM::CycloneDX;
+
+my $io := $*PROGRAM.sibling("valid/valid-compositions-1.6.json");
+
+plan 6;
+
+my $sbom := SBOM::CycloneDX.new($io);
+isa-ok $sbom, SBOM::CycloneDX;
+
+is $sbom.all-components>>.bom-ref.join("\n"),
+  Q:to/COMPONENTS/.chomp, "are all components found";
+acme-application-1.0
+pkg:maven/partner/shaded-library@1.0
+pkg:maven/acme/library@3.0
+pkg:maven/ossproject/library@2.0
+COMPONENTS
+
+my @purls = $sbom.all-purls;
+is @purls.are.^name, "PURL", 'are they all PURL objects';
+
+is @purls.join("\n"), Q:to/PURLS/.chomp, "are all purls found";
+pkg:maven/partner/shaded-library@1.0
+pkg:maven/acme/library@3.0
+pkg:maven/ossproject/library@2.0
+PURLS
+
+my @verses = $sbom.all-verses;
+ok @verses == 0, 'need example with actual VERS strings';
+
+my @services = $sbom.all-services;
+ok @services == 0, 'need example with actual services';
+
+# vim: expandtab shiftwidth=4

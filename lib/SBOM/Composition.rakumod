@@ -1,20 +1,20 @@
-use SBOM::enums:ver<0.0.10>:auth<zef:lizmat> <
+use SBOM::enums:ver<0.0.11>:auth<zef:lizmat> <
   Aggregate
 >;
 
-use SBOM::subsets:ver<0.0.10>:auth<zef:lizmat> <
+use SBOM::subsets:ver<0.0.11>:auth<zef:lizmat> <
   bom-ref bom-refOrLink
 >;
 
-use SBOM:ver<0.0.10>:auth<zef:lizmat>;
-use SBOM::Signature:ver<0.0.10>:auth<zef:lizmat>;
+use SBOM:ver<0.0.11>:auth<zef:lizmat>;
+use SBOM::Signature:ver<0.0.11>:auth<zef:lizmat>;
 
 #- Conmposition ----------------------------------------------------------------
 #| Compositions describe constituent parts (including components,
 #| services, and dependency relationships) and their completeness.
 #| The completeness of vulnerabilities expressed in a BOM may also
 #| be described.
-class SBOM::Composition:ver<0.0.10>:auth<zef:lizmat> does SBOM {
+class SBOM::Composition:ver<0.0.11>:auth<zef:lizmat> does SBOM {
 
 #| An optional identifier which can be used to reference the
 #| composition elsewhere in the BOM.

@@ -5,15 +5,21 @@
   ],
   "build-depends": [
   ],
-  "depends": [
-    "Email::Valid:ver<1.0.7+>:auth<zef:demayl>",
-    "JSON::Fast:ver<0.19+>:auth<cpan:TIMOTIMO>",
-    "PURL:ver<0.0.10+>:auth<zef:lizmat>"
-  ],
+  "depends": {
+    "runtime": {
+      "requires": [
+        "Email::Valid:ver<1.0.7+>:auth<zef:demayl>",
+        "JSON::Fast:ver<0.19+>:auth<cpan:TIMOTIMO>",
+        "PURL:ver<0.0.12+>:auth<zef:lizmat>"
+      ]
+    }
+  },
   "description": "Software Bill Of Materials, CycloneDX style",
   "license": "Artistic-2.0",
   "name": "SBOM::CycloneDX",
   "perl": "6.d",
+  "raku": "6.d",
+  "production": true,
   "provides": {
     "SBOM": "lib/SBOM.rakumod",
     "SBOM::AlgorithmProperties": "lib/SBOM/AlgorithmProperties.rakumod",
@@ -118,7 +124,11 @@
     "enums/VulnerabilityState",
     "licenses.json"
   ],
-  "source-url": "https://github.com/lizmat/SBOM-CycloneDX.git",
+  "support": {
+    "email": "liz@raku.rocks",
+    "bugtracker": "https://github.com/lizmat/SBOM-CycloneDX/issues",
+    "source": "https://github.com/lizmat/SBOM-CycloneDX.git"
+  },
   "tags": [
     "SBOM",
     "CYCLONEDX",
@@ -127,5 +137,5 @@
   ],
   "test-depends": [
   ],
-  "version": "0.0.10"
+  "version": "0.0.11"
 }

@@ -1,8 +1,8 @@
 use JSON::Fast:ver<0.19+>:auth<cpan:TIMOTIMO>;
-use SBOM::enums:ver<0.0.10>:auth<zef:lizmat> <Enumify>;
+use SBOM::enums:ver<0.0.11>:auth<zef:lizmat> <Enumify>;
 
 #- SBOM ------------------------------------------------------------------------
-role SBOM:ver<0.0.10>:auth<zef:lizmat> {
+role SBOM:ver<0.0.11>:auth<zef:lizmat> {
 
     # Hidden attribute to store any extra information, such as build
     # errors and bom-refs seen.  Supports the following keys:
