@@ -21,7 +21,10 @@ use SBOM::Service:ver<0.0.11>:auth<zef:lizmat>;
 use SBOM::Signature:ver<0.0.11>:auth<zef:lizmat>;
 use SBOM::Vulnerability:ver<0.0.11>:auth<zef:lizmat>;
 
-use PURL:ver<0.0.12+>:auth<zef:lizmat>;
+use PURL:ver<0.0.14+>:auth<zef:lizmat>;
+
+my constant $specVersion = "1.6";
+my constant $schema = "http://cyclonedx.org/schema/bom-$specVersion.schema.json";
 
 #- CycloneDX -------------------------------------------------------------------
 #| Providing the CycloneDX v1.6 JSON specification in Raku.
@@ -110,7 +113,7 @@ class SBOM::CycloneDX:ver<0.0.11>:auth<zef:lizmat> does SBOM {
 
     # Type objects get a minimal hash to allow further building upon
     multi method Hash(SBOM::CycloneDX:U:) {
-        Hash.new( (:bomFormat<CycloneDX>, :specVersion("1.6")) )
+        Hash.new( (:bomFormat<CycloneDX>, :$specVersion) )
     }
 
     # These should probably be auto-generated in RakUAST at some point
@@ -138,6 +141,14 @@ class SBOM::CycloneDX:ver<0.0.11>:auth<zef:lizmat> does SBOM {
         recursed-components(self.components);
 
         @components.List
+    }
+
+    # Produce JSON with schema definition for top level objects
+    method JSON(SBOM::CycloneDX:D: --> Str:D) {
+        self.SBOM::JSON.subst(
+          q|{|,
+          qq|\{\n  "\$schema": "$schema",|
+        )
     }
 
 #| Returns all L<C<PURL>|https://raku.land/zef:lizmat/PURL> objects

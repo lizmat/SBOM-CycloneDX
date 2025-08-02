@@ -1,12 +1,15 @@
 Revision history for SBOM::CycloneDX
 
 {{$NEXT}}
+    - Make sure that SBOM::CycloneDX generates JSON with the
+      schema reference in it
+    - Bump dependency on PURL for VERS fixes
 
 0.0.11  2025-07-31T21:26:29+02:00
     - Modernized the META6.json
     - Added methods "all-components", "all-services",
       "all-purls" and "all-verses"
-    - Bump dependency on PURL to VERS checking
+    - Bump dependency on PURL to enable VERS checking
 
 0.0.10  2025-07-28T21:48:55+02:00
     - Added "url" attribute/method to LicenseId enum

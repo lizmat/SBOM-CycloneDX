@@ -10,7 +10,7 @@
       "requires": [
         "Email::Valid:ver<1.0.7+>:auth<zef:demayl>",
         "JSON::Fast:ver<0.19+>:auth<cpan:TIMOTIMO>",
-        "PURL:ver<0.0.12+>:auth<zef:lizmat>"
+        "PURL:ver<0.0.14+>:auth<zef:lizmat>"
       ]
     }
   },

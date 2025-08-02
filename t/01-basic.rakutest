@@ -2,7 +2,7 @@ use Test;
 use SBOM::CycloneDX;
 use SBOM::enums;
 
-plan 1 + 2 * 4;
+plan 1 + 2 * 5;
 
 is LicenseId("0BSD").url, "https://spdx.org/licenses/0BSD.json",
   'did we get the correct URL for BSD';
@@ -26,6 +26,15 @@ for
     is $sbom.specVersion, $spec,   "$name: is the specVersion correct";
 
     is-deeply $sbom.version, 1, "$name: is the version correct";
+
+    is $sbom.JSON, qq:to/JSON/.chomp, 'is the JSON ok';
+\{
+  "\$schema": "http://cyclonedx.org/schema/bom-$spec.schema.json",
+  "bomFormat": "$format",
+  "specVersion": "$spec",
+  "version": 1
+}
+JSON
 }
 
 # vim: expandtab shiftwidth=4
