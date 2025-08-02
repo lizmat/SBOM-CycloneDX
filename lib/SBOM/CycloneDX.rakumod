@@ -1,25 +1,25 @@
-use SBOM::enums:ver<0.0.11>:auth<zef:lizmat> <
+use SBOM::enums:ver<0.0.12>:auth<zef:lizmat> <
   BOMFormat
 >;
 
-use SBOM::subsets:ver<0.0.11>:auth<zef:lizmat> <
+use SBOM::subsets:ver<0.0.12>:auth<zef:lizmat> <
   PositiveInt serialNumber
 >;
 
-use SBOM:ver<0.0.11>:auth<zef:lizmat>;
-use SBOM::Annotation:ver<0.0.11>:auth<zef:lizmat>;
-use SBOM::Component:ver<0.0.11>:auth<zef:lizmat>;
-use SBOM::Composition:ver<0.0.11>:auth<zef:lizmat>;
-use SBOM::Declarations:ver<0.0.11>:auth<zef:lizmat>;
-use SBOM::Definition:ver<0.0.11>:auth<zef:lizmat>;
-use SBOM::Dependency:ver<0.0.11>:auth<zef:lizmat>;
-use SBOM::Formulation:ver<0.0.11>:auth<zef:lizmat>;
-use SBOM::Metadata:ver<0.0.11>:auth<zef:lizmat>;
-use SBOM::Property:ver<0.0.11>:auth<zef:lizmat>;
-use SBOM::Reference:ver<0.0.11>:auth<zef:lizmat>;
-use SBOM::Service:ver<0.0.11>:auth<zef:lizmat>;
-use SBOM::Signature:ver<0.0.11>:auth<zef:lizmat>;
-use SBOM::Vulnerability:ver<0.0.11>:auth<zef:lizmat>;
+use SBOM:ver<0.0.12>:auth<zef:lizmat>;
+use SBOM::Annotation:ver<0.0.12>:auth<zef:lizmat>;
+use SBOM::Component:ver<0.0.12>:auth<zef:lizmat>;
+use SBOM::Composition:ver<0.0.12>:auth<zef:lizmat>;
+use SBOM::Declarations:ver<0.0.12>:auth<zef:lizmat>;
+use SBOM::Definition:ver<0.0.12>:auth<zef:lizmat>;
+use SBOM::Dependency:ver<0.0.12>:auth<zef:lizmat>;
+use SBOM::Formulation:ver<0.0.12>:auth<zef:lizmat>;
+use SBOM::Metadata:ver<0.0.12>:auth<zef:lizmat>;
+use SBOM::Property:ver<0.0.12>:auth<zef:lizmat>;
+use SBOM::Reference:ver<0.0.12>:auth<zef:lizmat>;
+use SBOM::Service:ver<0.0.12>:auth<zef:lizmat>;
+use SBOM::Signature:ver<0.0.12>:auth<zef:lizmat>;
+use SBOM::Vulnerability:ver<0.0.12>:auth<zef:lizmat>;
 
 use PURL:ver<0.0.14+>:auth<zef:lizmat>;
 
@@ -28,7 +28,7 @@ my constant $schema = "http://cyclonedx.org/schema/bom-$specVersion.schema.json"
 
 #- CycloneDX -------------------------------------------------------------------
 #| Providing the CycloneDX v1.6 JSON specification in Raku.
-class SBOM::CycloneDX:ver<0.0.11>:auth<zef:lizmat> does SBOM {
+class SBOM::CycloneDX:ver<0.0.12>:auth<zef:lizmat> does SBOM {
 
 #| Specifies the format of the BOM. This helps to identify the file as
 #| CycloneDX since BOMs do not have a filename convention, nor does

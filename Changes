@@ -1,6 +1,8 @@
 Revision history for SBOM::CycloneDX
 
 {{$NEXT}}
+
+0.0.12  2025-08-02T18:44:05+02:00
     - Make sure that SBOM::CycloneDX generates JSON with the
       schema reference in it
     - Bump dependency on PURL for VERS fixes
