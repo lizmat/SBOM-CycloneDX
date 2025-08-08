@@ -1,6 +1,8 @@
 Revision history for SBOM::CycloneDX
 
 {{$NEXT}}
+
+0.0.13  2025-08-08T17:27:21+02:00
     - Added "update-component" method to ::Metadata
     - Added sponsor link
 
