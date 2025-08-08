@@ -1,6 +1,8 @@
 Revision history for SBOM::CycloneDX
 
 {{$NEXT}}
+    - Added "update-component" method to ::Metadata
+    - Added sponsor link
 
 0.0.12  2025-08-02T18:44:05+02:00
     - Make sure that SBOM::CycloneDX generates JSON with the

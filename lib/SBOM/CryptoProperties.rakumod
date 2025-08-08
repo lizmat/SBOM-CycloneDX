@@ -1,15 +1,15 @@
-use SBOM::enums:ver<0.0.12>:auth<zef:lizmat> <
+use SBOM::enums:ver<0.0.13>:auth<zef:lizmat> <
   CryptoAsset
 >;
 
-use SBOM:ver<0.0.12>:auth<zef:lizmat>;
-use SBOM::AlgorithmProperties:ver<0.0.12>:auth<zef:lizmat>;
-use SBOM::CryptoMaterialProperties:ver<0.0.12>:auth<zef:lizmat>;
-use SBOM::CryptoProtocolProperties:ver<0.0.12>:auth<zef:lizmat>;
+use SBOM:ver<0.0.13>:auth<zef:lizmat>;
+use SBOM::AlgorithmProperties:ver<0.0.13>:auth<zef:lizmat>;
+use SBOM::CryptoMaterialProperties:ver<0.0.13>:auth<zef:lizmat>;
+use SBOM::CryptoProtocolProperties:ver<0.0.13>:auth<zef:lizmat>;
 
 #- CertificateProperties -------------------------------------------------------
 #| Properties for cryptographic assets of asset type 'certificate'
-class SBOM::CertificateProperties:ver<0.0.12>:auth<zef:lizmat> does SBOM {
+class SBOM::CertificateProperties:ver<0.0.13>:auth<zef:lizmat> does SBOM {
 
 #| The subject name for the certificate.
     has Str $.subjectName;
@@ -47,7 +47,7 @@ class SBOM::CertificateProperties:ver<0.0.12>:auth<zef:lizmat> does SBOM {
 #| encryption) are only defined by the definition of the algorithm
 #| variant. The presence of a weak cryptographic algorithm like SHA1
 #| vs. HMAC-SHA1 also makes a difference.
-class SBOM::CryptoProperties:ver<0.0.12>:auth<zef:lizmat> does SBOM {
+class SBOM::CryptoProperties:ver<0.0.13>:auth<zef:lizmat> does SBOM {
 
 #| Type of crypto asset.
     has CryptoAsset $.assetType is required;

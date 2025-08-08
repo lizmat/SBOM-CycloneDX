@@ -2146,6 +2146,12 @@ BOM.
 
 The tool used in the creation, enrichment, and validation of the BOM.
 
+=head2 ADDITIONAL METHODS
+
+=head3 update-component
+
+Return new SBOM::Metadata object with the component specified
+
 =head2 SBOM::ModelCard
 
 A model card describes the intended uses of a machine learning model
@@ -4477,6 +4483,13 @@ L<Giuseppe Di Terlizzi's SBOM::CycloneDX repository|https://github.com/giterlizz
 =head1 AUTHOR
 
 Elizabeth Mattijsen <liz@raku.rocks>
+
+Source can be located at: https://github.com/lizmat/SBOM-CycloneDX .
+Comments and Pull Requests are welcome.
+
+If you like this module, or what I’m doing more generally, committing to a
+L<small sponsorship|https://github.com/sponsors/lizmat/>  would mean a great
+deal to me!
 
 =head1 COPYRIGHT AND LICENSE
 

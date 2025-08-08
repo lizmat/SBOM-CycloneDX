@@ -1,12 +1,12 @@
-use SBOM::subsets:ver<0.0.12>:auth<zef:lizmat> <
+use SBOM::subsets:ver<0.0.13>:auth<zef:lizmat> <
   bom-ref email URL
 >;
 
-use SBOM:ver<0.0.12>:auth<zef:lizmat>;
+use SBOM:ver<0.0.13>:auth<zef:lizmat>;
 
 #- Address ---------------------------------------------------------------------
 #| The physical address (location) of the organization.
-class SBOM::Address:ver<0.0.12>:auth<zef:lizmat> does SBOM {
+class SBOM::Address:ver<0.0.13>:auth<zef:lizmat> does SBOM {
 
 #| An optional identifier which can be used to reference the
 #| address elsewhere in the BOM.
@@ -33,7 +33,7 @@ class SBOM::Address:ver<0.0.12>:auth<zef:lizmat> does SBOM {
 
 #- Contact ---------------------------------------------------------------------
 #| A person.
-class SBOM::Contact:ver<0.0.12>:auth<zef:lizmat> does SBOM {
+class SBOM::Contact:ver<0.0.13>:auth<zef:lizmat> does SBOM {
 
 #| An optional identifier which can be used to reference the person
 #| elsewhere in the BOM.
@@ -51,7 +51,7 @@ class SBOM::Contact:ver<0.0.12>:auth<zef:lizmat> does SBOM {
 
 #- Organization ----------------------------------------------------------------
 #| An organization, as opposed to a person.
-class SBOM::Organization:ver<0.0.12>:auth<zef:lizmat> does SBOM {
+class SBOM::Organization:ver<0.0.13>:auth<zef:lizmat> does SBOM {
 
 #| An optional identifier which can be used to reference the object
 #| elsewhere in the BOM.
@@ -76,7 +76,7 @@ class SBOM::Organization:ver<0.0.12>:auth<zef:lizmat> does SBOM {
 
 #-------------------------------------------------------------------------------
 #| An individual or an organizaton
-class SBOM::IndividualOrOrganization:ver<0.0.12>:auth<zef:lizmat> does SBOM {
+class SBOM::IndividualOrOrganization:ver<0.0.13>:auth<zef:lizmat> does SBOM {
 
 #| An individual
     has SBOM::Contact $.individual;
@@ -92,7 +92,7 @@ class SBOM::IndividualOrOrganization:ver<0.0.12>:auth<zef:lizmat> does SBOM {
 
 #- Governor --------------------------------------------------------------------
 #| A person or organization governing data
-class SBOM::Governor:ver<0.0.12>:auth<zef:lizmat> does SBOM {
+class SBOM::Governor:ver<0.0.13>:auth<zef:lizmat> does SBOM {
 
 #| A governing organization
     has SBOM::Organization $.organization;

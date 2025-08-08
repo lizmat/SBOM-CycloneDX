@@ -1,14 +1,14 @@
-use SBOM::subsets:ver<0.0.12>:auth<zef:lizmat> <
+use SBOM::subsets:ver<0.0.13>:auth<zef:lizmat> <
   bom-ref
 >;
 
-use SBOM:ver<0.0.12>:auth<zef:lizmat>;
-use SBOM::Reference:ver<0.0.12>:auth<zef:lizmat>;
-use SBOM::Signature:ver<0.0.12>:auth<zef:lizmat>;
+use SBOM:ver<0.0.13>:auth<zef:lizmat>;
+use SBOM::Reference:ver<0.0.13>:auth<zef:lizmat>;
+use SBOM::Signature:ver<0.0.13>:auth<zef:lizmat>;
 
 #- Claim -----------------------------------------------------------------------
 #| A claim.
-class SBOM::Claim:ver<0.0.12>:auth<zef:lizmat> does SBOM {
+class SBOM::Claim:ver<0.0.13>:auth<zef:lizmat> does SBOM {
 
 #| An optional identifier which can be used to reference the object
 #| elsewhere in the BOM.
