@@ -1,12 +1,12 @@
-use SBOM::enums:ver<0.0.13>:auth<zef:lizmat> <
+use SBOM::enums:ver<0.0.14>:auth<zef:lizmat> <
   Crypto CryptoState
 >;
 
-use SBOM:ver<0.0.13>:auth<zef:lizmat>;
+use SBOM:ver<0.0.14>:auth<zef:lizmat>;
 
 #- CryptoSecurity --------------------------------------------------------------
 #| The mechanism by which a cryptographic asset is secured by.
-class SBOM::CryptoSecurity:ver<0.0.13>:auth<zef:lizmat> does SBOM {
+class SBOM::CryptoSecurity:ver<0.0.14>:auth<zef:lizmat> does SBOM {
 
 #| Specifies the mechanism by which the cryptographic asset is secured by.
     has Str $.mechanism;
@@ -18,7 +18,7 @@ class SBOM::CryptoSecurity:ver<0.0.13>:auth<zef:lizmat> does SBOM {
 #- CryptoMaterialProperties ----------------------------------------------------
 #| Properties for cryptographic assets of asset type:
 #| related-crypto-material
-class SBOM::CryptoMaterialProperties:ver<0.0.13>:auth<zef:lizmat> does SBOM {
+class SBOM::CryptoMaterialProperties:ver<0.0.14>:auth<zef:lizmat> does SBOM {
 
 #| The type for the related cryptographic material
     has Crypto $.type;
