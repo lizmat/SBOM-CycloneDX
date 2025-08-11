@@ -3,7 +3,7 @@ use Test;
 use SBOM::CycloneDX;
 use testers;
 
-plan 3;
+plan 4;
 
 # Testing an object with one required argument
 
@@ -20,12 +20,15 @@ test-map-json SBOM::Property, %complete, Q:to/JSON/;
 JSON
 
 my %minimal is Map = name => "foo";
-test-map-json SBOM::Contact, %minimal, Q:to/JSON/, "minimal";
+test-map-json SBOM::Property, %minimal, Q:to/JSON/, "minimal";
 {
   "name": "foo"
 }
 JSON
 
 dies-ok { SBOM::Property.new(:raw-error) }, 'No args throws';
+
+my $sbom := SBOM::Property.new(|%minimal);
+is $sbom, "foo", 'is the stringification correct';
 
 # vim: expandtab shiftwidth=4
