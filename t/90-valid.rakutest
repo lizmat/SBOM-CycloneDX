@@ -2,7 +2,7 @@ use Test;
 use SBOM::enums;    # for .EVAL
 use SBOM::subsets;  # for .EVAL
 use SBOM::CycloneDX;
-use JSON::Fast:ver<0.19+>:auth<cpan:TIMOTIMO>;  # for parsing valid sboms
+use JSON::Fast:ver<0.19+>:auth<cpan:TIMOTIMO>;  # for parsing valid JSON sboms
 
 my @files = $*PROGRAM.sibling("valid").dir.sort(*.basename);
 my $raw-error := True;
@@ -11,9 +11,12 @@ plan +@files;
 
 # Testing valid SBOMs
 
+my $yaml-io := $*PROGRAM.sibling("valid.yml");
+END .unlink with $yaml-io;
+
 for @files -> $io {
     subtest "Testing $io" => {
-        plan 7;
+        plan 9;
 
         my $sbom := SBOM::CycloneDX.new(:$raw-error, $io);
         if $sbom.build-errors -> @errors {
@@ -42,6 +45,11 @@ for @files -> $io {
         }
         isa-ok $sbom3, SBOM::CycloneDX;
         is-deeply $sbom3, $sbom, 'did we roundtrip from .raku correctly';
+
+        $yaml-io.spurt: $sbom.YAML;
+        my $sbom4 := SBOM::CycloneDX.new(:$raw-error, $yaml-io);
+        isa-ok $sbom4, SBOM::CycloneDX;
+        is-deeply $sbom4, $sbom, 'did we roundtrip from .YAML correctly';
     }
 }
 

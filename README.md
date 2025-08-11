@@ -92,10 +92,17 @@ Accepts the following optional named arguments:
 </tbody>
 </table>
 
+INSTANTIATION
+=============
+
+Any `SBOM::` object can be instantiated in 2 ways: either the standard way using named arguments, or by passing a path (either as a string or as an `IO::Path` object) as a single positional argument.
+
+If the extension of the path is `.yml` or `.yaml`, then its contents will be considered to be valid YAML. Otherwise the contents will be assumed to be valid JSON.
+
 INTROSPECTION METHODS
 =====================
 
-A number of introspection methods will be provided, making it easier to search for certain conditions in a given SBOM. Suggestions for types of introspection are very welcome.
+A number of introspection methods are provided, making it easier to search for certain conditions in a given SBOM. Suggestions for types of introspection are very welcome.
 
 CLASSES PROVIDED
 ================
@@ -129,6 +136,10 @@ Returns a `Hash` representation of the instance, which can be used as an input t
   * .raku
 
 Returns a string representation of the instance, which can be used in an `EVAL`.
+
+  * .YAML
+
+Returns a YAML representation of the instance.
 
 SBOM::CycloneDX
 ---------------

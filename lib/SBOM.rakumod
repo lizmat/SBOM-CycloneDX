@@ -1,5 +1,6 @@
 use JSON::Fast:ver<0.19+>:auth<cpan:TIMOTIMO>;
 use SBOM::enums:ver<0.0.13>:auth<zef:lizmat> <Enumify>;
+use YAMLish:ver<0.1.2+>:auth<zef:leont>;
 
 #- SBOM ------------------------------------------------------------------------
 role SBOM:ver<0.0.13>:auth<zef:lizmat> {  # UNCOVERABLE
@@ -73,14 +74,12 @@ role SBOM:ver<0.0.13>:auth<zef:lizmat> {  # UNCOVERABLE
         self.ingest($raw-error, %in)
     }
 
-    # Instantiate from a hash, bypassing flattening
-    multi method new(::?CLASS: %in, :$raw-error = False) {
-        self.ingest($raw-error, %in)
-    }
-
     # Instantiate from a path, either as a string or as an IO object
     multi method new(::?CLASS: IO(Str) $io, :$raw-error = False) {
-        self.ingest($raw-error, from-json $io.slurp)
+        my $basename := $io.basename;
+        my &loader = &from-json;
+           &loader = &load-yaml if $basename.ends-with(".yml" | ".yaml");
+        self.ingest($raw-error, loader $io.slurp)
     }
 
     method ingest($raw-error, %in) is implementation-detail {
@@ -420,6 +419,11 @@ role SBOM:ver<0.0.13>:auth<zef:lizmat> {  # UNCOVERABLE
     # Produce the JSON for the invocant
     method JSON(::?CLASS:D: --> Str:D) {
         to-json(self.Map(:ordered))
+    }
+
+    # Produce the YAML for the invocant
+    method YAML(::?CLASS:D: --> Str:D) {
+        save-yaml(self.Map(:ordered))
     }
 
     # Helper method for required array attributes: the "is required"

@@ -1,13 +1,20 @@
 Revision history for SBOM::CycloneDX
 
 {{$NEXT}}
+    - Add a little explanation about instantiation
+    - .new(IO) now looks at extension: if it is .yml or .yaml
+      the contents will be interpreted as YAML.  Otherwise JSON
+      will be assumed
+    - Added "YAML" method to produce a YAML representation
+    - Upped coverage testing to 94%
+    - Added dependency on YAMLish
 
 0.0.13  2025-08-08T17:27:21+02:00
     - Added "update-component" method to ::Metadata
     - Added sponsor link
 
 0.0.12  2025-08-02T18:44:05+02:00
-    - Make sure that SBOM::CycloneDX generates JSON with the
+    - Made sure that SBOM::CycloneDX generates JSON with the
       schema reference in it
     - Bump dependency on PURL for VERS fixes
 
