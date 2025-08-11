@@ -58,6 +58,12 @@ $ echo $!
 0
 =end output
 
+=begin output
+$ cyclonedx t/invalid/invalid-missing-component-type-1.6.json
+Found 1 build error:
+  CycloneDX/Component	The attribute '$!type' is required, but you did not provide a value for it.
+=end output
+
 =head2 cyclonedx-enums
 
 =begin output

@@ -58,6 +58,10 @@ Accepts the following optional named arguments:
     $ echo $!
     0
 
+    $ cyclonedx t/invalid/invalid-missing-component-type-1.6.json
+    Found 1 build error:
+      CycloneDX/Component	The attribute '$!type' is required, but you did not provide a value for it.
+
 cyclonedx-enums
 ---------------
 
