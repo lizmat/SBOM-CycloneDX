@@ -127,7 +127,7 @@ class SBOM::ComponentEvidence:ver<0.0.13>:auth<zef:lizmat> does SBOM {
                 $_ ~~ SBOM ?? $_ !! SBOM::Identity.new(|$_)
             }
         }
-        elsif $identity.defined {
+        elsif $identity.defined {  # UNCOVERABLE
             $!identity := $identity ~~ SBOM
               ?? $identity<>
               !! SBOM::Identity.new(|$identity<>);

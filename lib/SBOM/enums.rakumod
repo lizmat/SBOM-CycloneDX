@@ -5,36 +5,36 @@ my %classes is default(Nil);
 
 #| Role for creating SBOM "enums", which are in fact just classes
 #| that consume this role
-my role Enumify {
+my role Enumify {  # UNCOVERABLE
     has $.name;
     has $.WHY;
 
     my %enums is Map;
 
     proto method setup(|) is implementation-detail {*}
-    multi method setup(Enumify:U: Str:D $key) {
-        %classes{$key} := self;
-        self.setup(%?RESOURCES{"enums/$key"}.open.lines(:close).Array)
+    multi method setup(Enumify:U: Str:D $key) {  # UNCOVERABLE
+        %classes{$key} := self;  # UNCOVERABLE
+        self.setup(%?RESOURCES{"enums/$key"}.open.lines(:close).Array)  # UNCOVERABLE
     }
 
-    multi method setup(Enumify:U: @setup) {
+    multi method setup(Enumify:U: @setup) {  # UNCOVERABLE
         my %hash;
-        while @setup {
+        while @setup {  # UNCOVERABLE
             my $name  = @setup.shift;
             my $WHY   = @setup.shift // "";
-            if $WHY {
-                while @setup && @setup.shift -> $next {
-                    $WHY ~= "\n$next";
+            if $WHY {  # UNCOVERABLE
+                while @setup && @setup.shift -> $next {  # UNCOVERABLE
+                    $WHY ~= "\n$next";  # UNCOVERABLE
                 }
             }
-            %hash{$name} := self.new(:$name, :$WHY);
+            %hash{$name} := self.new(:$name, :$WHY);  # UNCOVERABLE
         }
-        %enums := %hash.Map;
+        %enums := %hash.Map;  # UNCOVERABLE
     }
 
-    method setup-from-maps(Enumify:U: @setup) is implementation-detail {
-        %enums := @setup.map(-> %args {
-            %args<name> => self.new(|%args)
+    method setup-from-maps(Enumify:U: @setup) is implementation-detail {  # UNCOVERABLE
+        %enums := @setup.map(-> %args {  # UNCOVERABLE
+            %args<name> => self.new(|%args)  # UNCOVERABLE
         }).Map;
     }
 
@@ -210,8 +210,8 @@ my class LicenseId:ver<0.0.13>:auth<zef:lizmat> does Enumify {
 BEGIN LicenseId.setup-from-maps(
   from-json(
     %?RESOURCES<licenses.json>.open.slurp(:close)
-  )<licenses>.map({
-      (name => .<licenseId>, WHY => .<name>, url => .<detailsUrl>).Map
+  )<licenses>.map({  # UNCOVERABLE
+      (name => .<licenseId>, WHY => .<name>, url => .<detailsUrl>).Map  # UNCOVERABLE
   }).Array
 );
 
@@ -224,7 +224,7 @@ my class LicenseName:ver<0.0.13>:auth<zef:lizmat> does Enumify { }
 BEGIN LicenseName.setup(
   from-json(
     %?RESOURCES<licenses.json>.open.slurp(:close)
-  )<licenses>.map({ (.<name>, .<licenseId>, "").Slip }).Array
+  )<licenses>.map({ (.<name>, .<licenseId>, "").Slip }).Array  # UNCOVERABLE
 );
 
 #- P ---------------------------------------------------------------------------
@@ -303,14 +303,14 @@ my class VulnerabilityState:ver<0.0.13>:auth<zef:lizmat> does Enumify { }
 # Read the resources section of the META6.json to figure out which
 # text files need to be processed into their associated classes
 BEGIN ::($_).setup($_) for $?DISTRIBUTION.meta<resources>.map: {
-    .substr(6) if .starts-with("enums/")
+    .substr(6) if .starts-with("enums/")  # UNCOVERABLE
 }
 
 # Make sure the class lookup is read-only
 BEGIN {
-    %classes<LicenseId>   := LicenseId;
-    %classes<LicenseName> := LicenseName;
-    %classes := %classes.Map
+    %classes<LicenseId>   := LicenseId;  # UNCOVERABLE
+    %classes<LicenseName> := LicenseName;  # UNCOVERABLE
+    %classes := %classes.Map  # UNCOVERABLE
 }
 
 #- EXPORT ----------------------------------------------------------------------

@@ -14,7 +14,7 @@ class SBOM::DataContents:ver<0.0.13>:auth<zef:lizmat> does SBOM {
     has SBOM::Attachment $.attachment;
 
 #| The URL to where the data can be retrieved.
-    has URL$.url;
+    has URL $.url;
 
 #| Any additional properties as name-value pairs.
     has SBOM::Property @.properties;

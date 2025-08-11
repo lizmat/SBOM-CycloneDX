@@ -52,9 +52,9 @@ class SBOM::Licensing:ver<0.0.13>:auth<zef:lizmat> does SBOM {
 }
 
 #- AnyLicense ------------------------------------------------------------------
-class SBOM::License     { ... }
-class SBOM::SPDXLicense { ... }
-class SBOM::LicenseInfo { ... }
+class SBOM::License     { ... }  # UNCOVERABLE
+class SBOM::SPDXLicense { ... }  # UNCOVERABLE
+class SBOM::LicenseInfo { ... }  # UNCOVERABLE
 
 #| Either a (modern) License object, or a legacy SPDX License object
 class SBOM::AnyLicense:ver<0.0.13>:auth<zef:lizmat> does SBOM {

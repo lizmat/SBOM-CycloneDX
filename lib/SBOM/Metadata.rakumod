@@ -95,7 +95,7 @@ class SBOM::Metadata:ver<0.0.13>:auth<zef:lizmat> does SBOM {
                 $_ ~~ SBOM ?? $_ !! SBOM::LegacyTool.new(|$_)
             }
         }
-        elsif $tools.defined {
+        elsif $tools.defined {  # UNCOVERABLE
             $!tools := $tools ~~ SBOM ?? $tools<> !! SBOM::Tool.new(|$tools<>);
         }
 

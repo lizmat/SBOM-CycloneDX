@@ -51,10 +51,10 @@ class SBOM::PublicKey:ver<0.0.13>:auth<zef:lizmat> does SBOM {
         if $keytype eq "EC" {
             return if $!crv && $!x && $!y;
         }
-        elsif $keytype eq "OKP" {
+        elsif $keytype eq "OKP" {  # UNCOVERABLE
             return if $!crv && $!x;
         }
-        elsif $keytype eq "RSA" {
+        elsif $keytype eq "RSA" {  # UNCOVERABLE
             return if $!n && $!e;
         }
         die "did not specify all required arguments for key '$keytype'";
@@ -67,9 +67,9 @@ class SBOM::PublicKey:ver<0.0.13>:auth<zef:lizmat> does SBOM {
 }
 
 #- ValidSignature --------------------------------------------------------------
-class SBOM::Signature        { ... }
-class SBOM::SignatureChain   { ... }
-class SBOM::SignatureSigners { ... }
+class SBOM::Signature        { ... }  # UNCOVERABLE
+class SBOM::SignatureChain   { ... }  # UNCOVERABLE
+class SBOM::SignatureSigners { ... }  # UNCOVERABLE
 
 #| Enveloped signature in JSON Signature Format (JSF).
 class SBOM::ValidSignature:ver<0.0.13>:auth<zef:lizmat> {

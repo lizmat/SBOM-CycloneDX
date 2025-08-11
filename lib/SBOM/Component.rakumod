@@ -87,7 +87,7 @@ class SBOM::SWID:ver<0.0.13>:auth<zef:lizmat> does SBOM {
 }
 
 #- Component -------------------------------------------------------------------
-class SBOM::Pedigree { ... }
+class SBOM::Pedigree { ... }  # UNCOVERABLE
 
 #| A software or hardware component.
 class SBOM::Component:ver<0.0.13>:auth<zef:lizmat> does SBOM {

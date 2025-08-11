@@ -2,7 +2,7 @@ use JSON::Fast:ver<0.19+>:auth<cpan:TIMOTIMO>;
 use SBOM::enums:ver<0.0.13>:auth<zef:lizmat> <Enumify>;
 
 #- SBOM ------------------------------------------------------------------------
-role SBOM:ver<0.0.13>:auth<zef:lizmat> {
+role SBOM:ver<0.0.13>:auth<zef:lizmat> {  # UNCOVERABLE
 
     # Hidden attribute to store any extra information, such as build
     # errors and bom-refs seen.  Supports the following keys:
@@ -52,19 +52,19 @@ role SBOM:ver<0.0.13>:auth<zef:lizmat> {
     # Attribute name to positional mapper: returns True for an
     # attribute name if it was defined with a @ sigil
     my %positional is Map = @names.map: -> $name {
-        $name => True if %attribute{$name}.type ~~ Positional;
+        $name => True if %attribute{$name}.type ~~ Positional;  # UNCOVERABLE
     }
 
     # Attribute name to required flag, if attribute was specified
     # with "is required".
     my %required is Map = @names.map: -> $name {
-        $name => True if %attribute{$name}.required;
+        $name => True if %attribute{$name}.required;  # UNCOVERABLE
     }
 
     # Attribute name to type mapper, hiding any Positional wrapping
     my %type is Map = @names.map: -> $name {
         my $type := %attribute{$name}.type;
-        $name => $type ~~ Positional ?? $type.of !! $type
+        $name => $type ~~ Positional ?? $type.of !! $type  # UNCOVERABLE
     }
 
     # The instantiator method, using standard .new semantics, except
@@ -212,20 +212,20 @@ role SBOM:ver<0.0.13>:auth<zef:lizmat> {
                         }($_)
                     }
                 }
-                elsif $type ~~ Enumify {
+                elsif $type ~~ Enumify {  # UNCOVERABLE
                     %out{$name} := value ~~ Enumify
                       ?? value
                       !! $type(value);
                 }
-                elsif $type ~~ DateTime {
+                elsif $type ~~ DateTime {  # UNCOVERABLE
                     %out{$name} := value ~~ DateTime
                       ?? value
                       !! makeDateTime(value);
                 }
-                elsif value ~~ Cool {
+                elsif value ~~ Cool {  # UNCOVERABLE
                     %out{$name} := value;
                 }
-                elsif $type ~~ SBOM {
+                elsif $type ~~ SBOM {  # UNCOVERABLE
                     %out{$name} := value ~~ SBOM
                       ?? value
                       !! $type.new(|value);
@@ -326,11 +326,11 @@ role SBOM:ver<0.0.13>:auth<zef:lizmat> {
                     !! $value.Map(:$ordered)
                   !! $type ~~ Cool
                     ?? $value
-                    !! ($type ~~ Enumify)
+                    !! ($type ~~ Enumify)  # UNCOVERABLE
                       ?? $value ~~ Enumify
                         ?? $value.name
                         !! $value
-                      !! ($type ~~ DateTime)
+                      !! ($type ~~ DateTime)  # UNCOVERABLE
                         ?? $value ~~ DateTime
                           ?? $value.Str.subst("Z","+00:00")
                           !! $value
@@ -344,7 +344,7 @@ role SBOM:ver<0.0.13>:auth<zef:lizmat> {
             }
 
             # An array of sort, add them if they're not empty
-            elsif %positional{$name} || $value ~~ Positional {
+            elsif %positional{$name} || $value ~~ Positional {  # UNCOVERABLE
                 if $value<>.elems {
                     $name => $value<>.map(&mapify).List
                 }
@@ -384,11 +384,11 @@ role SBOM:ver<0.0.13>:auth<zef:lizmat> {
                     !! $value.Hash(:$ordered)
                   !! $type ~~ Cool
                     ?? $value
-                    !! ($type ~~ Enumify)
+                    !! ($type ~~ Enumify)  # UNCOVERABLE
                       ?? $value ~~ Enumify
                         ?? $value.name
                         !! $value
-                      !! ($type ~~ DateTime)
+                      !! ($type ~~ DateTime)  # UNCOVERABLE
                         ?? $value ~~ DateTime
                           ?? $value.Str.subst("Z","+00:00")
                           !! $value
@@ -402,7 +402,7 @@ role SBOM:ver<0.0.13>:auth<zef:lizmat> {
             }
 
             # An array of sort, add them if they're not empty
-            elsif %positional{$name} || $value ~~ Positional {
+            elsif %positional{$name} || $value ~~ Positional {  # UNCOVERABLE
                 if $value<>.elems {
                     $name => $value<>.map(&mapify).List
                 }
