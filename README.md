@@ -79,7 +79,9 @@ cyclonedx-enums
     read-write
     ...
 
-The `cyclonedx` script takes **one** optional positional argument: the name of the enum class to display information for. It defaults to `all`, in which case all possible enum classes will be displayed.
+The `cyclonedx` script takes **two** optional positional arguments: the name of the enum class to display information for, and the value for which to display information. It defaults to `all` for the first positional argument, in which case all possible enum classes will be displayed.
+
+If no second positional argument is specified, then all possible values of the given enum will be shown.
 
 Accepts the following optional named arguments:
 

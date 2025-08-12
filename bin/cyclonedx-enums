@@ -4,6 +4,7 @@ my %*SUB-MAIN-OPTS = :named-anywhere, :coerce-allomorphs-to(Str);
 #| Provide SBOM enum info
 unit sub MAIN(
     Str   $name = "all",  #= enum name
+    Str   $value?,        #= show WHY of this enum value
     Bool :$verbose;       #= whether to show WHY info
     Bool :$silent;        #= whether to skip headers
 ) {
@@ -21,11 +22,19 @@ unit sub MAIN(
             exit 1;
         }
         say "All possible values in the '$name' enum:\n"
-          unless $silent;
+          unless $value || $silent;
         $class
     }
 
-    if $verbose {
+    if $value {
+        with $type{$value}.WHY -> $text {
+            say "$type.^name()\($value):\n$type($value).WHY()";
+        }
+        else {
+            say "$type.^name(): '$value' unknown";
+        }
+    }
+    elsif $verbose {
         for $type.keys -> $key {
             say "$key:";
             with $type{$key}.WHY -> $text {
