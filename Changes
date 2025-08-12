@@ -1,6 +1,8 @@
 Revision history for SBOM::CycloneDX
 
 {{$NEXT}}
+
+0.0.15  2025-08-12T20:33:52+02:00
     - Added many more named arguments to cyclonedx script
     - Actually document the subsets API
     - Allow for additional "value" argument to cyclonedx-enums
