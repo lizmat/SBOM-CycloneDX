@@ -50,7 +50,7 @@ Accepts the following optional named arguments:
 <th>parameter</th> <th>description</th>
 </tr></thead>
 <tbody>
-<tr> <td>--raw</td> <td>whether to show raw errors</td> </tr> <tr> <td>--silent</td> <td>whether to be silent on success</td> </tr>
+<tr> <td>--raw</td> <td>show first raw error only</td> </tr> <tr> <td>--silent</td> <td>be silent on success</td> </tr> <tr> <td>--json</td> <td>show SBOM as JSON if valid</td> </tr> <tr> <td>--yaml</td> <td>show SBOM as YAML if valid</td> </tr> <tr> <td>--raku</td> <td>show SBOM as Raku code if valid</td> </tr> <tr> <td>--components</td> <td>only show components</td> </tr> <tr> <td>--services</td> <td>only show services</td> </tr> <tr> <td>--purls</td> <td>only Package URLs</td> </tr>
 </tbody>
 </table>
 
@@ -79,7 +79,7 @@ cyclonedx-enums
     read-write
     ...
 
-The `cyclonedx` script takes **two** optional positional arguments: the name of the enum class to display information for, and the value for which to display information. It defaults to `all` for the first positional argument, in which case all possible enum classes will be displayed.
+The `cyclonedx-enums` script takes **two** optional positional arguments: the name of the enum class to display information for, and the value for which to display information. It defaults to `all` for the first positional argument, in which case all possible enum classes will be displayed.
 
 If no second positional argument is specified, then all possible values of the given enum will be shown.
 

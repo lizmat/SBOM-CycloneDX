@@ -3,26 +3,70 @@ my %*SUB-MAIN-OPTS = :named-anywhere, :coerce-allomorphs-to(Str);
 
 #| Check a CycloneDX SBOM file
 unit sub MAIN(
-    Str   $path,    #= The path of a CycloneDX SBOM file
-    Bool :$raw,     #= whether to show raw errors
-    Bool :$silent,  #= whether to be silent on success
+    Str   $path,       #= The path of a CycloneDX SBOM file
+    Bool :$raw,        #= show first raw error only
+    Bool :$silent,     #= be silent on success
+    Bool :$json,       #= show SBOM as JSON if valid
+    Bool :$yaml,       #= show SBOM as YAML if valid
+    Bool :$raku,       #= show SBOM as Raku code if valid
+    Bool :$components, #= show all components
+    Bool :$services,   #= show all services
+    Bool :$purls,      #= show all Package URLs
 ) {
-    if $raw {
-        SBOM::CycloneDX.new(:raw-error, $path);
+    my $sbom := do if $raw {
+        SBOM::CycloneDX.new(:raw-error, $path)
     }
     orwith try SBOM::CycloneDX.new($path) -> $sbom {
         if $sbom.build-errors -> @errors {
-            note "Found @errors.elems() build errors:";
+            note "Found @errors.elems() build error{"s" unless @errors == 1}:";
             note "  $_" for @errors;
             exit 1;
         }
+        $sbom
     }
     else {
         note "'$path' does NOT contain SBOM information" unless $silent;
         exit 1;
     }
 
-    say "'$path' contains a valid CycloneDX SBOM" unless $silent;
+    my @to-show;
+    if $components {
+        unless @to-show = $sbom.all-components {
+            say "No components found";
+            exit 0;
+        }
+    }
+    elsif $services {
+        unless @to-show = $sbom.all-services {
+            say "No services found";
+            exit 0;
+        }
+    }
+    elsif $purls {
+        if @to-show = $sbom.all-purls {
+            .say for @to-show;
+        }
+        else {
+            say "No Package URLs found";
+        }
+        exit 0;
+    }
+    else {
+        @to-show = $sbom;
+    }
+
+    if $json {
+        say @to-show.map(*.JSON).join("\n\n");
+    }
+    elsif $yaml {
+        say @to-show.map(*.YAML).join("\n\n");
+    }
+    elsif $raku {
+        say @to-show.map(*.raku).join("\n\n");
+    }
+    elsif !$silent {
+        say "'$path' contains a valid CycloneDX SBOM";
+    }
 }
 
 # vim: expandtab shiftwidth=4

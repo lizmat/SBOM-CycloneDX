@@ -1,9 +1,9 @@
 use JSON::Fast:ver<0.19+>:auth<cpan:TIMOTIMO>;
-use SBOM::enums:ver<0.0.14>:auth<zef:lizmat> <Enumify>;
+use SBOM::enums:ver<0.0.15>:auth<zef:lizmat> <Enumify>;
 use YAMLish:ver<0.1.2+>:auth<zef:leont>;
 
 #- SBOM ------------------------------------------------------------------------
-role SBOM:ver<0.0.14>:auth<zef:lizmat> {  # UNCOVERABLE
+role SBOM:ver<0.0.15>:auth<zef:lizmat> {  # UNCOVERABLE
 
     # Hidden attribute to store any extra information, such as build
     # errors and bom-refs seen.  Supports the following keys:

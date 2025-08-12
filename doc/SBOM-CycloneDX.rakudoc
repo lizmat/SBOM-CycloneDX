@@ -47,10 +47,16 @@ an error occurred, or C<0> if all is ok.
 
 Accepts the following optional named arguments:
 =table
-parameter | description
-----------+------------
---raw     | whether to show raw errors
---silent  | whether to be silent on success
+parameter    | description
+-------------+------------
+--raw        | show first raw error only
+--silent     | be silent on success
+--json       | show SBOM as JSON if valid
+--yaml       | show SBOM as YAML if valid
+--raku       | show SBOM as Raku code if valid
+--components | only show components
+--services   | only show services
+--purls      | only Package URLs
 
 =begin output
 $ cyclonedx t/valid/valid-metadata-tool-1.6.json --silent
@@ -82,7 +88,7 @@ read-write
 ...
 =end output
 
-The C<cyclonedx> script takes B<two> optional positional arguments:
+The C<cyclonedx-enums> script takes B<two> optional positional arguments:
 the name of the enum class to display information for, and the value
 for which to display information.  It defaults to C<all> for the first
 positional argument, in which case all possible enum classes will be
