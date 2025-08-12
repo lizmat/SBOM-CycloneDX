@@ -3220,6 +3220,22 @@ A version should ideally comply with semantic versioning but is not enforced. Mu
 SUBSETS API
 ===========
 
+The `SBOM::subsets` module provides a number of functional [`subset`s](https://docs.raku.org/language/typesystem#subset).
+
+```raku
+use SBOM::subsets;  # import *all* subsets
+
+my email $email = "foo@bar.com";  # works
+my email $meh   = "foo";
+# Type check failed in assignment to $a; expected email but got Str ("foo")
+```
+
+```raku
+use SBOM::subsets <email>;  # Just import "email" subset
+```
+
+If only interested in one or more subsets, then these can be specified as positional arguments in the `use` statement.
+
 ENUMS PROVIDED
 ==============
 

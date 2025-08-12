@@ -3698,6 +3698,24 @@ enforced. Must be at most 1024 characters long.
 
 =head1 SUBSETS API
 
+The C<SBOM::subsets> module provides a number of functional
+L<C<subset>s|https://docs.raku.org/language/typesystem#subset>.
+
+=begin code :lang<raku>
+use SBOM::subsets;  # import *all* subsets
+
+my email $email = "foo@bar.com";  # works
+my email $meh   = "foo";
+# Type check failed in assignment to $a; expected email but got Str ("foo")
+=end code
+
+=begin code :lang<raku>
+use SBOM::subsets <email>;  # Just import "email" subset
+=end code
+
+If only interested in one or more subsets, then these can be specified
+as positional arguments in the C<use> statement.
+
 =head1 ENUMS PROVIDED
 
 =head2 AccessMode
@@ -4466,7 +4484,6 @@ use SBOM::enums <DataFlow>;  # Just import DataFlow enum
 
 say DataFlow.WHY;           # Specifies information about the...
 say DataFlow<inbound>.WHY;  # Data that enters a service.
-
 =end code
 
 If only interested in one or more enum classes, then these can be
