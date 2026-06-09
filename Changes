@@ -1,6 +1,8 @@
 Revision history for SBOM::CycloneDX
 
 {{$NEXT}}
+
+0.0.16  2026-06-09T21:38:31+02:00
     - Upped dependencies
     - Make sure .purls only returns unique Package URLs
     - Update copyright year
