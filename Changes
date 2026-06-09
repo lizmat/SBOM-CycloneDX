@@ -1,6 +1,9 @@
 Revision history for SBOM::CycloneDX
 
 {{$NEXT}}
+    - Upped dependencies
+    - Make sure .purls only returns unique Package URLs
+    - Update copyright year
 
 0.0.15  2025-08-12T20:33:52+02:00
     - Added many more named arguments to cyclonedx script

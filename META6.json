@@ -9,8 +9,8 @@
     "runtime": {
       "requires": [
         "Email::Valid:ver<1.0.7+>:auth<zef:demayl>",
-        "JSON::Fast:ver<0.19+>:auth<cpan:TIMOTIMO>",
-        "PURL:ver<0.0.14+>:auth<zef:lizmat>",
+        "JSON::Fast:ver<0.20+>:auth<zef:timo>",
+        "PURL:ver<0.0.15+>:auth<zef:lizmat>",
         "YAMLish:ver<0.1.2+>:auth<zef:leont>"
       ]
     }
@@ -139,5 +139,5 @@
   ],
   "test-depends": [
   ],
-  "version": "0.0.15"
+  "version": "0.0.16"
 }

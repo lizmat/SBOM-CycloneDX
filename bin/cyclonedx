@@ -43,7 +43,7 @@ unit sub MAIN(
         }
     }
     elsif $purls {
-        if @to-show = $sbom.all-purls {
+        if @to-show = $sbom.all-purls.map(*.Str).unique.sort {
             .say for @to-show;
         }
         else {
